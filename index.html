@@ -16,9 +16,47 @@
     <script defer src="scripts/main.js"></script>
 
     <title>Train It</title>
+
+    <style>
+        /* No JS Screen */
+
+        noscript {
+            /* Position */
+            position: absolute;
+            z-index: 999999;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            /* Content */
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        noscript p {
+            border: 2px solid black;
+            border-radius: 7px;
+
+            margin: 20px;
+            padding: 20px;
+        }
+
+        /* Loading screen */
+
+    </style>
 </head>
 <body>
+    <!-- No JS Screen -->
+    <noscript>
+        <p>
+            JavaScript is required to run this app. Please turn it on in the settings.
+        </p>
+    </noscript>
 
+    <!-- Loading Screen -->
 
 </body>
 </html>
