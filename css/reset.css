@@ -1,0 +1,12 @@
+@charset "utf-8"
+
+/* for older browsers not supporting HTML5 */
+article, aside, figcaption, figure, footer, main, header, menu, nav, section {
+    display: block;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
