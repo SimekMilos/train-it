@@ -18,22 +18,24 @@
     <title>Train It</title>
 
     <style>
-        /* No JS Screen */
-
-        noscript {
+        .cover-app {
             /* Position */
             position: fixed;
-            z-index: 1000000;
             top: 0;
             bottom: 0;
             left: 0;
             right: 0;
 
             /* Content */
-            background-color: white;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: white;
+        }
+
+        /* No JS Screen */
+        noscript {
+            z-index: 1000000;
         }
 
         noscript p {
@@ -45,18 +47,39 @@
         }
 
         /* Loading screen */
+        .loading-screen {
+            z-index: 999999;
+        }
+
+        .loading-screen p {
+            color: darkgray;
+            font: bold 40px "Arial", sans-serif;
+            animation: pulse 2s 2s  infinite linear backwards alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0; }
+            70% { opacity: 1; }
+            to {   opacity: 1; }
+        }
+
 
     </style>
 </head>
 <body>
     <!-- No JS Screen -->
-    <noscript>
+    <noscript class="cover-app">
         <p>
             JavaScript is required to run this app. Please turn it on in the settings.
         </p>
     </noscript>
 
     <!-- Loading Screen -->
+    <div class="loading-screen cover-app">
+        <p>Loading &#0133;</p>
+    </div>
+
+
 
 </body>
 </html>
