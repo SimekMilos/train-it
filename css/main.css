@@ -2,6 +2,16 @@
 
 /* ==== General ==== */
 
+@font-face {
+    font-family: "Roboto Medium";
+    src: url(../res/fonts/Roboto-Medium.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "OpenSans Regular";
+    src: url(../res/fonts/OpenSans-Regular.ttf) format("truetype");
+}
+
 html {
     /* Position */
     position: fixed;
@@ -14,4 +24,124 @@ html {
 body {
     width: 100%;
     height: 100%;
+
+    font-family: "OpenSans Regular";
+}
+
+/* ==== Initial Screen === */
+
+.initial-screen {
+    /* Position */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ==== Overview Component ==== */
+
+.comp-overview {
+    width: 350px;
+    min-height: 300px;
+    max-height: 450px;
+    height: 80vh;
+
+    margin: 20px;
+
+    box-shadow: 0 7px 20px 7px rgba(0,0,0,.2);
+
+    padding: 13px 20px;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
+}
+
+.comp-overview h1 {
+    color: hsl(209, 100%, 56%);
+    text-align: center;
+
+    font: 32px "Roboto Medium", sans-serif;
+}
+
+.comp-overview h2 {
+    font: 16px "OpenSans Regular", sans-serif;
+}
+
+
+/* Training list */
+.comp-overview .training-list {
+    border: 1px solid black;
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto;
+}
+
+
+/* No trainings display */
+.comp-overview .no-trainings {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comp-overview .no-trainings:not(:only-child) {
+    display: none;
+}
+
+.comp-overview .no-trainings p {
+    color: #0006;
+    text-align: center;
+}
+
+.comp-overview .no-trainings p:first-child {
+    margin-bottom: 1em;
+}
+
+
+/* Trainings */
+
+
+/* Controls */
+
+.comp-overview .controls {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comp-overview [type="button"] {
+    height: 40px;
+    flex: 1 1 0;
+    margin-top: 5px;
+
+    border: 1px solid black;
+    background-color: white;
+
+    font: 16px "OpenSans Regular", sans-serif;
+}
+
+.comp-overview .open {
+    flex-basis: auto;
+    width: 100%;
+}
+
+.comp-overview .create {
+    margin-right: 5px;
+}
+
+.comp-overview .delete {
+    margin-right: 5px;
+}
+
+.comp-overview .settings {
+
 }
