@@ -76,7 +76,7 @@ body {
 }
 
 
-/* Training list */
+/* --- Training list --- */
 .ov-training-list {
     border: 1px solid black;
     flex-grow: 1;
@@ -85,7 +85,7 @@ body {
 }
 
 
-/* No trainings display */
+/* --- No trainings display --- */
 .ov-no-trainings {
     height: 100%;
 
@@ -108,10 +108,10 @@ body {
 }
 
 
-/* Trainings */
+/* --- Trainings --- */
 
 
-/* Controls */
+/* --- Controls --- */
 
 .ov-controls {
     display: flex;
