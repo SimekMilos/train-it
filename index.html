@@ -87,22 +87,26 @@
 
         <!-- TODO:
             - najít obrázek cog wheel
+            - vertikální uspořádání - otestovat, příp. upravit
+                - výšku overview nastavit spíše comp(100vh - Xpx)
+            - Nebylo by lepší dát vytvořit/upravit zvlášť?
+            - nastavit min-height spíše seznamu tréningů?
         -->
 
         <form class="comp-overview">
             <h1>Train It</h1>
             <h2>Trainings:</h2>
-            <div class="training-list">
-                <div class="no-trainings">
+            <div class="ov-training-list">
+                <div class="ov-no-trainings">
                     <p>You don't have any trainings.</p>
                     <p>Create new training by clicking <strong>Create</strong> or load your trainings in the settings.</p>
                 </div>
             </div>
-            <div class="controls">
-                <button type="button" class="open">Open</button>
-                <button type="button" class="create">Create</button>
-                <button type="button" class="delete">Delete</button>
-                <button type="button" class="settings">CW</button>
+            <div class="ov-controls">
+                <button type="button" class="ov-open">Open</button>
+                <button type="button" class="ov-create">Create</button>
+                <button type="button" class="ov-delete">Delete</button>
+                <button type="button" class="ov-settings">CW</button>
             </div>
 
         </form>
