@@ -107,6 +107,11 @@ body {
     margin-bottom: 1em;
 }
 
+.ov-no-trainings strong {
+    font-weight: normal;
+    color: #000B;
+}
+
 
 /* --- Trainings --- */
 
