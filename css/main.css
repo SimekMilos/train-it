@@ -37,12 +37,7 @@ body {
     left: 0;
     right: 0;
 
-    /* Content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-
+    /* Background */
     background:
         linear-gradient(#FFF6, #FFF6),
         linear-gradient(#000, #000),
@@ -50,6 +45,10 @@ body {
 
     background-blend-mode: normal, saturation, normal;
 
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
