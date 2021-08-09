@@ -84,8 +84,6 @@
     <div class="initial-screen">
 
         <!-- TODO:
-            - chybí mi trainings
-
             - vertikální uspořádání - řešit až vymyslím uspořádání dalších komponent
                 - otestovat, příp. upravit
                 - výšku overview nastavit spíše comp(100vh - Xpx)
@@ -100,6 +98,32 @@
                     <p>You don't have any trainings yet.</p>
                     <p>Create new training by clicking <strong>Create</strong> or load previously saved trainings in the settings.</p>
                 </div>
+
+                <!-- TODO: put trainings in <template> -->
+                <div class="ov-training">
+                    <input type="radio" name="training" value="" id="1" hidden>
+                    <label for="1">
+                        <p>First training</p>
+                        <div class="handle"><div></div></div>
+                    </label>
+                </div>
+
+                <div class="ov-training">
+                    <input type="radio" name="training" value="" id="2" hidden>
+                    <label for="2">
+                        <p>Second training</p>
+                        <div class="handle"><div></div></div>
+                    </label>
+                </div>
+
+                <div class="ov-training">
+                    <input type="radio" name="training" value="" id="3" hidden>
+                    <label for="3">
+                        <p>Third training</p>
+                        <div class="handle"><div></div></div>
+                    </label>
+                </div>
+
             </div>
             <div class="ov-controls">
                 <!-- TODO?: (may not be needed)

@@ -187,9 +187,45 @@ body {
 
 /* --- Trainings --- */
 
+.ov-training label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 0;
+    border-bottom: 1px solid var(--main-color);
+}
+
+.ov-training:nth-child(2) label {
+    border-top: 1px solid var(--main-color);
+}
+
+.ov-training p {
+    margin: 0 10px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ov-training .handle {
+    margin: 0 10px;
+    flex-shrink: 0;
+}
+
+    /* Selected training */
+.ov-training :checked + label {
+    color: white;
+    background-color: hsl(209, 100%, 70%);
+}
+
+.ov-training :checked + label .handle {
+    --border-color: white;
+}
+
 
 /* --- Controls --- */
-
 .ov-controls {
     display: flex;
     flex-wrap: wrap;
