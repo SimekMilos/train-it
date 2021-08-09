@@ -60,10 +60,11 @@ body {
 }
 
 
+
 /* ==== Overview Component ==== */
 
 .comp-overview {
-    width: 350px;
+    width: 400px;
     max-height: 450px;
     height: 80vh;
 
