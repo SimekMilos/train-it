@@ -30,6 +30,9 @@ body {
     height: 100%;
 
     font-family: "OpenSans Regular";
+
+    --main-color: hsl(209, 100%, 56%);
+}
 }
 
 /* ==== Initial Screen === */
@@ -83,7 +86,7 @@ body {
 }
 
 .comp-overview h1 {
-    color: hsl(209, 100%, 56%);
+    color: var(--main-color);
     text-align: center;
 
     font: 32px "Roboto Medium", sans-serif;
