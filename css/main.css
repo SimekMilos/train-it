@@ -98,6 +98,9 @@ body {
 /* ==== Overview Component ==== */
 
 .comp-overview {
+    display: none;
+    position: relative;
+
     /* Dimensions */
     width: 400px;
     max-height: 450px;
@@ -113,9 +116,45 @@ body {
         0 5px 15px 10px rgba(0,0,0,.15);
 
     /* Content */
-    display: flex;
     flex-direction: column;
 }
+
+    /* Fade in/out animations */
+.comp-overview.display {
+    display: flex;
+    opacity: 0;
+    animation: fade-in .7s .5s forwards;
+}
+
+    @keyframes fade-in {
+        from {
+            top: -50px;
+        }
+        70% {
+            opacity: 1;
+        }
+        to {
+            top: 0;
+            opacity: 1;
+        }
+    }
+
+.comp-overview.hide {
+    display: flex;
+    animation: fade-out .7s .2s forwards;
+}
+
+    @keyframes fade-out {
+        from {
+            top: 0;
+        }
+        to {
+            top: 50px;
+            opacity: 0;
+            display: none;
+        }
+    }
+
 
 .comp-overview > * {
     flex-shrink: 0;

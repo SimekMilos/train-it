@@ -1,7 +1,7 @@
 "use strict"
 
 function onAppLoad() {
-    //Deactivate loading screen
+    // Deactivate loading screen
     const lScreen = document.querySelector(".loading-screen")
     lScreen.style.display = "none"
 
@@ -9,6 +9,9 @@ function onAppLoad() {
     loadingElem.style.animationPlayState = "paused"
 
 
+    // Display overview
+    const overview = document.querySelector(".comp-overview")
+    overview.classList.add("display")
 }
 
 window.addEventListener("load", onAppLoad)
