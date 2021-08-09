@@ -273,6 +273,7 @@ body {
     margin-top: 5px;
 
     border: 1px solid black;
+    border-radius: 3px;
     background-color: white;
 
     font: 16px "OpenSans Regular", sans-serif;
