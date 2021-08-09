@@ -56,7 +56,6 @@ body {
 
 .comp-overview {
     width: 350px;
-    min-height: 300px;
     max-height: 450px;
     height: 80vh;
 
@@ -72,6 +71,10 @@ body {
     /* Content */
     display: flex;
     flex-direction: column;
+}
+
+.comp-overview > * {
+    flex-shrink: 0;
 }
 
 .comp-overview h1 {
@@ -90,6 +93,7 @@ body {
 .ov-training-list {
     border: 1px solid black;
     flex-grow: 1;
+    flex-shrink: 1;
     padding: 20px;
     overflow: auto;
 }
