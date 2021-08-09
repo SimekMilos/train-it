@@ -266,10 +266,12 @@ body {
 .ov-controls {
     display: flex;
     flex-wrap: wrap;
+
+    --height: 36px;
 }
 
 .ov-controls > * {
-    height: 35px;
+    height: var(--height);
     margin-top: 5px;
 
     border: 1px solid black;
@@ -301,7 +303,9 @@ body {
 }
 
 .ov-settings {
-    width: 35px;
+    width: var(--height);
+    background:
+        center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
 }
 
 .ov-settings img {
