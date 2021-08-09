@@ -171,6 +171,12 @@ body {
     font: 16px "OpenSans Regular", sans-serif;
 }
 
+.ov-controls :disabled {
+    --color: hsl(0, 0%, 65%);
+    color: var(--color);
+    border-color: var(--color);
+}
+
 .ov-open {
     width: 100%;
 }
