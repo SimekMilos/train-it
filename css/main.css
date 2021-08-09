@@ -34,14 +34,15 @@ body {
     --main-color: hsl(209, 100%, 56%);
 }
 
+
 /* --- Handle --- */
 
 .handle {
-    /*border: 1px solid red;*/
-
+    /* Size */
     height: 17px;
     width: 25px;
 
+    /* Content */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -65,7 +66,6 @@ body {
 
 
 }
-
 
 
 
@@ -98,18 +98,19 @@ body {
 /* ==== Overview Component ==== */
 
 .comp-overview {
+    /* Dimensions */
     width: 400px;
     max-height: 450px;
     height: 80vh;
 
     margin: 20px;
+    padding: 13px 20px 20px;
 
+    /* Background */
     background-color: white;
     box-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
-
-    padding: 13px 20px 20px;
 
     /* Content */
     display: flex;
@@ -161,6 +162,7 @@ body {
 .ov-no-trainings {
     height: 100%;
 
+    /* Content */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -188,12 +190,13 @@ body {
 /* --- Trainings --- */
 
 .ov-training label {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--main-color);
+
+    /* Content */
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 10px 0;
-    border-bottom: 1px solid var(--main-color);
 }
 
 .ov-training:nth-child(2) label {
@@ -202,11 +205,6 @@ body {
 
 .ov-training p {
     margin: 0 10px;
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .ov-training .handle {
@@ -243,6 +241,7 @@ body {
 
 .ov-controls :disabled {
     --color: hsl(0, 0%, 65%);
+
     color: var(--color);
     border-color: var(--color);
 }
