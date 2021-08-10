@@ -289,6 +289,7 @@
 
 
 .comp-over-settings {
+    display: none;
     position: relative;
 
     margin-top: 10px;
@@ -298,6 +299,21 @@
     background-color: white;
     box-shadow: var(--comp-shadow);
 }
+
+    /* Fade in/out animations */
+.comp-over-settings.display {
+    display: block;
+    opacity: 0;
+
+    --from: 50px;
+    animation: ov-fade-in .7s forwards;
+}
+
+.comp-over-settings.hide {
+    display: block;
+    animation: ov-fade-out .7s forwards;
+}
+
 
 .ov-sett-close {
     position: absolute;
