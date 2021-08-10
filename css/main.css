@@ -32,6 +32,7 @@ body {
     font-family: "OpenSans Regular";
 
     --main-color: hsl(209, 100%, 56%);
+    --disabled-color: hsl(0, 0%, 65%);
 }
 
 
@@ -183,6 +184,7 @@ body {
 
     padding-left: 15px;
     margin-bottom: 10px;
+    border: none;
 
     overflow: auto;
 }
@@ -252,7 +254,7 @@ body {
     flex-shrink: 0;
 }
 
-    /* Selected training */
+    /* Selected state */
 .ov-training :checked + label {
     color: white;
     background-color: hsl(209, 100%, 70%);
@@ -262,6 +264,14 @@ body {
     --border-color: white;
 }
 
+    /* Disabled state */
+.ov-training :disabled + label {
+    color: var(--disabled-color);
+}
+
+.ov-training :disabled + label .handle {
+    --border-color: var(--disabled-color);
+}
 
 /* --- Controls --- */
 .ov-controls {
@@ -283,10 +293,8 @@ body {
 }
 
 .ov-controls :disabled {
-    --color: hsl(0, 0%, 65%);
-
-    color: var(--color);
-    border-color: var(--color);
+    color: var(--disabled-color);
+    border-color: var(--disabled-color);
 }
 
 .ov-open {
