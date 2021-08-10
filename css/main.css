@@ -313,13 +313,18 @@ body {
 
 .ov-settings {
     width: var(--height);
-    background:
+
+    --background:
         center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
+    background: var(--background);
 }
 
-.ov-settings img {
-    width: 100%;
-    height: 100%;
+.ov-settings:disabled {
+    background:
+        linear-gradient(var(--disabled-color), var(--disabled-color)),
+        var(--background);
+
+    background-blend-mode: lighten;
 }
 
     /* Enlarging buttons for touch devices */
