@@ -104,6 +104,8 @@ body {
     margin: 0 20px;
 }
 
+
+
 /* ==== Overview Component ==== */
 
 .comp-overview {
@@ -291,6 +293,7 @@ body {
 .ov-training :disabled + label .handle {
     --border-color: var(--disabled-color);
 }
+
 
 /* --- Controls --- */
 .ov-controls {
