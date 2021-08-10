@@ -36,6 +36,31 @@ body {
 }
 
 
+/* --- Initial Screen --- */
+
+.initial-screen {
+    /* Position */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Background */
+    background:
+        linear-gradient(#FFF6, #FFF6),
+        linear-gradient(#000, #000),
+        center / cover url(../res/images/initial-screen-background.jpg);
+
+    background-blend-mode: normal, saturation, normal;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /* --- Handle --- */
 
 .handle {
@@ -62,308 +87,8 @@ body {
     content: "";
 }
 
-.handle > :first-child {
+.handle > :only-child {
     border-top: var(--border);
 
 
-}
-
-
-
-/* ==== Initial Screen === */
-
-.initial-screen {
-    /* Position */
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    /* Background */
-    background:
-        linear-gradient(#FFF6, #FFF6),
-        linear-gradient(#000, #000),
-        center / cover url(../res/images/initial-screen-background.jpg);
-
-    background-blend-mode: normal, saturation, normal;
-
-    /* Content */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.overview-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    width: 400px;
-    height: calc(100% - 40px);
-    margin: 0 20px;
-}
-
-
-
-/* ==== Overview Component ==== */
-
-.comp-overview {
-    display: none;
-    position: relative;
-
-    /* Dimensions */
-    max-height: 450px;
-    min-height: 284px;
-    flex: 1 0 0;
-
-    padding: 13px 20px 20px;
-
-    /* Background */
-    background-color: white;
-    border-radius: 3px;
-    box-shadow:
-        0 0 5px 3px rgba(0,0,0,.1),
-        0 5px 15px 10px rgba(0,0,0,.15);
-
-    /* Content */
-    flex-direction: column;
-}
-
-    /* Fade in/out animations */
-.comp-overview.display {
-    display: flex;
-    opacity: 0;
-    animation: fade-in .7s .5s forwards;
-}
-
-    @keyframes fade-in {
-        from {
-            top: -50px;
-        }
-        70% {
-            opacity: 1;
-        }
-        to {
-            top: 0;
-            opacity: 1;
-        }
-    }
-
-.comp-overview.hide {
-    display: flex;
-    animation: fade-out .7s .2s forwards;
-}
-
-    @keyframes fade-out {
-        from {
-            top: 0;
-        }
-        to {
-            top: 50px;
-            opacity: 0;
-            display: none;
-        }
-    }
-
-.comp-overview > fieldset {
-    border: none;
-    flex-grow: 1;
-
-    /* Content */
-    display: flex;
-    flex-direction: column;
-}
-
-.comp-overview > fieldset > * {
-    flex-shrink: 0;
-}
-
-
-/* --- Headings --- */
-.comp-overview h1 {
-    color: var(--main-color);
-    text-align: center;
-
-    font: 32px "Roboto Medium", sans-serif;
-}
-
-.comp-overview h2 {
-    font: 16px "OpenSans SemiBold", sans-serif;
-    padding-bottom: 10px;
-}
-
-.comp-overview :disabled h2 {
-    color: var(--disabled-color);
-}
-
-
-/* --- Training list --- */
-.ov-training-list {
-    flex: 1 0 0;        /* flex-shrink is overwritten by higher priority rule
-                        above to the same value 0 */
-    padding-left: 15px;
-    margin-bottom: 10px;
-    border: none;
-
-    overflow: auto;
-}
-
-.ov-training-list.overflow-bottom {
-    /* TODO: trigger in js
-        - may have twin shadow at the top and each be
-        triggered when overflown in that direction
-    */
-    box-shadow:
-        inset 0 -10px 10px -10px #0002,
-        inset 0 -6px 3px -6px #0004;
-}
-
-
-/* --- No trainings display --- */
-.ov-no-trainings {
-    height: 100%;
-
-    /* Content */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.ov-no-trainings:not(:only-child) {
-    display: none;
-}
-
-.ov-no-trainings p {
-    color: #0006;
-    text-align: center;
-}
-
-.ov-no-trainings p:first-child {
-    margin-bottom: 1em;
-}
-
-.ov-no-trainings strong {
-    font-weight: normal;
-    color: #000B;
-}
-
-
-/* --- Trainings --- */
-
-.ov-training label {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--main-color);
-
-    /* Content */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.ov-training:nth-child(2) label {
-    border-top: 1px solid var(--main-color);
-}
-
-.ov-training:last-child {
-    margin-bottom: 5px;
-}
-
-.ov-training p {
-    margin: 0 10px;
-}
-
-.ov-training .handle {
-    margin: 0 10px;
-    flex-shrink: 0;
-}
-
-    /* Selected state */
-.ov-training :checked + label {
-    color: white;
-    background-color: hsl(209, 100%, 70%);
-}
-
-.ov-training :checked + label .handle {
-    --border-color: white;
-}
-
-    /* Disabled state */
-.ov-training :disabled + label {
-    color: var(--disabled-color);
-    background-color: white;
-}
-
-.ov-training :disabled + label .handle {
-    --border-color: var(--disabled-color);
-}
-
-
-/* --- Controls --- */
-.ov-controls {
-    display: flex;
-    flex-wrap: wrap;
-
-    --height: 36px;
-}
-
-.ov-controls > * {
-    height: var(--height);
-    margin-top: 5px;
-
-    border: 1px solid black;
-    border-radius: 3px;
-    background-color: white;
-
-    font: 16px "OpenSans Regular", sans-serif;
-}
-
-.ov-controls :disabled {
-    color: var(--disabled-color);
-    border-color: var(--disabled-color);
-}
-
-.ov-open {
-    width: 100%;
-}
-
-.ov-create {
-    flex: 1 1 0;
-    margin-right: 5px;
-}
-
-.ov-delete {
-    flex: 1 1 0;
-    margin-right: 5px;
-}
-
-.ov-settings {
-    width: var(--height);
-
-    --background:
-        center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
-    background: var(--background);
-}
-
-.ov-settings:disabled {
-    background:
-        linear-gradient(var(--disabled-color), var(--disabled-color)),
-        var(--background);
-
-    background-blend-mode: lighten;
-}
-
-    /* Enlarging buttons for touch devices */
-@media (pointer: coarse) {
-    .comp-overview {
-        min-height: 300px;
-    }
-
-    .ov-controls > * {
-        height: 50px;
-    }
-
-    .ov-settings {
-        width: 50px;
-    }
 }
