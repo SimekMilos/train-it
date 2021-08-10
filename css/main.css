@@ -116,14 +116,11 @@ body {
     box-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
-
-    /* Content */
-    flex-direction: column;
 }
 
     /* Fade in/out animations */
 .comp-overview.display {
-    display: flex;
+    display: block;
     opacity: 0;
     animation: fade-in .7s .5s forwards;
 }
@@ -142,7 +139,7 @@ body {
     }
 
 .comp-overview.hide {
-    display: flex;
+    display: block;
     animation: fade-out .7s .2s forwards;
 }
 
@@ -157,8 +154,15 @@ body {
         }
     }
 
+.comp-overview > fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
 
-.comp-overview > * {
+    height: 100%;
+}
+
+.comp-overview > fieldset > * {
     flex-shrink: 0;
 }
 
@@ -176,7 +180,7 @@ body {
 
 
 /* --- Training list --- */
-.ov-training-list {
+.comp-overview .ov-training-list {
     /* Height */
     flex-grow: 1;
     flex-shrink: 1;

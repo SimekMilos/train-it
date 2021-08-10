@@ -91,58 +91,58 @@
         -->
 
         <form class="comp-overview">
-            <h1>Train It</h1>
-            <h2>Trainings:</h2>
-            <div class="ov-training-list">
-                <div class="ov-no-trainings">
-                    <p>You don't have any trainings yet.</p>
-                    <p>Create new training by clicking <strong>Create</strong> or load previously saved trainings in the settings.</p>
+            <fieldset>              <!-- For disabled functionality -->
+                <h1>Train It</h1>
+                <h2>Trainings:</h2>
+                <div class="ov-training-list">
+                    <div class="ov-no-trainings">
+                        <p>You don't have any trainings yet.</p>
+                        <p>Create new training by clicking <strong>Create</strong> or load previously saved trainings in the settings.</p>
+                    </div>
+
+                    <!-- TODO: put trainings in <template> -->
+                    <!-- To enable draggability, probably needed:
+                            - disable user selectable text
+                            - change cursor to dragging
+                    -->
+                    <div class="ov-training">
+                        <input type="radio" name="training" value="" id="1" hidden>
+                        <label for="1">
+                            <p>First training</p>
+                            <div class="handle"><div></div></div>
+                        </label>
+                    </div>
+
+                    <div class="ov-training">
+                        <input type="radio" name="training" value="" id="2" hidden>
+                        <label for="2">
+                            <p>Second training</p>
+                            <div class="handle"><div></div></div>
+                        </label>
+                    </div>
+
+                    <div class="ov-training">
+                        <input type="radio" name="training" value="" id="3" hidden>
+                        <label for="3">
+                            <p>Third training</p>
+                            <div class="handle"><div></div></div>
+                        </label>
+                    </div>
+
                 </div>
-
-                <!-- TODO: put trainings in <template> -->
-                <!-- To enable draggability, probably needed:
-                        - disable user selectable text
-                        - change cursor to dragging
-                -->
-                <div class="ov-training">
-                    <input type="radio" name="training" value="" id="1" hidden>
-                    <label for="1">
-                        <p>First training</p>
-                        <div class="handle"><div></div></div>
-                    </label>
+                <div class="ov-controls">
+                    <!-- TODO?: (may not be needed)
+                        It may be possible to hide currently unusable buttons by transitioning to 0 - width/height (or flex alternative), margin, visibility, finishing by display: none
+                        - test if there is no small jump at the end
+                        - if applied, remove :disabled styles (disabled atribute can by used as selector to hide buttons)
+                    -->
+                    <button type="button" class="ov-open" disabled>Open</button>
+                    <button type="button" class="ov-delete" disabled>Delete</button>
+                    <button type="button" class="ov-create">Create</button>
+                    <button type="button" class="ov-settings"></button>
                 </div>
-
-                <div class="ov-training">
-                    <input type="radio" name="training" value="" id="2" hidden>
-                    <label for="2">
-                        <p>Second training</p>
-                        <div class="handle"><div></div></div>
-                    </label>
-                </div>
-
-                <div class="ov-training">
-                    <input type="radio" name="training" value="" id="3" hidden>
-                    <label for="3">
-                        <p>Third training</p>
-                        <div class="handle"><div></div></div>
-                    </label>
-                </div>
-
-            </div>
-            <div class="ov-controls">
-                <!-- TODO?: (may not be needed)
-                    It may be possible to hide currently unusable buttons by transitioning to 0 - width/height (or flex alternative), margin, visibility, finishing by display: none
-                    - test if there is no small jump at the end
-                    - if applied, remove :disabled styles (disabled atribute can by used as selector to hide buttons)
-                -->
-                <button type="button" class="ov-open" disabled>Open</button>
-                <button type="button" class="ov-delete" disabled>Delete</button>
-                <button type="button" class="ov-create">Create</button>
-                <button type="button" class="ov-settings"></button>
-            </div>
-
+            </fieldset>
         </form>
-
     </div>
 
 
