@@ -56,6 +56,9 @@ function onCloseButtonClick() {
 }
 
 function onResize() {
+    //for resizing while hiding
+    if(!overviewSettings.classList.contains("display")) return
+
     let currentHeight = settingsContainer.style.height
     currentHeight = Number.parseInt(currentHeight.slice(0, -2))
 
