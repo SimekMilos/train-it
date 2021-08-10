@@ -94,7 +94,15 @@ body {
     align-items: center;
 }
 
+.overview-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
+    width: 400px;
+    height: calc(100% - 40px);
+    margin: 0 20px;
+}
 
 /* ==== Overview Component ==== */
 
@@ -103,11 +111,10 @@ body {
     position: relative;
 
     /* Dimensions */
-    width: 400px;          /*Change to max-width? */
     max-height: 450px;
-    height: 80vh;
+    min-height: 282px;
+    flex: 1 0 0;
 
-    margin: 20px;
     padding: 13px 20px 20px;
 
     /* Background */
@@ -116,11 +123,14 @@ body {
     box-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
+
+    /* Content */
+    flex-direction: column;
 }
 
     /* Fade in/out animations */
 .comp-overview.display {
-    display: block;
+    display: flex;
     opacity: 0;
     animation: fade-in .7s .5s forwards;
 }
@@ -139,7 +149,7 @@ body {
     }
 
 .comp-overview.hide {
-    display: block;
+    display: flex;
     animation: fade-out .7s .2s forwards;
 }
 
@@ -156,10 +166,11 @@ body {
 
 .comp-overview > fieldset {
     border: none;
+    flex-grow: 1;
+
+    /* Content */
     display: flex;
     flex-direction: column;
-
-    height: 100%;
 }
 
 .comp-overview > fieldset > * {
@@ -186,12 +197,9 @@ body {
 
 
 /* --- Training list --- */
-.comp-overview .ov-training-list {
-    /* Height */
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-height: 89px;
-
+.ov-training-list {
+    flex: 1 0 0;        /* flex-shrink is overwritten by higher priority rule
+                        above to the same value 0 */
     padding-left: 15px;
     margin-bottom: 10px;
     border: none;
