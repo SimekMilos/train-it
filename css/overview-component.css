@@ -10,6 +10,10 @@
     margin: 0 20px;
 }
 
+
+
+/* === Overview Component === */
+
 .comp-overview {
     display: none;
     position: relative;
@@ -19,14 +23,12 @@
     min-height: 284px;
     flex: 1 0 0;
 
-    padding: 13px 20px 20px;
+    padding: 13px var(--comp-default-padding) var(--comp-default-padding);
 
     /* Background */
     background-color: white;
-    border-radius: 3px;
-    box-shadow:
-        0 0 5px 3px rgba(0,0,0,.1),
-        0 5px 15px 10px rgba(0,0,0,.15);
+    border-radius: var(--comp-border-radius);
+    box-shadow: var(--comp-shadow);
 
     /* Content */
     flex-direction: column;
@@ -205,19 +207,17 @@
 .ov-controls {
     display: flex;
     flex-wrap: wrap;
-
-    --height: 36px;
 }
 
 .ov-controls > * {
-    height: var(--height);
+    height: var(--button-height);
     margin-top: 5px;
 
     border: 1px solid black;
     border-radius: 3px;
     background-color: white;
 
-    font: 16px "OpenSans Regular", sans-serif;
+    font: var(--button-font);
 }
 
 .ov-controls :disabled {
@@ -240,7 +240,7 @@
 }
 
 .ov-settings {
-    width: var(--height);
+    width: var(--button-height);
 
     --background:
         center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
@@ -262,10 +262,13 @@
     }
 
     .ov-controls > * {
-        height: 50px;
+        height: var(--button-touch-height);
     }
 
     .ov-settings {
-        width: 50px;
+        width: var(--button-touch-height);
+    }
+}
+
     }
 }
