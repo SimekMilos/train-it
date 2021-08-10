@@ -166,6 +166,8 @@ body {
     flex-shrink: 0;
 }
 
+
+/* --- Headings --- */
 .comp-overview h1 {
     color: var(--main-color);
     text-align: center;
@@ -176,6 +178,10 @@ body {
 .comp-overview h2 {
     font: 16px "OpenSans Bold", sans-serif;
     padding-bottom: 10px;
+}
+
+.comp-overview :disabled h2 {
+    color: var(--disabled-color);
 }
 
 
