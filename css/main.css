@@ -114,7 +114,7 @@ body {
 
     /* Dimensions */
     max-height: 450px;
-    min-height: 282px;
+    min-height: 284px;
     flex: 1 0 0;
 
     padding: 13px 20px 20px;
@@ -265,6 +265,10 @@ body {
     border-top: 1px solid var(--main-color);
 }
 
+.ov-training:last-child {
+    margin-bottom: 5px;
+}
+
 .ov-training p {
     margin: 0 10px;
 }
@@ -351,6 +355,10 @@ body {
 
     /* Enlarging buttons for touch devices */
 @media (pointer: coarse) {
+    .comp-overview {
+        min-height: 300px;
+    }
+
     .ov-controls > * {
         height: 50px;
     }
