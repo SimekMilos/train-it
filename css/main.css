@@ -13,8 +13,8 @@
 }
 
 @font-face {
-    font-family: "OpenSans Bold";
-    src: url(../res/fonts/OpenSans-Bold.ttf) format("truetype");
+    font-family: "OpenSans SemiBold";
+    src: url(../res/fonts/OpenSans-SemiBold.ttf) format("truetype");
 }
 
 html {
@@ -176,7 +176,7 @@ body {
 }
 
 .comp-overview h2 {
-    font: 16px "OpenSans Bold", sans-serif;
+    font: 16px "OpenSans SemiBold", sans-serif;
     padding-bottom: 10px;
 }
 
