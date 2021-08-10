@@ -15,3 +15,14 @@ function onAppLoad() {
 }
 
 window.addEventListener("load", onAppLoad)
+
+
+// Overview settings activation
+const settingsButton = document.querySelector(".ov-settings")
+const overSettContainer = document.querySelector(".over-sett-container")
+
+function onSettingsActivation() {
+    overSettContainer.classList.toggle("display")
+}
+
+settingsButton.addEventListener("click", onSettingsActivation)

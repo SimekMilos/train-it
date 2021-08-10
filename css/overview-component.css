@@ -288,7 +288,7 @@
 .comp-over-settings {
     position: relative;
 
-    margin-top: 15px;
+    margin-top: 10px;
     padding: var(--comp-default-padding);
     border-radius: var(--comp-border-radius);
 
