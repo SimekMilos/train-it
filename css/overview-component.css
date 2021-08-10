@@ -277,16 +277,10 @@
 
 /* === Overview Settings Component === */
 
-/*.over-sett-container {
+.over-sett-container {
     height: 0;
-    transition: height 2s;
+    transition: height .7s;
 }
-
-.over-sett-container.display {
-    height: 100px;
-}
-*/
-
 
 .comp-over-settings {
     display: none;
