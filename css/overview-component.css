@@ -38,12 +38,14 @@
 .comp-overview.display {
     display: flex;
     opacity: 0;
-    animation: fade-in .7s .5s forwards;
+
+    --from: -50px;
+    animation: ov-fade-in .7s .5s forwards;
 }
 
-    @keyframes fade-in {
+    @keyframes ov-fade-in {
         from {
-            top: -50px;
+            top: var(--from);
         }
         70% {
             opacity: 1;
@@ -56,10 +58,10 @@
 
 .comp-overview.hide {
     display: flex;
-    animation: fade-out .7s .2s forwards;
+    animation: ov-fade-out .7s .2s forwards;
 }
 
-    @keyframes fade-out {
+    @keyframes ov-fade-out {
         from {
             top: 0;
         }
@@ -69,6 +71,7 @@
             display: none;
         }
     }
+
 
 .comp-overview > fieldset {
     border: none;
