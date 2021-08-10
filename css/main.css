@@ -74,6 +74,39 @@ body {
 }
 
 
+/* --- Close Button --- */
+
+.close-button {
+    width: 26px;
+    height: 26px;
+
+    border: none;
+    background-color: white;
+}
+
+.close-button::before, .close-button::after {
+    display: block;
+    content: "";
+
+    /* Position */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    /* Dimensions */
+    width: 100%;
+    border-top: 2px solid var(--secondary-control-color);
+}
+
+.close-button::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-button::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
 /* --- Handle --- */
 
 .handle {
