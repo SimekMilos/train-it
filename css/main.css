@@ -33,6 +33,7 @@ body {
 
     --main-color: hsl(209, 100%, 56%);
     --disabled-color: hsl(0, 0%, 65%);
+    --secondary-control-color: hsl(0, 0%, 30%);
 }
 
 
@@ -73,22 +74,14 @@ body {
     flex-direction: column;
     justify-content: space-between;
 
-    --border-color: hsl(0, 0%, 30%);
-    --border: 2px solid var(--border-color);
+    --border: 2px solid var(--secondary-control-color);
 }
 
-.handle::before {
-    border-top: var(--border);
-    content: "";
-}
-
-.handle::after {
+.handle::before, .handle::after {
     border-top: var(--border);
     content: "";
 }
 
 .handle > :only-child {
     border-top: var(--border);
-
-
 }
