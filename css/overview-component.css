@@ -311,9 +311,9 @@
     display: none;
 }
 
-    /* Hiding controls during animation */
+    /* Hiding controls during animations */
 .comp-over-settings::before {
-    display: none;
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
@@ -324,8 +324,8 @@
     content: "";
 }
 
-.comp-over-settings.hide-contr::before {
-    display: block;
+.comp-over-settings.enable-contr::before {
+    display: none;
 }
 
 

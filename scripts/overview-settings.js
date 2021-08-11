@@ -31,15 +31,18 @@ function onSettingsClick() {
         settingsContainer.style.height = `${height + margin}px`
         window.addEventListener("resize", onResize)
 
+        function enableControls() { settingsElem.classList.add("enable-contr") }
+        setTimeout(enableControls, 700)
+
     } else {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
         setTimeout(() => {
             settingsElem.classList.add("disp-none")
         }, 700)
-    }
 
-    hideControls(settingsElem, .7)
+        settingsElem.classList.remove("enable-contr")
+    }
 }
 
 function onCloseButtonClick() {
@@ -49,7 +52,7 @@ function onCloseButtonClick() {
     settingsContainer.style.height = "0"
 
     // Hiding element
-    hideControls(settingsElem, .7)
+    settingsElem.classList.remove("enable-contr")
     function undisplay() { settingsElem.classList.add("disp-none") }
     setTimeout(undisplay, 700)
 }
@@ -76,16 +79,3 @@ function onResize() {
 settingsButton.addEventListener("click", onSettingsClick)
 closeButton.addEventListener("click", onCloseButtonClick)
 
-
-// Other functions
-
-function hideControls(elem, timeInS) {
-    /* Hides controls temporarily during animation */
-
-    // Hide
-    const cls = elem.classList.add("hide-contr")
-
-    // Unhide
-    function unhide() { elem.classList.remove("hide-contr") }
-    setTimeout(unhide, timeInS*1000)
-}
