@@ -1,5 +1,5 @@
 
-// --- Scripts for Overview Settings ---
+// --- Overview Settings Component ---
 
 
 const settingsContainer = document.querySelector(".over-sett-container")
@@ -57,6 +57,19 @@ function onCloseButtonClick() {
     elemClassList.remove("enable-contr")
 }
 
+function onAnimationEnd() {
+    console.log("now")
+
+    // Displaying - enable controllers
+    if(elemClassList.contains("display")) {
+        elemClassList.add("enable-contr")
+
+    // Hiding - undisplay
+    } else {
+        elemClassList.add("disp-none")
+    }
+}
+
 function onResize() {
     // Prevent resize change during hiding animation
     if(!elemClassList.contains("display")) return
@@ -76,6 +89,6 @@ function onResize() {
     }
 }
 
+settingsElem.addEventListener("animationend", onAnimationEnd)
 settingsButton.addEventListener("click", onSettingsClick)
 closeButton.addEventListener("click", onCloseButtonClick)
-
