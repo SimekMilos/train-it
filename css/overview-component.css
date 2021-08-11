@@ -282,7 +282,9 @@
 
 .over-sett-container {
     height: 0;
-    transition: height .7s;
+    transition: height var(--animation-speed);
+
+    --animation-speed: .4s;
 
     /* For Floating mode */
     top: 50%;
@@ -307,12 +309,12 @@
     opacity: 0;
 
     --from: 50px;
-    animation: ov-fade-in .7s forwards ease-in-out;
+    animation: ov-fade-in var(--animation-speed) forwards ease-in-out;
 }
 
 .comp-over-settings.hide {
     display: block;
-    animation: ov-fade-out .7s forwards ease-in-out;
+    animation: ov-fade-out var(--animation-speed) forwards ease-in-out;
 }
 
 .comp-over-settings.disp-none {
