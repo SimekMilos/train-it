@@ -82,10 +82,10 @@ closeButton.addEventListener("click", onCloseButtonClick)
 function hideControls(elem, timeInS) {
     /* Hides controls temporarily during animation */
 
-    const cls = elem.classList
-    cls.add("hide-contr")
+    // Hide
+    const cls = elem.classList.add("hide-contr")
 
-    setTimeout(() => {
-        cls.remove("hide-contr")
-    }, timeInS*1000)
+    // Unhide
+    function unhide() { elem.classList.remove("hide-contr") }
+    setTimeout(unhide, timeInS*1000)
 }
