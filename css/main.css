@@ -145,9 +145,15 @@ body {
     bottom: 0;
     z-index: 1;
 
+    border-radius: var(--comp-border-radius);
     content: "";
 }
 
 .overlay-disabling.enable-access::before {
     display: none;
+}
+
+.overlay-disabling.visible-disabling::before {
+    display: block;
+    background-color: #0003;
 }
