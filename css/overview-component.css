@@ -68,7 +68,6 @@
         to {
             top: 50px;
             opacity: 0;
-            display: none;
         }
     }
 
@@ -306,6 +305,10 @@
 .comp-over-settings.hide {
     display: block;
     animation: ov-fade-out .7s forwards;
+}
+
+.comp-over-settings.disp-none {
+    display: none;
 }
 
     /* Hiding controls during animation */

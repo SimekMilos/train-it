@@ -38,6 +38,8 @@ function onSettingsClick() {
     classes.toggle("display")
 
     if(classes.contains("display")) {
+        overviewSettings.classList.remove("disp-none")
+
         const height = overviewSettings.getBoundingClientRect().height
 
         let margin = getComputedStyle(overviewSettings).marginTop.slice(0, -2)
@@ -49,6 +51,9 @@ function onSettingsClick() {
     } else {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
+        setTimeout(() => {
+            overviewSettings.classList.add("disp-none")
+        }, 700)
     }
 
     hideControlsTemp(overviewSettings, .7)
@@ -59,6 +64,9 @@ function onCloseButtonClick() {
     overviewSettings.classList.remove("display")
     settingsContainer.style.height = "0"
     hideControlsTemp(overviewSettings, .7)
+    setTimeout(() => {
+        overviewSettings.classList.add("disp-none")
+    }, 700)
 }
 
 function onResize() {
