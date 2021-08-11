@@ -71,6 +71,10 @@
         }
     }
 
+.comp-overview.disp-none {
+    display: none;
+}
+
 
 .comp-overview > fieldset {
     border: none;
