@@ -28,8 +28,7 @@ function onSettingsClick() {
 
         // Get dimensions
         const height = settingsElem.getBoundingClientRect().height
-        let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
-        margin = Number.parseInt(margin)
+        const margin = Number.parseInt(getComputedStyle(settingsElem).marginTop)
 
         // Resize
         settingsContainer.style.height = `${height + margin}px`
@@ -73,13 +72,9 @@ function onResize() {
     if(!elemClassList.contains("display")) return
 
     // Get dimensions
-    let currentHeight = settingsContainer.style.height
+    const currentHeight = Number.parseInt(settingsContainer.style.height)
     const newHeight = settingsElem.getBoundingClientRect().height
-    let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
-
-    // Retype dimensions
-    currentHeight = Number.parseInt(currentHeight.slice(0, -2))
-    margin = Number.parseInt(margin)
+    const margin = Number.parseInt(getComputedStyle(settingsElem).marginTop)
 
     // Resize
     if (currentHeight !== newHeight) {
