@@ -12,40 +12,50 @@ const closeButton = document.querySelector(".ov-sett-close")
 // Event listeners
 
 function onSettingsClick() {
-    const classes = settingsElem.classList
+    const elemClassList = settingsElem.classList
 
-    if (classes.contains("display") || classes.contains("hide")) {
-        classes.toggle("hide")
+    // Set new state
+    if (elemClassList.contains("display") || elemClassList.contains("hide")) {
+        elemClassList.toggle("display")
+        elemClassList.toggle("hide")
+    } else {
+        elemClassList.add("display")
     }
 
-    classes.toggle("display")
-
-    if(classes.contains("display")) {
+    // Displaying
+    if(elemClassList.contains("display")) {
+        // Display
         settingsElem.classList.remove("disp-none")
-
-        const height = settingsElem.getBoundingClientRect().height
-
-        let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
-        margin = Number.parseInt(margin)
-
-        settingsContainer.style.height = `${height + margin}px`
-        window.addEventListener("resize", onResize)
 
         function enableControls() { settingsElem.classList.add("enable-contr") }
         setTimeout(enableControls, 700)
 
+        // Get dimensions
+        const height = settingsElem.getBoundingClientRect().height
+        let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
+        margin = Number.parseInt(margin)
+
+        // Resize
+        settingsContainer.style.height = `${height + margin}px`
+        window.addEventListener("resize", onResize)
+
+    // Hiding
     } else {
+        // Resize
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
-        setTimeout(() => {
-            settingsElem.classList.add("disp-none")
-        }, 700)
 
+        // Undisplay
+        function undisplay() { settingsElem.classList.add("disp-none") }
+        setTimeout(undisplay, 700)
+
+        // Disable controllers
         settingsElem.classList.remove("enable-contr")
     }
 }
 
 function onCloseButtonClick() {
+    // Set new state
     settingsElem.classList.add("hide")
     settingsElem.classList.remove("display")
 
