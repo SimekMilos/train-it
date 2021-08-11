@@ -55,17 +55,19 @@ function onCloseButtonClick() {
 }
 
 function onResize() {
-    // prevent resize change during hiding animation
+    // Prevent resize change during hiding animation
     if(!settingsElem.classList.contains("display")) return
 
+    // Get dimensions
     let currentHeight = settingsContainer.style.height
-    currentHeight = Number.parseInt(currentHeight.slice(0, -2))
-
     const newHeight = settingsElem.getBoundingClientRect().height
-
     let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
+
+    // Retype dimensions
+    currentHeight = Number.parseInt(currentHeight.slice(0, -2))
     margin = Number.parseInt(margin)
 
+    // Resize
     if (currentHeight !== newHeight) {
         settingsContainer.style.height = `${newHeight + margin}px`
     }
