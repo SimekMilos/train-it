@@ -17,6 +17,9 @@ function onAppLoad() {
 window.addEventListener("load", onAppLoad)
 
 
+
+// --- Overview Component ---
+
 // Overview settings activation
 const settingsContainer = document.querySelector(".over-sett-container")
 const overviewSettings = document.querySelector(".comp-over-settings")
@@ -47,12 +50,15 @@ function onSettingsClick() {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
     }
+
+    hideControlsTemp(overviewSettings, .7)
 }
 
 function onCloseButtonClick() {
     overviewSettings.classList.add("hide")
     overviewSettings.classList.remove("display")
     settingsContainer.style.height = "0"
+    hideControlsTemp(overviewSettings, .7)
 }
 
 function onResize() {
@@ -70,6 +76,15 @@ function onResize() {
     if (currentHeight !== newHeight) {
         settingsContainer.style.height = `${newHeight + margin}px`
     }
+}
+
+function hideControlsTemp(elem, timeInS) {
+    const cls = elem.classList
+    cls.add("hide-contr")
+
+    setTimeout(() => {
+        cls.remove("hide-contr")
+    }, timeInS*1000)
 }
 
 settingsButton.addEventListener("click", onSettingsClick)

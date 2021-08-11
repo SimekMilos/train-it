@@ -308,6 +308,23 @@
     animation: ov-fade-out .7s forwards;
 }
 
+    /* Hiding controls during animation */
+.comp-over-settings::before {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    content: "";
+}
+
+.comp-over-settings.hide-contr::before {
+    display: block;
+}
+
 
 .ov-sett-close {
     position: absolute;
