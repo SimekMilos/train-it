@@ -283,6 +283,10 @@
 .over-sett-container {
     height: 0;
     transition: height .7s;
+
+    /* For Floating mode */
+    top: 50%;
+    left: 50%;
 }
 
 .comp-over-settings {
