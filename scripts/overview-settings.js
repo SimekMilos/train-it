@@ -1,14 +1,18 @@
 
-// Overview settings activation
+// --- Scripts for Overview Settings ---
+
+
 const settingsContainer = document.querySelector(".over-sett-container")
-const overviewSettings = document.querySelector(".comp-over-settings")
+const settingsElem = settingsContainer.firstElementChild
 
 const settingsButton = document.querySelector(".ov-settings")
 const closeButton = document.querySelector(".ov-sett-close")
 
 
+// Event listeners
+
 function onSettingsClick() {
-    const classes = overviewSettings.classList
+    const classes = settingsElem.classList
 
     if (classes.contains("display") || classes.contains("hide")) {
         classes.toggle("hide")
@@ -17,11 +21,11 @@ function onSettingsClick() {
     classes.toggle("display")
 
     if(classes.contains("display")) {
-        overviewSettings.classList.remove("disp-none")
+        settingsElem.classList.remove("disp-none")
 
-        const height = overviewSettings.getBoundingClientRect().height
+        const height = settingsElem.getBoundingClientRect().height
 
-        let margin = getComputedStyle(overviewSettings).marginTop.slice(0, -2)
+        let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
         margin = Number.parseInt(margin)
 
         settingsContainer.style.height = `${height + margin}px`
@@ -31,33 +35,35 @@ function onSettingsClick() {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
         setTimeout(() => {
-            overviewSettings.classList.add("disp-none")
+            settingsElem.classList.add("disp-none")
         }, 700)
     }
 
-    hideControlsTemp(overviewSettings, .7)
+    hideControls(settingsElem, .7)
 }
 
 function onCloseButtonClick() {
-    overviewSettings.classList.add("hide")
-    overviewSettings.classList.remove("display")
+    settingsElem.classList.add("hide")
+    settingsElem.classList.remove("display")
+
     settingsContainer.style.height = "0"
-    hideControlsTemp(overviewSettings, .7)
-    setTimeout(() => {
-        overviewSettings.classList.add("disp-none")
-    }, 700)
+
+    // Hiding element
+    hideControls(settingsElem, .7)
+    function undisplay() { settingsElem.classList.add("disp-none") }
+    setTimeout(undisplay, 700)
 }
 
 function onResize() {
-    //for resizing while hiding
-    if(!overviewSettings.classList.contains("display")) return
+    // prevent resize change during hiding animation
+    if(!settingsElem.classList.contains("display")) return
 
     let currentHeight = settingsContainer.style.height
     currentHeight = Number.parseInt(currentHeight.slice(0, -2))
 
-    const newHeight = overviewSettings.getBoundingClientRect().height
+    const newHeight = settingsElem.getBoundingClientRect().height
 
-    let margin = getComputedStyle(overviewSettings).marginTop.slice(0, -2)
+    let margin = getComputedStyle(settingsElem).marginTop.slice(0, -2)
     margin = Number.parseInt(margin)
 
     if (currentHeight !== newHeight) {
@@ -65,7 +71,15 @@ function onResize() {
     }
 }
 
-function hideControlsTemp(elem, timeInS) {
+settingsButton.addEventListener("click", onSettingsClick)
+closeButton.addEventListener("click", onCloseButtonClick)
+
+
+// Other functions
+
+function hideControls(elem, timeInS) {
+    /* Hides controls temporarily during animation */
+
     const cls = elem.classList
     cls.add("hide-contr")
 
@@ -73,6 +87,3 @@ function hideControlsTemp(elem, timeInS) {
         cls.remove("hide-contr")
     }, timeInS*1000)
 }
-
-settingsButton.addEventListener("click", onSettingsClick)
-closeButton.addEventListener("click", onCloseButtonClick)
