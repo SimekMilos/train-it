@@ -303,12 +303,12 @@
     opacity: 0;
 
     --from: 50px;
-    animation: ov-fade-in .7s forwards;
+    animation: ov-fade-in .7s forwards ease-in-out;
 }
 
 .comp-over-settings.hide {
     display: block;
-    animation: ov-fade-out .7s forwards;
+    animation: ov-fade-out .7s forwards ease-in-out;
 }
 
 .comp-over-settings.disp-none {
