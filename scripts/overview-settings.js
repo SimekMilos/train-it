@@ -3,7 +3,8 @@
 
 
 const settingsContainer = document.querySelector(".over-sett-container")
-const settingsElem = settingsContainer.firstElementChild
+const settingsElem = settingsContainer.firstElementChild    // ".comp-over-settings"
+const elemClassList = settingsElem.classList
 
 const settingsButton = document.querySelector(".ov-settings")
 const closeButton = document.querySelector(".ov-sett-close")
@@ -12,8 +13,6 @@ const closeButton = document.querySelector(".ov-sett-close")
 // Event listeners
 
 function onSettingsClick() {
-    const elemClassList = settingsElem.classList
-
     // Set new state
     if (elemClassList.contains("display") || elemClassList.contains("hide")) {
         elemClassList.toggle("display")
@@ -25,10 +24,7 @@ function onSettingsClick() {
     // Displaying
     if(elemClassList.contains("display")) {
         // Display
-        settingsElem.classList.remove("disp-none")
-
-        function enableControls() { settingsElem.classList.add("enable-contr") }
-        setTimeout(enableControls, 700)
+        elemClassList.remove("disp-none")
 
         // Get dimensions
         const height = settingsElem.getBoundingClientRect().height
@@ -45,31 +41,25 @@ function onSettingsClick() {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
 
-        // Undisplay
-        function undisplay() { settingsElem.classList.add("disp-none") }
-        setTimeout(undisplay, 700)
-
         // Disable controllers
-        settingsElem.classList.remove("enable-contr")
+        elemClassList.remove("enable-contr")
     }
 }
 
 function onCloseButtonClick() {
     // Set new state
-    settingsElem.classList.add("hide")
-    settingsElem.classList.remove("display")
+    elemClassList.add("hide")
+    elemClassList.remove("display")
 
     settingsContainer.style.height = "0"
 
     // Hiding element
-    settingsElem.classList.remove("enable-contr")
-    function undisplay() { settingsElem.classList.add("disp-none") }
-    setTimeout(undisplay, 700)
+    elemClassList.remove("enable-contr")
 }
 
 function onResize() {
     // Prevent resize change during hiding animation
-    if(!settingsElem.classList.contains("display")) return
+    if(!elemClassList.contains("display")) return
 
     // Get dimensions
     let currentHeight = settingsContainer.style.height
