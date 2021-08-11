@@ -130,3 +130,24 @@ body {
 .handle > :only-child {
     border-top: var(--border);
 }
+
+
+/* --- Overlay Disabling --- */
+/* Creates pseudo-element overlay so component can't be accessed
+    during inproper times (i.e. during animations) */
+
+.overlay-disabling::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    content: "";
+}
+
+.overlay-disabling.enable-access::before {
+    display: none;
+}

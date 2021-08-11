@@ -41,8 +41,8 @@ function onSettingsClick() {
         settingsContainer.style.height = "0"
         window.removeEventListener("resize", onResize)
 
-        // Disable controllers
-        elemClassList.remove("enable-contr")
+        // Disable access to controls
+        elemClassList.remove("enable-access")
     }
 }
 
@@ -53,14 +53,14 @@ function onCloseButtonClick() {
 
     settingsContainer.style.height = "0"
 
-    // Hiding element
-    elemClassList.remove("enable-contr")
+    // Disable access to controls
+    elemClassList.remove("enable-access")
 }
 
 function onAnimationEnd() {
-    // Displaying - enable controllers
+    // Displaying - enable access to controls
     if(elemClassList.contains("display")) {
-        elemClassList.add("enable-contr")
+        elemClassList.add("enable-access")
 
     // Hiding - undisplay
     } else {
