@@ -58,8 +58,6 @@ function onCloseButtonClick() {
 }
 
 function onAnimationEnd() {
-    console.log("now")
-
     // Displaying - enable controllers
     if(elemClassList.contains("display")) {
         elemClassList.add("enable-contr")
