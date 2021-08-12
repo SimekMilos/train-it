@@ -175,20 +175,39 @@
         <!-- Training Setup Component -->
 
         <div class="vertical-container tr-sett-container">
-
             <form class="comp-training-setup">
+
                 <input type="text" class="ts-training-name"
-                    placeholder="Name your training">
+                    placeholder="Name for the training">
 
                 <textarea class="ts-training-notes"
-                    placeholder=" - notes"></textarea>
+                    placeholder=" - notes the training"></textarea>
 
-                <div class="ts-cont-moves">
+                <div class="ts-exercise-container">
+
+                    <!-- Group subcomponent -->
                     <div class="ts-group">
-                        <div class="ts-group-handle handle"><div></div></div>
-                        <div class="ts-group-close close-button"></div>
+                        <input type="text" class="ts-group-name"
+                            placeholder="Name for the group">
 
+                        <textarea class="ts-group-notes"
+                            placeholder=" - notes for the group"></textarea>
+
+                        <div class="ts-group-exercise-container">
+
+
+                        </div>
+
+                        <div class="ts-group-controlls">
+                            <div class="ts-group-handle handle"><div></div></div>
+                            <div class="ts-group-close close-button"></div>
+
+                            <button class="ts-group-add control-button"
+                            type="button">Add exercise</button>
+                        </div>
                     </div>
+
+                    <!-- Move Subcomponent -->
 
                 </div>
 
