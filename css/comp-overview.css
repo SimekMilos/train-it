@@ -108,12 +108,7 @@
 
 /* --- No trainings display --- */
 .ov-no-trainings {
-    height: 100%;
-
-    /* Content */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin: calc(1em - 10px) 3% 3% calc(3% - 15px);
 }
 
 .ov-no-trainings:not(:only-child) {
