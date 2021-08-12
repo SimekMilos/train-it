@@ -29,10 +29,10 @@ function onSettingsClick() {
 
         // Get dimensions
         const height = settingsElem.getBoundingClientRect().height
-        const margin = Number.parseInt(getComputedStyle(settingsElem).marginTop)
+        const marginTop = Number.parseInt(getComputedStyle(settingsElem).marginTop)
 
         // Resize
-        settingsContainer.style.height = `${height + margin}px`
+        settingsContainer.style.height = `${height + marginTop}px`
         window.addEventListener("resize", onResize)
 
     // Hiding
@@ -79,11 +79,11 @@ function onResize() {
     // Get dimensions
     const currentHeight = Number.parseInt(settingsContainer.style.height)
     const newHeight = settingsElem.getBoundingClientRect().height
-    const margin = Number.parseInt(getComputedStyle(settingsElem).marginTop)
+    const marginTop = Number.parseInt(getComputedStyle(settingsElem).marginTop)
 
     // Resize
     if (currentHeight !== newHeight) {
-        settingsContainer.style.height = `${newHeight + margin}px`
+        settingsContainer.style.height = `${newHeight + marginTop}px`
     }
 
     floatingMode()
