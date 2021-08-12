@@ -6,6 +6,7 @@
 
 .comp-training-setup {
     /*display: none;*/
+    display: flex;
     position: relative;
     flex: 1 0 0;
 
@@ -20,3 +21,28 @@
     flex-direction: column;
 }
 
+.ts-cont-moves {
+    border: 1px solid red;
+    flex-grow: 1;
+}
+
+
+
+/* --- Controls --- */
+
+.ts-controlls {
+    display: flex;
+}
+
+.ts-controlls > * {
+    flex: 1 1 0;
+    margin-top: 5px;
+}
+
+.ts-cancel {
+    margin-right: 5px;
+}
+
+.ts-save {
+
+}
