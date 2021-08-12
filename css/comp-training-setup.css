@@ -21,7 +21,7 @@
     flex-direction: column;
 }
 
-.comp-training-setup > *:not(:last-child) {
+.comp-training-setup > :not(.ts-controlls) {
     margin-bottom: 5px;
 }
 

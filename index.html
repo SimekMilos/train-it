@@ -126,9 +126,7 @@
                     </div>
                 </fieldset>
 
-
-                <!-- Template for trainings -->
-
+                <!-- Trainings Template -->
                 <template class="ov-training-template">
                     <div class="ov-training">
                         <input type="radio" name="training" value="" id="" hidden>
@@ -171,7 +169,6 @@
 
         <div class="vertical-container tr-sett-container">
             <form class="comp-training-setup">
-
                 <input type="text" class="ts-training-name"
                     placeholder="Name for the training">
 
@@ -179,8 +176,19 @@
                     placeholder=" - notes the training"></textarea>
 
                 <div class="ts-exercise-container">
+                    <!-- Groups and Sets goes here -->
+                </div>
 
-                    <!-- Group subcomponent -->
+                <div class="ts-controlls">
+                    <button class="ts-cancel control-button"
+                        type="button">Cancel</button>
+                    <button class="ts-save control-button"
+                        type="button">Save</button>
+                </div>
+
+
+                <!-- Group Template -->
+                <template class="ts-group-template">
                     <div class="ts-group">
                         <input type="text" class="ts-group-name"
                             placeholder="Name for the group">
@@ -189,8 +197,7 @@
                             placeholder=" - notes for the group"></textarea>
 
                         <div class="ts-group-exercise-container">
-
-
+                            <!-- Exercised goes here -->
                         </div>
 
                         <div class="ts-group-controlls">
@@ -201,17 +208,22 @@
                             type="button">Add exercise</button>
                         </div>
                     </div>
+                </template>
 
-                    <!-- Move Subcomponent -->
+                <!-- Exercise Template -->
+                <template class="ts-exercise-template">
+                    <div class="ts-exercise">
 
-                </div>
+                    </div>
+                </template>
 
-                <div class="ts-controlls">
-                    <button class="ts-cancel control-button"
-                        type="button">Cancel</button>
-                    <button class="ts-save control-button"
-                        type="button">Save</button>
-                </div>
+                <!-- Set Template -->
+                <template class="ts-set-template">
+                    <div class="ts-set">
+
+                    </div>
+                </template>
+
 
             </form>
         </div>
