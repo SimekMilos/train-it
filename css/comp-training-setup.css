@@ -1,2 +1,22 @@
 @charset "utf-8";
 
+.tr-sett-container {
+    margin-left: -5px;
+}
+
+.comp-training-setup {
+    /*display: none;*/
+    position: relative;
+    flex: 1 0 0;
+
+    padding: var(--comp-default-padding);
+
+    /* Background */
+    background-color: white;
+    border-radius: var(--comp-border-radius);
+    box-shadow: var(--comp-shadow);
+
+    /* Content */
+    flex-direction: column;
+}
+
