@@ -136,10 +136,12 @@ body {
 }
 
 .close-button::before {
+    width: 20px;
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close-button::after {
+    width: 20px;
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
