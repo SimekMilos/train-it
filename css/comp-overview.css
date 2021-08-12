@@ -201,22 +201,6 @@
     flex-wrap: wrap;
 }
 
-.ov-controls > * {
-    height: var(--button-height);
-    margin-top: 5px;
-
-    border: 1px solid black;
-    border-radius: 3px;
-    background-color: white;
-
-    font: var(--button-font);
-}
-
-.ov-controls :disabled {
-    color: var(--disabled-color);
-    border-color: var(--disabled-color);
-}
-
 .ov-open {
     width: 100%;
 }
@@ -251,10 +235,6 @@
 @media (pointer: coarse) {
     .comp-overview {
         min-height: 300px;
-    }
-
-    .ov-controls > * {
-        height: var(--button-touch-height);
     }
 
     .ov-settings {

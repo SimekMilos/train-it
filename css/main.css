@@ -85,6 +85,33 @@ body {
 }
 
 
+/* --- Control Button --- */
+/* General styles for buttons */
+
+.control-button {
+    height: var(--button-height);
+    margin-top: 5px;
+
+    border: 1px solid black;
+    border-radius: var(--comp-border-radius);
+    background-color: white;
+
+    font: var(--button-font);
+}
+
+.control-button:disabled {
+    color: var(--disabled-color);
+    border-color: var(--disabled-color);
+}
+
+    /* Enlarging buttons for touch devices */
+@media (pointer: coarse) {
+    .control-button {
+        height: var(--button-touch-height);
+    }
+}
+
+
 /* --- Close Button --- */
 
 .close-button {
