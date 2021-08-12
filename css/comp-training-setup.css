@@ -28,8 +28,9 @@
 .ts-cont-moves {
     border: 1px solid red;
     flex-grow: 1;
-}
 
+    overflow: auto;
+}
 
 
 /* --- Controls --- */
@@ -49,3 +50,27 @@
 .ts-save {
 
 }
+
+
+/* --- Group --- */
+
+.ts-group {
+    position: relative;
+    padding: var(--comp-default-padding);
+    border: 1px solid red;
+}
+
+.ts-group-handle {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+}
+
+.ts-group-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+
+/* --- Move --- */
