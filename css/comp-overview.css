@@ -201,6 +201,10 @@
     flex-wrap: wrap;
 }
 
+.ov-controls > * {
+    margin-top: 5px;
+}
+
 .ov-open {
     width: 100%;
 }
@@ -310,18 +314,6 @@
 
 .ov-sett-controls > * {
     flex-grow: 1;
-    height: var(--button-height);
-
-    background-color: white;
-    border: 1px solid black;
-    border-radius: var(--comp-border-radius);
-
-    font: var(--button-font);
-}
-
-.ov-sett-controls :disabled {
-    color: var(--disabled-color);
-    border-color: var(--disabled-color);
 }
 
 .ov-sett-save {
