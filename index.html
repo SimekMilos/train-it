@@ -93,6 +93,7 @@
     <div class="initial-screen">
         <div class="vertical-container">
 
+
             <!-- Overview Component -->
 
             <form class="comp-overview overlay-disabling">
@@ -105,34 +106,7 @@
                             <p>Create new training by clicking <strong>Create</strong> or load previously saved trainings in the settings.</p>
                         </div>
 
-                        <!-- TODO: put trainings in <template> -->
-                        <!-- To enable draggability, probably needed:
-                                - disable user selectable text
-                                - change cursor to dragging
-                        -->
-                        <div class="ov-training">
-                            <input type="radio" name="training" value="" id="1" hidden>
-                            <label for="1">
-                                <p>First training</p>
-                                <div class="handle"><div></div></div>
-                            </label>
-                        </div>
-
-                        <div class="ov-training">
-                            <input type="radio" name="training" value="" id="2" hidden>
-                            <label for="2">
-                                <p>Second training</p>
-                                <div class="handle"><div></div></div>
-                            </label>
-                        </div>
-
-                        <div class="ov-training">
-                            <input type="radio" name="training" value="" id="3" hidden>
-                            <label for="3">
-                                <p>Third training</p>
-                                <div class="handle"><div></div></div>
-                            </label>
-                        </div>
+                        <!-- Trainings goes here -->
 
                     </div>
                     <div class="ov-controls">
@@ -151,7 +125,27 @@
                             ></button>
                     </div>
                 </fieldset>
+
+
+                <!-- Template for trainings -->
+
+                <template class="ov-training-template">
+                    <div class="ov-training">
+                        <input type="radio" name="training" value="" id="" hidden>
+                        <label for="">
+                            <p></p>
+                            <div class="handle"><div></div></div>
+                        </label>
+                    </div>
+
+                    <!-- To enable draggability, probably needed:
+                        - disable user selectable text
+                        - change cursor to dragging
+                    -->
+                </template>
+
             </form>
+
 
             <!-- Overview Settings Component -->
 
@@ -171,6 +165,7 @@
                 </form>
             </div>
         </div>
+
 
         <!-- Training Setup Component -->
 
