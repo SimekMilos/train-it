@@ -73,6 +73,17 @@ body {
     align-items: center;
 }
 
+/* Vertical alignment */
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 400px;
+    height: calc(100% - 40px);
+    margin: 0 20px;
+}
+
 
 /* --- Close Button --- */
 

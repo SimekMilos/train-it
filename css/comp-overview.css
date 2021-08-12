@@ -1,19 +1,5 @@
 @charset "utf-8";
 
-.overview-container {   /* Vertical alignment */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    width: 400px;
-    height: calc(100% - 40px);
-    margin: 0 20px;
-}
-
-
-
-/* === Overview Component === */
-
 .comp-overview {
     display: none;
     position: relative;
