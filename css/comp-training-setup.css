@@ -24,16 +24,14 @@
 }
 
 
-/* Training Name */
+/* General input styles */
 
-.ts-training-name {
-    margin: 0px -5px 5px -5px;
-    padding: 3px 5px;
-    border: 1px solid white;
+.ts-input {
+    border: 1px solid transparent;
     border-radius: var(--comp-border-radius);
+    padding: 3px 5px;
 
-    color: var(--main-color);
-    font: 24px "Roboto Light", sans-serif;
+    font: 1em "OpenSans Regular", sans-serif;
     text-overflow: ellipsis;
 
     -webkit-appearance: none;
@@ -41,14 +39,13 @@
     appearance: none;
 }
 
-.ts-training-name::placeholder {
-    opacity: 1; /* Firefox */
-
-    font: 24px "Roboto Light", sans-serif;
+.ts-input::placeholder {
     color: var(--placeholder-color);
+    font: 1em "OpenSans Regular", sans-serif;
+    opacity: 1; /* Firefox */
 }
 
-.ts-training-name:focus {
+.ts-input:focus {
     outline: none;
     border-color: var(--main-color);
 }
