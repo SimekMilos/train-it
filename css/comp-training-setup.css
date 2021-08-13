@@ -19,17 +19,59 @@
 
     /* Content */
     flex-direction: column;
+
+    --placeholder-color: #0006;
 }
 
-.comp-training-setup > :not(.ts-controlls) {
-    margin-bottom: 5px;
+
+/* Training Name */
+
+.ts-training-name {
+    margin: 0px -5px 5px -5px;
+    padding: 3px 5px;
+    border: 1px solid white;
+    border-radius: var(--comp-border-radius);
+
+    color: var(--main-color);
+    font: 24px "Roboto Light", sans-serif;
+    text-overflow: ellipsis;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
+
+.ts-training-name::placeholder {
+    opacity: 1; /* Firefox */
+
+    font: 24px "Roboto Light", sans-serif;
+    color: var(--placeholder-color);
+}
+
+.ts-training-name:focus {
+    outline: none;
+    border-color: var(--main-color);
+}
+
+
+/* Excercise Container */
 
 .ts-exercise-container {
     flex-grow: 1;
+    border-top: 1px solid var(--main-color);
 
     overflow: auto;
 }
+
+/*.ts-training-notes {
+    border: none;
+    border-left: 3px solid var(--main-color);
+    border-radius: 0;
+    margin: 0 0 1em 1em;
+    padding-left: 5px;
+    font: .8em "OpenSans Regula", sans-serif;
+    resize: none;
+}*/
 
 
 /* --- Controls --- */
