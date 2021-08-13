@@ -170,22 +170,29 @@
         <div class="ts-container vertical-container">
             <form class="comp-training-setup">
                 <input type="text" class="ts-training-name ts-input"
-                    placeholder="Name the training">
+                    size="1" placeholder="Name the training">
 
                 <div class="ts-exercise-container">
                     <textarea class="ts-training-notes ts-input"
                         placeholder="- notes for the training"></textarea>
+
+                    <!-- Groups and Sets goes here -->
 
                     <div class="ts-no-exercises">
                         <p>Add exercise by clicking <strong>Add&#160;Exercise</strong>.</p>
                         <p>Add group of exercises by clicking <strong>Add&#160;Group</strong>.</p>
                     </div>
 
-                    <!-- Groups and Sets goes here -->
+                    <div class="ts-add-controls">
+                        <button class="ts-add-group control-button"
+                            type="button">Add&#160;Group</button>
+                        <button class="ts-add-exercise control-button"
+                            type="button">Add&#160;Exercise</button>
+                    </div>
 
                 </div>
 
-                <div class="ts-controlls">
+                <div class="ts-bottom-controlls">
                     <button class="ts-cancel control-button"
                         type="button">Cancel</button>
                     <button class="ts-save control-button"
