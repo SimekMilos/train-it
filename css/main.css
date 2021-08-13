@@ -42,6 +42,7 @@ body {
     --button-height: 36px;
     --button-touch-height: 48px;
     --button-font: 1em "OpenSans Regular", sans-serif;
+    --button-color: hsl(209, 100%, 40%);
 
     --secondary-control-color: hsl(0, 0%, 30%);
 
@@ -96,11 +97,12 @@ body {
 .control-button {
     height: var(--button-height);
 
-    border: 1px solid black;
+    border: 1px solid var(--button-color);
     border-radius: var(--comp-border-radius);
     background-color: white;
 
     font: var(--button-font);
+    color: var(--button-color);
 }
 
 .control-button:disabled {
