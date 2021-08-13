@@ -75,8 +75,34 @@
     overflow: auto;
 }
 
+.ts-exercise-container > * {
+    width: 100%;
+}
+
+
+/* Training Notes */
+
+.ts-training-notes {
+    height: calc(8px + 3 * 1.5em);
+    background-color: rgba(0,0,0,.04);
     resize: none;
-}*/
+
+    padding-left: 8px;
+    padding-right: 8px;
+
+    color: #000A;
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.ts-training-notes::placeholder {
+    line-height: 1.5;
+}
+
+.ts-training-notes:focus {
+    background-color: white;
+}
+
 
 
 /* --- Controls --- */
