@@ -219,14 +219,3 @@
 
     background-blend-mode: lighten;
 }
-
-    /* Enlarging buttons for touch devices */
-@media (pointer: coarse) {
-    .comp-overview {
-        min-height: 300px;
-    }
-
-    .ov-settings {
-        width: var(--button-touch-height);
-    }
-}

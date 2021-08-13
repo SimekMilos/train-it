@@ -41,7 +41,6 @@ body {
     --disabled-color: hsl(0, 0%, 65%);
 
     --button-height: 36px;
-    --button-touch-height: 48px;
     --button-font: 1em "OpenSans Regular", sans-serif;
     --button-color: hsl(209, 100%, 40%);
 
@@ -110,13 +109,6 @@ body {
 .control-button:disabled {
     color: var(--disabled-color);
     border-color: var(--disabled-color);
-}
-
-    /* Enlarging buttons for touch devices */
-@media (pointer: coarse) {
-    .control-button {
-        height: var(--button-touch-height);
-    }
 }
 
 
