@@ -106,7 +106,7 @@
 }
 
 
-/* --- No trainings display --- */
+/* --- No Trainings Display --- */
 .ov-no-trainings {
     margin: calc(1em - 10px) 3% 3% calc(3% - 15px);
 }
@@ -120,7 +120,7 @@
     text-align: center;
 }
 
-.ov-no-trainings p:first-child {
+.ov-no-trainings p:not(:last-child) {
     margin-bottom: 1em;
 }
 
