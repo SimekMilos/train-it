@@ -75,15 +75,12 @@
     overflow: auto;
 }
 
-.ts-exercise-container > * {
-    width: 100%;
-}
-
 
 /* Training Notes */
 
 .ts-training-notes {
     height: calc(8px + 3 * 1.5em);
+    width: 100%;
     background-color: rgba(0,0,0,.04);
     resize: none;
 
@@ -101,6 +98,31 @@
 
 .ts-training-notes:focus {
     background-color: white;
+}
+
+
+/* No Exercise Display */
+
+.ts-no-exercises {
+    margin: 1em;
+}
+
+.ts-no-exercises:not(:last-child) {
+    display: none;
+}
+
+.ts-no-exercises p {
+    color: #0006;
+    text-align: center;
+}
+
+.ts-no-exercises p:not(:last-child) {
+    margin-bottom: .6em;
+}
+
+.ts-no-exercises strong {
+    font-weight: normal;
+    color: #000B;
 }
 
 

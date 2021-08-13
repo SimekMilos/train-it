@@ -80,7 +80,8 @@ body {
     align-items: center;
 }
 
-/* Vertical alignment */
+/* --- Vertical alignment --- */
+
 .vertical-container {
     display: flex;
     flex-direction: column;
