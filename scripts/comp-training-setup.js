@@ -16,8 +16,8 @@ for (const _ of [1, 2]) {
     grExerciseContainer.append(exercise)
 }
 
-exerciseContainer.append(group)
+// exerciseContainer.append(group)
 
 // Adds separate exercise
 const exercise = exerciseTemplate.content.cloneNode(true)
-exerciseContainer.append(exercise)
+// exerciseContainer.append(exercise)
