@@ -114,7 +114,10 @@ function floatingMode() {
                 style.position = "absolute"
                 style.transform = "translate(-50%, -50%)"
             }
-            style.width = window.getComputedStyle(overviewComponent).width
+
+            // Set width
+            const overviewWidth = window.getComputedStyle(overviewComponent).width
+            style.width = `${Number.parseFloat(overviewWidth) - 30}px`
 
             // Disable overview component
             overviewComponent.classList.add("visible-disabling")
