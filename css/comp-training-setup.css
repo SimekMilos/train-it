@@ -24,7 +24,7 @@
 }
 
 
-/* General input styles */
+/* General Input */
 
 .ts-input {
     border: 1px solid transparent;
@@ -51,6 +51,9 @@
 }
 
 
+
+/* --- Component Elements --- */
+
 /* Training Name */
 
 .ts-training-name {
@@ -76,6 +79,27 @@
     flex-direction: column;
     overflow: auto;
 }
+
+
+/* Bottom Controls */
+
+.ts-bottom-controlls {
+    margin-top: 15px;
+
+    display: flex;
+}
+
+.ts-bottom-controlls > * {
+    flex: 1 1 0;
+}
+
+.ts-cancel {
+    margin-right: 5px;
+}
+
+
+
+/* --- Exercise Container Elements --- */
 
 .ts-exercise-container > * {
     flex-shrink: 0;
@@ -153,26 +177,6 @@
 }
 
 
-/* Bottom Controls */
-
-.ts-bottom-controlls {
-    margin-top: 15px;
-
-    display: flex;
-}
-
-.ts-bottom-controlls > * {
-    flex: 1 1 0;
-}
-
-.ts-cancel {
-    margin-right: 5px;
-}
-
-.ts-save {
-
-}
-
 
 /* --- Group --- */
 
@@ -214,4 +218,7 @@
 }
 
 
-/* --- Move --- */
+/* --- Exercise --- */
+
+
+/* --- Set --- */
