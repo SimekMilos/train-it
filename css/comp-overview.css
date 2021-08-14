@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-.comp-overview {
+.overview-component {
     display: none;
     position: relative;
 
@@ -21,7 +21,7 @@
 }
 
     /* Fade in/out animations */
-.comp-overview.display {
+.overview-component.display {
     display: flex;
     opacity: 0;
 
@@ -42,7 +42,7 @@
         }
     }
 
-.comp-overview.hide {
+.overview-component.hide {
     display: flex;
     animation: ov-fade-out .7s .2s forwards;
 }
@@ -57,12 +57,12 @@
         }
     }
 
-.comp-overview.disp-none {
+.overview-component.disp-none {
     display: none;
 }
 
 
-.comp-overview > fieldset {
+.overview-component > fieldset {
     border: none;
     flex-grow: 1;
 
@@ -71,25 +71,25 @@
     flex-direction: column;
 }
 
-.comp-overview > fieldset > * {
+.overview-component > fieldset > * {
     flex-shrink: 0;
 }
 
 
 /* --- Headings --- */
-.comp-overview h1 {
+.overview-component h1 {
     color: var(--main-color);
     text-align: center;
 
     font: 32px "Roboto Medium", sans-serif;
 }
 
-.comp-overview h2 {
+.overview-component h2 {
     font: 16px "OpenSans SemiBold", sans-serif;
     padding-bottom: 10px;
 }
 
-.comp-overview :disabled h2 {
+.overview-component :disabled h2 {
     color: var(--disabled-color);
 }
 

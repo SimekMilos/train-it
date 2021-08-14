@@ -1,6 +1,6 @@
 
-const overviewElem = document.querySelector(".comp-overview")
-const classList = overviewElem.classList
+const overviewComponent = document.querySelector(".overview-component")
+const compClassList = overviewComponent.classList
 
 /*
 TODO: at places displaying/hiding Overview
@@ -10,16 +10,16 @@ TODO: at places displaying/hiding Overview
 
 function onAnimationEnd() {
     // Displaying - enable access to controls
-    if(classList.contains("display")) {
-        classList.add("enable-access")
+    if(compClassList.contains("display")) {
+        compClassList.add("enable-access")
 
     // Hiding - undisplay
     } else {
-        classList.add("disp-none")
+        compClassList.add("disp-none")
     }
 }
 
-overviewElem.addEventListener("animationend", onAnimationEnd)
+overviewComponent.addEventListener("animationend", onAnimationEnd)
 
 
 // Temporary

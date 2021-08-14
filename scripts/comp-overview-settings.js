@@ -1,11 +1,10 @@
 
 // --- Overview Settings Component ---
 
-
-const settingsContainer = document.querySelector(".over-sett-container")
-const settingsElem = settingsContainer.firstElementChild    // ".comp-over-settings"
-const overviewComp = document.querySelector(".comp-overview")
-const elemClassList = settingsElem.classList
+const settingsContainer = document.querySelector(".ov-container")
+const settingsComponent = settingsContainer.firstElementChild
+const overviewComponent = document.querySelector(".overview-component")
+const compClassList = settingsComponent.classList
 
 const settingsButton = document.querySelector(".ov-settings")
 const closeButton = document.querySelector(".ov-sett-close")
@@ -15,21 +14,21 @@ const closeButton = document.querySelector(".ov-sett-close")
 
 function onSettingsClick() {
     // Set new state
-    if (elemClassList.contains("display") || elemClassList.contains("hide")) {
-        elemClassList.toggle("display")
-        elemClassList.toggle("hide")
+    if (compClassList.contains("display") || compClassList.contains("hide")) {
+        compClassList.toggle("display")
+        compClassList.toggle("hide")
     } else {
-        elemClassList.add("display")
+        compClassList.add("display")
     }
 
     // Displaying
-    if(elemClassList.contains("display")) {
+    if(compClassList.contains("display")) {
         // Display
-        elemClassList.remove("disp-none")
+        compClassList.remove("disp-none")
 
         // Get dimensions
-        const height = settingsElem.getBoundingClientRect().height
-        const marginTop = Number.parseInt(getComputedStyle(settingsElem).marginTop)
+        const height = settingsComponent.getBoundingClientRect().height
+        const marginTop = Number.parseInt(getComputedStyle(settingsComponent).marginTop)
 
         // Resize
         settingsContainer.style.height = `${height + marginTop}px`
@@ -42,7 +41,7 @@ function onSettingsClick() {
         window.removeEventListener("resize", onResize)
 
         // Disable access to controls
-        elemClassList.remove("enable-access")
+        compClassList.remove("enable-access")
     }
 
     floatingMode()
@@ -50,36 +49,36 @@ function onSettingsClick() {
 
 function onCloseButtonClick() {
     // Set new state
-    elemClassList.add("hide")
-    elemClassList.remove("display")
+    compClassList.add("hide")
+    compClassList.remove("display")
 
     settingsContainer.style.height = "0"
 
     // Disable access to controls
-    elemClassList.remove("enable-access")
+    compClassList.remove("enable-access")
 
     floatingMode()
 }
 
 function onAnimationEnd() {
     // Displaying - enable access to controls
-    if(elemClassList.contains("display")) {
-        elemClassList.add("enable-access")
+    if(compClassList.contains("display")) {
+        compClassList.add("enable-access")
 
     // Hiding - undisplay
     } else {
-        elemClassList.add("disp-none")
+        compClassList.add("disp-none")
     }
 }
 
 function onResize() {
     // Prevent resize change during hiding animation
-    if(!elemClassList.contains("display")) return
+    if(!compClassList.contains("display")) return
 
     // Get dimensions
     const currentHeight = Number.parseInt(settingsContainer.style.height)
-    const newHeight = settingsElem.getBoundingClientRect().height
-    const marginTop = Number.parseInt(getComputedStyle(settingsElem).marginTop)
+    const newHeight = settingsComponent.getBoundingClientRect().height
+    const marginTop = Number.parseInt(getComputedStyle(settingsComponent).marginTop)
 
     // Resize
     if (currentHeight !== newHeight) {
@@ -89,7 +88,7 @@ function onResize() {
     floatingMode()
 }
 
-settingsElem.addEventListener("animationend", onAnimationEnd)
+settingsComponent.addEventListener("animationend", onAnimationEnd)
 settingsButton.addEventListener("click", onSettingsClick)
 closeButton.addEventListener("click", onCloseButtonClick)
 
@@ -104,24 +103,24 @@ function floatingMode() {
     const style = settingsContainer.style
 
     // Getting heights
-    const minOverview = Number.parseInt(window.getComputedStyle(overviewComp).minHeight)
-    const currentSettings = settingsElem.getBoundingClientRect().height
+    const minOverview = Number.parseInt(window.getComputedStyle(overviewComponent).minHeight)
+    const currentSettings = settingsComponent.getBoundingClientRect().height
 
     // Activating
     if ((minOverview + currentSettings + 44) >= window.innerHeight) {
-        if(elemClassList.contains("display")) {
+        if(compClassList.contains("display")) {
             // Set up position
             if (!style.position) {
                 style.position = "absolute"
                 style.transform = "translate(-50%, -50%)"
             }
-            style.width = window.getComputedStyle(overviewComp).width
+            style.width = window.getComputedStyle(overviewComponent).width
 
             // Disable overview component
-            overviewComp.classList.add("visible-disabling")
+            overviewComponent.classList.add("visible-disabling")
         } else {
             // Enable overview component
-            overviewComp.classList.remove("visible-disabling")
+            overviewComponent.classList.remove("visible-disabling")
         }
 
     // Disabling
@@ -134,6 +133,6 @@ function floatingMode() {
         }
 
         // Enable overview component
-        overviewComp.classList.remove("visible-disabling")
+        overviewComponent.classList.remove("visible-disabling")
     }
 }

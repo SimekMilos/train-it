@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-.over-sett-container {
+.ov-container {
     height: 0;
     transition: height var(--animation-speed);
 
@@ -11,7 +11,7 @@
     left: 50%;
 }
 
-.comp-over-settings {
+.overview-settings-component {
     display: none;
     position: relative;
 
@@ -24,7 +24,7 @@
 }
 
     /* Fade in/out animations */
-.comp-over-settings.display {
+.overview-settings-component.display {
     display: block;
     opacity: 0;
 
@@ -32,16 +32,16 @@
     animation: ov-fade-in var(--animation-speed) forwards ease-in-out;
 }
 
-.comp-over-settings.hide {
+.overview-settings-component.hide {
     display: block;
     animation: ov-fade-out var(--animation-speed) forwards ease-in-out;
 }
 
-.comp-over-settings.disp-none {
+.overview-settings-component.disp-none {
     display: none;
 }
 
-.comp-over-settings p {
+.overview-settings-component p {
     margin: 0 20px;
 
     text-align: center;

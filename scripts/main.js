@@ -10,7 +10,7 @@ function onAppLoad() {
 
 
     // Display overview
-    const overview = document.querySelector(".comp-overview")
+    const overview = document.querySelector(".overview-component")
     overview.classList.add("display")
 }
 
