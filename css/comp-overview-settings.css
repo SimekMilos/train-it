@@ -73,8 +73,3 @@
 
 }
 
-@media (pointer: coarse) {
-    .ov-sett-controls > * {
-        height: var(--button-touch-height);
-    }
-}
