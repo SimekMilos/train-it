@@ -145,6 +145,12 @@
     flex-shrink: 0;
 }
 
+/* No Exercises Display */
+
+.ts-no-exercises {
+    margin: 1em calc(1em - 10px);
+}
+
 
 /* Add Controls */
 
