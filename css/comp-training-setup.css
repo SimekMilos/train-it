@@ -135,6 +135,9 @@
 /* Exercise Container */
 
 .ts-exercise-container {
+    --left-right-padding: 5px;
+
+    padding: 10px var(--left-right-padding);
     border-top: 1px solid var(--main-color);
 
     display: flex;
@@ -148,7 +151,7 @@
 /* No Exercises Display */
 
 .ts-no-exercises {
-    margin: 1em calc(1em - 10px);
+    margin: 1em calc(1em - var(--left-right-padding));
 }
 
 
