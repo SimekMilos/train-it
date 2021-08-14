@@ -130,31 +130,6 @@
 }
 
 
-/* No Exercise Display */
-
-.ts-no-exercises {
-    margin: 2em 1em;
-}
-
-.ts-no-exercises:not(:last-child) {
-    display: none;
-}
-
-.ts-no-exercises p {
-    color: #0006;
-    text-align: center;
-}
-
-.ts-no-exercises p:not(:last-child) {
-    margin-bottom: .6em;
-}
-
-.ts-no-exercises strong {
-    font-weight: normal;
-    color: #000B;
-}
-
-
 /* Add Controls */
 
 .ts-add-controls {

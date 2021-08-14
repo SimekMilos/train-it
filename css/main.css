@@ -92,6 +92,31 @@ body {
 }
 
 
+/* --- No Content Display --- */
+
+.no-content-display {
+    margin: 1em;
+}
+
+.no-content-display:not(:only-child) {
+    display: none;
+}
+
+.no-content-display p {
+    color: #0006;
+    text-align: center;
+}
+
+.no-content-display p:not(:last-child) {
+    margin-bottom: .6em;
+}
+
+.no-content-display strong {
+    font-weight: normal;
+    color: #000B;
+}
+
+
 /* --- Control Button --- */
 /* General styles for buttons */
 

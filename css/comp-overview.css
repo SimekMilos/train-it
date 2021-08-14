@@ -107,25 +107,7 @@
 
 /* --- No Trainings Display --- */
 .ov-no-trainings {
-    margin: calc(1em - 10px) 3% 3% calc(3% - 15px);
-}
-
-.ov-no-trainings:not(:only-child) {
-    display: none;
-}
-
-.ov-no-trainings p {
-    color: #0006;
-    text-align: center;
-}
-
-.ov-no-trainings p:not(:last-child) {
-    margin-bottom: 1em;
-}
-
-.ov-no-trainings strong {
-    font-weight: normal;
-    color: #000B;
+    margin: calc(1em - 10px) 1em 1em calc(1em - 15px);
 }
 
 
