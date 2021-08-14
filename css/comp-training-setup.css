@@ -68,11 +68,17 @@
 /* Excercise Container */
 
 .ts-exercise-container {
-    flex-grow: 1;
+    flex: 1 1 0;
     padding-top: 10px;
     border-top: 1px solid var(--main-color);
 
+    display: flex;
+    flex-direction: column;
     overflow: auto;
+}
+
+.ts-exercise-container > * {
+    flex-shrink: 0;
 }
 
 
@@ -104,10 +110,10 @@
 /* No Exercise Display */
 
 .ts-no-exercises {
-    margin: 1em;
+    margin: 2em 1em;
 }
 
-.ts-no-exercises:not(:last-child) {
+.ts-no-exercises:not(:nth-child(2)) {
     display: none;
 }
 
@@ -151,6 +157,7 @@
 
 .ts-bottom-controlls {
     margin-top: 15px;
+
     display: flex;
 }
 
