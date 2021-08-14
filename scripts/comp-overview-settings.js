@@ -7,7 +7,7 @@ const overviewComponent = document.querySelector(".overview-component")
 const compClassList = settingsComponent.classList
 
 const settingsButton = document.querySelector(".ov-settings")
-const closeButton = document.querySelector(".ov-sett-close")
+const closeButton = document.querySelector(".ovs-close")
 
 
 // Event listeners

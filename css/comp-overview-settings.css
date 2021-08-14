@@ -50,26 +50,21 @@
 
 
 /* --- Controls --- */
-.ov-sett-close {
+.ovs-close {
     position: absolute;
     top: 5px;
     right: 5px;
 }
 
-.ov-sett-controls {
+.ovs-controls {
     display: flex;
     margin-top: 1em;
 }
 
-.ov-sett-controls > * {
+.ovs-controls > * {
     flex-grow: 1;
 }
 
-.ov-sett-save {
+.ovs-save {
     margin-right: 5px;
 }
-
-.ov-sett-load {
-
-}
-
