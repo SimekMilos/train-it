@@ -57,7 +57,7 @@
 /* Training Name */
 
 .ts-training-name {
-    margin: 0px -5px 5px -5px;
+    margin: 0px -5px 2px -5px;
 
     color: var(--main-color);
     font: 24px "Roboto Light", sans-serif;
@@ -71,9 +71,11 @@
 /* Scroll Container */
 
 .ts-scroll-container {
+    position: relative;     /* For sticky line effect */
+
     flex: 1 1 0;
-    padding-top: 10px;
-    border-top: 1px solid var(--main-color);
+    padding-top: 3px;
+    border-top: 1px solid transparent;
 
     display: flex;
     flex-direction: column;

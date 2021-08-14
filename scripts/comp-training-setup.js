@@ -1,7 +1,32 @@
 
+const scrollContainer = document.querySelector(".ts-scroll-container")
+const exerciseContainer = document.querySelector(".ts-exercise-container")
+
+
+// Sticky line effect
+
+let lineHidden = true
+function onScroll() {
+    if (lineHidden) {
+        if (scrollContainer.scrollTop >= exerciseContainer.offsetTop) {
+            scrollContainer.style.borderTopColor = "var(--main-color)"
+            lineHidden = false
+        }
+    } else {
+        if (scrollContainer.scrollTop < exerciseContainer.offsetTop) {
+            scrollContainer.style.removeProperty("border-top-color")
+            lineHidden = true
+        }
+    }
+}
+
+scrollContainer.addEventListener("scroll", onScroll)
+
+
+
+
 // --- Temporary ---
 
-const exerciseContainer = document.querySelector(".ts-exercise-container")
 const groupTemplate = document.querySelector(".ts-group-template")
 const exerciseTemplate = document.querySelector(".ts-exercise-template")
 const setTemplate = document.querySelector(".ts-set-template")
