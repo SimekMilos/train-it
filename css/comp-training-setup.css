@@ -70,7 +70,7 @@
 
 /* Excercise Container */
 
-.ts-exercise-container {
+.ts-scroll-container {
     flex: 1 1 0;
     padding-top: 10px;
     border-top: 1px solid var(--main-color);
@@ -78,6 +78,10 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+}
+
+.ts-scroll-container > * {
+    flex-shrink: 0;
 }
 
 
@@ -100,11 +104,6 @@
 
 
 /* --- Exercise Container Elements --- */
-
-.ts-exercise-container > * {
-    flex-shrink: 0;
-}
-
 
 /* Training Notes */
 
@@ -137,7 +136,7 @@
     margin: 2em 1em;
 }
 
-.ts-no-exercises:not(:nth-child(2)) {
+.ts-no-exercises:not(:last-child) {
     display: none;
 }
 
