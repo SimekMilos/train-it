@@ -154,6 +154,10 @@
     flex-shrink: 0;
 }
 
+.ts-exercise-container > :not(:last-child):not(.ts-no-exercises) {
+    margin-bottom: 10px;
+}
+
 /* No Exercises Display */
 
 .ts-no-exercises {
@@ -208,6 +212,14 @@
     font-family: "Roboto Light", sans-serif;
 }
 
+.ts-group-exercise-container > :nth-child(2) {
+    margin-top: 5px;
+}
+
+.ts-group-exercise-container > :not(.ts-group-no-exercises) {
+    margin-bottom: 10px;
+}
+
 .ts-group-no-exercises {
     margin: 1.5em 1em;
 }
@@ -240,6 +252,23 @@
 
 
 /* ===== Exercise ===== */
+
+.ts-exercise {
+    position: relative;
+
+    border: 1px solid black;
+    border-radius: var(--comp-border-radius);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.ts-exercise-container > .ts-exercise {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
 
 
 /* ===== Set ===== */
