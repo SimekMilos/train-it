@@ -143,8 +143,7 @@ body {
     width: 26px;
     height: 26px;
 
-    border: none;
-    background-color: white;
+    position: relative;
 }
 
 .close-button::before, .close-button::after {
