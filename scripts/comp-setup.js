@@ -38,11 +38,14 @@ const grExerciseContainer = group.querySelector(".ts-group-exercise-container")
 // Adds exercises to the group
 for (const _ of [1, 2]) {
     const exercise = exerciseTemplate.content.cloneNode(true)
-    // grExerciseContainer.append(exercise)
+    grExerciseContainer.append(exercise)
 }
 
 exerciseContainer.append(group)
 
 // Adds separate exercise
-const exercise = exerciseTemplate.content.cloneNode(true)
-// exerciseContainer.append(exercise)
+let exercise = exerciseTemplate.content.cloneNode(true)
+exerciseContainer.append(exercise)
+
+exercise = exerciseTemplate.content.cloneNode(true)
+exerciseContainer.append(exercise)
