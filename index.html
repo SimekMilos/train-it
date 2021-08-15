@@ -203,7 +203,7 @@
                 <template class="ts-group-template">
                     <div class="ts-group">
                         <input type="text" class="ts-group-name ts-input"
-                            placeholder="Name this group">
+                            size="1" placeholder="Name this group">
 
                         <textarea class="ts-group-notes ts-input notes"
                             placeholder="- notes for the group"></textarea>
@@ -222,7 +222,7 @@
                             <div class="ts-group-close close-button"></div>
 
                             <button class="ts-group-add control-button"
-                            type="button">Add Exercise</button>
+                                type="button">Add Exercise</button>
                         </div>
                     </div>
                 </template>
@@ -230,7 +230,23 @@
                 <!-- Exercise Template -->
                 <template class="ts-exercise-template">
                     <div class="ts-exercise">
+                        <input type="text" class="ts-exercise-name ts-input"
+                            size="1" placeholder="Name this excercise">
 
+                        <textarea class="ts-exercise-notes ts-input notes"
+                            placeholder="- notes for the excercise"></textarea>
+
+                        <div class="ts-exercise-set-container">
+                            <!-- Sets goes here -->
+                        </div>
+
+                        <div class="ts-exercise-controls">
+                            <div class="ts-exercise-handle handle"><div></div></div>
+                            <div class="ts-exercise-close close-button"></div>
+
+                            <button class="ts-exercise-add-set control-button"
+                                type="button">Add Set</button>
+                        </div>
                     </div>
                 </template>
 
