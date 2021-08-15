@@ -110,19 +110,14 @@
 
                     </div>
                     <div class="ov-controls">
-                        <!-- TODO?: (may not be needed)
-                            It may be possible to hide currently unusable buttons by transitioning to 0 - width/height (or flex alternative), margin, visibility, finishing by display: none
-                            - test if there is no small jump at the end
-                            - if applied, remove :disabled styles (disabled atribute can by used as selector to hide buttons)
-                        -->
                         <button type="button" class="ov-open control-button"
                             disabled>Open</button>
                         <button type="button" class="ov-delete control-button"
                             disabled>Delete</button>
-                        <button type="button" class="ov-create control-button"
-                            >Create</button>
-                        <button type="button" class="ov-settings control-button"
-                            ></button>
+                        <button type="button" class="ov-create control-button">
+                            Create</button>
+                        <button type="button" class="ov-settings control-button">
+                            </button>
                     </div>
                 </fieldset>
 
@@ -135,11 +130,6 @@
                             <div class="handle"><div></div></div>
                         </label>
                     </div>
-
-                    <!-- To enable draggability, probably needed:
-                        - disable user selectable text
-                        - change cursor to dragging
-                    -->
                 </template>
 
             </form>
