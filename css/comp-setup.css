@@ -51,7 +51,7 @@
 }
 
 
-/* Notes */
+/* General Notes */
 /* Also requires ts-input */
 
 .notes {
@@ -75,7 +75,7 @@
 
 
 
-/* --- Component Elements --- */
+/* ===== Component Elements ===== */
 
 /* Training Name */
 
@@ -183,7 +183,7 @@
 
 
 
-/* ----- Group ----- */
+/* ===== Group ===== */
 
 .ts-group {
     position: relative;
@@ -226,7 +226,7 @@
 }
 
 
-/* ----- Exercise ----- */
+/* ===== Exercise ===== */
 
 
-/* ----- Set ----- */
+/* ===== Set ===== */
