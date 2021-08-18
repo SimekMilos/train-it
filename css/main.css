@@ -85,13 +85,16 @@ body {
 /* --- Vertical alignment --- */
 
 .vertical-container {
+    --vertical-container-margin: 20px;
+    --vertical-container-width: 400px;
+
+    width: var(--vertical-container-width);
+    height: calc(100% - 2 * var(--vertical-container-margin));
+    margin: 0 var(--vertical-container-margin);
+
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    width: 400px;
-    height: calc(100% - 40px);
-    margin: 0 20px;
 }
 
 
