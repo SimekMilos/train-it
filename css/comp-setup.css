@@ -80,7 +80,7 @@
 /* Training Name */
 
 .ts-training-name {
-    margin: 0px -5px 2px -5px;
+    margin: 0px -6px 2px -6px;
 
     color: var(--main-color);
     font: 24px "Roboto Light", sans-serif;
@@ -206,8 +206,8 @@
 
 
 .ts-group-name {
-    margin-left: -5px;
-    margin-right: -5px;
+    margin-left: -6px;
+    margin-right: -6px;
 
     font-family: "Roboto Light", sans-serif;
 }
@@ -275,8 +275,8 @@
 
 
 .ts-exercise-name {
-    margin-left: -5px;
-    margin-right: -5px;
+    margin-left: -6px;
+    margin-right: -6px;
 
     font-family: "Roboto Light", sans-serif;
 }
