@@ -248,3 +248,29 @@ body {
         inset 0 -10px 10px -10px #0002,
         inset 0 -6px 3px -6px #0004;
 }
+
+
+/* --- Overview Animations --- */
+
+@keyframes ov-fade-in {
+    from {
+        top: var(--from);
+    }
+    70% {
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes ov-fade-out {
+    from {
+        top: 0;
+    }
+    to {
+        top: 50px;
+        opacity: 0;
+    }
+}

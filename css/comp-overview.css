@@ -29,33 +29,10 @@
     animation: ov-fade-in .7s .5s forwards;
 }
 
-    @keyframes ov-fade-in {
-        from {
-            top: var(--from);
-        }
-        70% {
-            opacity: 1;
-        }
-        to {
-            top: 0;
-            opacity: 1;
-        }
-    }
-
 .overview-component.hide {
     display: flex;
     animation: ov-fade-out .7s .2s forwards;
 }
-
-    @keyframes ov-fade-out {
-        from {
-            top: 0;
-        }
-        to {
-            top: 50px;
-            opacity: 0;
-        }
-    }
 
 .overview-component.disp-none {
     display: none;
