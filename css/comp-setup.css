@@ -50,6 +50,7 @@
 .ts-input:focus {
     outline: none;
     border-color: var(--main-color);
+    background-color: white;
 }
 
 
@@ -69,10 +70,6 @@
 
 .notes:placeholder {
     line-height: 1.5;
-}
-
-.notes:focus {
-    background-color: white;
 }
 
 
