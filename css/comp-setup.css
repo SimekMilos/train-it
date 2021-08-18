@@ -145,7 +145,7 @@
 .ts-exercise-container {
     --left-right-padding: 5px;
 
-    padding: 10px var(--left-right-padding) 20px;
+    padding: 0 var(--left-right-padding);
     border-top: 1px solid var(--main-color);
 
     display: flex;
@@ -154,10 +154,6 @@
 
 .ts-exercise-container > * {
     flex-shrink: 0;
-}
-
-.ts-exercise-container > :not(:last-child):not(.ts-no-exercises) {
-    margin-bottom: 10px;
 }
 
 /* No Exercises Display */
@@ -202,24 +198,22 @@
     flex-direction: column;
 }
 
-.ts-group > :not(:last-child) {
-    margin-bottom: 5px;
+.ts-group:nth-child(2), .ts-exercise + .ts-group {
+    margin-top: 10px;
+}
+
+.ts-group:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.ts-group:last-child {
+    margin-bottom: 20px;
 }
 
 
 .ts-group-name {
-    margin-left: -6px;
-    margin-right: -6px;
-
+    margin: 0 -6px 5px;
     font-family: "Roboto Light", sans-serif;
-}
-
-.ts-group-exercise-container > :nth-child(2) {
-    margin-top: 5px;
-}
-
-.ts-group-exercise-container > :not(.ts-group-no-exercises) {
-    margin-bottom: 10px;
 }
 
 .ts-group-no-exercises {
@@ -257,13 +251,25 @@
 
 .ts-exercise {
     position: relative;
-    padding: 30px 10px 15px;
+    padding: 30px 10px 10px;
 
-    border: 1px solid black;
-    border-radius: var(--comp-border-radius);
+    border-bottom: 1px solid var(--main-color);
 
     display: flex;
     flex-direction: column;
+}
+
+.ts-exercise:last-child {
+    margin-bottom: 20px;
+}
+
+.ts-group .ts-exercise:nth-child(2) {
+    margin-top: 10px;
+    border-top: 1px solid var(--main-color);
+}
+
+.ts-group + .ts-exercise {
+    border-top: 1px solid var(--main-color);
 }
 
 .ts-exercise-container > .ts-exercise {
