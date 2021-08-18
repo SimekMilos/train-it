@@ -77,6 +77,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding-left: calc(env(safe-area-inset-left, 10px) - 10px);
+    padding-right: calc(env(safe-area-inset-right, 10px) - 10px);
 }
 
 /* --- Vertical alignment --- */
