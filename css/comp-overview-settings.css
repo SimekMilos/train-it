@@ -1,10 +1,10 @@
 @charset "utf-8";
 
 .ov-container {
-    height: 0;
-    transition: height var(--animation-speed);
-
     --animation-speed: .4s;
+
+    height: 0;
+    transition: height var(--animation-speed) ease-in-out;
 
     /* For Floating mode */
     top: 50%;
