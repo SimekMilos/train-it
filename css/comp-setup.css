@@ -31,6 +31,8 @@
     border-radius: var(--comp-border-radius);
     padding: 3px 5px;
 
+    background-color: transparent;
+
     font: 1em "OpenSans Regular", sans-serif;
     text-overflow: ellipsis;
 
@@ -281,6 +283,10 @@
     font-family: "Roboto Light", sans-serif;
 }
 
+.ts-exercise-set-container {
+    counter-reset: set-counter;
+}
+
 
 /* Controls */
 
@@ -307,4 +313,36 @@
     font-size: .8em;
 }
 
+
+
 /* ===== Set ===== */
+
+.ts-set {
+    padding: 3px 5px 3px 10px;
+
+    list-style: none;
+    counter-increment: set-counter;
+
+    display: flex;
+    align-items: center;
+    border-radius: var(--comp-border-radius);
+}
+
+.ts-set::before {
+    content: counter(set-counter) ".";
+}
+
+.ts-set:nth-child(2n) {
+    background-color: rgba(0,0,0,.04);
+}
+
+
+.ts-set-handle {
+    margin-right: 12px;
+    order: -1;
+}
+
+.ts-set-name {
+    margin: 0 5px 0 2px;
+    flex-grow: 1;
+}
