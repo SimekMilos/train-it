@@ -3,10 +3,10 @@ const scrollContainer = document.querySelector(".ts-scroll-container")
 const exerciseContainer = document.querySelector(".ts-exercise-container")
 
 
-// Sticky line effect
-
 let lineHidden = true
 function onScroll() {
+
+    // Sticky line effect
     if (lineHidden) {
         if (scrollContainer.scrollTop >= exerciseContainer.offsetTop) {
             scrollContainer.style.borderTopColor = "var(--main-color)"
@@ -38,6 +38,11 @@ const grExerciseContainer = group.querySelector(".ts-group-exercise-container")
 // Adds exercises to the group
 for (const _ of [1, 2]) {
     const exercise = exerciseTemplate.content.cloneNode(true)
+    const setContainer = exercise.querySelector(".ts-exercise-set-container")
+    for (const _ of [1, 2, 3]) {
+        setContainer.append(setTemplate.content.cloneNode(true))
+    }
+
     grExerciseContainer.append(exercise)
 }
 
@@ -45,7 +50,19 @@ exerciseContainer.append(group)
 
 // Adds separate exercise
 let exercise = exerciseTemplate.content.cloneNode(true)
+
+let setContainer = exercise.querySelector(".ts-exercise-set-container")
+for (const _ of [1, 2, 3]) {
+    setContainer.append(setTemplate.content.cloneNode(true))
+}
+
 exerciseContainer.append(exercise)
 
 exercise = exerciseTemplate.content.cloneNode(true)
+
+setContainer = exercise.querySelector(".ts-exercise-set-container")
+for (const _ of [1, 2, 3]) {
+    setContainer.append(setTemplate.content.cloneNode(true))
+}
+
 exerciseContainer.append(exercise)
