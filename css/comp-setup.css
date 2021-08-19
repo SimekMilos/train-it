@@ -1,12 +1,25 @@
 @charset "utf-8";
 
 .ts-container {
+    --animation-speed: .7s;
+
+    margin-left: 0;
+    margin-right: 0;
+    width: 0;
+
+    transition: all var(--animation-speed) ease-in-out;
+}
+
+.ts-container.display {
     margin-left: -5px;
+    margin-right: var(--vertical-container-margin);
+    width: var(--vertical-container-width);
 }
 
 .training-setup-component {
-    /*display: none;*/
-    display: flex;
+    --placeholder-color: #0006;
+
+    display: none;
     position: relative;
     flex: 1 0 0;
 
@@ -19,9 +32,43 @@
 
     /* Content */
     flex-direction: column;
-
-    --placeholder-color: #0006;
 }
+
+    /* Fade in/out animations */
+.training-setup-component.display {
+    display: flex;
+    opacity: 0;
+
+    animation: ts-fade-in var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes ts-fade-in {
+        from {
+            left: 50px;
+        }
+        70% {
+            opacity: 1;
+        }
+        to {
+            left: 0;
+            opacity: 1;
+        }
+    }
+
+.training-setup-component.hide {
+    display: flex;
+    animation: ts-fade-out var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes ts-fade-out {
+        from {
+            left: 0;
+        }
+        to {
+            left: 50px;
+            opacity: 0;
+        }
+    }
 
 
 /* General Input */
