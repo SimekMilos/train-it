@@ -1,7 +1,67 @@
 
+const initialScreen = document.querySelector(".initial-screen")
+const ovComponent = document.querySelector(".overview-component")
+
+const tsContainer = document.querySelector(".ts-container")
+const tsComponent = tsContainer.firstElementChild
+const tsClassList = tsComponent.classList
+
+const createEditButton = document.querySelector(".ov-create-edit")
+const cancelButton = tsComponent.querySelector(".ts-cancel")
+
+
+// --- Fade in/out animations ---
+
+function createEditClick() {
+    tsClassList.add("display")
+    tsClassList.remove("hide")
+    tsContainer.classList.add("display")
+
+    tsComponent.style.width = getComponentWidth()
+    ovComponent.classList.add("visible-disabling")
+}
+
+function cancelClick() {
+    tsClassList.remove("display", "enable-access")
+    tsClassList.add("hide")
+    tsComponent.style.width = getComponentWidth()
+
+    tsContainer.classList.remove("display")
+    ovComponent.classList.remove("visible-disabling")
+}
+
+function onAnimEnd() {
+    if(tsClassList.contains("display")) {
+        tsClassList.add("enable-access")
+        tsComponent.style.removeProperty("width")
+    }
+}
+
+
+tsComponent.addEventListener("animationend", onAnimEnd)
+createEditButton.addEventListener("click", createEditClick)
+cancelButton.addEventListener("click", cancelClick)
+
+
+function getComponentWidth() {
+    let width = initialScreen.clientWidth
+    const screenStyles = window.getComputedStyle(initialScreen)
+
+    width -= Number.parseFloat(screenStyles.paddingLeft)
+    width -= Number.parseFloat(screenStyles.paddingRight)
+    width -= 3*20 - 5   // Margins
+    width /= 2          // width is split between 2 components
+    console.log(width)
+
+    return width > 400 ? "400px" : `${width}px`
+}
+
+
+
+// --- Sticky line effect ---
+
 const scrollContainer = document.querySelector(".ts-scroll-container")
 const exerciseContainer = document.querySelector(".ts-exercise-container")
-
 
 let lineHidden = true
 function onScroll() {
