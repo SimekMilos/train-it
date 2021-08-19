@@ -37,9 +37,6 @@
     animation: ov-fade-out var(--animation-speed) forwards ease-in-out;
 }
 
-.overview-settings-component.disp-none {
-    display: none;
-}
 
 .overview-settings-component p {
     margin: 0 20px;

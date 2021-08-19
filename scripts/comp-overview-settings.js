@@ -14,18 +14,15 @@ const closeButton = document.querySelector(".ovs-close")
 
 function onSettingsClick() {
     // Set new state
-    if (compClassList.contains("display") || compClassList.contains("hide")) {
-        compClassList.toggle("display")
-        compClassList.toggle("hide")
-    } else {
+    if (!compClassList.contains("display")) {
         compClassList.add("display")
+    } else {
+        compClassList.remove("display")
+        compClassList.add("hide")
     }
 
     // Displaying
     if(compClassList.contains("display")) {
-        // Display
-        compClassList.remove("disp-none")
-
         // Get dimensions
         const height = settingsComponent.getBoundingClientRect().height
         const marginTop = Number.parseInt(getComputedStyle(settingsComponent).marginTop)
@@ -67,7 +64,7 @@ function onAnimationEnd() {
 
     // Hiding - undisplay
     } else {
-        compClassList.add("disp-none")
+        compClassList.remove("hide")
     }
 }
 
