@@ -5,7 +5,6 @@ const compClassList = overviewComponent.classList
 /*
 TODO: at places displaying/hiding Overview
     - disable access when outro animation starts
-    - remove disp-none before intro animation begins
 */
 
 function onAnimationEnd() {
@@ -15,7 +14,7 @@ function onAnimationEnd() {
 
     // Hiding - undisplay
     } else {
-        compClassList.add("disp-none")
+        compClassList.remove("hide")
     }
 }
 

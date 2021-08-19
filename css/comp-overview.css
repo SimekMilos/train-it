@@ -34,10 +34,6 @@
     animation: ov-fade-out .7s .2s forwards;
 }
 
-.overview-component.disp-none {
-    display: none;
-}
-
 
 .overview-component > fieldset {
     border: none;
