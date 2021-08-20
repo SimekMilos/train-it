@@ -7,7 +7,9 @@
     margin-right: 0;
     width: 0;
 
-    transition: all var(--animation-speed) ease-in-out;
+    transition:
+        margin var(--animation-speed) ease-in-out,
+        width var(--animation-speed) ease-in-out;
 }
 
 .ts-container.display {
