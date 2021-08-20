@@ -64,6 +64,9 @@
         from {
             left: 0;
         }
+        30% {
+            opacity: 1;
+        }
         to {
             left: 50px;
             opacity: 0;
