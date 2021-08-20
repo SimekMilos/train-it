@@ -3,6 +3,8 @@ const initialScreen = document.querySelector(".initial-screen")
 const ovComponent = document.querySelector(".overview-component")
 
 const tsContainer = document.querySelector(".ts-container")
+const tsContainerStyles = window.getComputedStyle(tsContainer)
+
 const tsComponent = tsContainer.firstElementChild
 const tsClassList = tsComponent.classList
 
@@ -11,14 +13,20 @@ const cancelButton = tsComponent.querySelector(".ts-cancel")
 
 
 // --- Fade in/out animations ---
+// Alternative display - when viewport is too narrow
 
 function createEditClick() {
     tsClassList.add("display")
     tsClassList.remove("hide")
-    tsContainer.classList.add("display")
-
     tsComponent.style.width = getComponentWidth()
+
+    tsContainer.classList.add("display")
     ovComponent.classList.add("visible-disabling")
+
+    // Alternative display
+    if(tsContainerStyles.position === "absolute") {
+        ovComponent.style.boxShadow = "none"
+    }
 }
 
 function cancelClick() {
@@ -27,17 +35,39 @@ function cancelClick() {
     tsComponent.style.width = getComponentWidth()
 
     tsContainer.classList.remove("display")
-    ovComponent.classList.remove("visible-disabling")
+    tsContainer.classList.add("hide")
 }
 
 function onAnimEnd() {
     if(tsClassList.contains("display")) {
         tsClassList.add("enable-access")
         tsComponent.style.removeProperty("width")
+    } else {
+        tsContainer.classList.remove("hide")
+        ovComponent.classList.remove("visible-disabling")
+        ovComponent.style.removeProperty("box-shadow")
     }
 }
 
+// Disabling overview shadows on alternative display
+let shadowDisplayed = true
+function onResize() {
+    if (tsContainerStyles.display == "none") return
 
+    if (shadowDisplayed) {
+        if (tsContainerStyles.position === "absolute") {
+            ovComponent.style.boxShadow = "none"
+            shadowDisplayed = false
+        }
+    } else {
+        if (tsContainerStyles.position !== "absolute") {
+            ovComponent.style.removeProperty("box-shadow")
+            shadowDisplayed = true
+        }
+    }
+}
+
+window.addEventListener("resize", onResize)
 tsComponent.addEventListener("animationend", onAnimEnd)
 createEditButton.addEventListener("click", createEditClick)
 cancelButton.addEventListener("click", cancelClick)
@@ -49,9 +79,13 @@ function getComponentWidth() {
 
     width -= Number.parseFloat(screenStyles.paddingLeft)
     width -= Number.parseFloat(screenStyles.paddingRight)
-    width -= 3*20 - 5   // Margins
-    width /= 2          // width is split between 2 components
-    console.log(width)
+
+    if (tsContainerStyles.position !== "absolute") {
+        width -= 3*20 - 5   // Margins
+        width /= 2          // width is split between 2 components
+    } else {
+        width -= 2*20       // Only margins for narrow viewport
+    }
 
     return width > 400 ? "400px" : `${width}px`
 }
