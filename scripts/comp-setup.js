@@ -42,8 +42,11 @@ function onAnimEnd() {
     if(tsClassList.contains("display")) {
         tsClassList.add("enable-access")
         tsComponent.style.removeProperty("width")
+
     } else {
         tsContainer.classList.remove("hide")
+        tsClassList.remove("hide")
+
         ovComponent.classList.remove("visible-disabling")
         ovComponent.style.removeProperty("box-shadow")
     }
