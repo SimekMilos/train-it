@@ -234,7 +234,7 @@ body {
 
 .overlay-disabling.disable-transition::before {
     opacity: 0;
-    transition: opacity .7s ease-in-out;
+    transition: opacity var(--disable-duration) ease-in-out;
 }
 
 .overlay-disabling.disable-tran-progress::before {
