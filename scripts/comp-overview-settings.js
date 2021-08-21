@@ -117,10 +117,21 @@ function floatingMode() {
             style.width = `${Number.parseFloat(overviewWidth) - 30}px`
 
             // Disable overview component
-            overviewComponent.classList.add("visible-disabling")
+            overviewComponent.classList.add("visible-disabling", "disable-transition")
+            overviewComponent.style.setProperty("--disable-duration", ".4s")
+            setTimeout(() => {
+                overviewComponent.classList.add("disable-tran-progress")
+            }, 0)
+
         } else {
             // Enable overview component
-            overviewComponent.classList.remove("visible-disabling")
+            overviewComponent.classList.remove("disable-tran-progress")
+
+            setTimeout(() => {
+                overviewComponent.classList.remove("visible-disabling",
+                    "disable-transition")
+                overviewComponent.style.removeProperty("--disable-duration")
+            }, 400)
         }
 
     // Disabling
