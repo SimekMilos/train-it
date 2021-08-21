@@ -21,12 +21,15 @@ function createEditClick() {
     tsComponent.style.width = getComponentWidth()
 
     tsContainer.classList.add("display")
-    ovComponent.classList.add("visible-disabling")
 
     // Alternative display
-    if(tsContainerStyles.position === "absolute") {
+    if(tsContainerStyles.position !== "absolute") {
+        tsContainer.classList.add("animate")
+    } else {
         ovComponent.style.boxShadow = "none"
     }
+
+    ovComponent.classList.add("visible-disabling")
 }
 
 function cancelClick() {
@@ -36,6 +39,10 @@ function cancelClick() {
 
     tsContainer.classList.remove("display")
     tsContainer.classList.add("hide")
+
+    if (tsContainerStyles.position !== "absolute") {
+        tsContainer.classList.add("animate")
+    }
 }
 
 function onAnimEnd() {
@@ -50,6 +57,8 @@ function onAnimEnd() {
         ovComponent.classList.remove("visible-disabling")
         ovComponent.style.removeProperty("box-shadow")
     }
+
+    tsContainer.classList.remove("animate")
 }
 
 // Disabling overview shadows on alternative display

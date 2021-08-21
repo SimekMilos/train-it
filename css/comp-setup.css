@@ -6,17 +6,47 @@
     margin-left: 0;
     margin-right: 0;
     width: 0;
-
-    transition:
-        margin var(--animation-speed) ease-in-out,
-        width var(--animation-speed) ease-in-out;
 }
 
-.ts-container.display {
+.ts-container.display, .ts-container.hide {
     margin-left: -5px;
     margin-right: var(--vertical-container-margin);
     width: var(--vertical-container-width);
 }
+
+.ts-container.display.animate {
+    animation: ts-cont-display var(--animation-speed) ease-in-out;
+}
+
+.ts-container.hide.animate {
+    animation: ts-cont-hide var(--animation-speed) ease-in-out;
+}
+
+    @keyframes ts-cont-display {
+        from {
+            margin-left: 0;
+            margin-right: 0;
+            width: 0;
+        }
+        to {
+            margin-left: -5px;
+            margin-right: var(--vertical-container-margin);
+            width: var(--vertical-container-width);
+        }
+    }
+
+    @keyframes ts-cont-hide {
+        from {
+            margin-left: -5px;
+            margin-right: var(--vertical-container-margin);
+            width: var(--vertical-container-width);
+        }
+        to {
+            margin-left: 0;
+            margin-right: 0;
+            width: 0;
+        }
+    }
 
 .training-setup-component {
     --placeholder-color: #0006;
@@ -90,15 +120,9 @@
 
         max-width: var(--vertical-container-width);
         width: calc(100% - 2* var(--vertical-container-margin));
-
-        transition: none;
     }
 
-    .ts-container.display {
-        display: flex;
-    }
-
-    .ts-container.hide {
+    .ts-container.display, .ts-container.hide {
         display: flex;
     }
 }
