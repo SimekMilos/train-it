@@ -15,6 +15,7 @@
     background-color: white;
     border-radius: var(--comp-border-radius);
     box-shadow: var(--comp-shadow);
+    transition: box-shadow 1s;
 
     /* Content */
     flex-direction: column;

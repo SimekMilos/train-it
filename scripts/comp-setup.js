@@ -27,7 +27,7 @@ function createEditClick() {
     if(tsContainerStyles.position !== "absolute") {
         tsContainer.classList.add("animate")
     } else {
-        ovComponent.style.boxShadow = "none"
+        ovComponent.style.boxShadow = "var(--comp-shadow-hidden)"
     }
 
     // ov component
@@ -47,6 +47,10 @@ function cancelClick() {
     if (tsContainerStyles.position !== "absolute") {
         tsContainer.classList.add("animate")
     }
+
+    // ov component
+    ovComponent.classList.remove("visible-disabling")
+    ovComponent.style.removeProperty("box-shadow")
 }
 
 function onAnimEnd() {
@@ -56,11 +60,7 @@ function onAnimEnd() {
 
     } else {
         tsComponent.classList.remove("hide")
-
         tsContainer.classList.remove("hide")
-
-        ovComponent.classList.remove("visible-disabling")
-        ovComponent.style.removeProperty("box-shadow")
     }
 
     tsContainer.classList.remove("animate")
