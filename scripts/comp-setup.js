@@ -5,7 +5,7 @@ const tsContainer = document.querySelector(".ts-container")
 const tsContainerStyles = window.getComputedStyle(tsContainer)
 
 const tsComponent = tsContainer.firstElementChild
-const tsCancelButton = tsComponent.querySelector(".ts-cancel")
+const tsCancelButton = tsComponent.querySelector(":scope .ts-cancel")
 
 const ovComponent = document.querySelector(".overview-component")
 const ovCreateEditButton = document.querySelector(".ov-create-edit")
