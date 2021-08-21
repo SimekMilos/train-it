@@ -32,6 +32,7 @@ function createEditClick() {
 
     // ov component
     ovComponent.classList.add("visible-disabling", "disable-transition")
+    ovComponent.style.setProperty("--disable-duration", ".7s")
     setTimeout(() => {
         ovComponent.classList.add("disable-tran-progress")
     },0)
@@ -66,6 +67,7 @@ function onAnimEnd() {
         tsContainer.classList.remove("hide")
 
         ovComponent.classList.remove("disable-transition", "visible-disabling")
+        ovComponent.style.removeProperty("--disable-duration")
     }
 
     tsContainer.classList.remove("animate")
