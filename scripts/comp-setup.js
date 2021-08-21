@@ -31,7 +31,10 @@ function createEditClick() {
     }
 
     // ov component
-    ovComponent.classList.add("visible-disabling")
+    ovComponent.classList.add("visible-disabling", "disable-transition")
+    setTimeout(() => {
+        ovComponent.classList.add("disable-tran-progress")
+    },0)
 }
 
 function cancelClick() {
@@ -49,7 +52,7 @@ function cancelClick() {
     }
 
     // ov component
-    ovComponent.classList.remove("visible-disabling")
+    ovComponent.classList.remove("disable-tran-progress")
     ovComponent.style.removeProperty("box-shadow")
 }
 
@@ -61,6 +64,8 @@ function onAnimEnd() {
     } else {
         tsComponent.classList.remove("hide")
         tsContainer.classList.remove("hide")
+
+        ovComponent.classList.remove("disable-transition", "visible-disabling")
     }
 
     tsContainer.classList.remove("animate")
