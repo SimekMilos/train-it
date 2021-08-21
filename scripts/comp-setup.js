@@ -1,42 +1,46 @@
 
 const initialScreen = document.querySelector(".initial-screen")
-const ovComponent = document.querySelector(".overview-component")
 
 const tsContainer = document.querySelector(".ts-container")
 const tsContainerStyles = window.getComputedStyle(tsContainer)
 
 const tsComponent = tsContainer.firstElementChild
-const tsClassList = tsComponent.classList
+const tsCancelButton = tsComponent.querySelector(".ts-cancel")
 
-const createEditButton = document.querySelector(".ov-create-edit")
-const cancelButton = tsComponent.querySelector(".ts-cancel")
+const ovComponent = document.querySelector(".overview-component")
+const ovCreateEditButton = document.querySelector(".ov-create-edit")
 
 
 // --- Fade in/out animations ---
 // Alternative display - when viewport is too narrow
 
 function createEditClick() {
-    tsClassList.add("display")
-    tsClassList.remove("hide")
+    // ts component
+    tsComponent.classList.add("display")
+    tsComponent.classList.remove("hide")
     tsComponent.style.width = getComponentWidth()
 
+    // ts container
     tsContainer.classList.add("display")
 
-    // Alternative display
+        // Alternative display
     if(tsContainerStyles.position !== "absolute") {
         tsContainer.classList.add("animate")
     } else {
         ovComponent.style.boxShadow = "none"
     }
 
+    // ov component
     ovComponent.classList.add("visible-disabling")
 }
 
 function cancelClick() {
-    tsClassList.remove("display", "enable-access")
-    tsClassList.add("hide")
+    // ts component
+    tsComponent.classList.remove("display", "enable-access")
+    tsComponent.classList.add("hide")
     tsComponent.style.width = getComponentWidth()
 
+    // ts container
     tsContainer.classList.remove("display")
     tsContainer.classList.add("hide")
 
@@ -46,13 +50,14 @@ function cancelClick() {
 }
 
 function onAnimEnd() {
-    if(tsClassList.contains("display")) {
-        tsClassList.add("enable-access")
+    if(tsComponent.classList.contains("display")) {
+        tsComponent.classList.add("enable-access")
         tsComponent.style.removeProperty("width")
 
     } else {
+        tsComponent.classList.remove("hide")
+
         tsContainer.classList.remove("hide")
-        tsClassList.remove("hide")
 
         ovComponent.classList.remove("visible-disabling")
         ovComponent.style.removeProperty("box-shadow")
@@ -81,8 +86,8 @@ function onResize() {
 
 window.addEventListener("resize", onResize)
 tsComponent.addEventListener("animationend", onAnimEnd)
-createEditButton.addEventListener("click", createEditClick)
-cancelButton.addEventListener("click", cancelClick)
+tsCancelButton.addEventListener("click", cancelClick)
+ovCreateEditButton.addEventListener("click", createEditClick)
 
 
 function getComponentWidth() {
