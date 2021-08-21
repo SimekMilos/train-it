@@ -1,46 +1,98 @@
 
 const initialScreen = document.querySelector(".initial-screen")
-const ovComponent = document.querySelector(".overview-component")
 
 const tsContainer = document.querySelector(".ts-container")
-const tsComponent = tsContainer.firstElementChild
-const tsClassList = tsComponent.classList
+const tsContainerStyles = window.getComputedStyle(tsContainer)
 
-const createEditButton = document.querySelector(".ov-create-edit")
-const cancelButton = tsComponent.querySelector(".ts-cancel")
+const tsComponent = tsContainer.firstElementChild
+const tsCancelButton = tsComponent.querySelector(":scope .ts-cancel")
+
+const ovComponent = document.querySelector(".overview-component")
+const ovCreateEditButton = document.querySelector(".ov-create-edit")
 
 
 // --- Fade in/out animations ---
+// Alternative display - when viewport is too narrow
 
 function createEditClick() {
-    tsClassList.add("display")
-    tsClassList.remove("hide")
+    // ts component
+    tsComponent.classList.add("display")
+    tsComponent.classList.remove("hide")
+    tsComponent.style.width = getComponentWidth()
+
+    // ts container
     tsContainer.classList.add("display")
 
-    tsComponent.style.width = getComponentWidth()
-    ovComponent.classList.add("visible-disabling")
+        // Alternative display
+    if(tsContainerStyles.position !== "absolute") {
+        tsContainer.classList.add("animate")
+    } else {
+        ovComponent.style.boxShadow = "var(--comp-shadow-hidden)"
+    }
+
+    // ov component
+    ovComponent.classList.add("visible-disabling", "disable-transition")
+    setTimeout(() => {
+        ovComponent.classList.add("disable-tran-progress")
+    },0)
 }
 
 function cancelClick() {
-    tsClassList.remove("display", "enable-access")
-    tsClassList.add("hide")
+    // ts component
+    tsComponent.classList.remove("display", "enable-access")
+    tsComponent.classList.add("hide")
     tsComponent.style.width = getComponentWidth()
 
+    // ts container
     tsContainer.classList.remove("display")
-    ovComponent.classList.remove("visible-disabling")
+    tsContainer.classList.add("hide")
+
+    if (tsContainerStyles.position !== "absolute") {
+        tsContainer.classList.add("animate")
+    }
+
+    // ov component
+    ovComponent.classList.remove("disable-tran-progress")
+    ovComponent.style.removeProperty("box-shadow")
 }
 
 function onAnimEnd() {
-    if(tsClassList.contains("display")) {
-        tsClassList.add("enable-access")
+    if(tsComponent.classList.contains("display")) {
+        tsComponent.classList.add("enable-access")
         tsComponent.style.removeProperty("width")
+
+    } else {
+        tsComponent.classList.remove("hide")
+        tsContainer.classList.remove("hide")
+
+        ovComponent.classList.remove("disable-transition", "visible-disabling")
+    }
+
+    tsContainer.classList.remove("animate")
+}
+
+// Disabling overview shadows on alternative display
+let shadowDisplayed = true
+function onResize() {
+    if (tsContainerStyles.display == "none") return
+
+    if (shadowDisplayed) {
+        if (tsContainerStyles.position === "absolute") {
+            ovComponent.style.boxShadow = "none"
+            shadowDisplayed = false
+        }
+    } else {
+        if (tsContainerStyles.position !== "absolute") {
+            ovComponent.style.removeProperty("box-shadow")
+            shadowDisplayed = true
+        }
     }
 }
 
-
+window.addEventListener("resize", onResize)
 tsComponent.addEventListener("animationend", onAnimEnd)
-createEditButton.addEventListener("click", createEditClick)
-cancelButton.addEventListener("click", cancelClick)
+tsCancelButton.addEventListener("click", cancelClick)
+ovCreateEditButton.addEventListener("click", createEditClick)
 
 
 function getComponentWidth() {
@@ -49,9 +101,13 @@ function getComponentWidth() {
 
     width -= Number.parseFloat(screenStyles.paddingLeft)
     width -= Number.parseFloat(screenStyles.paddingRight)
-    width -= 3*20 - 5   // Margins
-    width /= 2          // width is split between 2 components
-    console.log(width)
+
+    if (tsContainerStyles.position !== "absolute") {
+        width -= 3*20 - 5   // Margins
+        width /= 2          // width is split between 2 components
+    } else {
+        width -= 2*20       // Only margins for narrow viewport
+    }
 
     return width > 400 ? "400px" : `${width}px`
 }

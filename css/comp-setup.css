@@ -6,15 +6,47 @@
     margin-left: 0;
     margin-right: 0;
     width: 0;
-
-    transition: all var(--animation-speed) ease-in-out;
 }
 
-.ts-container.display {
+.ts-container.display, .ts-container.hide {
     margin-left: -5px;
     margin-right: var(--vertical-container-margin);
     width: var(--vertical-container-width);
 }
+
+.ts-container.display.animate {
+    animation: ts-cont-display var(--animation-speed) ease-in-out;
+}
+
+.ts-container.hide.animate {
+    animation: ts-cont-hide var(--animation-speed) ease-in-out;
+}
+
+    @keyframes ts-cont-display {
+        from {
+            margin-left: 0;
+            margin-right: 0;
+            width: 0;
+        }
+        to {
+            margin-left: -5px;
+            margin-right: var(--vertical-container-margin);
+            width: var(--vertical-container-width);
+        }
+    }
+
+    @keyframes ts-cont-hide {
+        from {
+            margin-left: -5px;
+            margin-right: var(--vertical-container-margin);
+            width: var(--vertical-container-width);
+        }
+        to {
+            margin-left: 0;
+            margin-right: 0;
+            width: 0;
+        }
+    }
 
 .training-setup-component {
     --placeholder-color: #0006;
@@ -64,11 +96,36 @@
         from {
             left: 0;
         }
+        30% {
+            opacity: 1;
+        }
         to {
             left: 50px;
             opacity: 0;
         }
     }
+
+    /* Alternative display for narrow viewport */
+@media (max-width: 700px) {
+    .ts-container.ts-container {
+        display: none;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        margin-left: 0;
+        margin-right: 0;
+
+        max-width: var(--vertical-container-width);
+        width: calc(100% - 2* var(--vertical-container-margin));
+    }
+
+    .ts-container.display, .ts-container.hide {
+        display: flex;
+    }
+}
 
 
 /* General Input */
