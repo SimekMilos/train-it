@@ -166,6 +166,8 @@
     background-color: rgba(0,0,0,.04);
     resize: none;
 
+    padding-left: 6px;
+    padding-right: 6px;
 
     color: #000A;
     font-size: .8em;
@@ -235,8 +237,6 @@
 /* Training Notes */
 
 .ts-training-notes {
-    padding-left: 8px;
-    padding-right: 8px;
     margin-bottom: 10px;
 }
 
