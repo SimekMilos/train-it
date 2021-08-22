@@ -238,6 +238,7 @@
 
 .ts-training-notes {
     margin-bottom: 10px;
+    width: 99.99999%;       /* Fix width for Safari */
 }
 
 
