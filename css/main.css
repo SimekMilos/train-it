@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* ==== General ==== */
+
 
 @font-face {
     font-family: "Roboto Light";
@@ -13,6 +13,11 @@
 }
 
 @font-face {
+    font-family: "AzeretMono";
+    src: url(../res/fonts/AzeretMono-variable-wght.ttf) format("truetype");
+}
+
+@font-face {
     font-family: "OpenSans Regular";
     src: url(../res/fonts/OpenSans-Regular.ttf) format("truetype");
 }
@@ -21,6 +26,8 @@
     font-family: "OpenSans SemiBold";
     src: url(../res/fonts/OpenSans-SemiBold.ttf) format("truetype");
 }
+
+
 
 html {
     position: fixed;
