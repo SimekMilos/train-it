@@ -86,6 +86,10 @@ body {
     padding-right: calc(env(safe-area-inset-right, 10px) - 10px);
 }
 
+/* Temporary disabling */
+.initial-screen {
+    display: none;
+}
 /* --- Vertical alignment --- */
 
 .vertical-container {
