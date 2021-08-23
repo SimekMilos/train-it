@@ -50,10 +50,11 @@
 
 
 .stopwatch-component h2 {
-    margin: 5px 0 0 5px;
+    margin-top: 5px;
 
     color: var(--main-color);
     font: 16px "OpenSans SemiBold", sans-serif;
+    text-align: center;
 }
 
 
