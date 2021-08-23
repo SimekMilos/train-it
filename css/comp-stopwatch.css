@@ -1,2 +1,62 @@
 @charset "utf-8";
 
+
+.stopwatch-component {
+    height: 40vh;
+
+    display: flex;
+    justify-content: center;
+
+    border: 1px solid red;
+
+    --margin-around: 1vw;
+    --margin-between: 2vw;
+}
+
+
+.st-first-container {
+    margin: 0 var(--margin-between) 0 var(--margin-around);
+    border: 1px solid red;
+}
+
+.st-second-container {
+    margin-right: var(--margin-around);
+    border: 1px solid red;
+}
+
+
+@media (orientation: portrait) {
+    .stopwatch-component {
+        flex-direction: column;
+        justify-content: unset;
+        align-items: center;
+    }
+
+    .st-first-container, .st-second-container {
+        margin: 0 1vw;
+        width: unset;
+    }
+}
+
+
+.stopwatch-component h2 {
+    margin: 5px 0 5px 5px;
+
+    color: var(--main-color);
+    font: 16px "OpenSans SemiBold", sans-serif;
+}
+
+
+.st-current-stopwatch, .st-total-stopwatch {
+    line-height: .8;
+    font-size: 125px;
+    border: 1px solid red;
+}
+
+.st-current-stopwatch {
+    font-family: "OpenSans Regular", sans-serif;
+}
+
+.st-total-stopwatch {
+    font-family: "OpenSans Regular", sans-serif;
+}
