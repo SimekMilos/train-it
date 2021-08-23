@@ -16,7 +16,7 @@
     --margin-between: 2vw;
 
      --secondary-button-size: clamp(36px, 4vw, 46px);
-     --secondary-button-offset: 7px;
+     --secondary-button-offset: 5px;
 }
 
 .st-first-container, .st-second-container {
