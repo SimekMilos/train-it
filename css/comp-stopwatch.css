@@ -72,3 +72,30 @@
 .st-total-stopwatch {
     font-family: "OpenSans Regular", sans-serif;
 }
+
+
+.st-main-controls {
+    flex: 1 0;
+    margin-top: 3%;
+
+    display: flex;
+    align-items: stretch;
+}
+
+.st-main-controls > * {
+    flex: 1 0 0;
+    height: unset;
+    min-height: var(--button-height);
+}
+
+.st-main-controls > :not(:last-child) {
+    margin-right: 1vw;
+}
+
+.st-main-controls > :nth-child(2) {
+    flex-grow: 2;
+}
+
+* {
+    /*border: 1px solid red;*/
+}
