@@ -12,7 +12,8 @@
     display: flex;
     justify-content: center;
 
-    --margin-around: 1vw;
+    --secondary-button-size: clamp(36px, 4vw, 46px);
+    --margin-around: calc(var(--secondary-button-size) + 5px);
     --margin-between: 2vw;
 }
 
@@ -109,8 +110,8 @@
     top: 5px;
     left: 5px;
 
-    width: var(--button-height);
-    height: var(--button-height);
+    width: var(--secondary-button-size);
+    height: var(--secondary-button-size);
 }
 
 .ts-settings {
@@ -118,7 +119,8 @@
     top: 5px;
     right: 5px;
 
-    width: var(--button-height);
+    width: var(--secondary-button-size);
+    height: var(--secondary-button-size);
 
     border-color: transparent;
     transition: border-color .2s;
