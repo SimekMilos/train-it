@@ -3,8 +3,8 @@
 
 .stopwatch-component {
     position: relative;
+    padding: 0 env(safe-area-inset-right) 20px env(safe-area-inset-left);
 
-    padding-bottom: 20px;
     box-shadow:
         0 1px 5px 0 rgba(0,0,0,.1),
         0 3px 15px 0 rgba(0,0,0,.15);
