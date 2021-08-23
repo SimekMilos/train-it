@@ -12,9 +12,11 @@
     display: flex;
     justify-content: center;
 
-    --secondary-button-size: clamp(36px, 4vw, 46px);
     --margin-around: calc(var(--secondary-button-size) + 5px);
     --margin-between: 2vw;
+
+     --secondary-button-size: clamp(36px, 4vw, 46px);
+     --secondary-button-offset: 7px;
 }
 
 .st-first-container, .st-second-container {
@@ -107,8 +109,8 @@
 
 .ts-close {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: var(--secondary-button-offset);
+    left: max(env(safe-area-inset-left), var(--secondary-button-offset));
 
     width: var(--secondary-button-size);
     height: var(--secondary-button-size);
@@ -116,8 +118,8 @@
 
 .ts-settings {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: var(--secondary-button-offset);
+    right: max(env(safe-area-inset-right), var(--secondary-button-offset));
 
     width: var(--secondary-button-size);
     height: var(--secondary-button-size);
