@@ -47,6 +47,8 @@ body {
     --button-color: hsl(209, 100%, 40%);
 
     --secondary-control-color: hsl(0, 0%, 30%);
+    --secondary-color-hover: rgba(0, 0, 0, .08);
+    --secondary-color-active: rgba(0, 0, 0, .2);
 
     --comp-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
@@ -158,7 +160,7 @@ body {
 
     border: 1px solid var(--button-color);
     border-radius: var(--comp-border-radius);
-    background-color: white;
+    background-color: transparent;
 
     font: var(--button-font);
     color: var(--button-color);
@@ -173,10 +175,12 @@ body {
 /* --- Close Button --- */
 
 .close-button {
+    position: relative;
+
     width: 26px;
     height: 26px;
 
-    position: relative;
+    border-radius: var(--comp-border-radius);
 }
 
 .close-button::before, .close-button::after {
@@ -201,6 +205,14 @@ body {
 .close-button::after {
     width: 80%;
     transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.close-button:active {
+    background-color: var(--secondary-color-active);
 }
 
 
