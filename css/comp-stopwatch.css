@@ -2,6 +2,8 @@
 
 
 .stopwatch-component {
+    position: relative;
+
     padding-bottom: 20px;
     box-shadow:
         0 1px 5px 0 rgba(0,0,0,.1),
@@ -74,6 +76,8 @@
 }
 
 
+/* Main controls */
+
 .st-main-controls {
     flex: 1 0;
     margin-top: 3%;
@@ -96,6 +100,32 @@
     flex-grow: 2;
 }
 
-* {
-    /*border: 1px solid red;*/
+
+/* Secondary controls */
+
+.ts-close {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    width: var(--button-height);
+    height: var(--button-height);
+}
+
+.ts-settings {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    width: var(--button-height);
+
+    border-color: transparent;
+    transition: border-color .2s;
+
+    background:
+        center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
+}
+
+.ts-settings:active {
+    border-color: var(--main-color);
 }
