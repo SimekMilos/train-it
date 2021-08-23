@@ -1,7 +1,7 @@
 
 import {float, px} from "./tools.js"
 
-const mainScreen = document.querySelector(".main-screen")
+const stopwatchComp = document.querySelector(".stopwatch-component")
 
 const firstContainer = document.querySelector(".st-first-container")
 const secondContainer = document.querySelector(".st-second-container")
@@ -23,7 +23,7 @@ window.addEventListener("load", onAppLoad)
 
 function setStopwatchSize() {
     // get max width
-    const mainStyles = getComputedStyle(mainScreen)
+    const mainStyles = getComputedStyle(stopwatchComp)
     const padding = float(mainStyles.paddingLeft) + float(mainStyles.paddingRight)
 
     const contStyles = [getComputedStyle(firstContainer),
