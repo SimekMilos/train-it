@@ -14,9 +14,9 @@
 
     --margin-around: calc(var(--secondary-button-size) + 5px);
     --margin-between: 2vw;
-    --top-offset: 5px;
 
-     --secondary-button-size: clamp(36px, 4vw, 46px);
+    --top-offset: 5px;
+    --top-height: clamp(36px, 4vw, 46px);
 }
 
 .st-first-container, .st-second-container {
@@ -54,6 +54,7 @@
 
 .stopwatch-component h2 {
     margin-top: var(--top-offset);
+    height: var(--top-height);
 
     color: var(--main-color);
     font: 16px "OpenSans SemiBold", sans-serif;
@@ -113,8 +114,8 @@
     top: var(--top-offset);
     left: max(env(safe-area-inset-left), var(--top-offset));
 
-    width: var(--secondary-button-size);
-    height: var(--secondary-button-size);
+    width: var(--top-height);
+    height: var(--top-height);
 }
 
 .ts-settings {
@@ -122,8 +123,8 @@
     top: var(--top-offset);
     right: max(env(safe-area-inset-right), var(--top-offset));
 
-    width: var(--secondary-button-size);
-    height: var(--secondary-button-size);
+    width: var(--top-height);
+    height: var(--top-height);
 
     border-color: transparent;
     transition: border-color .2s;
