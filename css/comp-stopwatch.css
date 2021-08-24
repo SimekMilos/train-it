@@ -53,12 +53,13 @@
 
 
 .stopwatch-component h2 {
-    margin-top: var(--top-offset);
-    height: var(--top-height);
+    --height: calc(var(--top-height) + 2 * var(--top-offset));
+
+    height: var(--height);
 
     color: var(--main-color);
-    font: 16px "OpenSans SemiBold", sans-serif;
-    text-align: center;
+    font: calc(.4 * var(--height)) "OpenSans SemiBold", sans-serif;
+
     /* Centering text */
     display: flex;
     justify-content: center;
