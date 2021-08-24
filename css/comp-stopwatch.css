@@ -64,6 +64,7 @@
 
 .st-current-stopwatch, .st-total-stopwatch {
     line-height: .8;
+    margin-top: -.06em;   /* Fix for font that creates unneeded top padding */
 }
 
 .st-current-stopwatch {
