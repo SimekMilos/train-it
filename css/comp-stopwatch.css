@@ -3,7 +3,7 @@
 
 .stopwatch-component {
     position: relative;
-    padding: 0 env(safe-area-inset-right) 15px env(safe-area-inset-left);
+    padding-bottom: 15px;
 
     box-shadow:
         0 1px 5px 0 rgba(0,0,0,.1),
@@ -15,7 +15,7 @@
     --top-offset: 5px;
     --top-height: clamp(36px, 4vw, 46px);
 
-    --margin-around: calc(var(--top-height) + 5px);
+    --margin-around: 2vw;
     --margin-between: 3vw;
 }
 
@@ -26,11 +26,12 @@
 
 
 .st-first-container {
-    margin: 0 var(--margin-between) 0 var(--margin-around);
+    margin-right: var(--margin-between);
+    margin-left: max(var(--margin-around), env(safe-area-inset-left));
 }
 
 .st-second-container {
-    margin-right: var(--margin-around);
+    margin-right: max(var(--margin-around), env(safe-area-inset-right));
 }
 
 
@@ -117,7 +118,7 @@
 .ts-close {
     position: absolute;
     top: var(--top-offset);
-    left: max(env(safe-area-inset-left), var(--top-offset));
+    left: max(var(--top-offset), env(safe-area-inset-left));
 
     width: var(--top-height);
     height: var(--top-height);
@@ -126,7 +127,7 @@
 .ts-settings {
     position: absolute;
     top: var(--top-offset);
-    right: max(env(safe-area-inset-right), var(--top-offset));
+    right: max(var(--top-offset), env(safe-area-inset-right));
 
     width: var(--top-height);
     height: var(--top-height);
