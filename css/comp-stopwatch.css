@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
 
-    --margin-around: calc(var(--secondary-button-size) + 5px);
+    --margin-around: calc(var(--top-height) + 5px);
     --margin-between: 2vw;
 
     --top-offset: 5px;
