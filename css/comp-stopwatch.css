@@ -59,6 +59,10 @@
     color: var(--main-color);
     font: 16px "OpenSans SemiBold", sans-serif;
     text-align: center;
+    /* Centering text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Watches */
