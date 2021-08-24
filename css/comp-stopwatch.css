@@ -12,11 +12,11 @@
     display: flex;
     justify-content: center;
 
-    --margin-around: calc(var(--top-height) + 5px);
-    --margin-between: 2vw;
-
     --top-offset: 5px;
     --top-height: clamp(36px, 4vw, 46px);
+
+    --margin-around: calc(var(--top-height) + 5px);
+    --margin-between: 2vw;
 }
 
 .st-first-container, .st-second-container {
