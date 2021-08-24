@@ -31,11 +31,11 @@ function setStopwatchSize() {
     const margin = float(contStyles[0].marginLeft) + float(contStyles[0].marginRight) +
                    float(contStyles[1].marginLeft) + float(contStyles[1].marginRight)
 
-    let maxWidth = (innerWidth / 2) - padding - margin
+    let maxWidth = (innerWidth - padding - margin) / 2
 
     // get max height
     const position = currentStopwatch.getBoundingClientRect().y
-    let maxHeight = (innerHeight * .4) - position
+    let maxHeight = (innerHeight * .4) - position - float(mainStyles.paddingBottom)
 
     // portrait mode
     if (matchMedia("(orientation:portrait)").matches) {
