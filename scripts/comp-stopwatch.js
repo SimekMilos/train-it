@@ -11,7 +11,13 @@ const secondContainer = document.querySelector(".st-second-container")
 const currentStopwatch = document.querySelector(".st-current-stopwatch")
 const totalStopwatch = document.querySelector(".st-total-stopwatch")
 
+// Constants
 const headingHeightFactor = 0.2
+const currWatchSizeRatio = 3.2
+const totalWatchSizeRatio = 4.95
+const watchFontMagnFactor = 1.25
+
+
 
 // temporary - activate when first displaying stopwatch
 //           - deactivate when stopwatch is hidden
@@ -43,7 +49,7 @@ function setComponentHeight() {
 
     // compute max height
     const maxWatchWidth = (innerWidth - padding - margin) / 2
-    const maxWatchHeight = maxWatchWidth / 3.2  // width to height font ratio
+    const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
     const maxHeight = (maxWatchHeight + float(compStyles.paddingBottom))
                        / (1 - headingHeightFactor)
 
@@ -62,32 +68,11 @@ function setHeadingHeight() {
 }
 
 function setStopwatchSize() {
-    // get max width
-    const compStyles = getComputedStyle(stopwatchComp)
-    const padding = float(compStyles.paddingLeft) + float(compStyles.paddingRight)
+    // set current watch size
+    const currWatchHeight = float(getComputedStyle(currentStopwatch).height)
+    currentStopwatch.style.fontSize = px(currWatchHeight * watchFontMagnFactor)
 
-    const contStyles = [getComputedStyle(firstContainer),
-                    getComputedStyle(secondContainer)]
-    const margin = float(contStyles[0].marginLeft) + float(contStyles[0].marginRight) +
-                   float(contStyles[1].marginLeft) + float(contStyles[1].marginRight)
-
-    let maxWidth = (innerWidth - padding - margin) / 2
-
-    // get max height
-    const position = currentStopwatch.getBoundingClientRect().y
-    let maxHeight = (innerHeight * .4) - position - float(compStyles.paddingBottom)
-
-    // portrait mode
-    if (matchMedia("(orientation:portrait)").matches) {
-        maxWidth = innerWidth - padding - margin
-        maxHeight /= 2
-    }
-
-    // compute maximum size
-    const watchStyles = getComputedStyle(currentStopwatch)
-    const maxSize = Math.min(maxHeight, maxWidth / 3.2) / .8 // line height factor
-
-    // assing size to watches
-    currentStopwatch.style.fontSize = px(maxSize)
-    totalStopwatch.style.fontSize = px(maxSize * 3.2/4.95)  // ratio of watch widths
+    // set total watch size
+    const totalWatchHeight = currWatchHeight * (currWatchSizeRatio/totalWatchSizeRatio)
+    totalStopwatch.style.fontSize = px(totalWatchHeight * watchFontMagnFactor)
 }
