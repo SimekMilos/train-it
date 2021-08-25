@@ -72,21 +72,19 @@
 /* Watches */
 
 .st-current-stopwatch, .st-total-stopwatch {
-    line-height: .8;
     margin-top: -.055em;    /* used in JS */
         /* Fix for font that creates unneeded top padding */
+
+    font-family: "OpenSans Regular", sans-serif;
+    line-height: .8;
 }
 
 .st-current-stopwatch {
-    font-family: "OpenSans Regular", sans-serif;
+    flex-grow: 1;
 
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.st-total-stopwatch {
-    font-family: "OpenSans Regular", sans-serif;
 }
 
 
