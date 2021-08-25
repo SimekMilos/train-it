@@ -19,11 +19,17 @@
     --margin-between: 3vw;
 }
 
+
+/* Containers */
+
 .st-first-container, .st-second-container {
     display: flex;
     flex-direction: column;
 }
 
+.st-first-container > *, .st-second-container > * {
+    flex: 0 0 auto;
+}
 
 .st-first-container {
     margin-right: var(--margin-between);
@@ -67,7 +73,8 @@
 
 .st-current-stopwatch, .st-total-stopwatch {
     line-height: .8;
-    margin-top: -.06em;   /* Fix for font that creates unneeded top padding */
+    margin-top: -.05em;
+        /* Fix for font that creates unneeded top padding */
 }
 
 .st-current-stopwatch {
