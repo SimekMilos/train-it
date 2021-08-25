@@ -13,8 +13,8 @@ const totalStopwatch = document.querySelector(".st-total-stopwatch")
 
 // Constants
 const headingHeightFactor = 0.2
-const currWatchSizeRatio = 3.2
-const totalWatchSizeRatio = 4.95
+const currWatchSizeRatio = 3.427
+const totalWatchSizeRatio = 5.366
 const watchFontMagnFactor = 1.25
 
 
