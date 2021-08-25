@@ -13,8 +13,8 @@ const totalStopwatch = document.querySelector(".st-total-stopwatch")
 
 // Constants
 const headingHeightFactor = 0.2
-const currWatchSizeRatio = 3.427
-const totalWatchSizeRatio = 5.366
+const currWatchSizeRatio = 3.42
+const totalWatchSizeRatio = 5.34
 const watchFontMagnFactor = 1.25
 
 
@@ -78,15 +78,15 @@ function setStopwatchSize() {
 
     // set current watch size
     let marginTop = float(getComputedStyle(currentStopwatch).marginTop)
-    let currWatchHeight = containerHeight - headingHeight
-    currWatchHeight = currWatchHeight * watchFontMagnFactor - marginTop
+    let currWatchHeight = containerHeight - headingHeight - marginTop
+    currWatchHeight = currWatchHeight * watchFontMagnFactor
 
     currentStopwatch.style.fontSize = px(currWatchHeight)
 
     // set total watch size
     marginTop = float(getComputedStyle(totalStopwatch).marginTop)
-    let totalWatchHeight = currWatchHeight * (currWatchSizeRatio/totalWatchSizeRatio)
-    totalWatchHeight = totalWatchHeight * watchFontMagnFactor - marginTop
+    const width = float(getComputedStyle(firstContainer).width)
+    const totalWatchHeight = width / totalWatchSizeRatio - marginTop
 
-    totalStopwatch.style.fontSize = px(totalWatchHeight)
+    totalStopwatch.style.fontSize = px(totalWatchHeight * watchFontMagnFactor)
 }
