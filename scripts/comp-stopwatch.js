@@ -54,7 +54,7 @@ function setComponentHeight() {
 
     // compute max height
     const maxWatchWidth = (innerWidth - outerPadding - containerMargins) / 2
-    const maxWatchHeight = (maxWatchWidth / currWatchSizeRatio) + currWatchMarginTop
+    const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
     const maxHeight = (maxWatchHeight + float(compStyles.paddingBottom))
                        / (1 - headingHeightFactor)
 
