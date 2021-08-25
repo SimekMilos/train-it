@@ -73,7 +73,7 @@
 
 .st-current-stopwatch, .st-total-stopwatch {
     line-height: .8;
-    margin-top: -.05em;
+    margin-top: -.055em;    /* used in JS */
         /* Fix for font that creates unneeded top padding */
 }
 
