@@ -61,7 +61,7 @@
 
 .stopwatch-component h2 {
     color: var(--main-color);
-    font: calc(.4 * var(--height)) "OpenSans SemiBold", sans-serif;
+    font-family: "OpenSans Regular", sans-serif;
 
     /* Centering text */
     display: flex;
@@ -153,4 +153,8 @@
     background: linear-gradient(var(--secondary-color-active),
                                 var(--secondary-color-active)),
                 var(--background);
+}
+
+* {
+    /*border: 1px solid red;*/
 }
