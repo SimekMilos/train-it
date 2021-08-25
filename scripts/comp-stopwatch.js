@@ -119,6 +119,7 @@ function setMainControls() {
     // set border
     let borderWidth = .04 * height
     if (borderWidth < 1) borderWidth = 1
+    if (borderWidth > 2) borderWidth = 2
 
     for (const button of buttons) {
         button.style.borderWidth = px(borderWidth)
