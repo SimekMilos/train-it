@@ -69,7 +69,9 @@ function setHeadingHeight() {
 
 function setStopwatchSize() {
     // set current watch size
-    const currWatchHeight = float(getComputedStyle(currentStopwatch).height)
+    const containerHeight = float(getComputedStyle(firstContainer).height)
+    const headingHeight = float(getComputedStyle(headings[0]).height)
+    const currWatchHeight = containerHeight - headingHeight
     currentStopwatch.style.fontSize = px(currWatchHeight * watchFontMagnFactor)
 
     // set total watch size

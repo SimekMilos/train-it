@@ -78,7 +78,6 @@
 }
 
 .st-current-stopwatch {
-    flex-grow: 1;
     font-family: "OpenSans Regular", sans-serif;
 
     display: flex;
