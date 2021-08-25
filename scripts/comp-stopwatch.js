@@ -23,8 +23,8 @@ window.addEventListener("load", onAppLoad)
 
 function setStopwatchSize() {
     // get max width
-    const mainStyles = getComputedStyle(stopwatchComp)
-    const padding = float(mainStyles.paddingLeft) + float(mainStyles.paddingRight)
+    const compStyles = getComputedStyle(stopwatchComp)
+    const padding = float(compStyles.paddingLeft) + float(compStyles.paddingRight)
 
     const contStyles = [getComputedStyle(firstContainer),
                     getComputedStyle(secondContainer)]
@@ -35,7 +35,7 @@ function setStopwatchSize() {
 
     // get max height
     const position = currentStopwatch.getBoundingClientRect().y
-    let maxHeight = (innerHeight * .4) - position - float(mainStyles.paddingBottom)
+    let maxHeight = (innerHeight * .4) - position - float(compStyles.paddingBottom)
 
     // portrait mode
     if (matchMedia("(orientation:portrait)").matches) {
