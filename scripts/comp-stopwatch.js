@@ -14,12 +14,38 @@ const totalStopwatch = document.querySelector(".st-total-stopwatch")
 //           - deactivate when stopwatch is hidden
 
 function onAppLoad() {
-    setStopwatchSize()
-    window.addEventListener("resize", setStopwatchSize)
+    onResize()
+    window.addEventListener("resize", onResize)
 }
 
 window.addEventListener("load", onAppLoad)
 
+function onResize() {
+    setComponentHeight()
+    setStopwatchSize()
+}
+
+function setComponentHeight() {
+    let height = innerHeight * .4   // size shoud be 2/5 of viewport
+
+    // compute paddings and margins
+    const compStyles = getComputedStyle(stopwatchComp)
+    const padding = float(compStyles.paddingLeft) + float(compStyles.paddingRight)
+
+    const contStyles = [getComputedStyle(firstContainer),
+                    getComputedStyle(secondContainer)]
+    const margin = float(contStyles[0].marginLeft) + float(contStyles[0].marginRight) +
+                   float(contStyles[1].marginLeft) + float(contStyles[1].marginRight)
+
+    // compute max height
+    const maxWatchWidth = (innerWidth - padding - margin) / 2
+    const maxWatchHeight = maxWatchWidth / 3.2  // width to height font ratio
+    const maxHeight = (maxWatchHeight + float(compStyles.paddingBottom)) / (1 - 0.2)
+        // 0.2 = size factor of heading height
+
+    if (height > maxHeight) height = maxHeight
+    stopwatchComp.style.height = px(height)
+}
 
 function setStopwatchSize() {
     // get max width
