@@ -11,6 +11,9 @@ const secondContainer = document.querySelector(".st-second-container")
 const currentStopwatch = document.querySelector(".st-current-stopwatch")
 const totalStopwatch = document.querySelector(".st-total-stopwatch")
 
+const mainCtrContainer = document.querySelector(".st-main-controls")
+const buttons = document.querySelectorAll(".st-main-controls > *")
+
 // Constants
 const headingHeightFactor = 0.2
 const currWatchSizeRatio = 3.42
@@ -33,6 +36,7 @@ function onResize() {
     setComponentHeight()
     setHeadingHeight()
     setStopwatchSize()
+    setMainControls()
 }
 
 function setComponentHeight() {
@@ -89,4 +93,34 @@ function setStopwatchSize() {
     const totalWatchHeight = width / totalWatchSizeRatio - marginTop
 
     totalStopwatch.style.fontSize = px(totalWatchHeight * watchFontMagnFactor)
+}
+
+function setMainControls() {
+    const offset = .06
+
+    // set top margin
+    const compHeight = float(getComputedStyle(stopwatchComp).height)
+    mainCtrContainer.style.marginTop = px(offset * compHeight)
+
+    // set space between
+    for (const [index, button] of buttons.entries()) {
+        if (index == buttons.length - 1) break          // not the last one
+
+        button.style.marginRight = px(offset * compHeight)
+    }
+
+    // set font size
+    const height = float(getComputedStyle(buttons[0]).height)
+    for (const button of buttons) {
+        button.style.fontSize = px(.5 * height)
+    }
+
+    // set border
+    let borderWidth = .04 * height
+    if (borderWidth < 1) borderWidth = 1
+
+    for (const button of buttons) {
+        button.style.borderWidth = px(borderWidth)
+        button.style.borderRadius = px(2 * borderWidth)
+    }
 }
