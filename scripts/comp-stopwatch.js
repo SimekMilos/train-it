@@ -68,13 +68,20 @@ function setHeadingHeight() {
 }
 
 function setStopwatchSize() {
-    // set current watch size
     const containerHeight = float(getComputedStyle(firstContainer).height)
     const headingHeight = float(getComputedStyle(headings[0]).height)
-    const currWatchHeight = containerHeight - headingHeight
-    currentStopwatch.style.fontSize = px(currWatchHeight * watchFontMagnFactor)
+
+    // set current watch size
+    let marginTop = float(getComputedStyle(currentStopwatch).marginTop)
+    let currWatchHeight = containerHeight - headingHeight
+    currWatchHeight = currWatchHeight * watchFontMagnFactor - marginTop
+
+    currentStopwatch.style.fontSize = px(currWatchHeight)
 
     // set total watch size
-    const totalWatchHeight = currWatchHeight * (currWatchSizeRatio/totalWatchSizeRatio)
-    totalStopwatch.style.fontSize = px(totalWatchHeight * watchFontMagnFactor)
+    marginTop = float(getComputedStyle(totalStopwatch).marginTop)
+    let totalWatchHeight = currWatchHeight * (currWatchSizeRatio/totalWatchSizeRatio)
+    totalWatchHeight = totalWatchHeight * watchFontMagnFactor - marginTop
+
+    totalStopwatch.style.fontSize = px(totalWatchHeight)
 }
