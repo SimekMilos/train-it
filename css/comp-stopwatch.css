@@ -62,6 +62,7 @@
 .stopwatch-component h2 {
     color: var(--main-color);
     font-family: "OpenSans Regular", sans-serif;
+    font-weight: normal;
 
     /* Centering text */
     display: flex;
