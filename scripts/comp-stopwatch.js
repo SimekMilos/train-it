@@ -45,7 +45,7 @@ function setComponentHeight() {
     const containerStyles = [getComputedStyle(firstContainer),
                              getComputedStyle(secondContainer)]
 
-    const containerMargin = float(containerStyles[0].marginLeft)
+    const containerMargins = float(containerStyles[0].marginLeft)
                             + float(containerStyles[0].marginRight)
                             + float(containerStyles[1].marginLeft)
                             + float(containerStyles[1].marginRight)
@@ -53,7 +53,7 @@ function setComponentHeight() {
     const currWatchMarginTop = float(getComputedStyle(currentStopwatch).marginTop)
 
     // compute max height
-    const maxWatchWidth = (innerWidth - outerPadding - containerMargin) / 2
+    const maxWatchWidth = (innerWidth - outerPadding - containerMargins) / 2
     const maxWatchHeight = (maxWatchWidth / currWatchSizeRatio) + currWatchMarginTop
     const maxHeight = (maxWatchHeight + float(compStyles.paddingBottom))
                        / (1 - headingHeightFactor)
