@@ -111,20 +111,11 @@ function setMainControls() {
         button.style.marginRight = px(buttonOffset * compHeight)
     }
 
-    // set font size
+    // set font size & border
     const height = float(getComputedStyle(buttons[0]).height)
     for (const button of buttons) {
         button.style.fontSize = px(.5 * height)
-    }
-
-    // set border
-    let borderWidth = .04 * height
-    if (borderWidth < 1) borderWidth = 1
-    if (borderWidth > 2) borderWidth = 2
-
-    for (const button of buttons) {
-        button.style.borderWidth = px(borderWidth)
-        button.style.borderRadius = px(2 * borderWidth)
+        button.style.borderRadius = px(.1 * height)
     }
 }
 
