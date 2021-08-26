@@ -11,11 +11,18 @@
     display: flex;
     justify-content: center;
 
-    --top-offset: 5px;
-    --top-height: clamp(36px, 4vw, 46px);
+    --sec-butt-offset-top: 5px;
+    --sec-butt-offset-left: max(var(--sec-butt-offset-top), env(safe-area-inset-left));
+    --sec-butt-offset-right: max(var(--sec-butt-offset-top), env(safe-area-inset-right));
 
-    --margin-around: 2vw;
-    --margin-between: 3vw;
+    --sec-butt-size: clamp(36px, 4vw, 46px);
+
+    /* Margins wide enough not to interfere with secondary buttons */
+    --margin-left: calc(var(--sec-butt-offset-left) + var(--sec-butt-size)
+                        + var(--sec-butt-offset-top));
+    --margin-right: calc(var(--sec-butt-offset-right) + var(--sec-butt-size)
+                        + var(--sec-butt-offset-top));
+    --margin-between: 4vw;
 }
 
 
@@ -31,12 +38,12 @@
 }
 
 .st-first-container {
+    margin-left: var(--margin-left);
     margin-right: var(--margin-between);
-    margin-left: max(var(--margin-around), env(safe-area-inset-left));
 }
 
 .st-second-container {
-    margin-right: max(var(--margin-around), env(safe-area-inset-right));
+    margin-right: var(--margin-right);
 }
 
 
@@ -116,20 +123,20 @@
 
 .ts-close {
     position: absolute;
-    top: var(--top-offset);
-    left: max(var(--top-offset), env(safe-area-inset-left));
+    top: var(--sec-butt-offset-top);
+    left: var(--sec-butt-offset-left);
 
-    width: var(--top-height);
-    height: var(--top-height);
+    width: var(--sec-butt-size);
+    height: var(--sec-butt-size);
 }
 
 .ts-settings {
     position: absolute;
-    top: var(--top-offset);
-    right: max(var(--top-offset), env(safe-area-inset-right));
+    top: var(--sec-butt-offset-top);
+    right: var(--sec-butt-offset-right);
 
-    width: var(--top-height);
-    height: var(--top-height);
+    width: var(--sec-butt-size);
+    height: var(--sec-butt-size);
 
     border-color: transparent;
     transition: border-color .2s;
