@@ -17,8 +17,8 @@ const buttons = document.querySelectorAll(".st-main-controls > *")
 // Constants
 const headingHeightFactor = 0.2
 const bottomPaddingHeightFactor = 0.1
-const currWatchSizeRatio = 3.42
-const totalWatchSizeRatio = 5.34
+const currWatchSizeRatio = 3.285
+const totalWatchSizeRatio = 5.2
 const watchFontMagnFactor = 1.25
 const buttonOffset = 0.06
 

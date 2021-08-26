@@ -72,8 +72,8 @@
 /* Watches */
 
 .st-current-stopwatch, .st-total-stopwatch {
-    margin-top: -.055em;    /* used in JS */
-        /* Fix for font that creates unneeded top padding */
+    margin: -.055em -.055em 0 -.055em;    /* used in JS */
+        /* Fix for font that creates unneeded paddings */
 
     font-family: "OpenSans Regular", sans-serif;
     line-height: .8;
