@@ -16,6 +16,7 @@ const buttons = document.querySelectorAll(".st-main-controls > *")
 
 // Constants
 const headingHeightFactor = 0.2
+const bottomPaddingHeightFactor = 0.1
 const currWatchSizeRatio = 3.42
 const totalWatchSizeRatio = 5.34
 const watchFontMagnFactor = 1.25
@@ -37,6 +38,7 @@ function onResize() {
     setHeadingHeight()
     setStopwatchSize()
     setMainControls()
+    setBottomPadding()
 }
 
 function setComponentHeight() {
@@ -59,8 +61,7 @@ function setComponentHeight() {
     // compute max height constraint
     const maxWatchWidth = (innerWidth - outerPadding - containerMargins) / 2
     const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
-    const maxHeight = (maxWatchHeight + float(compStyles.paddingBottom))
-                       / (1 - headingHeightFactor)
+    const maxHeight = maxWatchHeight / (1 - headingHeightFactor - bottomPaddingHeightFactor)
     if (height > maxHeight) height = maxHeight
 
     // set height
@@ -125,4 +126,9 @@ function setMainControls() {
         button.style.borderWidth = px(borderWidth)
         button.style.borderRadius = px(2 * borderWidth)
     }
+}
+
+function setBottomPadding() {
+    const compHeight = float(getComputedStyle(stopwatchComp).height)
+    stopwatchComp.style.paddingBottom = px(compHeight * bottomPaddingHeightFactor)
 }
