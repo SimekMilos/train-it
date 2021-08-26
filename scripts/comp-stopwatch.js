@@ -20,7 +20,7 @@ const bottomPaddingHeightFactor = 0.1
 const currWatchSizeRatio = 3.42
 const totalWatchSizeRatio = 5.34
 const watchFontMagnFactor = 1.25
-
+const buttonOffset = 0.06
 
 
 // temporary - activate when first displaying stopwatch
@@ -100,17 +100,15 @@ function setStopwatchSize() {
 }
 
 function setMainControls() {
-    const offset = .06
-
     // set top margin
     const compHeight = float(getComputedStyle(stopwatchComp).height)
-    mainCtrContainer.style.marginTop = px(offset * compHeight)
+    mainCtrContainer.style.marginTop = px(buttonOffset * compHeight)
 
     // set space between
     for (const [index, button] of buttons.entries()) {
         if (index == buttons.length - 1) break          // not the last one
 
-        button.style.marginRight = px(offset * compHeight)
+        button.style.marginRight = px(buttonOffset * compHeight)
     }
 
     // set font size
