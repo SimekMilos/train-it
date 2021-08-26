@@ -1,5 +1,5 @@
 
-import {float, px} from "./tools.js"
+import {float, px, range} from "./tools.js"
 
 const stopwatchComp = document.querySelector(".stopwatch-component")
 
@@ -34,11 +34,13 @@ function onAppLoad() {
 window.addEventListener("load", onAppLoad)
 
 function onResize() {
-    setComponentHeight()
-    setHeadingHeight()
-    setStopwatchSize()
-    setMainControls()
-    setBottomPadding()
+    for (const _ of range(2)) {     // some situations need 2 passes
+        setComponentHeight()
+        setHeadingHeight()
+        setStopwatchSize()
+        setMainControls()
+        setBottomPadding()
+    }
 }
 
 function setComponentHeight() {
