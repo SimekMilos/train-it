@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* ==== General ==== */
+
 
 @font-face {
     font-family: "Roboto Light";
@@ -21,6 +21,8 @@
     font-family: "OpenSans SemiBold";
     src: url(../res/fonts/OpenSans-SemiBold.ttf) format("truetype");
 }
+
+
 
 html {
     position: fixed;
@@ -45,6 +47,8 @@ body {
     --button-color: hsl(209, 100%, 40%);
 
     --secondary-control-color: hsl(0, 0%, 30%);
+    --secondary-color-hover: rgba(0, 0, 0, .08);
+    --secondary-color-active: rgba(0, 0, 0, .2);
 
     --comp-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
@@ -59,7 +63,7 @@ body {
 }
 
 
-/* --- Initial Screen --- */
+/* --- Screens --- */
 
 .initial-screen {
     /* Position */
@@ -85,6 +89,25 @@ body {
     padding-left: calc(env(safe-area-inset-left, 10px) - 10px);
     padding-right: calc(env(safe-area-inset-right, 10px) - 10px);
 }
+
+/* Temporary disabling */
+.initial-screen {
+    display: none;
+}
+
+.main-screen {
+    /* Position */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
+}
+
 
 /* --- Vertical alignment --- */
 
@@ -135,7 +158,7 @@ body {
 
     border: 1px solid var(--button-color);
     border-radius: var(--comp-border-radius);
-    background-color: white;
+    background-color: transparent;
 
     font: var(--button-font);
     color: var(--button-color);
@@ -150,10 +173,12 @@ body {
 /* --- Close Button --- */
 
 .close-button {
+    position: relative;
+
     width: 26px;
     height: 26px;
 
-    position: relative;
+    border-radius: var(--comp-border-radius);
 }
 
 .close-button::before, .close-button::after {
@@ -171,13 +196,21 @@ body {
 }
 
 .close-button::before {
-    width: 20px;
+    width: 80%;
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close-button::after {
-    width: 20px;
+    width: 80%;
     transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.close-button:active {
+    background-color: var(--secondary-color-active);
 }
 
 

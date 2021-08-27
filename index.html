@@ -19,12 +19,14 @@
     <link rel="stylesheet" href="css/comp-overview.css">
     <link rel="stylesheet" href="css/comp-overview-settings.css">
     <link rel="stylesheet" href="css/comp-setup.css">
+    <link rel="stylesheet" href="css/comp-stopwatch.css">
 
     <!-- Scripts -->
     <script defer src="scripts/main.js"></script>
     <script type="module" src="scripts/comp-overview.js"></script>
     <script type="module" src="scripts/comp-overview-settings.js"></script>
     <script type="module" src="scripts/comp-setup.js"></script>
+    <script type="module" src="scripts/comp-stopwatch.js"></script>
 
     <title>Train It</title>
 
@@ -144,8 +146,7 @@
             <div class="ov-container">
                 <form class="overview-settings-component overlay-disabling">
 
-                    <div class="ovs-close close-button"
-                            type="button"></div>
+                    <div class="ovs-close close-button"></div>
                     <p>You can save your trainings to your device or load them to the app.</p>
 
                     <div class="ovs-controls">
@@ -269,6 +270,43 @@
     <!-- ==== MAIN SCREEN ==== -->
 
     <div class="main-screen">
+
+        <!-- Stopwatch Component -->
+
+        <div class="stopwatch-component">
+
+            <div class="st-first-container">
+                <h2>Current Set:</h2>
+                <p class="st-current-stopwatch">00:00</p>
+            </div>
+
+            <div class="st-second-container">
+                <h2>Total Time:</h2>
+                <p class="st-total-stopwatch">00:00:00</p>
+                <div class="st-main-controls">
+                    <button class="st-back control-button">Back</button>
+                    <button class="st-next control-button">Next</button>
+                    <button class="st-pause control-button">Pause</button>
+                </div>
+            </div>
+
+            <div class="ts-close close-button"></div>
+            <div class="ts-settings control-button"></div>
+        </div>
+
+
+        <!-- Training Component -->
+
+        <div class="training-component">
+
+        </div>
+
+
+        <!-- Settings Component -->
+
+        <div class="settings-component">
+
+        </div>
 
     </div>
 

@@ -148,10 +148,10 @@
 }
 
 .ov-settings {
-    width: var(--button-height);
-
     --background:
         center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
+
+    width: var(--button-height);
     background: var(--background);
 }
 

@@ -1,0 +1,160 @@
+@charset "utf-8";
+
+
+.stopwatch-component {
+    position: relative;
+
+    box-shadow:
+        0 1px 5px 0 rgba(0,0,0,.1),
+        0 3px 15px 0 rgba(0,0,0,.15);
+
+    display: flex;
+    justify-content: center;
+
+    --sec-butt-offset-top: 5px;
+    --sec-butt-offset-left: max(var(--sec-butt-offset-top), env(safe-area-inset-left));
+    --sec-butt-offset-right: max(var(--sec-butt-offset-top), env(safe-area-inset-right));
+
+    --sec-butt-size: clamp(36px, 4vw, 46px);
+
+    /* Margins wide enough not to interfere with secondary buttons */
+    --margin-left: calc(var(--sec-butt-offset-left) + var(--sec-butt-size)
+                        + var(--sec-butt-offset-top));
+    --margin-right: calc(var(--sec-butt-offset-right) + var(--sec-butt-size)
+                        + var(--sec-butt-offset-top));
+    --margin-between: 4vw;
+}
+
+
+/* Containers */
+
+.st-first-container, .st-second-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.st-first-container > *, .st-second-container > * {
+    flex: 0 0 auto;
+}
+
+.st-first-container {
+    margin-left: var(--margin-left);
+    margin-right: var(--margin-between);
+}
+
+.st-second-container {
+    margin-right: var(--margin-right);
+}
+
+
+/* Portrait mode */
+
+@media (orientation: portrait) {
+    .stopwatch-component {
+        flex-direction: column;
+        justify-content: unset;
+        align-items: center;
+    }
+
+    .st-first-container, .st-second-container {
+        margin: 0 var(--margin-left) 0 var(--margin-right);
+    }
+}
+
+
+/* Headings */
+
+.stopwatch-component h2 {
+    color: var(--main-color);
+    font-family: "OpenSans Regular", sans-serif;
+    font-weight: normal;
+
+    /* Centering text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Watches */
+
+.st-current-stopwatch, .st-total-stopwatch {
+    margin: -.055em -.055em 0 -.055em;    /* used in JS */
+        /* Fix for font that creates unneeded paddings */
+
+    font-family: "OpenSans Regular", sans-serif;
+    line-height: .8;
+}
+
+.st-current-stopwatch {
+    flex-grow: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Main controls */
+/* margin, space between, font-size, borders are set in JS */
+
+.st-main-controls {
+    flex: 1 0;
+
+    display: flex;
+    align-items: stretch;
+}
+
+.st-main-controls > * {
+    flex: 1 0 0;
+    height: unset;
+}
+
+.st-main-controls > :not(:last-child) {
+    margin-right: 1vw;
+}
+
+.st-main-controls > :nth-child(2) {
+    flex-grow: 2;
+}
+
+
+/* Secondary controls */
+
+.ts-close {
+    position: absolute;
+    top: var(--sec-butt-offset-top);
+    left: var(--sec-butt-offset-left);
+
+    width: var(--sec-butt-size);
+    height: var(--sec-butt-size);
+}
+
+.ts-settings {
+    position: absolute;
+    top: var(--sec-butt-offset-top);
+    right: var(--sec-butt-offset-right);
+
+    width: var(--sec-butt-size);
+    height: var(--sec-butt-size);
+
+    border-color: transparent;
+    transition: border-color .2s;
+
+    --background:
+        center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
+
+    background: var(--background);
+}
+
+.ts-settings:hover {
+    background: linear-gradient(var(--secondary-color-hover),
+                                var(--secondary-color-hover)),
+                var(--background);
+}
+
+.ts-settings:active {
+    background: linear-gradient(var(--secondary-color-active),
+                                var(--secondary-color-active)),
+                var(--background);
+}
