@@ -88,7 +88,8 @@ function setComponentHeight() {
 
 function setHeadingHeight() {
     const compHeight = float(getComputedStyle(stopwatchComp).height)
-    const headingHeight = compHeight * headingHeightFactor
+    let headingHeight = compHeight * headingHeightFactor
+    if (matchMedia("(orientation: portrait)").matches) headingHeight /= 2
 
     for (const heading of headings) {
         heading.style.height = px(headingHeight)
