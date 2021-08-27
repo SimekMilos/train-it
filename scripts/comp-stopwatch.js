@@ -147,15 +147,21 @@ function setStopwatchSize() {
 }
 
 function setMainControls() {
+    // get offset
+    let offset = buttonOffset
+    if (matchMedia("(orientation: portrait)").matches) {
+        offset /= 2
+    }
+
     // set top margin
     const compHeight = float(getComputedStyle(stopwatchComp).height)
-    mainCtrContainer.style.marginTop = px(buttonOffset * compHeight)
+    mainCtrContainer.style.marginTop = px(offset * compHeight)
 
     // set space between
     for (const [index, button] of buttons.entries()) {
         if (index == buttons.length - 1) break          // not the last one
 
-        button.style.marginRight = px(buttonOffset * compHeight)
+        button.style.marginRight = px(offset * compHeight)
     }
 
     // set font size & border
