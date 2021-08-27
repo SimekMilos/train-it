@@ -17,9 +17,11 @@ const buttons = document.querySelectorAll(".st-main-controls > *")
 // Constants
 const headingHeightFactor = 0.2
 const bottomPaddingHeightFactor = 0.1
+
 const currWatchSizeRatio = 3.285
 const totalWatchSizeRatio = 5.2
 const watchFontMagnFactor = 1.25
+
 const buttonOffset = 0.06
 
 
@@ -45,28 +47,42 @@ function onResize() {
 
 function setComponentHeight() {
     let height = innerHeight * .4   // size shoud be 2/5 of viewport
-
-    // compute paddings and margins
-    const compStyles = getComputedStyle(stopwatchComp)
-    const outerPadding = float(compStyles.paddingLeft) + float(compStyles.paddingRight)
+    let maxHeight
 
     const containerStyles = [getComputedStyle(firstContainer),
                              getComputedStyle(secondContainer)]
 
-    const containerMargins = float(containerStyles[0].marginLeft)
+    // Landskape mode
+    if (matchMedia("(orientation: landscape)").matches) {
+        // compute paddings and margins
+        const compStyles = getComputedStyle(stopwatchComp)
+        const outerPadding = float(compStyles.paddingLeft) + float(compStyles.paddingRight)
+
+        const contMarginSum = float(containerStyles[0].marginLeft)
                             + float(containerStyles[0].marginRight)
                             + float(containerStyles[1].marginLeft)
                             + float(containerStyles[1].marginRight)
 
-    const currWatchMarginTop = float(getComputedStyle(currentStopwatch).marginTop)
+        const currWatchMarginTop = float(getComputedStyle(currentStopwatch).marginTop)
 
-    // compute max height constraint
-    const maxWatchWidth = (innerWidth - outerPadding - containerMargins) / 2
-    const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
-    const maxHeight = maxWatchHeight / (1 - headingHeightFactor - bottomPaddingHeightFactor)
-    if (height > maxHeight) height = maxHeight
+        // compute max height constraint
+        const maxWatchWidth = (innerWidth - outerPadding - contMarginSum) / 2
+        const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
+        maxHeight = maxWatchHeight
+                        / (1 - headingHeightFactor - bottomPaddingHeightFactor)
+
+    // Portrait mode
+    } else {
+        const maxWatchWidth = innerWidth - float(containerStyles[0].marginLeft)
+                                - float(containerStyles[0].marginRight)
+        const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
+
+        maxHeight = (2*maxWatchHeight + bottomPaddingHeightFactor/2)
+                        / (1 - headingHeightFactor)
+    }
 
     // set height
+    if (height > maxHeight) height = maxHeight
     stopwatchComp.style.height = px(height)
 }
 
