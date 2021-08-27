@@ -51,16 +51,10 @@
     .stopwatch-component {
         flex-direction: column;
         justify-content: unset;
-        align-items: center;
     }
 
     .st-first-container, .st-second-container {
-        margin: 0 1vw;
-        width: unset;
-    }
-
-    .st-first-container {
-        margin-bottom: 10px;
+        margin: 0 10px;
     }
 }
 
