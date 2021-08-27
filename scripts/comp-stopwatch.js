@@ -38,10 +38,10 @@ window.addEventListener("load", onAppLoad)
 function onResize() {
     for (const _ of range(2)) {     // some situations need 2 passes
         setComponentHeight()
+        setBottomPadding()
         setHeadingHeight()
         setStopwatchSize()
         setMainControls()
-        setBottomPadding()
     }
 }
 
@@ -86,6 +86,16 @@ function setComponentHeight() {
     stopwatchComp.style.height = px(height)
 }
 
+function setBottomPadding() {
+    const compHeight = float(getComputedStyle(stopwatchComp).height)
+    let paddingFactor = bottomPaddingHeightFactor
+
+    if (matchMedia("(orientation: portrait)").matches) {
+        paddingFactor /= 2
+    }
+
+    stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
+}
 function setHeadingHeight() {
     const compHeight = float(getComputedStyle(stopwatchComp).height)
     let headingHeight = compHeight * headingHeightFactor
@@ -134,15 +144,4 @@ function setMainControls() {
         button.style.fontSize = px(.5 * height)
         button.style.borderRadius = px(.1 * height)
     }
-}
-
-function setBottomPadding() {
-    const compHeight = float(getComputedStyle(stopwatchComp).height)
-    let paddingFactor = bottomPaddingHeightFactor
-
-    if (matchMedia("(orientation: portrait)").matches) {
-        paddingFactor /= 2
-    }
-
-    stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
 }
