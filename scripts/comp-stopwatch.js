@@ -138,5 +138,11 @@ function setMainControls() {
 
 function setBottomPadding() {
     const compHeight = float(getComputedStyle(stopwatchComp).height)
-    stopwatchComp.style.paddingBottom = px(compHeight * bottomPaddingHeightFactor)
+    let paddingFactor = bottomPaddingHeightFactor
+
+    if (matchMedia("(orientation: portrait)").matches) {
+        paddingFactor /= 2
+    }
+
+    stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
 }
