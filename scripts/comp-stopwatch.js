@@ -15,7 +15,8 @@ const mainCtrContainer = document.querySelector(".st-main-controls")
 const buttons = document.querySelectorAll(".st-main-controls > *")
 
 // Constants
-const headingHeightFactor = 0.2
+const headingHeightFactorLandscape = 0.2
+const headingHeightFactorPortrait  = 0.25
 const bottomPaddingHeightFactor = 0.1
 
 const currWatchSizeRatio = 3.285
@@ -40,6 +41,7 @@ function onResize() {
         setComponentHeight()
         setBottomPadding()
         setContainerHeight()
+        setContainerOffset()
         setHeadingHeight()
         setStopwatchSize()
         setMainControls()
@@ -70,7 +72,7 @@ function setComponentHeight() {
         const maxWatchWidth = (innerWidth - outerPadding - contMarginSum) / 2
         const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
         maxHeight = maxWatchHeight
-                        / (1 - headingHeightFactor - bottomPaddingHeightFactor)
+                    / (1 - headingHeightFactorLandscape - bottomPaddingHeightFactor)
 
     // Portrait mode
     } else {
@@ -78,8 +80,8 @@ function setComponentHeight() {
                                 - float(containerStyles[0].marginRight)
         const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
 
-        maxHeight = (2*maxWatchHeight + bottomPaddingHeightFactor/2)
-                        / (1 - headingHeightFactor)
+        maxHeight = 2*maxWatchHeight
+                        / (1 - headingHeightFactorPortrait - bottomPaddingHeightFactor)
     }
 
     // set height
@@ -98,16 +100,30 @@ function setBottomPadding() {
     stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
 }
 
+function setContainerOffset() {
+    if(matchMedia("(orientation: portrait)").matches) {
+        const compHeight = float(getComputedStyle(stopwatchComp).height)
+        const marginFactor = bottomPaddingHeightFactor / 2
+
+        secondContainer.style.marginTop = px(compHeight * marginFactor)
+    } else {
+        secondContainer.style.removeProperty("margin-top")
+    }
+}
+
 function setContainerHeight() {
     if(matchMedia("(orientation: portrait)").matches) {
         const compStyles = getComputedStyle(stopwatchComp)
+
         const compHeight = float(compStyles.height)
         const compBottPadding = float(compStyles.paddingBottom)
+        const topMargin = float(getComputedStyle(secondContainer).marginTop)
 
-        const height = (compHeight - compBottPadding) / 2
+        const height = (compHeight - compBottPadding - topMargin) / 2
 
         firstContainer.style.height = px(height)
         secondContainer.style.height = px(height)
+
     } else {
         if (firstContainer.style.height) {
             firstContainer.style.removeProperty("height")
@@ -118,9 +134,16 @@ function setContainerHeight() {
 
 function setHeadingHeight() {
     const compHeight = float(getComputedStyle(stopwatchComp).height)
-    let headingHeight = compHeight * headingHeightFactor
-    if (matchMedia("(orientation: portrait)").matches) headingHeight /= 2
 
+    // Compute heading height
+    let headingHeight
+    if (matchMedia("(orientation :landscape)").matches) {
+        headingHeight = compHeight * headingHeightFactorLandscape
+    } else {
+        headingHeight = compHeight * headingHeightFactorPortrait / 2
+    }
+
+    // Set headings
     for (const heading of headings) {
         heading.style.height = px(headingHeight)
         heading.style.fontSize = px(.5 * headingHeight)
