@@ -39,6 +39,7 @@ function onResize() {
     for (const _ of range(2)) {     // some situations need 2 passes
         setComponentHeight()
         setBottomPadding()
+        setContainerHeight()
         setHeadingHeight()
         setStopwatchSize()
         setMainControls()
@@ -96,6 +97,20 @@ function setBottomPadding() {
 
     stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
 }
+
+function setContainerHeight() {
+    if(matchMedia("(orientation: portrait)").matches) {
+        const compStyles = getComputedStyle(stopwatchComp)
+        const compHeight = float(compStyles.height)
+        const compBottPadding = float(compStyles.paddingBottom)
+
+        const height = (compHeight - compBottPadding) / 2
+
+        firstContainer.style.height = px(height)
+        secondContainer.style.height = px(height)
+    }
+}
+
 function setHeadingHeight() {
     const compHeight = float(getComputedStyle(stopwatchComp).height)
     let headingHeight = compHeight * headingHeightFactor

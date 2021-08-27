@@ -51,6 +51,7 @@
     .stopwatch-component {
         flex-direction: column;
         justify-content: unset;
+        align-items: center;
     }
 
     .st-first-container, .st-second-container {
