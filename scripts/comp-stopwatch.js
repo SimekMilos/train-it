@@ -108,6 +108,11 @@ function setContainerHeight() {
 
         firstContainer.style.height = px(height)
         secondContainer.style.height = px(height)
+    } else {
+        if (firstContainer.style.height) {
+            firstContainer.style.removeProperty("height")
+            secondContainer.style.removeProperty("height")
+        }
     }
 }
 
