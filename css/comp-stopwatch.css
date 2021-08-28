@@ -15,7 +15,7 @@
     --sec-butt-offset-left: max(var(--sec-butt-offset-top), env(safe-area-inset-left));
     --sec-butt-offset-right: max(var(--sec-butt-offset-top), env(safe-area-inset-right));
 
-    --sec-butt-size: clamp(36px, 4vw, 46px);
+    --sec-butt-size: clamp(26px, 3.5vw, 42px);
 
     /* Margins wide enough not to interfere with secondary buttons */
     --margin-left: calc(var(--sec-butt-offset-left) + var(--sec-butt-size)
@@ -58,6 +58,15 @@
 
     .st-first-container, .st-second-container {
         margin: 0 var(--margin-left) 0 var(--margin-right);
+    }
+}
+
+
+/* Size of secondary buttons on touch devices */
+
+@media (pointer: coarse) {
+    .stopwatch-component {
+        --sec-butt-size: clamp(36px, 4vw, 42px);
     }
 }
 
