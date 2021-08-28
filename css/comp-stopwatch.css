@@ -90,6 +90,7 @@
     margin: -.055em -.055em 0 -.055em;    /* used in JS */
         /* Fix for font that creates unneeded paddings */
 
+    color: #000D;
     font-family: "OpenSans Regular", sans-serif;
     line-height: .8;
 }
