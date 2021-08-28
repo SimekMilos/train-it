@@ -179,6 +179,10 @@ body {
     height: 26px;
 
     border-radius: var(--comp-border-radius);
+
+    /* Removing default button styles */
+    border: none;
+    background: none;
 }
 
 .close-button::before, .close-button::after {
@@ -191,17 +195,15 @@ body {
     left: 50%;
 
     /* Dimensions */
-    width: 100%;
+    width: 80%;
     border-top: 2px solid var(--secondary-control-color);
 }
 
 .close-button::before {
-    width: 80%;
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .close-button::after {
-    width: 80%;
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
