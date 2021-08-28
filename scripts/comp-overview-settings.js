@@ -13,6 +13,9 @@ const closeButton = document.querySelector(".ovs-close")
 // Event listeners
 
 function onSettingsClick() {
+    settingsButton.disabled = true
+    closeButton.disabled = true
+
     // Set new state
     if (!compClassList.contains("display")) {
         compClassList.add("display")
@@ -45,6 +48,9 @@ function onSettingsClick() {
 }
 
 function onCloseButtonClick() {
+    settingsButton.disabled = true
+    closeButton.disabled = true
+
     // Set new state
     compClassList.add("hide")
     compClassList.remove("display")
@@ -66,6 +72,9 @@ function onAnimationEnd() {
     } else {
         compClassList.remove("hide")
     }
+
+    settingsButton.disabled = false
+    closeButton.disabled = false
 }
 
 function onResize() {

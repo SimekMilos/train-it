@@ -156,9 +156,7 @@
 }
 
 .ov-settings:disabled {
-    background:
-        linear-gradient(var(--disabled-color), var(--disabled-color)),
-        var(--background);
-
-    background-blend-mode: lighten;
+    /* Settings is being disabled during fade in/out animations.
+       This disabling shouldn't be visible. */
+    border-color: var(--button-color);
 }
