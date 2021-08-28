@@ -51,6 +51,9 @@
     position: absolute;
     top: 5px;
     right: 5px;
+
+    width: 28px;
+    height: 28px;
 }
 
 .ovs-controls {
