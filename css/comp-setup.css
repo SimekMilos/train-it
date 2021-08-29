@@ -375,8 +375,8 @@
 }
 
 .ts-exercise-container > .ts-exercise {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 11px;      /* 1px for group border */
+    margin-right: 11px;
 }
 
 .ts-exercise > :not(:last-child) {
