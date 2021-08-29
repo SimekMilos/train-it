@@ -1,2 +1,16 @@
 @charset "utf-8";
 
+
+.training-component {
+    margin-top: 15px;
+    flex-grow: 1;
+
+    /* Content */
+    display: flex;
+    overflow: auto;
+}
+
+.training-component > * {
+    flex-shrink: 0;
+}
+
