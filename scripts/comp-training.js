@@ -40,3 +40,16 @@ function onLoad() {
 window.addEventListener("load", onLoad)
 
 new ResizeObserver(onResize).observe(trainingComponent)
+
+
+
+// Temporary
+const container = document.querySelector(".tc-container")
+
+const trainingTempl = document.querySelector(".tc-training-template")
+const groupTempl = document.querySelector(".tc-group-template")
+const noGroupTemp = document.querySelector(".tc-no-group-template")
+
+const exerciseHeaderTempl = document.querySelector(".tc-exercise-header-template")
+const exerciseNotesTempl = document.querySelector(".tc-exercise-notes-template")
+const exerciseSetTempl = document.querySelector(".tc-exercise-set-template")
