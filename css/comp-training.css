@@ -4,13 +4,18 @@
 .training-component {
     margin-top: 15px;
     flex-grow: 1;
+}
+
+.tc-container {
+    width: 100%;
+    height: 100%;
 
     /* Content */
     display: flex;
     overflow: auto;
 }
 
-.training-component > * {
+.tc-container > * {
     flex-shrink: 0;
 }
 
