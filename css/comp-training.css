@@ -14,3 +14,18 @@
     flex-shrink: 0;
 }
 
+
+/* No training display */
+
+.tc-no-training {
+    /* Position */
+    position: absolute;
+    left: 50%;                          /* top - set in JS */
+    transform: translate(-50%, -50%);
+
+    opacity: .1;
+}
+
+.tc-no-training:not(:only-child) {
+    display: none;
+}
