@@ -1,6 +1,7 @@
 
 import {float, px, range} from "./tools.js"
 
+const mainScreen = document.querySelector(".main-screen")
 const stopwatchComp = document.querySelector(".stopwatch-component")
 
 const headings = document.querySelectorAll(".stopwatch-component h2")
@@ -31,10 +32,12 @@ const buttonOffset = 0.06
 
 function onAppLoad() {
     onResize()
-    window.addEventListener("resize", onResize)
 }
 
 window.addEventListener("load", onAppLoad)
+
+new ResizeObserver(onResize).observe(mainScreen)
+
 
 function onResize() {
     for (const _ of range(2)) {     // some situations need 2 passes
