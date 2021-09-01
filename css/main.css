@@ -182,6 +182,10 @@ body {
 
 .close-button {
     position: relative;
+
+    width: 26px;
+    height: 26px;
+
     border-radius: var(--comp-border-radius);
 
     /* Removing default button styles */
