@@ -94,4 +94,21 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
 // Temporary
 const container = document.querySelector(".tc-container")
 
+    // Adding training info, group and exercises to the document
+window.addEventListener("load", () => {
+    container.append(createTrainingInfo("Training Name"))
+
+    const [group, groupCont] = createGroup("First Group")
+    container.append(group)
+
+    const [noGroup, noGroupCont] = createNoGroup()
+    container.append(noGroup)
+
+    for (const container of [groupCont, noGroupCont]) {
+        for (const num of range(3)) {
+            container.append(createExercise(`Excercise ${num}`, true, 3))
+        }
+    }
+
+})
 
