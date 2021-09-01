@@ -2,8 +2,10 @@
 
 
 .training-component {
-    margin-top: 15px;
     flex-grow: 1;
+    height: 0;
+
+    margin-top: 15px;
 }
 
 .tc-container {
@@ -12,6 +14,7 @@
 
     /* Content */
     display: flex;
+    flex-direction: row;
     overflow: auto;
 }
 
