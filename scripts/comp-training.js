@@ -1,5 +1,5 @@
 
-import {px, float, range} from "./tools.js"
+import {px, range} from "./tools.js"
 
 // No training display sizing and positioning
 

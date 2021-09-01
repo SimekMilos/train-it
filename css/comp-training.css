@@ -34,3 +34,45 @@
 .tc-no-training:not(:only-child) {
     display: none;
 }
+
+
+/* Training Info */
+.tc-training {
+
+}
+
+
+/* Group Container */
+.tc-group {
+
+}
+
+.tc-group > * {
+
+}
+
+/* No Group Container */
+.tc-no-group {
+
+}
+
+.tc-group > * {
+
+}
+
+/* --- Excercise --- */
+
+/* Header */
+.tc-exercise-header {
+
+}
+
+/* Notes */
+.tc-exercise-notes {
+
+}
+
+/* Set */
+.tc-exercise-set {
+
+}
