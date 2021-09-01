@@ -90,11 +90,6 @@ body {
     padding-right: calc(env(safe-area-inset-right, 10px) - 10px);
 }
 
-/* Temporary disabling */
-.initial-screen {
-    display: none;
-}
-
 .main-screen {
     /* Position */
     position: absolute;
@@ -110,6 +105,15 @@ body {
 
 .main-screen > * {
     flex-shrink: 0;
+}
+
+/* Temporary disabling */
+.initial-screen {
+    display: none;
+}
+
+.main-screen {
+    /*display: none;*/
 }
 
 
