@@ -108,6 +108,10 @@ body {
     flex-direction: column;
 }
 
+.main-screen > * {
+    flex-shrink: 0;
+}
+
 
 /* --- Vertical alignment --- */
 
