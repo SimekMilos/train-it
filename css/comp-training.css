@@ -5,7 +5,9 @@
     flex-grow: 1;
     height: 0;
 
-    margin-top: 15px;
+    margin: 15px 0;
+
+    --column-width: 300px;
 }
 
 .tc-container {
