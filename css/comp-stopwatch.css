@@ -78,9 +78,10 @@
     font-family: "OpenSans Regular", sans-serif;
     font-weight: normal;
 
-    /* Centering text */
+    /* Aligning text */
     display: flex;
     align-items: center;
+    padding-left: .2em;
 }
 
 
