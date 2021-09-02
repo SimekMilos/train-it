@@ -30,3 +30,14 @@
     overflow: auto;
     color: #000A;
 }
+
+
+.sett-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    width: 28px;
+    height: 28px;
+}
+
