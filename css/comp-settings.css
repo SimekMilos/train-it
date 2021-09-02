@@ -41,3 +41,35 @@
     height: 28px;
 }
 
+
+/* Headings */
+
+.settings-component h2 {
+    text-align: center;
+    color: var(--main-color);
+    font: normal 28px "OpenSans Light", sans-serif;
+}
+
+.settings-component h3 {
+    color: var(--main-color);
+    font: normal 20px "OpenSans Light", sans-serif;
+}
+
+
+/* Info list */
+
+.settings-component ul {
+    margin: 1em 0 1em 20px;
+}
+
+.settings-component li:not(:last-child) {
+    margin-bottom: .5em;
+}
+
+.settings-component ::marker {
+    color: var(--main-color);
+}
+
+.settings-component strong {
+    color: black;
+}
