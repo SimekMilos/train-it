@@ -40,7 +40,8 @@ body {
     height: 100%;
 
     --main-color: hsl(209, 100%, 56%);
-    --disabled-color: hsl(0, 0%, 65%);
+    --disabled-control-color: hsl(0, 0%, 65%);
+    --disabled-component-color: #0003;
 
     --button-height: 36px;
     --button-font: 1em "OpenSans Regular", sans-serif;
@@ -173,8 +174,8 @@ body {
 }
 
 .control-button:disabled {
-    color: var(--disabled-color);
-    border-color: var(--disabled-color);
+    color: var(--disabled-control-color);
+    border-color: var(--disabled-control-color);
 }
 
 
@@ -272,7 +273,7 @@ body {
 
 .overlay-disabling.visible-disabling::before {
     display: block;
-    background-color: #0003;
+    background-color: var(--disabled-component-color);
 }
 
 .overlay-disabling.disable-transition::before {

@@ -112,12 +112,12 @@
 
     /* Disabled state */
 .ov-training :disabled + label {
-    color: var(--disabled-color);
+    color: var(--disabled-control-color);
     background-color: white;
 }
 
 .ov-training :disabled + label .handle {
-    --border-color: var(--disabled-color);
+    --border-color: var(--disabled-control-color);
 }
 
 
