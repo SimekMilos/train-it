@@ -20,11 +20,13 @@
     max-width: var(--comp-default-width);
     max-height: calc(100vh - 2*var(--comp-default-margin));
 
-    padding: var(--comp-default-padding);
+    padding: 30px;
+    padding-top: 1em;
     border-radius: var(--comp-border-radius);
 
     background-color: white;
     box-shadow: var(--comp-shadow);
 
     overflow: auto;
+    color: #000A;
 }
