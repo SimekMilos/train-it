@@ -61,6 +61,8 @@ body {
 
     --comp-border-radius: 3px;
     --comp-default-padding: 20px;
+    --comp-default-margin: 20px;
+    --comp-default-width: 400px;
 }
 
 
@@ -121,13 +123,11 @@ body {
 /* --- Vertical alignment --- */
 
 .vertical-container {
-    --vertical-container-margin: 20px;
-    --vertical-container-width: 400px;
+    width: var(--comp-default-width);
+    height: calc(100% - 2 * var(--comp-default-margin));
+    margin: 0 var(--comp-default-margin);
 
-    width: var(--vertical-container-width);
-    height: calc(100% - 2 * var(--vertical-container-margin));
-    margin: 0 var(--vertical-container-margin);
-
+    /* Content */
     display: flex;
     flex-direction: column;
     justify-content: center;
