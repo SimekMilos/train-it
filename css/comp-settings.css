@@ -1,2 +1,30 @@
 @charset "utf-8";
 
+.settings-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: var(--disabled-component-color);
+}
+
+.settings-component form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: calc(100vw - 2*var(--comp-default-margin));
+    max-width: var(--comp-default-width);
+    max-height: calc(100vh - 2*var(--comp-default-margin));
+
+    padding: var(--comp-default-padding);
+    border-radius: var(--comp-border-radius);
+
+    background-color: white;
+    box-shadow: var(--comp-shadow);
+
+    overflow: auto;
+}
