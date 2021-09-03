@@ -53,16 +53,18 @@
 .settings-component h3 {
     color: var(--main-color);
     font: normal 20px "OpenSans Light", sans-serif;
+    margin-bottom: .25rem;
 }
 
 
-/* Info list */
+/* Lists */
 
 .sett-info {
     margin: 1em 25px;
 }
 
-.settings-component li:not(:last-child) {
+.sett-explanation {
+    margin: 0 25px;
     margin-bottom: .5em;
 }
 
@@ -70,8 +72,15 @@
     color: var(--main-color);
 }
 
-.settings-component strong {
-    color: black;
+.settings-component li:not(:last-child) {
+    margin-bottom: .5em;
+}
+
+.settings-component em {
+    font-style: normal;
+    text-decoration: underline;
+}
+
 
 
 /* Attribution */
