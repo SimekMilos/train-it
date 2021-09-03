@@ -82,6 +82,39 @@
 }
 
 
+/* Inputs */
+
+.settings-component label {
+    display: flex;
+    margin: 0 25px 1em 25px;
+
+    color: #000C;
+    font-family: "OpenSans SemiBold", sans-serif;
+}
+
+.settings-component input {
+    width: 40px;
+    margin-left: 5px;
+
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--main-color);
+    border-radius: 0;
+
+    font-family: "OpenSans Regular", sans-serif;
+    font-size: inherit;
+    text-align: right;
+
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.settings-component input:focus {
+    border: 1px solid var(--main-color);
+    border-radius: var(--comp-border-radius);
+    outline: none;
+}
+
 
 /* Attribution */
 
