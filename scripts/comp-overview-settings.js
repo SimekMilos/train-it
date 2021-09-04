@@ -1,5 +1,5 @@
 
-// --- Overview Settings Component ---
+import {px, float} from "./tools.js"
 
 const settingsContainer = document.querySelector(".ov-container")
 const settingsComponent = settingsContainer.firstElementChild
@@ -28,10 +28,10 @@ function onSettingsClick() {
     if(compClassList.contains("display")) {
         // Get dimensions
         const height = settingsComponent.getBoundingClientRect().height
-        const marginTop = Number.parseInt(getComputedStyle(settingsComponent).marginTop)
+        const marginTop = float(getComputedStyle(settingsComponent).marginTop)
 
         // Resize
-        settingsContainer.style.height = `${height + marginTop}px`
+        settingsContainer.style.height = px(height + marginTop)
         window.addEventListener("resize", onResize)
 
     // Hiding
@@ -82,13 +82,13 @@ function onResize() {
     if(!compClassList.contains("display")) return
 
     // Get dimensions
-    const currentHeight = Number.parseInt(settingsContainer.style.height)
+    const currentHeight = float(settingsContainer.style.height)
     const newHeight = settingsComponent.getBoundingClientRect().height
-    const marginTop = Number.parseInt(getComputedStyle(settingsComponent).marginTop)
+    const marginTop = float(getComputedStyle(settingsComponent).marginTop)
 
     // Resize
     if (currentHeight !== newHeight) {
-        settingsContainer.style.height = `${newHeight + marginTop}px`
+        settingsContainer.style.height = px(newHeight + marginTop)
     }
 
     floatingMode()
@@ -109,7 +109,7 @@ function floatingMode() {
     const style = settingsContainer.style
 
     // Getting heights
-    const minOverview = Number.parseInt(window.getComputedStyle(overviewComponent).minHeight)
+    const minOverview = float(window.getComputedStyle(overviewComponent).minHeight)
     const currentSettings = settingsComponent.getBoundingClientRect().height
 
     // Activating
@@ -123,7 +123,7 @@ function floatingMode() {
 
             // Set width
             const overviewWidth = window.getComputedStyle(overviewComponent).width
-            style.width = `${Number.parseFloat(overviewWidth) - 30}px`
+            style.width = px(float(overviewWidth) - 30)
 
             // Disable overview component
             overviewComponent.classList.add("visible-disabling", "disable-transition")

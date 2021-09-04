@@ -1,0 +1,197 @@
+@charset "utf-8";
+
+
+/* Component */
+
+.settings-component {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: var(--disabled-component-color);
+
+    /* Positioning fo the component */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--comp-default-margin);
+
+    --animation-speed: .4s;
+}
+
+.settings-component.display {
+    display: flex;
+    opacity: 0;
+    animation: display var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes display {
+        to {
+            opacity: 1;
+        }
+    }
+
+.settings-component.hide {
+    display: flex;
+    opacity: 1;
+    animation: hide var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes hide {
+        to {
+            opacity: 0;
+        }
+    }
+
+
+/* Main Window */
+
+.sett-main-window {
+    position: relative;
+
+    height: 0;
+    flex-grow: 1;
+    max-width: var(--comp-default-width);
+    /* max-height - set in JS */
+
+    padding: 1em 30px 30px 30px;
+    border-radius: var(--comp-border-radius);
+
+    background-color: white;
+    box-shadow: var(--comp-shadow);
+
+    color: #000A;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
+
+    --list-offset: 21px;
+}
+
+.sett-main-window > * {
+    flex-shrink: 0;
+}
+
+.settings-component.display .sett-main-window {
+    opacity: 0;
+    --from: -50px;
+    animation: fade-in var(--animation-speed) forwards ease-in-out;
+}
+
+.settings-component.hide .sett-main-window {
+    animation: fade-out var(--animation-speed) forwards ease-in-out;
+}
+
+@media (max-width: 400px) {
+    .sett-main-window {
+        padding: 1em 25px 30px 25px;
+    }
+}
+
+
+/* Scroll Container */
+
+.sett-scroll-container {
+    flex-shrink: 1;
+    overflow: auto;
+}
+
+
+/* Close Button */
+
+.sett-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+    width: 28px;
+    height: 28px;
+}
+
+
+/* Headings */
+
+.settings-component h2 {
+    text-align: center;
+    color: var(--main-color);
+    font: normal 28px "OpenSans Light", sans-serif;
+    margin-bottom: .5rem;
+}
+
+.settings-component h3 {
+    color: var(--main-color);
+    font: normal 20px "OpenSans Light", sans-serif;
+    margin-bottom: .25rem;
+}
+
+
+/* Lists */
+
+.sett-info {
+    margin: .5em 0 1em var(--list-offset);
+}
+
+.sett-explanation {
+    margin: 0 0 .5em var(--list-offset);
+}
+
+.settings-component ::marker {
+    color: var(--main-color);
+}
+
+.settings-component li:not(:last-child) {
+    margin-bottom: .5em;
+}
+
+.settings-component em {
+    font-style: normal;
+    text-decoration: underline;
+}
+
+
+/* Inputs */
+
+.settings-component label {
+    display: flex;
+    margin: 0 var(--list-offset) 1em var(--list-offset);
+
+    color: #000C;
+    font-family: "OpenSans SemiBold", sans-serif;
+}
+
+.settings-component input {
+    width: 40px;
+    margin-left: 5px;
+
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--main-color);
+    border-radius: 0;
+
+    font-family: "OpenSans Regular", sans-serif;
+    font-size: inherit;
+    text-align: right;
+
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.settings-component input:focus {
+    border: 1px solid var(--main-color);
+    border-radius: var(--comp-border-radius);
+    outline: none;
+}
+
+
+/* Attribution */
+
+.settings-component small {
+    display: block;
+    margin-top: 2rem;
+
+    text-align: center;
+}

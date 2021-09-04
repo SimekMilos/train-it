@@ -29,12 +29,12 @@
     opacity: 0;
 
     --from: 50px;
-    animation: ov-fade-in var(--animation-speed) forwards ease-in-out;
+    animation: fade-in var(--animation-speed) forwards ease-in-out;
 }
 
 .overview-settings-component.hide {
     display: block;
-    animation: ov-fade-out var(--animation-speed) forwards ease-in-out;
+    animation: fade-out var(--animation-speed) forwards ease-in-out;
 }
 
 
