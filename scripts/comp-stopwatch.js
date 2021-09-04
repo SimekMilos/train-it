@@ -69,8 +69,6 @@ function setComponentHeight() {
                             + float(containerStyles[1].marginLeft)
                             + float(containerStyles[1].marginRight)
 
-        const currWatchMarginTop = float(getComputedStyle(currentStopwatch).marginTop)
-
         // compute max height constraint
         const maxWatchWidth = (innerWidth - outerPadding - contMarginSum) / 2
         const maxWatchHeight = maxWatchWidth / currWatchSizeRatio
