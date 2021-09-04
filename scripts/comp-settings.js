@@ -4,10 +4,11 @@ const mainWidnow = document.querySelector(".sett-main-window")
 
 const settingsButton = document.querySelector(".ts-settings")
 const closeButton = document.querySelector(".sett-close")
-
+let animationInProgress = false
 
 function onSettingsClick() {
     component.classList.add("display")
+    animationInProgress = true
 }
 
 function onCloseClick() {
@@ -15,10 +16,11 @@ function onCloseClick() {
     component.classList.remove("display")
 
     mainWidnow.classList.remove("enable-access")
+    animationInProgress = true
 }
 
 function componentCloseClick(e) {
-    if (e.target == component) {
+    if (!animationInProgress && e.target == component) {
         onCloseClick()
     }
 }
@@ -29,6 +31,8 @@ function onAnimationEnd() {
     } else {
         component.classList.remove("hide")
     }
+
+    animationInProgress = false
 }
 
 settingsButton.addEventListener("click", onSettingsClick)
