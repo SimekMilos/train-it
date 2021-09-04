@@ -315,9 +315,9 @@ body {
 }
 
 
-/* --- Overview Animations --- */
+/* --- Fade In/Out Animations --- */
 
-@keyframes ov-fade-in {
+@keyframes fade-in {
     from {
         top: var(--from);
     }
@@ -330,7 +330,7 @@ body {
     }
 }
 
-@keyframes ov-fade-out {
+@keyframes fade-out {
     from {
         top: 0;
     }
