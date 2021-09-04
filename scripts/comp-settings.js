@@ -17,6 +17,12 @@ function onCloseClick() {
     mainWidnow.classList.remove("enable-access")
 }
 
+function componentCloseClick(e) {
+    if (e.target == component) {
+        onCloseClick()
+    }
+}
+
 function onAnimationEnd() {
     if (component.classList.contains("display")) {
         mainWidnow.classList.add("enable-access")
@@ -27,4 +33,5 @@ function onAnimationEnd() {
 
 settingsButton.addEventListener("click", onSettingsClick)
 closeButton.addEventListener("click", onCloseClick)
+component.addEventListener("click", componentCloseClick)
 mainWidnow.addEventListener("animationend", onAnimationEnd)
