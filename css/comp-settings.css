@@ -57,8 +57,7 @@
     max-width: var(--comp-default-width);
     /* max-height - set in JS */
 
-    padding: 30px;
-    padding-top: 1em;
+    padding: 1em 30px 30px 30px;
     border-radius: var(--comp-border-radius);
 
     background-color: white;
@@ -69,6 +68,8 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    --list-offset: 21px;
 }
 
 .sett-main-window > * {
@@ -83,6 +84,12 @@
 
 .settings-component.hide .sett-main-window {
     animation: fade-out var(--animation-speed) forwards ease-in-out;
+}
+
+@media (max-width: 400px) {
+    .sett-main-window {
+        padding: 1em 25px 30px 25px;
+    }
 }
 
 
@@ -125,11 +132,11 @@
 /* Lists */
 
 .sett-info {
-    margin: .5em 0 1em 25px;
+    margin: .5em 0 1em var(--list-offset);
 }
 
 .sett-explanation {
-    margin: 0 0 .5em 25px;
+    margin: 0 0 .5em var(--list-offset);
 }
 
 .settings-component ::marker {
@@ -150,7 +157,7 @@
 
 .settings-component label {
     display: flex;
-    margin: 0 25px 1em 25px;
+    margin: 0 var(--list-offset) 1em var(--list-offset);
 
     color: #000C;
     font-family: "OpenSans SemiBold", sans-serif;
