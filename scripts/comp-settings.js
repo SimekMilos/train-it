@@ -13,11 +13,13 @@ function onSettingsClick() {
 function onCloseClick() {
     component.classList.add("hide")
     component.classList.remove("display")
+
+    mainWidnow.classList.remove("enable-access")
 }
 
 function onAnimationEnd() {
     if (component.classList.contains("display")) {
-
+        mainWidnow.classList.add("enable-access")
     } else {
         component.classList.remove("hide")
     }
