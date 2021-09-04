@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 .settings-component {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -10,14 +11,39 @@
     background-color: var(--disabled-component-color);
 
     /* Positioning fo the component */
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: var(--comp-default-margin);
+
+    --animation-speed: .4s;
 }
 
-.settings-component form {
+.settings-component.display {
+    display: flex;
+    opacity: 0;
+    animation: display var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes display {
+        to {
+            opacity: 1;
+        }
+    }
+
+.settings-component.hide {
+    display: flex;
+    opacity: 1;
+    animation: hide var(--animation-speed) forwards ease-in-out;
+}
+
+    @keyframes hide {
+        to {
+            opacity: 0;
+        }
+    }
+
+.sett-main-window {
     position: relative;
     max-width: var(--comp-default-width);
 
@@ -30,6 +56,16 @@
 
     overflow: auto;
     color: #000A;
+}
+
+.settings-component.display .sett-main-window {
+    opacity: 0;
+    --from: -50px;
+    animation: fade-in var(--animation-speed) forwards ease-in-out;
+}
+
+.settings-component.hide .sett-main-window {
+    animation: fade-out var(--animation-speed) forwards ease-in-out;
 }
 
 
