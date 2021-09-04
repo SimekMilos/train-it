@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+
+/* Component */
+
 .settings-component {
     display: none;
     position: absolute;
@@ -43,9 +46,16 @@
         }
     }
 
+
+/* Main Window */
+
 .sett-main-window {
     position: relative;
+
+    height: 0;
+    flex-grow: 1;
     max-width: var(--comp-default-width);
+    /* max-height - set in JS */
 
     padding: 30px;
     padding-top: 1em;
@@ -54,8 +64,15 @@
     background-color: white;
     box-shadow: var(--comp-shadow);
 
-    overflow: auto;
     color: #000A;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
+}
+
+.sett-main-window > * {
+    flex-shrink: 0;
 }
 
 .settings-component.display .sett-main-window {
@@ -66,6 +83,14 @@
 
 .settings-component.hide .sett-main-window {
     animation: fade-out var(--animation-speed) forwards ease-in-out;
+}
+
+
+/* Scroll Container */
+
+.sett-scroll-container {
+    flex-shrink: 1;
+    overflow: auto;
 }
 
 
