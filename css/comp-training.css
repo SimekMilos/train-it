@@ -85,6 +85,7 @@
 
 }
 
+
 /* No Group Container */
 .tc-no-group {
 
@@ -94,6 +95,7 @@
 
 }
 
+
 /* --- Excercise --- */
 
 /* Header */
@@ -101,12 +103,14 @@
 
 }
 
-/* Notes */
-.tc-exercise-notes {
+/* Set */
+.tc-exercise-set {
 
 }
 
-/* Set */
-.tc-exercise-set {
+
+/* --- Notes --- */
+
+.tc-notes {
 
 }

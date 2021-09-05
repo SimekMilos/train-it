@@ -43,13 +43,14 @@ const groupTempl = document.querySelector(".tc-group-template")
 const noGroupTemp = document.querySelector(".tc-no-group-template")
 
 const exerciseHeaderTempl = document.querySelector(".tc-exercise-header-template")
-const exerciseNotesTempl = document.querySelector(".tc-exercise-notes-template")
 const exerciseSetTempl = document.querySelector(".tc-exercise-set-template")
+const notesTempl = document.querySelector(".tc-notes-template")
 
 function createTrainingInfo(trainingName) {
     const tInfo = trainingTempl.content.cloneNode(true)
     const heading = tInfo.querySelector("h2")
     heading.textContent = trainingName
+    tInfo.firstElementChild.append(createNotes())
 
     return tInfo
 }
@@ -59,6 +60,7 @@ function createGroup(groupName) {
     const groupCont = group.querySelector(".tcg-container")
     const heading = group.querySelector("h3")
     heading.textContent = groupName
+    groupCont.append(createNotes())
 
     return [group, groupCont]
 }
@@ -80,7 +82,7 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     exercise.append(header)
 
     // Notes
-    if (displayNotes) exercise.append(exerciseNotesTempl.content.cloneNode(true))
+    if (displayNotes) exercise.append(notesTempl.content.cloneNode(true))
 
     // Sets
     for (const _ of range(numOfSets)) {
@@ -88,6 +90,10 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     }
 
     return exercise
+}
+
+function createNotes() {
+    return notesTempl.content.cloneNode(true)
 }
 
 
