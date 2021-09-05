@@ -1,4 +1,6 @@
 
+import {px, float, range} from "./tools.js"
+
 const initialScreen = document.querySelector(".initial-screen")
 
 const tsContainer = document.querySelector(".ts-container")
@@ -100,8 +102,8 @@ function getComponentWidth() {
     let width = initialScreen.clientWidth
     const screenStyles = window.getComputedStyle(initialScreen)
 
-    width -= Number.parseFloat(screenStyles.paddingLeft)
-    width -= Number.parseFloat(screenStyles.paddingRight)
+    width -= float(screenStyles.paddingLeft)
+    width -= float(screenStyles.paddingRight)
 
     if (tsContainerStyles.position !== "absolute") {
         width -= 3*20 - 5   // Margins
@@ -110,7 +112,7 @@ function getComponentWidth() {
         width -= 2*20       // Only margins for narrow viewport
     }
 
-    return width > 400 ? "400px" : `${width}px`
+    return width > 400 ? "400px" : px(width)
 }
 
 
@@ -153,10 +155,10 @@ const group = groupTemplate.content.cloneNode(true)
 const grExerciseContainer = group.querySelector(".ts-group-exercise-container")
 
 // Adds exercises to the group
-for (const _ of [1, 2]) {
+for (const _ of range(2)) {
     const exercise = exerciseTemplate.content.cloneNode(true)
     const setContainer = exercise.querySelector(".ts-exercise-set-container")
-    for (const _ of [1, 2, 3]) {
+    for (const _ of range(3)) {
         setContainer.append(setTemplate.content.cloneNode(true))
     }
 
@@ -169,7 +171,7 @@ exerciseContainer.append(group)
 let exercise = exerciseTemplate.content.cloneNode(true)
 
 let setContainer = exercise.querySelector(".ts-exercise-set-container")
-for (const _ of [1, 2, 3]) {
+for (const _ of range(3)) {
     setContainer.append(setTemplate.content.cloneNode(true))
 }
 
@@ -178,7 +180,7 @@ exerciseContainer.append(exercise)
 exercise = exerciseTemplate.content.cloneNode(true)
 
 setContainer = exercise.querySelector(".ts-exercise-set-container")
-for (const _ of [1, 2, 3]) {
+for (const _ of range(3)) {
     setContainer.append(setTemplate.content.cloneNode(true))
 }
 
