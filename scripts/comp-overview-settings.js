@@ -44,7 +44,7 @@ function onSettingsClick() {
         compClassList.remove("enable-access")
     }
 
-    floatingMode()
+    floatingMode(false)
 }
 
 function onCloseButtonClick() {
@@ -60,7 +60,7 @@ function onCloseButtonClick() {
     // Disable access to controls
     compClassList.remove("enable-access")
 
-    floatingMode()
+    floatingMode(false)
 }
 
 function onAnimationEnd() {
@@ -91,7 +91,7 @@ function onResize() {
         settingsContainer.style.height = px(newHeight + marginTop)
     }
 
-    floatingMode()
+    floatingMode(true)
 }
 
 settingsComponent.addEventListener("animationend", onAnimationEnd)
@@ -101,7 +101,7 @@ closeButton.addEventListener("click", onCloseButtonClick)
 
 // Other functionality
 
-function floatingMode() {
+function floatingMode(resize) {
     /* Floats settings over overview component if there is not
         enough vertical space
     */
@@ -126,24 +126,26 @@ function floatingMode() {
             style.width = px(float(overviewWidth) - 30)
 
             // Disable overview component
-            overviewComponent.classList.add("visible-disabling", "disable-transition")
-            overviewComponent.style.setProperty("--disable-duration", ".4s")
-            setTimeout(() => {
-                overviewComponent.classList.add("disable-tran-progress")
-            }, 0)
+            if (!resize) {
+                overviewComponent.style.setProperty("--disable-anim-duration", ".4s")
+            }
+            overviewComponent.classList.add("disable-visible-display")
 
         } else {
             // Enable overview component
-            overviewComponent.classList.remove("disable-tran-progress")
+            if (!resize) {
+                overviewComponent.style.setProperty("--disable-anim-duration", ".4s")
+            }
+            overviewComponent.classList.remove("disable-visible-display")
+            overviewComponent.classList.add("disable-visible-hide")
 
             setTimeout(() => {
-                overviewComponent.classList.remove("visible-disabling",
-                    "disable-transition")
-                overviewComponent.style.removeProperty("--disable-duration")
+                overviewComponent.classList.remove("disable-visible-hide")
+                overviewComponent.style.removeProperty("--disable-anim-duration")
             }, 400)
         }
 
-    // Disabling
+    // Deactivating
     } else {
         // Clean up position
         if(style.position) {
@@ -153,6 +155,7 @@ function floatingMode() {
         }
 
         // Enable overview component
-        overviewComponent.classList.remove("visible-disabling")
+        overviewComponent.style.removeProperty("--disable-anim-duration")
+        overviewComponent.classList.remove("disable-visible-display")
     }
 }
