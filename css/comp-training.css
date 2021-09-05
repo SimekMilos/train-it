@@ -100,12 +100,38 @@
 
 /* Header */
 .tc-exercise-header {
-
+    counter-reset: sets;
 }
 
-/* Set */
-.tc-exercise-set {
 
+/* -- Set -- */
+
+.tc-exercise-set {
+    width: var(--column-width);
+    padding-left: 20px;
+
+    font-size: 24px;
+}
+
+.tcex-first-line {
+    display: flex;
+}
+
+.tcex-second-line {
+    padding-left: 1.05em;
+}
+
+.tcex-first-line::before {
+    margin-right: .25em;
+
+    content: counter(sets) ".";
+    counter-increment: sets;
+}
+
+.tcex-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
