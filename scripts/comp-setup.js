@@ -29,7 +29,7 @@ function createEditClick() {
     if(tsContainerStyles.position !== "absolute") {
         tsContainer.classList.add("animate")
     } else {
-        ovComponent.style.boxShadow = "var(--comp-shadow-hidden)"
+        ovComponent.style.boxShadow = "none"
     }
 
     // ov component - visible disabling

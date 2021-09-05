@@ -60,10 +60,6 @@ body {
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
 
-    --comp-shadow-hidden:
-        0 0 5px 3px rgba(0,0,0,0),
-        0 5px 15px 10px rgba(0,0,0,0);
-
     --comp-border-radius: 3px;
     --comp-default-padding: 20px;
     --comp-default-margin: 20px;
