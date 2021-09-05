@@ -251,6 +251,57 @@ body {
 }
 
 
+/* --- General Input --- */
+
+.text-input {
+    border: 1px solid transparent;
+    border-radius: var(--comp-border-radius);
+    padding: 3px 5px;
+
+    background-color: transparent;
+
+    font: 1em "OpenSans Regular", sans-serif;
+    text-overflow: ellipsis;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.text-input::placeholder {
+    color: var(--placeholder-color);
+    font: 1em "OpenSans Regular", sans-serif;
+    opacity: 1; /* Firefox */
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--main-color);
+    background-color: white;
+}
+
+
+/* --- General Notes --- */
+/* Requires text-input */
+
+.notes {
+    height: calc(8px + 3 * 1.5em);
+    background-color: rgba(0,0,0,.04);
+    resize: none;
+
+    padding-left: 6px;
+    padding-right: 6px;
+
+    color: #000A;
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+.notes:placeholder {
+    line-height: 1.5;
+}
+
+
 /* --- Overlay Disabling --- */
 /* Creates pseudo-element overlay so component can't be accessed
     during inproper times (i.e. during animations) */
