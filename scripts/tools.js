@@ -3,7 +3,8 @@ export const float = Number.parseFloat
 export const int = Number.parseInt
 
 export function px(value) {
-    return `${value.toFixed(2)}px`
+    if(typeof value == "number") value = value.toFixed(2)
+    return `${value}px`
 }
 
 export function* range(startStop, stop, step) {

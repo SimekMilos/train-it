@@ -10,8 +10,8 @@
 
 .ts-container.display, .ts-container.hide {
     margin-left: -5px;
-    margin-right: var(--vertical-container-margin);
-    width: var(--vertical-container-width);
+    margin-right: var(--comp-default-margin);
+    width: var(--comp-default-width);
 }
 
 .ts-container.display.animate {
@@ -30,16 +30,16 @@
         }
         to {
             margin-left: -5px;
-            margin-right: var(--vertical-container-margin);
-            width: var(--vertical-container-width);
+            margin-right: var(--comp-default-margin);
+            width: var(--comp-default-width);
         }
     }
 
     @keyframes ts-cont-hide {
         from {
             margin-left: -5px;
-            margin-right: var(--vertical-container-margin);
-            width: var(--vertical-container-width);
+            margin-right: var(--comp-default-margin);
+            width: var(--comp-default-width);
         }
         to {
             margin-left: 0;
@@ -118,8 +118,8 @@
         margin-left: 0;
         margin-right: 0;
 
-        max-width: var(--vertical-container-width);
-        width: calc(100% - 2* var(--vertical-container-margin));
+        max-width: var(--comp-default-width);
+        width: calc(100% - 2* var(--comp-default-margin));
     }
 
     .ts-container.display, .ts-container.hide {

@@ -18,6 +18,11 @@
 }
 
 @font-face {
+    font-family: "OpenSans Light";
+    src: url(../res/fonts/OpenSans-Light.ttf) format("truetype");
+}
+
+@font-face {
     font-family: "OpenSans SemiBold";
     src: url(../res/fonts/OpenSans-SemiBold.ttf) format("truetype");
 }
@@ -40,7 +45,8 @@ body {
     height: 100%;
 
     --main-color: hsl(209, 100%, 56%);
-    --disabled-color: hsl(0, 0%, 65%);
+    --disabled-control-color: hsl(0, 0%, 65%);
+    --disabled-component-color: #0003;
 
     --button-height: 36px;
     --button-font: 1em "OpenSans Regular", sans-serif;
@@ -54,12 +60,10 @@ body {
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
 
-    --comp-shadow-hidden:
-        0 0 5px 3px rgba(0,0,0,0),
-        0 5px 15px 10px rgba(0,0,0,0);
-
     --comp-border-radius: 3px;
     --comp-default-padding: 20px;
+    --comp-default-margin: 20px;
+    --comp-default-width: 400px;
 }
 
 
@@ -120,13 +124,11 @@ body {
 /* --- Vertical alignment --- */
 
 .vertical-container {
-    --vertical-container-margin: 20px;
-    --vertical-container-width: 400px;
+    width: var(--comp-default-width);
+    height: calc(100% - 2 * var(--comp-default-margin));
+    margin: 0 var(--comp-default-margin);
 
-    width: var(--vertical-container-width);
-    height: calc(100% - 2 * var(--vertical-container-margin));
-    margin: 0 var(--vertical-container-margin);
-
+    /* Content */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -173,8 +175,8 @@ body {
 }
 
 .control-button:disabled {
-    color: var(--disabled-color);
-    border-color: var(--disabled-color);
+    color: var(--disabled-control-color);
+    border-color: var(--disabled-control-color);
 }
 
 
@@ -270,19 +272,36 @@ body {
     display: none;
 }
 
-.overlay-disabling.visible-disabling::before {
+    /* Visible disabling with intro/outro animaton */
+.overlay-disabling.disable-visible-display::before {
     display: block;
-    background-color: #0003;
+    background-color: var(--disabled-component-color);
+    animation: disabling-display var(--disable-anim-duration, 0s) ease-in-out forwards;
 }
 
-.overlay-disabling.disable-transition::before {
-    opacity: 0;
-    transition: opacity var(--disable-duration) ease-in-out;
+    @keyframes disabling-display {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+.overlay-disabling.disable-visible-hide::before {
+    display: block;
+    background-color: var(--disabled-component-color);
+    animation: disabling-hide var(--disable-anim-duration, 0s) ease-in-out forwards;
 }
 
-.overlay-disabling.disable-tran-progress::before {
-    opacity: 1;
-}
+    @keyframes disabling-hide {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
 
 
 /* --- Overflow Shadows --- */
@@ -309,9 +328,9 @@ body {
 }
 
 
-/* --- Overview Animations --- */
+/* --- Fade In/Out Animations --- */
 
-@keyframes ov-fade-in {
+@keyframes fade-in {
     from {
         top: var(--from);
     }
@@ -324,7 +343,7 @@ body {
     }
 }
 
-@keyframes ov-fade-out {
+@keyframes fade-out {
     from {
         top: 0;
     }
