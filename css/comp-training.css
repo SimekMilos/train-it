@@ -112,5 +112,5 @@
 /* --- Notes --- */
 
 .tc-notes {
-
+    width: var(--column-width);
 }
