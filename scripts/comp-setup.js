@@ -30,12 +30,9 @@ function createEditClick() {
         ovComponent.style.boxShadow = "var(--comp-shadow-hidden)"
     }
 
-    // ov component
-    ovComponent.classList.add("visible-disabling", "disable-transition")
-    ovComponent.style.setProperty("--disable-duration", ".7s")
-    setTimeout(() => {
-        ovComponent.classList.add("disable-tran-progress")
-    },0)
+    // ov component - visible disabling
+    ovComponent.classList.add("disable-visible-display")
+    ovComponent.style.setProperty("--disable-anim-duration", ".7s")
 }
 
 function cancelClick() {
@@ -53,7 +50,8 @@ function cancelClick() {
     }
 
     // ov component
-    ovComponent.classList.remove("disable-tran-progress")
+    ovComponent.classList.remove("disable-visible-display")
+    ovComponent.classList.add("disable-visible-hide")
     ovComponent.style.removeProperty("box-shadow")
 }
 
@@ -66,8 +64,9 @@ function onAnimEnd() {
         tsComponent.classList.remove("hide")
         tsContainer.classList.remove("hide")
 
-        ovComponent.classList.remove("disable-transition", "visible-disabling")
-        ovComponent.style.removeProperty("--disable-duration")
+        // ov component - visible disabling
+        ovComponent.classList.remove("disable-visible-hide")
+        ovComponent.style.removeProperty("--disable-anim-duration")
     }
 
     tsContainer.classList.remove("animate")

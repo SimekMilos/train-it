@@ -276,19 +276,36 @@ body {
     display: none;
 }
 
-.overlay-disabling.visible-disabling::before {
+    /* Visible disabling with intro/outro animaton */
+.overlay-disabling.disable-visible-display::before {
     display: block;
     background-color: var(--disabled-component-color);
+    animation: disabling-display var(--disable-anim-duration, 0) ease-in-out forwards;
 }
 
-.overlay-disabling.disable-transition::before {
-    opacity: 0;
-    transition: opacity var(--disable-duration) ease-in-out;
+    @keyframes disabling-display {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+.overlay-disabling.disable-visible-hide::before {
+    display: block;
+    background-color: var(--disabled-component-color);
+    animation: disabling-hide var(--disable-anim-duration, 0) ease-in-out forwards;
 }
 
-.overlay-disabling.disable-tran-progress::before {
-    opacity: 1;
-}
+    @keyframes disabling-hide {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
 
 
 /* --- Overflow Shadows --- */
