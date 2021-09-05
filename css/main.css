@@ -280,7 +280,7 @@ body {
 .overlay-disabling.disable-visible-display::before {
     display: block;
     background-color: var(--disabled-component-color);
-    animation: disabling-display var(--disable-anim-duration, 0) ease-in-out forwards;
+    animation: disabling-display var(--disable-anim-duration, 0s) ease-in-out forwards;
 }
 
     @keyframes disabling-display {
@@ -295,7 +295,7 @@ body {
 .overlay-disabling.disable-visible-hide::before {
     display: block;
     background-color: var(--disabled-component-color);
-    animation: disabling-hide var(--disable-anim-duration, 0) ease-in-out forwards;
+    animation: disabling-hide var(--disable-anim-duration, 0s) ease-in-out forwards;
 }
 
     @keyframes disabling-hide {
