@@ -15,7 +15,7 @@
     background-color: white;
     border-radius: var(--comp-border-radius);
     box-shadow: var(--comp-shadow);
-    transition: box-shadow .7s ease-in-out;
+    transition: box-shadow ease-in-out;
         /* For when hiding under setup component */
 
     /* Content */

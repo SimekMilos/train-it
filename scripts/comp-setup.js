@@ -35,6 +35,7 @@ function createEditClick() {
     // ov component - visible disabling
     ovComponent.classList.add("disable-visible-display")
     ovComponent.style.setProperty("--disable-anim-duration", ".7s")
+    ovComponent.style.transitionDuration = ".7s"
 }
 
 function cancelClick() {
@@ -54,6 +55,7 @@ function cancelClick() {
     // ov component
     ovComponent.classList.remove("disable-visible-display")
     ovComponent.classList.add("disable-visible-hide")
+    ovComponent.style.transitionDuration = ".7s"
     ovComponent.style.removeProperty("box-shadow")
 }
 
@@ -71,6 +73,7 @@ function onAnimEnd() {
         ovComponent.style.removeProperty("--disable-anim-duration")
     }
 
+    ovComponent.style.removeProperty("transition-duration")
     tsContainer.classList.remove("animate")
 }
 
