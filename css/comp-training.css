@@ -54,6 +54,10 @@
 
     border: 1px solid hsl(0, 0%, 30%);
     border-radius: var(--comp-border-radius);
+
+    /* For dynamic sizing of tcg-container */
+    display: flex;
+    flex-direction: column;
 }
 
 .tcg-header {
@@ -82,13 +86,24 @@
 }
 
 .tcg-container {
+    height: 0;
+    flex-grow: 1;
 
+    /* Multiple column layout */
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-start;
 }
 
 
 /* No Group Container */
 .tc-no-group {
+    height: 100%;
 
+    /* Multiple column layout */
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-start;
 }
 
 .tc-group > * {
