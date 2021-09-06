@@ -1,5 +1,5 @@
 
-import {px, range} from "./tools.js"
+import {px, float, range} from "./tools.js"
 
 // No training display sizing and positioning
 
@@ -59,8 +59,11 @@ function createGroup(groupName) {
     const group = groupTempl.content.cloneNode(true)
     const groupCont = group.querySelector(".tcg-container")
     const heading = group.querySelector("h3")
+
     heading.textContent = groupName
     groupCont.append(createNotes())
+
+    widthObserver.observe(groupCont)
 
     return [group, groupCont]
 }
@@ -69,7 +72,25 @@ function createNoGroup() {
     const noGroup = noGroupTemp.content.cloneNode(true)
     const noGroupCont = noGroup.querySelector(".tc-no-group")
 
+    widthObserver.observe(noGroupCont)
+
     return [noGroup, noGroupCont]
+}
+
+const widthObserver = new ResizeObserver(setWidth)
+function setWidth(entries) {
+    for (const {target} of entries) {
+        const first = target.firstElementChild
+        const last = target.lastElementChild
+
+        let start = first.getBoundingClientRect().left
+        start -= float(getComputedStyle(first).marginLeft)
+
+        let end = last.getBoundingClientRect().right
+        end += float(getComputedStyle(last).marginRight)
+
+        target.style.width = px(end - start)
+    }
 }
 
 function createExercise(exerciseName, displayNotes, numOfSets) {
@@ -115,6 +136,5 @@ window.addEventListener("load", () => {
             container.append(createExercise(`Excercise ${num}`, true, 3))
         }
     }
-
 })
 
