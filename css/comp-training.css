@@ -43,7 +43,21 @@
 
 /* Training Info */
 .tc-training {
+    width: var(--column-width);
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tc-training h2 {
+    font: normal 24px "OpenSans Regular", sans-serif;
+    color: var(--main-color);
+    text-align: center;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 
