@@ -356,12 +356,14 @@
             <!-- Excercise set template -->
             <template class="tc-exercise-set-template">
                 <div class="tc-exercise-set">
-                    <div class="tcex-first-line">
+                    <!-- Set counter pseudoelement -->
+                    <div class="tcex-container">
                         <p class="tcex-name">Set</p>
-                    </div>
-                    <div class="tcex-second-line">
-                        <span class="tcex-set-watch">00:00</span>
-                        <span class="tcex-pause-watch">00:00</span>
+
+                        <div class="tcex-watches">
+                            <span class="tcex-set-watch">00:00</span>
+                            <span class="tcex-pause-watch">00:00</span>
+                        </div>
                     </div>
                 </div>
             </template>

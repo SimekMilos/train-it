@@ -138,30 +138,40 @@
 
 .tc-exercise-set {
     width: var(--column-width);
-    padding-left: 20px;
+    padding-left: 1em;
 
     font-size: 24px;
-}
 
-.tcex-first-line {
     display: flex;
 }
 
-.tcex-second-line {
-    padding-left: 1.05em;
-}
-
-.tcex-first-line::before {
+.tc-exercise-set::before {
     margin-right: .25em;
 
     content: counter(sets) ".";
     counter-increment: sets;
 }
 
+.tcex-container {
+    flex-grow: 1;
+    width: 0;
+
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
 .tcex-name {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.tcex-watches {
+    margin-left: auto;
+    padding-left: .5em;
+
+    display: flex;
+    column-gap: .5em;
 }
 
 
