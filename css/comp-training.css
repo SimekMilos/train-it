@@ -128,7 +128,23 @@
 /* Header */
 
 .tc-exercise-header {
+
+    display: flex;
+    justify-content: space-between;
     counter-reset: sets;
+}
+
+.tc-exercise-header h3 {
+    font: normal 22px "OpenSans Regular", sans-serif;
+
+    /* Overflowing text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tc-exercise-header p {
+    font: 36px/.8 "OpenSans Regular", sans-serif;
 }
 
 
