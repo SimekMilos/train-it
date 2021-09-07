@@ -107,6 +107,7 @@
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
+    column-gap: 10px;
 }
 
 

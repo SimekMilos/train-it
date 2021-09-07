@@ -133,7 +133,7 @@ window.addEventListener("load", () => {
 
     for (const container of [groupCont, noGroupCont]) {
         for (const num of range(3)) {
-            container.append(createExercise(`Excercise ${num}`, true, 3))
+            container.append(createExercise(`Excercise ${num+1}`, true, 3))
         }
     }
 })
