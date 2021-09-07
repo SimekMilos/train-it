@@ -42,6 +42,7 @@
 
 
 /* Training Info */
+
 .tc-training {
     width: var(--column-width);
 
@@ -62,6 +63,7 @@
 
 
 /* Group Container */
+
 .tc-group {
     margin: 0 10px;
     padding: 10px;
@@ -87,7 +89,7 @@
 
 .tcg-header h3 {
     color: var(--main-color);
-    font: normal 20px "OpenSans Regular", sans-serif;
+    font: normal 22px "OpenSans Regular", sans-serif;
 
     /* Overflowing text */
     white-space: nowrap;
@@ -110,7 +112,6 @@
     column-gap: 10px;
 }
 
-
 /* No Group Container */
 .tc-no-group {
     height: 100%;
@@ -121,14 +122,11 @@
     align-content: flex-start;
 }
 
-.tc-group > * {
-
-}
-
 
 /* --- Excercise --- */
 
 /* Header */
+
 .tc-exercise-header {
     counter-reset: sets;
 }
