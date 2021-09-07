@@ -227,12 +227,13 @@
     width: 20px;
 }
 
+
 .tc-notes textarea {
     display: none;
     width: 100%;
 }
 
-.tc-notes.display button {
+.tc-notes.display .tcn-button {
     display: none;
 }
 
