@@ -77,20 +77,25 @@ function createNoGroup() {
     return [noGroup, noGroupCont]
 }
 
-const widthObserver = new ResizeObserver(setWidth)
-function setWidth(entries) {
+const widthObserver = new ResizeObserver(setWidthObs)
+
+function setWidthObs(entries) {
     for (const {target} of entries) {
-        const first = target.firstElementChild
-        const last = target.lastElementChild
-
-        let start = first.getBoundingClientRect().left
-        start -= float(getComputedStyle(first).marginLeft)
-
-        let end = last.getBoundingClientRect().right
-        end += float(getComputedStyle(last).marginRight)
-
-        target.style.width = px(end - start)
+        setWidth(target)
     }
+}
+
+function setWidth(elem) {
+    const first = elem.firstElementChild
+    const last = elem.lastElementChild
+
+    let start = first.getBoundingClientRect().left
+    start -= float(getComputedStyle(first).marginLeft)
+
+    let end = last.getBoundingClientRect().right
+    end += float(getComputedStyle(last).marginRight)
+
+    elem.style.width = px(end - start)
 }
 
 function createExercise(exerciseName, displayNotes, numOfSets) {
@@ -123,6 +128,10 @@ function createNotes() {
 
 function notesButtonClick(e) {
     e.currentTarget.parentElement.classList.add("display")
+
+    const group = e.currentTarget.closest(".tcg-container, .tc-no-group")
+    if (group) setWidth(group)
+
     e.currentTarget.nextElementSibling.focus()
 }
 
