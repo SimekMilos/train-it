@@ -122,8 +122,8 @@ function createNotes() {
 }
 
 function notesButtonClick(e) {
-    e.target.parentElement.classList.add("display")
-    e.target.nextElementSibling.focus()
+    e.currentTarget.parentElement.classList.add("display")
+    e.currentTarget.nextElementSibling.focus()
 }
 
 
