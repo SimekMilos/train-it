@@ -193,4 +193,24 @@
 
 .tc-notes {
     width: var(--column-width);
+
+    display: flex;
+    justify-content: center;
+}
+
+.tc-notes button {
+
+}
+
+.tc-notes textarea {
+    display: none;
+    width: 100%;
+}
+
+.tc-notes.display button {
+    display: none;
+}
+
+.tc-notes.display textarea {
+    display: block;
 }

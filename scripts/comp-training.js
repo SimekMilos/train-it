@@ -103,7 +103,7 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     exercise.append(header)
 
     // Notes
-    if (displayNotes) exercise.append(notesTempl.content.cloneNode(true))
+    if (displayNotes) exercise.append(createNotes())
 
     // Sets
     for (const _ of range(numOfSets)) {
@@ -114,7 +114,16 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
 }
 
 function createNotes() {
-    return notesTempl.content.cloneNode(true)
+    const notes = notesTempl.content.cloneNode(true)
+    const button = notes.querySelector("button")
+    button.addEventListener("click", notesButtonClick)
+
+    return notes
+}
+
+function notesButtonClick(e) {
+    e.target.parentElement.classList.add("display")
+    e.target.nextElementSibling.focus()
 }
 
 
