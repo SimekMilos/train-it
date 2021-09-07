@@ -196,11 +196,35 @@
     width: var(--column-width);
 
     display: flex;
-    justify-content: center;
 }
 
-.tc-notes button {
+.tcn-button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    margin-left: -3px;
 
+    border-radius: var(--comp-border-radius);
+
+    /* Removing default styles */
+    background-color: transparent;
+    border: none;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.tcn-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.tcn-button:active {
+    background-color: var(--secondary-color-active);
+}
+
+.tcn-button img {
+    width: 20px;
 }
 
 .tc-notes textarea {

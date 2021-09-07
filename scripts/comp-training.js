@@ -115,7 +115,7 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
 
 function createNotes() {
     const notes = notesTempl.content.cloneNode(true)
-    const button = notes.querySelector("button")
+    const button = notes.querySelector(".tcn-button")
     button.addEventListener("click", notesButtonClick)
 
     return notes
