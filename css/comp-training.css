@@ -105,6 +105,9 @@
 .tcg-container {
     height: 0;
     flex-grow: 1;
+    padding-top: 10px;
+
+    border-top: 1px solid var(--main-color);
 
     /* Multiple column layout */
     display: flex;
