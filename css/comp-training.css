@@ -140,7 +140,6 @@
 
 .tc-exercise-header {
     background-color: var(--excercise-color1);
-    margin-top: 10px;
     padding: var(--excercise-padding);
 
     border: 1px solid var(--excercise-border-color);
@@ -193,9 +192,11 @@
 
 .tc-exercise-set.last {
     border-radius: 0 0 var(--excercise-border-radius) var(--excercise-border-radius);
-    padding-bottom: var(--excercise-padding);
     border-bottom: 1px solid var(--excercise-border-color);
 }
+
+.tc-exercise-set.last:not(:last-child) {
+    margin-bottom: 15px;
 }
 
 .tc-exercise-set::before {
