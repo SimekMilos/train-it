@@ -56,6 +56,8 @@ body {
     --secondary-color-hover: rgba(0, 0, 0, .08);
     --secondary-color-active: rgba(0, 0, 0, .2);
 
+    --secondary-watch-color: #0009;
+
     --comp-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);
@@ -292,7 +294,6 @@ body {
     padding-left: 6px;
     padding-right: 6px;
 
-    color: #000A;
     font-size: .8em;
     line-height: 1.5;
 }

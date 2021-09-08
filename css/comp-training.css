@@ -8,8 +8,8 @@
     margin: 15px 0;
 
     --column-width: 300px;
-    --excercise-color1: hsl(209, 45%, 96%);
-    --excercise-color2: hsl(209, 45%, 98%);
+    --excercise-color1: hsl(209, 100%, 95%);
+    --excercise-color2: hsl(209, 100%, 98%);
     --excercise-padding: 10px;
     --excercise-border-radius: 10px;
 }
@@ -151,6 +151,7 @@
 
 .tc-exercise-header h3 {
     font: normal 22px "OpenSans Regular", sans-serif;
+    color: hsl(209, 100%, 40%);
 
     /* Overflowing text */
     white-space: nowrap;
@@ -210,6 +211,10 @@
 
     display: flex;
     column-gap: .5em;
+}
+
+.tcex-pause-watch {
+    color: var(--secondary-watch-color);
 }
 
 
