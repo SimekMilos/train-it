@@ -111,8 +111,11 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     if (displayNotes) exercise.append(createNotes())
 
     // Sets
-    for (const _ of range(numOfSets)) {
-        exercise.append(exerciseSetTempl.content.cloneNode(true))
+    for (const count of range(1, numOfSets+1)) {
+        const set = exerciseSetTempl.content.cloneNode(true)
+        if (!(count % 2)) set.firstElementChild.classList.add("alternate")
+
+        exercise.append(set)
     }
     exercise.lastElementChild.classList.add("last")
 
