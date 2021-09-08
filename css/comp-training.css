@@ -13,6 +13,7 @@
     --excercise-padding: 10px;
     --excercise-border-radius: 7px;
     --excercise-border-color: hsl(209, 100%, 70%);
+    --excercise-shadow: 2px 2px 3px #0002;
 }
 
 .tc-container {
@@ -146,6 +147,8 @@
     border-bottom: none;
     border-radius: var(--excercise-border-radius) var(--excercise-border-radius) 0 0;
 
+    box-shadow: var(--excercise-shadow);
+
     /* Content */
     display: flex;
     justify-content: space-between;
@@ -178,6 +181,7 @@
     border-right: 1px solid var(--excercise-border-color);
 
     background-color: var(--excercise-color1);
+    box-shadow: var(--excercise-shadow);
 
     display: flex;
     font-size: 24px;
@@ -237,11 +241,13 @@
 }
 
 .tc-exercise-header ~ .tc-notes {
-    background-color: var(--excercise-color2);
     padding: var(--excercise-padding);
 
     border-left: 1px solid var(--excercise-border-color);
     border-right: 1px solid var(--excercise-border-color);
+
+    background-color: var(--excercise-color2);
+    box-shadow: var(--excercise-shadow);
 }
 
 .tcn-button {
