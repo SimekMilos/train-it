@@ -32,6 +32,13 @@
 }
 
 
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
 /* No training display */
 
 .tc-no-training {
@@ -62,10 +69,6 @@
     font: normal 24px "OpenSans Regular", sans-serif;
     color: var(--main-color);
     text-align: center;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 
@@ -97,11 +100,6 @@
 .tcg-header h3 {
     color: var(--main-color);
     font: normal 22px "OpenSans Regular", sans-serif;
-
-    /* Overflowing text */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .tcg-header p {
@@ -158,11 +156,6 @@
 .tc-exercise-header h3 {
     font: normal 22px "OpenSans Regular", sans-serif;
     color: hsl(209, 100%, 40%);
-
-    /* Overflowing text */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .tc-exercise-header p {
@@ -212,12 +205,6 @@
 
     display: inline-flex;
     flex-wrap: wrap;
-}
-
-.tcex-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .tcex-watches {
