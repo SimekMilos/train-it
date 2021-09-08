@@ -114,6 +114,7 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     for (const _ of range(numOfSets)) {
         exercise.append(exerciseSetTempl.content.cloneNode(true))
     }
+    exercise.lastElementChild.classList.add("last")
 
     return exercise
 }

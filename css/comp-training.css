@@ -8,6 +8,9 @@
     margin: 15px 0;
 
     --column-width: 300px;
+    --excercise-color: hsl(209, 45%, 96%);
+    --excercise-padding: 10px;
+    --excercise-border-radius: 10px;
 }
 
 .tc-container {
@@ -133,9 +136,15 @@
 /* Header */
 
 .tc-exercise-header {
+    background-color: var(--excercise-color);
+    margin-top: 10px;
+    padding: var(--excercise-padding);
+    border-radius: var(--excercise-border-radius) var(--excercise-border-radius) 0 0;
 
+    /* Content */
     display: flex;
     justify-content: space-between;
+    align-items: center;
     counter-reset: sets;
 }
 
@@ -157,11 +166,16 @@
 
 .tc-exercise-set {
     width: var(--column-width);
-    padding-left: 1em;
-
-    font-size: 24px;
+    padding: 5px var(--excercise-padding) 5px 1.5em;
+    background-color: var(--excercise-color);
 
     display: flex;
+    font-size: 24px;
+}
+
+.tc-exercise-set.last {
+    border-radius: 0 0 var(--excercise-border-radius) var(--excercise-border-radius);
+    padding-bottom: var(--excercise-padding);
 }
 
 .tc-exercise-set::before {
@@ -200,6 +214,11 @@
     width: var(--column-width);
 
     display: flex;
+}
+
+.tc-exercise-header ~ .tc-notes {
+    background-color: var(--excercise-color);
+    padding: var(--excercise-padding);
 }
 
 .tcn-button {
