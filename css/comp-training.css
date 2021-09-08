@@ -11,7 +11,8 @@
     --excercise-color1: hsl(209, 100%, 95%);
     --excercise-color2: hsl(209, 100%, 98%);
     --excercise-padding: 10px;
-    --excercise-border-radius: 10px;
+    --excercise-border-radius: 7px;
+    --excercise-border-color: hsl(209, 100%, 70%);
 }
 
 .tc-container {
@@ -140,6 +141,9 @@
     background-color: var(--excercise-color1);
     margin-top: 10px;
     padding: var(--excercise-padding);
+
+    border: 1px solid var(--excercise-border-color);
+    border-bottom: none;
     border-radius: var(--excercise-border-radius) var(--excercise-border-radius) 0 0;
 
     /* Content */
@@ -169,6 +173,10 @@
 .tc-exercise-set {
     width: var(--column-width);
     padding: 5px var(--excercise-padding) 5px 1.5em;
+
+    border-left: 1px solid var(--excercise-border-color);
+    border-right: 1px solid var(--excercise-border-color);
+
     background-color: var(--excercise-color1);
 
     display: flex;
@@ -182,6 +190,8 @@
 .tc-exercise-set.last {
     border-radius: 0 0 var(--excercise-border-radius) var(--excercise-border-radius);
     padding-bottom: var(--excercise-padding);
+    border-bottom: 1px solid var(--excercise-border-color);
+}
 }
 
 .tc-exercise-set::before {
@@ -229,6 +239,9 @@
 .tc-exercise-header ~ .tc-notes {
     background-color: var(--excercise-color2);
     padding: var(--excercise-padding);
+
+    border-left: 1px solid var(--excercise-border-color);
+    border-right: 1px solid var(--excercise-border-color);
 }
 
 .tcn-button {
