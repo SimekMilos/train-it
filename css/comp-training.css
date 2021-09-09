@@ -149,6 +149,7 @@
 }
 
 .tce-header {
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -208,7 +209,7 @@
 /* --- Set --- */
 
 .tc-exercise-set {
-    padding: 3px 0 3px 1.5em;
+    padding: 3px 10px 3px 1.5em;
 
     display: flex;
     font-size: 24px;
