@@ -52,10 +52,8 @@
 .sett-main-window {
     position: relative;
 
-    height: 0;
-    flex-grow: 1;
     max-width: var(--comp-default-width);
-    /* max-height - set in JS */
+    max-height: 100%;
 
     padding: 1em 30px 30px 30px;
     border-radius: var(--comp-border-radius);
