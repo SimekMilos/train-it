@@ -134,6 +134,72 @@
 
 /* --- Excercise --- */
 
+.tc-exercise {
+    width: var(--column-width);
+    padding: var(--excercise-padding);
+
+    border: 1px solid var(--excercise-border-color);
+    border-radius: var(--excercise-border-radius);
+    box-shadow: var(--excercise-shadow);
+
+    background-color: var(--excercise-color1);
+}
+
+.tc-exercise:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.tce-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.tce-right {
+    margin-left: auto;
+    padding-left: .5em;
+
+    display: flex;
+}
+
+.tce-name {
+    font: normal 22px "OpenSans Regular", sans-serif;
+    color: hsl(209, 100%, 40%);
+}
+
+.tce-notes-button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    margin-right: .5em;
+
+    border-radius: var(--comp-border-radius);
+    opacity: .5;
+
+    /* Removing default styles */
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.tce-notes-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.tce-notes-button:active {
+    background-color: var(--secondary-color-active);
+}
+
+.tce-notes-button img {
+    width: 20px;
+}
+
+.tce-watch {
+    font: 36px/.8 "OpenSans Regular", sans-serif;
+}
+
 /* Header */
 
 .tc-exercise-header {

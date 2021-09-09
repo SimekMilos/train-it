@@ -42,6 +42,7 @@ const trainingTempl = document.querySelector(".tc-training-template")
 const groupTempl = document.querySelector(".tc-group-template")
 const noGroupTemp = document.querySelector(".tc-no-group-template")
 
+const exerciseTempl = document.querySelector(".tc-exercise-template")
 const exerciseHeaderTempl = document.querySelector(".tc-exercise-header-template")
 const exerciseSetTempl = document.querySelector(".tc-exercise-set-template")
 const notesTempl = document.querySelector(".tc-notes-template")
@@ -122,6 +123,15 @@ function createExercise(exerciseName, displayNotes, numOfSets) {
     return exercise
 }
 
+function createExercise(exerciseName, numOfSets) {
+    const exercise = exerciseTempl.content.cloneNode(true)
+    const heading = exercise.querySelector(".tce-name")
+
+    heading.textContent = exerciseName
+
+    return exercise
+}
+
 function createNotes() {
     const notes = notesTempl.content.cloneNode(true)
     const button = notes.querySelector(".tcn-button")
@@ -155,7 +165,7 @@ window.addEventListener("load", () => {
 
     for (const container of [groupCont, noGroupCont]) {
         for (const num of range(3)) {
-            container.append(createExercise(`Excercise ${num+1}`, true, 3))
+            container.append(createExercise(`Excercise ${num+1}`, 3))
         }
     }
 })
