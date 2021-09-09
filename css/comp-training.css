@@ -174,7 +174,6 @@
     margin-right: .5em;
 
     border-radius: var(--comp-border-radius);
-    opacity: .5;
 
     /* Removing default styles */
     background-color: transparent;
@@ -194,6 +193,7 @@
 
 .tce-notes-button img {
     width: 20px;
+    opacity: .5;
 }
 
 .tce-watch {
