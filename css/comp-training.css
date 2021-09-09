@@ -160,7 +160,9 @@
 
 .tce-header {
     padding: 10px;
+    border-bottom: 1px solid var(--excercise-border-color);
 
+    /* Content */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
