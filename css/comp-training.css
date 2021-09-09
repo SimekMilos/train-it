@@ -138,6 +138,7 @@
 .tc-exercise {
     width: var(--column-width);
     max-height: 100%;
+    margin-bottom: 15px;
 
     border: 1px solid var(--excercise-border-color);
     border-radius: var(--excercise-border-radius);
@@ -152,10 +153,6 @@
 
 .tc-exercise > * {
     flex-shrink: 0;
-}
-
-.tc-exercise:not(:last-child) {
-    margin-bottom: 15px;
 }
 
 .tce-header {
