@@ -36,7 +36,9 @@
     text-overflow: ellipsis;
 }
 
+
 /* Notes button */
+
 .notes-button {
     width: 30px;
     height: 30px;
@@ -82,7 +84,7 @@
 }
 
 
-/* Training Info */
+/* --- Training Info --- */
 
 .tc-training {
     width: var(--column-width);
@@ -90,10 +92,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .tc-training h2 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
     font: normal 24px "OpenSans Regular", sans-serif;
     color: var(--main-color);
@@ -101,7 +104,7 @@
 }
 
 
-/* Group Container */
+/* --- Group Container --- */
 
 .tc-group {
     margin: 0 10px;
@@ -162,7 +165,9 @@
     column-gap: 10px;
 }
 
-/* No Group Container */
+
+/* --- No Group Container --- */
+
 .tc-no-group {
     height: 100%;
 
