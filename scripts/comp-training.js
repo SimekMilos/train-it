@@ -43,7 +43,6 @@ const groupTempl = document.querySelector(".tc-group-template")
 const noGroupTemp = document.querySelector(".tc-no-group-template")
 
 const exerciseTempl = document.querySelector(".tc-exercise-template")
-const exerciseHeaderTempl = document.querySelector(".tc-exercise-header-template")
 const exerciseSetTempl = document.querySelector(".tc-exercise-set-template")
 const notesTempl = document.querySelector(".tc-notes-template")
 
@@ -97,30 +96,6 @@ function setWidth(elem) {
     end += float(getComputedStyle(last).marginRight)
 
     elem.style.width = px(end - start)
-}
-
-function createExercise(exerciseName, displayNotes, numOfSets) {
-    const exercise = document.createDocumentFragment()
-
-    // Header
-    const header = exerciseHeaderTempl.content.cloneNode(true)
-    const heading = header.querySelector("h3")
-    heading.textContent = exerciseName
-    exercise.append(header)
-
-    // Notes
-    if (displayNotes) exercise.append(createNotes())
-
-    // Sets
-    for (const count of range(1, numOfSets+1)) {
-        const set = exerciseSetTempl.content.cloneNode(true)
-        if (!(count % 2)) set.firstElementChild.classList.add("alternate")
-
-        exercise.append(set)
-    }
-    exercise.lastElementChild.classList.add("last")
-
-    return exercise
 }
 
 function createExercise(exerciseName, numOfSets) {

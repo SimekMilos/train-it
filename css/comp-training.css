@@ -200,36 +200,8 @@
     font: 36px/.8 "OpenSans Regular", sans-serif;
 }
 
-/* Header */
 
-.tc-exercise-header {
-    background-color: var(--excercise-color1);
-    padding: var(--excercise-padding);
-
-    border: 1px solid var(--excercise-border-color);
-    border-bottom: none;
-    border-radius: var(--excercise-border-radius) var(--excercise-border-radius) 0 0;
-
-    box-shadow: var(--excercise-shadow);
-
-    /* Content */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    counter-reset: sets;
-}
-
-.tc-exercise-header h3 {
-    font: normal 22px "OpenSans Regular", sans-serif;
-    color: hsl(209, 100%, 40%);
-}
-
-.tc-exercise-header p {
-    font: 36px/.8 "OpenSans Regular", sans-serif;
-}
-
-
-/* -- Set -- */
+/* --- Set --- */
 
 .tc-exercise-set {
     width: var(--column-width);
