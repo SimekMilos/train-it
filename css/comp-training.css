@@ -10,10 +10,8 @@
     --column-width: 300px;
     --excercise-color1: hsl(209, 100%, 95%);
     --excercise-color2: hsl(209, 100%, 98%);
-    --excercise-padding: 10px;
-    --excercise-border-radius: 7px;
     --excercise-border-color: hsl(209, 100%, 70%);
-    --excercise-shadow: 2px 2px 3px #0002;
+    --excercise-border-radius: 7px;
 }
 
 .tc-container {
@@ -66,6 +64,8 @@
 }
 
 .tc-training h2 {
+    margin-bottom: 10px;
+
     font: normal 24px "OpenSans Regular", sans-serif;
     color: var(--main-color);
     text-align: center;
@@ -136,11 +136,10 @@
 
 .tc-exercise {
     width: var(--column-width);
-    padding: var(--excercise-padding);
 
     border: 1px solid var(--excercise-border-color);
     border-radius: var(--excercise-border-radius);
-    box-shadow: var(--excercise-shadow);
+    box-shadow: 2px 2px 3px #0002;
 
     background-color: var(--excercise-color1);
 }
@@ -197,6 +196,7 @@
 }
 
 .tce-watch {
+    margin-right: -.02em;
     font: 36px/.8 "OpenSans Regular", sans-serif;
 }
 
