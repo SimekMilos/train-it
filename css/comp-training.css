@@ -36,6 +36,35 @@
     text-overflow: ellipsis;
 }
 
+/* Notes button */
+.notes-button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+
+    border-radius: var(--comp-border-radius);
+
+    /* Removing default styles */
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.notes-button:hover {
+    background-color: var(--secondary-color-hover);
+}
+
+.notes-button:active {
+    background-color: var(--secondary-color-active);
+}
+
+.notes-button img {
+    width: 20px;
+    opacity: .5;
+}
+
 
 /* No training display */
 
@@ -178,32 +207,7 @@
 }
 
 .tce-notes-button {
-    width: 30px;
-    height: 30px;
-    padding: 5px;
     margin-right: .5em;
-
-    border-radius: var(--comp-border-radius);
-
-    /* Removing default styles */
-    background-color: transparent;
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.tce-notes-button:hover {
-    background-color: var(--secondary-color-hover);
-}
-
-.tce-notes-button:active {
-    background-color: var(--secondary-color-active);
-}
-
-.tce-notes-button img {
-    width: 20px;
-    opacity: .5;
 }
 
 .tce-watch {
