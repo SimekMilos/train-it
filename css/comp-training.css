@@ -205,6 +205,10 @@
     counter-reset: sets;
 }
 
+.tce-container > :nth-child(odd) {
+    background-color: var(--excercise-color2);
+}
+
 
 /* --- Set --- */
 
@@ -213,10 +217,6 @@
 
     display: flex;
     font-size: 24px;
-}
-
-.tc-exercise-set:nth-child(odd) {
-    background-color: var(--excercise-color2);
 }
 
 .tc-exercise-set:last-child {
@@ -254,60 +254,7 @@
 /* --- Notes --- */
 
 .tc-notes {
-    width: var(--column-width);
-
-    display: flex;
-}
-
-.tc-exercise-header ~ .tc-notes {
-    padding: var(--excercise-padding);
-
-    border-left: 1px solid var(--excercise-border-color);
-    border-right: 1px solid var(--excercise-border-color);
-
-    background-color: var(--excercise-color2);
-    box-shadow: var(--excercise-shadow);
-}
-
-.tcn-button {
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    margin-left: -3px;
-
-    border-radius: var(--comp-border-radius);
-
-    /* Removing default styles */
-    background-color: transparent;
-    border: none;
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.tcn-button:hover {
-    background-color: var(--secondary-color-hover);
-}
-
-.tcn-button:active {
-    background-color: var(--secondary-color-active);
-}
-
-.tcn-button img {
-    width: 20px;
-}
-
-
-.tc-notes textarea {
-    display: none;
     width: 100%;
-}
-
-.tc-notes.display .tcn-button {
-    display: none;
-}
-
-.tc-notes.display textarea {
-    display: block;
+    height: calc(8px + 3.4 * 1.5em);
+    background-color: transparent;
 }

@@ -50,7 +50,7 @@ function createTrainingInfo(trainingName) {
     const tInfo = trainingTempl.content.cloneNode(true)
     const heading = tInfo.querySelector("h2")
     heading.textContent = trainingName
-    tInfo.firstElementChild.append(createNotes())
+    // tInfo.firstElementChild.append(createNotes())
 
     return tInfo
 }
@@ -61,7 +61,7 @@ function createGroup(groupName) {
     const heading = group.querySelector("h3")
 
     heading.textContent = groupName
-    groupCont.append(createNotes())
+    // groupCont.append(createNotes())
 
     widthObserver.observe(groupCont)
 
@@ -101,35 +101,35 @@ function setWidth(elem) {
 function createExercise(exerciseName, numOfSets) {
     const exercise = exerciseTempl.content.cloneNode(true)
     const heading = exercise.querySelector(".tce-name")
+    const container = exercise.querySelector(".tce-container")
 
+    // Heading
     heading.textContent = exerciseName
 
+    // Notes
+    const button = exercise.querySelector(".tce-notes-button")
+    const notesFrag = notesTempl.content.cloneNode(true)
+    const notes = notesFrag.querySelector(".tc-notes")
+
+    button.addEventListener("click", () => {
+        // Display notes
+        button.style.display = "none"
+        container.prepend(notesFrag)
+
+        // Adjust containing group size
+        const group = container.closest(".tcg-container, .tc-no-group")
+        setWidth(group)
+
+        notes.focus()
+    })
+
     // Sets
-    const container = exercise.querySelector(".tce-container")
     for (const _ of range(numOfSets)) {
         container.append(exerciseSetTempl.content.cloneNode(true))
     }
 
     return exercise
 }
-
-function createNotes() {
-    const notes = notesTempl.content.cloneNode(true)
-    const button = notes.querySelector(".tcn-button")
-    button.addEventListener("click", notesButtonClick)
-
-    return notes
-}
-
-function notesButtonClick(e) {
-    e.currentTarget.parentElement.classList.add("display")
-
-    const group = e.currentTarget.closest(".tcg-container, .tc-no-group")
-    if (group) setWidth(group)
-
-    e.currentTarget.nextElementSibling.focus()
-}
-
 
 // Temporary
 const container = document.querySelector(".tc-container")
