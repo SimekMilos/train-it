@@ -104,6 +104,12 @@ function createExercise(exerciseName, numOfSets) {
 
     heading.textContent = exerciseName
 
+    // Sets
+    const container = exercise.querySelector(".tce-container")
+    for (const _ of range(numOfSets)) {
+        container.append(exerciseSetTempl.content.cloneNode(true))
+    }
+
     return exercise
 }
 

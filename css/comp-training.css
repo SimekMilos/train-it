@@ -200,34 +200,26 @@
     font: 36px/.8 "OpenSans Regular", sans-serif;
 }
 
+.tce-container {
+    counter-reset: sets;
+}
+
 
 /* --- Set --- */
 
 .tc-exercise-set {
-    width: var(--column-width);
-    padding: 5px var(--excercise-padding) 5px 1.5em;
-
-    border-left: 1px solid var(--excercise-border-color);
-    border-right: 1px solid var(--excercise-border-color);
-
-    background-color: var(--excercise-color1);
-    box-shadow: var(--excercise-shadow);
+    padding: 3px 0 3px 1.5em;
 
     display: flex;
     font-size: 24px;
 }
 
-.tc-exercise-set.alternate {
+.tc-exercise-set:nth-child(odd) {
     background-color: var(--excercise-color2);
 }
 
-.tc-exercise-set.last {
+.tc-exercise-set:last-child {
     border-radius: 0 0 var(--excercise-border-radius) var(--excercise-border-radius);
-    border-bottom: 1px solid var(--excercise-border-color);
-}
-
-.tc-exercise-set.last:not(:last-child) {
-    margin-bottom: 15px;
 }
 
 .tc-exercise-set::before {
