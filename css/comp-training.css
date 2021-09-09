@@ -149,7 +149,7 @@
 }
 
 .tce-header {
-    padding: 10px;
+    padding: 10px 10px 12px 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -202,7 +202,14 @@
 }
 
 .tce-container {
+    display: flex;
+    flex-direction: column;
+
     counter-reset: sets;
+}
+
+.tce-container > * {
+    flex-shrink: 0;
 }
 
 .tce-container > :nth-child(odd) {
@@ -213,7 +220,7 @@
 /* --- Set --- */
 
 .tc-exercise-set {
-    padding: 3px 10px 3px 1.5em;
+    padding: 3px 10px 4px 1.5em;
 
     display: flex;
     font-size: 24px;
