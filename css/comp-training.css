@@ -235,7 +235,7 @@
 
 .tc-exercise {
     width: var(--column-width);
-    max-height: 100%;
+    max-height: calc(100% - 10px);
     margin-bottom: 10px;
 
     border: 1px solid var(--border-color);
