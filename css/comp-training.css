@@ -176,6 +176,20 @@
     column-gap: 10px;
 }
 
+/* Notes */
+.tcg-notes {
+    display: none;
+    width: var(--column-width);
+    margin-bottom: 15px;
+
+    border: 1px solid var(--excercise-border-color);
+    background-color: var(--excercise-color2);
+}
+
+.tcg-notes:focus {
+    background-color: var(--excercise-color2);
+}
+
 
 /* --- No Group Container --- */
 

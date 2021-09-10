@@ -69,10 +69,20 @@ function createTrainingInfo(trainingName) {
 function createGroup(groupName) {
     const group = groupTempl.content.cloneNode(true)
     const groupCont = group.querySelector(".tcg-container")
-    const heading = group.querySelector("h3")
 
+    // Heading
+    const heading = group.querySelector("h3")
     heading.textContent = groupName
-    // groupCont.append(createNotes())
+
+    // Notes functionality
+    const notesButton = group.querySelector(".tcg-notes-button")
+    const notes = group.querySelector(".tcg-notes")
+
+    notesButton.addEventListener("click", () => {
+        notesButton.style.display = "none"
+        notes.style.display = "block"
+        notes.focus()
+    })
 
     widthObserver.observe(groupCont)
 
