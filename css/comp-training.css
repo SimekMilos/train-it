@@ -26,7 +26,8 @@
 .tc-container {
     width: 100%;
     height: 100%;
-    padding: 0 10px;
+    padding-left: max(10px, env(safe-area-inset-left, 0));
+    padding-right: max(10px, env(safe-area-inset-right, 0));
 
     /* Content */
     display: flex;
