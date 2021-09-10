@@ -308,8 +308,7 @@
         <div class="training-component">
             <div class="tc-container">
                 <img class="tc-no-training"
-                 src="res/images/training-background.svg"
-                 alt="">
+                     src="res/images/training-background.svg" alt="">
 
                 <!-- Training info, groups and exercises goes here -->
 
@@ -318,11 +317,15 @@
             <!-- Training info template -->
             <template class="tc-training-template">
                 <div class="tc-training">
-                    <h2 class="ellipsis"></h2>
+                    <h2 class="tct-heading ellipsis"></h2>
+
                     <button class="tct-notes-button notes-button">
                         <img src="res/icons/notes.png" alt="Add Notes">
                     </button>
-                    <!-- Notes goes here -->
+
+                    <textarea class="tct-notes text-input notes"
+                            spellcheck="false"
+                            placeholder="- training notes"></textarea>
                 </div>
             </template>
 
@@ -388,7 +391,8 @@
             <!-- Notes template -->
             <template class="tc-notes-template">
                 <textarea class="tc-notes text-input notes"
-                          placeholder="- notes"></textarea>
+                          spellcheck="false"
+                          placeholder="- excercise notes"></textarea>
             </template>
         </div>
 

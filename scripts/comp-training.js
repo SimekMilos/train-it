@@ -48,9 +48,20 @@ const notesTempl = document.querySelector(".tc-notes-template")
 
 function createTrainingInfo(trainingName) {
     const tInfo = trainingTempl.content.cloneNode(true)
-    const heading = tInfo.querySelector("h2")
+
+    // Heading
+    const heading = tInfo.querySelector(".tct-heading")
     heading.textContent = trainingName
-    // tInfo.firstElementChild.append(createNotes())
+
+    // Notes functionality
+    const notesButton = tInfo.querySelector(".tct-notes-button")
+    const notes = tInfo.querySelector(".tct-notes")
+
+    notesButton.addEventListener("click", () => {
+        notesButton.style.display = "none"
+        notes.style.display = "block"
+        notes.focus()
+    })
 
     return tInfo
 }

@@ -103,6 +103,17 @@
     text-align: center;
 }
 
+.tct-notes {
+    display: none;
+    width: 100%;
+    border: 1px solid var(--excercise-border-color);
+    background-color: var(--excercise-color2);
+}
+
+.tct-notes:focus {
+    background-color: var(--excercise-color2);
+}
+
 
 /* --- Group Container --- */
 
