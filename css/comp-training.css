@@ -13,7 +13,6 @@
 
     --notes-tb-padding: 8px;    /* Top Bottom */
     --notes-lr-padding: 12px;   /* Left Rigth */
-    --notes-height: calc(var(--notes-tb-padding) + 3px + 3.5 * 1.5em);
 
     --background-color1: hsl(209, 100%, 95%);
     --background-color2: hsl(209, 100%, 98%);
@@ -311,8 +310,7 @@
 
 .tc-notes {
     width: 100%;
-    height: calc(var(--notes-height) - 2px);
-    padding: var(--notes-tb-padding) var(--notes-lr-padding) 0;
+    padding: var(--notes-tb-padding) var(--notes-lr-padding);
 
     border: none;
     border-radius: 0;

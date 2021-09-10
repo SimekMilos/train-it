@@ -93,12 +93,6 @@ function createGroup(groupName) {
     return [group, groupCont]
 }
 
-function sizeNotes(e) {
-    const styles = getComputedStyle(e.target)
-    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
-    e.target.style.height = px(e.target.scrollHeight + border)
-}
-
 function createNoGroup() {
     const noGroup = noGroupTemp.content.cloneNode(true)
     const noGroupCont = noGroup.querySelector(".tc-no-group")
@@ -139,17 +133,17 @@ function createExercise(exerciseName, numOfSets) {
     const heading = exercise.querySelector(".tce-name")
     const container = exercise.querySelector(".tce-container")
 
-    // Heading
-    heading.textContent = exerciseName
-
-    // Notes
-    const button = exercise.querySelector(".tce-notes-button")
+    const notesButton = exercise.querySelector(".tce-notes-button")
     const notesFrag = notesTempl.content.cloneNode(true)
     const notes = notesFrag.querySelector(".tc-notes")
 
-    button.addEventListener("click", () => {
+    // Heading
+    heading.textContent = exerciseName
+
+    // Notes display
+    notesButton.addEventListener("click", () => {
         // Display notes
-        button.style.display = "none"
+        notesButton.style.display = "none"
         container.prepend(notesFrag)
 
         // Adjust containing group size
@@ -159,12 +153,21 @@ function createExercise(exerciseName, numOfSets) {
         notes.focus()
     })
 
+    // Notes sizing
+    notes.addEventListener("input", sizeNotes)
+
     // Sets
     for (const _ of range(numOfSets)) {
         container.append(exerciseSetTempl.content.cloneNode(true))
     }
 
     return exercise
+}
+
+function sizeNotes(e) {
+    const styles = getComputedStyle(e.target)
+    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
+    e.target.style.height = px(e.target.scrollHeight + border)
 }
 
 // Temporary
