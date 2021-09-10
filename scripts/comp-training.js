@@ -165,11 +165,20 @@ function createExercise(exerciseName, numOfSets) {
 }
 
 function sizeNotes(e) {
-    const styles = getComputedStyle(e.target)
+    const notes = e.target
+    const styles = getComputedStyle(notes)
     const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
-    e.target.style.height = px(e.target.scrollHeight + border)
 
-    const group = e.target.closest(".tcg-container, .tc-no-group")
+    // Set new height
+    notes.style.removeProperty("height")    // for shrinking
+    const height = notes.scrollHeight + border
+
+    if (Math.ceil(float(styles.height)) < height) { // necesary size must be larger
+        notes.style.height = px(height)             // than minimum size
+    }
+
+    // Resize container
+    const group = notes.closest(".tcg-container, .tc-no-group")
     if (group) setWidth(group)
 }
 
