@@ -8,6 +8,11 @@
     margin: 15px 0;
 
     --column-width: 300px;
+
+    --notes-top-padding: 8px;
+    --notes-lr-padding: 12px;
+    --notes-height: calc(var(--notes-top-padding) + 3px + 3.5 * 1.5em);
+
     --excercise-color1: hsl(209, 100%, 95%);
     --excercise-color2: hsl(209, 100%, 98%);
     --excercise-border-color: hsl(209, 100%, 70%);
@@ -106,6 +111,9 @@
 .tct-notes {
     display: none;
     width: 100%;
+    height: var(--notes-height);
+    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
+
     border: 1px solid var(--excercise-border-color);
     background-color: var(--excercise-color2);
 }
@@ -180,7 +188,10 @@
 .tcg-notes {
     display: none;
     width: var(--column-width);
+    height: var(--notes-height);
+
     margin-bottom: 15px;
+    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
 
     border: 1px solid var(--excercise-border-color);
     background-color: var(--excercise-color2);
@@ -279,6 +290,24 @@
 }
 
 
+/* --- Notes --- */
+
+.tc-notes {
+    width: 100%;
+    height: calc(var(--notes-height) - 2px);
+    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
+
+    border: none;
+    border-radius: 0;
+
+    background-color: transparent;
+}
+
+.tc-notes:focus {
+    border: none;
+}
+
+
 /* --- Set --- */
 
 .tc-exercise-set {
@@ -315,19 +344,3 @@
     color: var(--secondary-watch-color);
 }
 
-
-/* --- Notes --- */
-
-.tc-notes {
-    width: 100%;
-    height: calc(6px + 3.4 * 1.5em);
-    border: none;
-    border-radius: 0;
-
-    background-color: transparent;
-    padding-left: 12px;
-}
-
-.tc-notes:focus {
-    border: none;
-}
