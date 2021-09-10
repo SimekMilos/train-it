@@ -47,6 +47,7 @@ body {
     --main-color: hsl(209, 100%, 56%);
     --disabled-control-color: hsl(0, 0%, 65%);
     --disabled-component-color: #0003;
+    --placeholder-color: hsl(0, 0%, 50%);
 
     --button-height: 36px;
     --button-font: 1em "OpenSans Regular", sans-serif;
