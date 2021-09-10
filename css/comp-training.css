@@ -96,12 +96,11 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
 .tc-training h2 {
-    margin-bottom: 5px;
+    margin: 10px 0 15px;
 
     font: normal 24px "OpenSans Regular", sans-serif;
     color: var(--main-color);
