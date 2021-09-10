@@ -2,8 +2,10 @@
 
 
 .training-component {
-    flex-grow: 1;
     height: 0;
+    flex-grow: 1;
+    align-self: center;
+    max-width: 100%;
 
     margin-top: 15px;
 
