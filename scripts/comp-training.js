@@ -168,6 +168,9 @@ function sizeNotes(e) {
     const styles = getComputedStyle(e.target)
     const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
     e.target.style.height = px(e.target.scrollHeight + border)
+
+    const group = e.target.closest(".tcg-container, .tc-no-group")
+    if (group) setWidth(group)
 }
 
 // Temporary
