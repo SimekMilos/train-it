@@ -104,6 +104,10 @@
     align-items: center;
 }
 
+.tc-training > * {
+    flex-shrink: 0;
+}
+
 .tc-training h2 {
     margin: 10px 0 15px;
 
@@ -116,6 +120,7 @@
     display: none;
     width: 100%;
     height: var(--notes-height);
+    flex-shrink: 1;
 
     margin-bottom: 15px;
     padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
@@ -190,11 +195,16 @@
     column-gap: 10px;
 }
 
+.tcg-container > * {
+    flex-shrink: 0;
+}
+
 /* Notes */
 .tcg-notes {
     display: none;
     width: var(--column-width);
     height: var(--notes-height);
+    flex-shrink: 1;
 
     margin-bottom: 10px;
     padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
