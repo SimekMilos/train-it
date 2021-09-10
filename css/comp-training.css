@@ -11,9 +11,9 @@
 
     --column-width: 300px;
 
-    --notes-top-padding: 8px;
-    --notes-lr-padding: 12px;
-    --notes-height: calc(var(--notes-top-padding) + 3px + 3.5 * 1.5em);
+    --notes-tb-padding: 8px;    /* Top Bottom */
+    --notes-lr-padding: 12px;   /* Left Rigth */
+    --notes-height: calc(var(--notes-tb-padding) + 3px + 3.5 * 1.5em);
 
     --background-color1: hsl(209, 100%, 95%);
     --background-color2: hsl(209, 100%, 98%);
@@ -123,7 +123,7 @@
     flex-shrink: 1;
 
     margin-bottom: 15px;
-    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
+    padding: var(--notes-tb-padding) var(--notes-lr-padding);
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -207,7 +207,7 @@
     flex-shrink: 1;
 
     margin-bottom: 10px;
-    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
+    padding: var(--notes-tb-padding) var(--notes-lr-padding);
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -314,7 +314,7 @@
 .tc-notes {
     width: 100%;
     height: calc(var(--notes-height) - 2px);
-    padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
+    padding: var(--notes-tb-padding) var(--notes-lr-padding) 0;
 
     border: none;
     border-radius: 0;
