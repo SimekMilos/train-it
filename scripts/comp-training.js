@@ -48,20 +48,22 @@ const notesTempl = document.querySelector(".tc-notes-template")
 
 function createTrainingInfo(trainingName) {
     const tInfo = trainingTempl.content.cloneNode(true)
+    const notesButton = tInfo.querySelector(".tct-notes-button")
+    const notes = tInfo.querySelector(".tct-notes")
 
     // Heading
     const heading = tInfo.querySelector(".tct-heading")
     heading.textContent = trainingName
 
-    // Notes functionality
-    const notesButton = tInfo.querySelector(".tct-notes-button")
-    const notes = tInfo.querySelector(".tct-notes")
-
+    // Notes display
     notesButton.addEventListener("click", () => {
         notesButton.style.display = "none"
         notes.style.display = "block"
         notes.focus()
     })
+
+    // Notes sizing
+    notes.addEventListener("input", sizeNotes)
 
     return tInfo
 }
@@ -69,28 +71,32 @@ function createTrainingInfo(trainingName) {
 function createGroup(groupName) {
     const group = groupTempl.content.cloneNode(true)
     const groupCont = group.querySelector(".tcg-container")
+    const notesButton = group.querySelector(".tcg-notes-button")
+    const notes = group.querySelector(".tcg-notes")
 
     // Heading
     const heading = group.querySelector("h3")
     heading.textContent = groupName
 
-    // Notes functionality
-    const notesButton = group.querySelector(".tcg-notes-button")
-    const notes = group.querySelector(".tcg-notes")
-
+    // Notes display
     notesButton.addEventListener("click", () => {
         notesButton.style.display = "none"
         notes.style.display = "block"
-
-        // Adjust containing group size
         setWidth(groupCont)
-
         notes.focus()
     })
 
-    widthObserver.observe(groupCont)
+    // Notes sizing
+    notes.addEventListener("input", sizeNotes)
 
+    widthObserver.observe(groupCont)
     return [group, groupCont]
+}
+
+function sizeNotes(e) {
+    const styles = getComputedStyle(e.target)
+    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
+    e.target.style.height = px(e.target.scrollHeight + border)
 }
 
 function createNoGroup() {

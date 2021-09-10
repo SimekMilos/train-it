@@ -119,7 +119,6 @@
 .tct-notes {
     display: none;
     width: 100%;
-    height: var(--notes-height);
     flex-shrink: 1;
 
     margin-bottom: 15px;
@@ -203,7 +202,6 @@
 .tcg-notes {
     display: none;
     width: var(--column-width);
-    height: var(--notes-height);
     flex-shrink: 1;
 
     margin-bottom: 10px;
