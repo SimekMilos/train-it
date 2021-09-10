@@ -81,6 +81,10 @@ function createGroup(groupName) {
     notesButton.addEventListener("click", () => {
         notesButton.style.display = "none"
         notes.style.display = "block"
+
+        // Adjust containing group size
+        setWidth(groupCont)
+
         notes.focus()
     })
 
@@ -107,8 +111,13 @@ function setWidthObs(entries) {
 }
 
 function setWidth(elem) {
-    const first = elem.firstElementChild
+    let first = elem.firstElementChild
     const last = elem.lastElementChild
+
+    // If first element isn't displayed
+    if (getComputedStyle(first).display == "none") {
+        first = first.nextElementSibling
+    }
 
     let start = first.getBoundingClientRect().left
     start -= float(getComputedStyle(first).marginLeft)
