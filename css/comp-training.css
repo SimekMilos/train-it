@@ -5,7 +5,7 @@
     flex-grow: 1;
     height: 0;
 
-    margin: 15px 0;
+    margin-top: 15px;
 
     --column-width: 300px;
 
@@ -13,10 +13,12 @@
     --notes-lr-padding: 12px;
     --notes-height: calc(var(--notes-top-padding) + 3px + 3.5 * 1.5em);
 
-    --excercise-color1: hsl(209, 100%, 95%);
-    --excercise-color2: hsl(209, 100%, 98%);
-    --excercise-border-color: hsl(209, 100%, 70%);
-    --excercise-border-radius: 7px;
+    --background-color1: hsl(209, 100%, 95%);
+    --background-color2: hsl(209, 100%, 98%);
+    --border-color: hsl(209, 100%, 70%);
+    --border-radius: 7px;
+    --shadow: 2px 2px 3px #0002;
+
 }
 
 .tc-container {
@@ -113,35 +115,37 @@
     height: var(--notes-height);
     padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
 
-    border: 1px solid var(--excercise-border-color);
-    background-color: var(--excercise-color2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color2);
+    box-shadow: var(--shadow);
 }
 
 .tct-notes:focus {
-    background-color: var(--excercise-color2);
+    background-color: var(--background-color2);
 }
 
 
 /* --- Group Container --- */
 
 .tc-group {
-    margin: 0 10px;
+    margin: 0 10px 15px;
     padding: 10px;
 
-    border: 1px solid hsl(0, 0%, 30%);
-    border-radius: var(--comp-border-radius);
+    border: 1px solid var(--main-color);
+    border-radius: var(--border-radius);
 
     /* For dynamic sizing of tcg-container */
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow);
 }
 
 .tcg-header {
     position: sticky;
-    left: 10px;
+    left: 0;
 
     width: var(--column-width);
-    margin-bottom: 10px;
 
     display: flex;
     align-items: center;
@@ -174,8 +178,6 @@
     flex-grow: 1;
     padding-top: 10px;
 
-    border-top: 1px solid var(--main-color);
-
     /* Multiple column layout */
     display: flex;
     flex-flow: column wrap;
@@ -192,12 +194,14 @@
     margin-bottom: 15px;
     padding: var(--notes-top-padding) var(--notes-lr-padding) 0;
 
-    border: 1px solid var(--excercise-border-color);
-    background-color: var(--excercise-color2);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color2);
+    box-shadow: var(--shadow);
 }
 
 .tcg-notes:focus {
-    background-color: var(--excercise-color2);
+    background-color: var(--background-color2);
 }
 
 
@@ -221,11 +225,11 @@
     max-height: 100%;
     margin-bottom: 15px;
 
-    border: 1px solid var(--excercise-border-color);
-    border-radius: var(--excercise-border-radius);
-    box-shadow: 2px 2px 3px #0002;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 
-    background-color: var(--excercise-color1);
+    background-color: var(--background-color1);
 
     /* Content */
     display: flex;
@@ -238,7 +242,7 @@
 
 .tce-header {
     padding: 10px;
-    border-bottom: 1px solid var(--excercise-border-color);
+    border-bottom: 1px solid var(--border-color);
 
     /* Content */
     display: flex;
@@ -271,7 +275,7 @@
 .tce-container {
     flex-shrink: 1;
     overflow: auto;
-    border-radius: 0 0 var(--excercise-border-radius) var(--excercise-border-radius);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
 
     counter-reset: sets;
 
@@ -285,7 +289,7 @@
 }
 
 .tce-container > :nth-child(odd) {
-    background-color: var(--excercise-color2);
+    background-color: var(--background-color2);
 }
 
 
