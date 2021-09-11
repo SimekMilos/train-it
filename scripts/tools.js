@@ -28,3 +28,17 @@ export function* range(startStop, stop, step) {
         yield i
     }
 }
+
+export function sizeNotes(event) {
+    const notes = event.target
+    const styles = getComputedStyle(notes)
+    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
+
+    // Set new height
+    notes.style.removeProperty("height")            // for shrinking
+    const height = notes.scrollHeight + border
+
+    if (Math.ceil(float(styles.height)) < height) { // necesary size must be
+        notes.style.height = px(height)             // larger than minimum size
+    }
+}

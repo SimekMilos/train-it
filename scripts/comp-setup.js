@@ -1,5 +1,5 @@
 
-import {px, float, range} from "./tools.js"
+import {px, float, range, sizeNotes} from "./tools.js"
 
 const initialScreen = document.querySelector(".initial-screen")
 
@@ -146,7 +146,6 @@ scrollContainer.addEventListener("scroll", onScroll)
 
 
 
-
 // --- Temporary ---
 
 const groupTemplate = document.querySelector(".ts-group-template")
@@ -188,3 +187,17 @@ for (const _ of range(3)) {
 }
 
 exerciseContainer.append(exercise)
+
+
+// --- Sizing notes ---
+// TODO: Note sizing should be moved to Create functions made similarly as
+// training create functions
+
+const noteArr = []
+noteArr.push(document.querySelector(".ts-training-notes"))
+noteArr.push(...document.querySelectorAll(".ts-group-notes"))
+noteArr.push(...document.querySelectorAll(".ts-exercise-notes"))
+
+for (const note of noteArr) {
+    note.addEventListener("input", sizeNotes)
+}

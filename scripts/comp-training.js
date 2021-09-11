@@ -1,5 +1,5 @@
 
-import {px, float, range} from "./tools.js"
+import {px, float, range, sizeNotes} from "./tools.js"
 
 // No training display sizing and positioning
 
@@ -63,7 +63,7 @@ function createTrainingInfo(trainingName) {
     })
 
     // Notes sizing
-    notes.addEventListener("input", sizeNotes)
+    notes.addEventListener("input", sizeTrainingNotes)
 
     return tInfo
 }
@@ -87,7 +87,7 @@ function createGroup(groupName) {
     })
 
     // Notes sizing
-    notes.addEventListener("input", sizeNotes)
+    notes.addEventListener("input", sizeTrainingNotes)
 
     widthObserver.observe(groupCont)
     return [group, groupCont]
@@ -154,7 +154,7 @@ function createExercise(exerciseName, numOfSets) {
     })
 
     // Notes sizing
-    notes.addEventListener("input", sizeNotes)
+    notes.addEventListener("input", sizeTrainingNotes)
 
     // Sets
     for (const _ of range(numOfSets)) {
@@ -164,21 +164,11 @@ function createExercise(exerciseName, numOfSets) {
     return exercise
 }
 
-function sizeNotes(e) {
-    const notes = e.target
-    const styles = getComputedStyle(notes)
-    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
-
-    // Set new height
-    notes.style.removeProperty("height")    // for shrinking
-    const height = notes.scrollHeight + border
-
-    if (Math.ceil(float(styles.height)) < height) { // necesary size must be larger
-        notes.style.height = px(height)             // than minimum size
-    }
+function sizeTrainingNotes(e) {
+    sizeNotes(e)
 
     // Resize container
-    const group = notes.closest(".tcg-container, .tc-no-group")
+    const group = e.target.closest(".tcg-container, .tc-no-group")
     if (group) setWidth(group)
 }
 
