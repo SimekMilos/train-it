@@ -199,7 +199,7 @@ window.addEventListener("load", () => {
     const runningExcercise2 = document.querySelectorAll(".tc-exercise")[2]
     const runningSet2 = runningExcercise2.querySelectorAll(".tc-exercise-set")[1]
 
-    for (const elem of [runningGroup, runningExcercise, runningExcercise2]) {
+    for (const elem of [runningGroup, runningExcercise]) {
         elem.classList.add("running")
     }
 

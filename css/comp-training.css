@@ -310,6 +310,11 @@
     background-color: var(--background-color2);
 }
 
+/* Running excercise */
+.tc-exercise.running .tce-watch {
+    color: var(--running-color);
+}
+
 
 /* --- Notes --- */
 
