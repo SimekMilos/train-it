@@ -9,16 +9,16 @@
 
     margin-top: 15px;
 
-    --column-width: 300px;
+    --column-width: 15em;
 
-    --notes-tb-padding: 8px;    /* Top Bottom */
-    --notes-lr-padding: 12px;   /* Left Rigth */
+    --notes-tb-padding: .4em;    /* Top Bottom */
+    --notes-lr-padding: .6em;   /* Left Rigth */
 
     --background-color1: hsl(209, 100%, 95%);
     --background-color2: hsl(209, 100%, 98%);
     --border-color: hsl(209, 100%, 70%);
-    --border-radius: 7px;
-    --shadow: 2px 2px 3px #0002;
+    --border-radius: .35em;
+    --shadow: .1em .1em .15em #0002;
 
     font-size: 20px;
 }
@@ -26,8 +26,8 @@
 .tc-container {
     width: 100%;
     height: 100%;
-    padding-left: max(10px, env(safe-area-inset-left, 0));
-    padding-right: max(10px, env(safe-area-inset-right, 0));
+    padding-left: max(.5em, env(safe-area-inset-left, 0));
+    padding-right: max(.5em, env(safe-area-inset-right, 0));
 
     /* Content */
     display: flex;
@@ -50,11 +50,12 @@
 /* Notes button */
 
 .notes-button {
-    width: 30px;
-    height: 30px;
-    padding: 5px;
+    width: 1.5em;
+    height: 1.5em;
+    padding: .25em;
 
     border-radius: var(--comp-border-radius);
+    font-size: inherit;
 
     /* Removing default styles */
     background-color: transparent;
@@ -73,7 +74,7 @@
 }
 
 .notes-button img {
-    width: 20px;
+    width: 1em;
     opacity: .5;
 }
 
@@ -109,9 +110,9 @@
 }
 
 .tc-training h2 {
-    margin: 10px 0 15px;
+    margin: .5em 0 .75em;
 
-    font: normal 24px "OpenSans Regular", sans-serif;
+    font: normal 1.2em "OpenSans Regular", sans-serif;
     color: var(--main-color);
     text-align: center;
 }
@@ -121,8 +122,9 @@
     width: 100%;
     flex-shrink: 1;
 
-    margin-bottom: 15px;
+    margin-bottom: 0.938em;
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
+    font-size: .8em;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -138,8 +140,8 @@
 /* --- Group Container --- */
 
 .tc-group {
-    margin: 0 10px 15px;
-    padding: 10px 10px 0;
+    margin: 0 .5em .75em;
+    padding: .5em .5em 0;
 
     border: 1px solid var(--main-color);
     border-radius: var(--border-radius);
@@ -170,7 +172,7 @@
 
 .tcg-heading {
     color: var(--main-color);
-    font: normal 22px "OpenSans Regular", sans-serif;
+    font: normal 1.1em "OpenSans Regular", sans-serif;
 }
 
 .tcg-notes-button {
@@ -179,19 +181,19 @@
 
 .tcg-watch {
     margin-top: -.05em;
-    font: 40px/.8 "OpenSans Regular", sans-serif;
+    font: 2em/.8 "OpenSans Regular", sans-serif;
 }
 
 .tcg-container {
     height: 0;
     flex-grow: 1;
-    padding-top: 10px;
+    padding-top: .5em;
 
     /* Multiple column layout */
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
-    column-gap: 10px;
+    column-gap: .5em;
 }
 
 .tcg-container > * {
@@ -201,11 +203,12 @@
 /* Notes */
 .tcg-notes {
     display: none;
-    width: var(--column-width);
+    width: calc(var(--column-width) / .8);
     flex-shrink: 1;
 
-    margin-bottom: 10px;
+    margin-bottom: 0.625em;
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
+    font-size: .8em;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -227,13 +230,13 @@
 
 .tc-no-group {
     height: 100%;
-    padding-bottom: 5px;
+    padding-bottom: .25em;
 
     /* Multiple column layout */
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
-    column-gap: 10px;
+    column-gap: .5em;
 }
 
 
@@ -241,8 +244,8 @@
 
 .tc-exercise {
     width: var(--column-width);
-    max-height: calc(100% - 10px);
-    margin-bottom: 10px;
+    max-height: calc(100% - .5em);
+    margin-bottom: .5em;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -260,7 +263,7 @@
 }
 
 .tce-header {
-    padding: 10px;
+    padding: .5em;
     border-bottom: 1px solid var(--border-color);
 
     /* Content */
@@ -278,7 +281,7 @@
 }
 
 .tce-name {
-    font: normal 22px "OpenSans Regular", sans-serif;
+    font: normal 1.1em "OpenSans Regular", sans-serif;
     color: hsl(209, 100%, 40%);
 }
 
@@ -288,7 +291,7 @@
 
 .tce-watch {
     margin-right: -.02em;
-    font: 36px/.8 "OpenSans Regular", sans-serif;
+    font: 1.8em/.8 "OpenSans Regular", sans-serif;
 }
 
 .tce-container {
