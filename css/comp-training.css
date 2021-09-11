@@ -12,7 +12,7 @@
     --column-width: 15em;
 
     --notes-tb-padding: .4em;    /* Top Bottom */
-    --notes-lr-padding: .6em;   /* Left Rigth */
+    --notes-lr-padding: .6em;    /* Left Rigth */
 
     --background-color1: hsl(209, 100%, 95%);
     --background-color2: hsl(209, 100%, 98%);
@@ -27,7 +27,6 @@
     width: 100%;
     height: 100%;
     padding-left: max(.5em, env(safe-area-inset-left, 0));
-    padding-right: max(.5em, env(safe-area-inset-right, 0));
 
     /* Content */
     display: flex;
@@ -37,6 +36,14 @@
 
 .tc-container > * {
     flex-shrink: 0;
+}
+
+.tc-container::after{   /* Fix for right padding not working in Safari */
+    flex-shrink: 0;
+    content: "";
+
+    width: env(safe-area-inset-right, 0);
+    margin-left: -.5em;
 }
 
 
@@ -141,7 +148,7 @@
 
 .tc-group {
     margin: 0 .5em .75em;
-    padding: .5em .5em 0;
+    padding: .5em 0 0 .5em;
 
     border: 1px solid var(--main-color);
     border-radius: var(--border-radius);
@@ -193,7 +200,6 @@
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
-    column-gap: .5em;
 }
 
 .tcg-container > * {
@@ -236,7 +242,6 @@
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
-    column-gap: .5em;
 }
 
 
@@ -245,7 +250,7 @@
 .tc-exercise {
     width: var(--column-width);
     max-height: calc(100% - .5em);
-    margin-bottom: .5em;
+    margin: 0 .5em .5em 0;
 
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -366,7 +371,10 @@
     padding-left: .5em;
 
     display: flex;
-    column-gap: .5em;
+}
+
+.tcex-set-watch {
+   margin-right: .5em;
 }
 
 .tcex-pause-watch {
