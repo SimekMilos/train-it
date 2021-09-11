@@ -167,7 +167,7 @@
     align-items: center;
 }
 
-.tcg-header h3 {
+.tcg-heading {
     color: var(--main-color);
     font: normal 22px "OpenSans Regular", sans-serif;
 }
@@ -176,7 +176,7 @@
     margin-right: .5em;
 }
 
-.tcg-header p {
+.tcg-watch {
     margin-top: -.05em;
     font: 40px/.8 "OpenSans Regular", sans-serif;
 }
