@@ -20,6 +20,7 @@
     --border-radius: 7px;
     --shadow: 2px 2px 3px #0002;
 
+    font-size: 20px;
 }
 
 .tc-container {
@@ -336,10 +337,10 @@
 /* --- Set --- */
 
 .tc-exercise-set {
-    padding: 3px 10px 4px 1.5em;
+    padding: .15em .5em .2em 1.5em;
 
     display: flex;
-    font-size: 24px;
+    font-size: 1.2em;
 }
 
 .tc-exercise-set::before {
