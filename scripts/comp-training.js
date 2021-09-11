@@ -192,7 +192,7 @@ window.addEventListener("load", () => {
     }
 
     // Activating running styles
-    const runningGroup = document.querySelector(".tc-group-template")
+    const runningGroup = document.querySelector(".tc-group")
     const runningExcercise = document.querySelectorAll(".tc-exercise")[1]
     const runningSet = runningExcercise.querySelectorAll(".tc-exercise-set")[1]
 

@@ -216,6 +216,11 @@
     background-color: var(--background-color2);
 }
 
+/* Running group */
+.tc-group.running .tcg-watch {
+    color: var(--running-color);
+}
+
 
 /* --- No Group Container --- */
 
