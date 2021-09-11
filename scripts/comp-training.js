@@ -208,3 +208,19 @@ window.addEventListener("load", () => {
 
     document.querySelector(".st-current-stopwatch").classList.add("running-set")
 })
+
+
+// test em sizing
+
+let value = 20
+let down = true
+
+setInterval(() => {
+    if (down) {
+        trainingComponent.style.fontSize = px(value--)
+        if (value <= 10) down = false
+    } else {
+        trainingComponent.style.fontSize = px(value++)
+        if (value >= 20) down = true
+    }
+}, 500)
