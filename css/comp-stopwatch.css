@@ -104,6 +104,15 @@
     align-items: center;
 }
 
+/* Running watch */
+.st-current-stopwatch.running-set {
+    color: hsl(0, 80%, 40%);
+}
+
+.st-current-stopwatch.running-pause {
+    color: hsl(120, 100%, 25%);
+}
+
 
 /* Main controls */
 /* margin, space between, font-size, borders are set in JS */
