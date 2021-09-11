@@ -59,6 +59,9 @@ body {
 
     --secondary-watch-color: #0009;
 
+    --running-color: red;
+    --running-pause-color: hsl(120, 100%, 35%);
+
     --comp-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
         0 5px 15px 10px rgba(0,0,0,.15);

@@ -359,3 +359,28 @@
     color: var(--secondary-watch-color);
 }
 
+/* Running set */
+.tc-exercise-set.running-set::before {
+    color: var(--running-color);
+}
+
+.tc-exercise-set.running-set .tcex-name {
+    color: var(--running-color);
+}
+
+.tc-exercise-set.running-set .tcex-set-watch {
+    color: var(--running-color);
+}
+
+/* Running pause */
+.tc-exercise-set.running-pause::before {
+    color: var(--running-pause-color);
+}
+
+.tc-exercise-set.running-pause .tcex-name {
+    color: var(--running-pause-color);
+}
+
+.tc-exercise-set.running-pause .tcex-pause-watch {
+    color: var(--running-pause-color);
+}

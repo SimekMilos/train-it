@@ -190,5 +190,19 @@ window.addEventListener("load", () => {
             container.append(createExercise(`Excercise ${num+1}`, 3))
         }
     }
-})
 
+    // Activating running styles
+    const runningGroup = document.querySelector(".tc-group-template")
+    const runningExcercise = document.querySelectorAll(".tc-exercise")[1]
+    const runningSet = runningExcercise.querySelectorAll(".tc-exercise-set")[1]
+
+    const runningExcercise2 = document.querySelectorAll(".tc-exercise")[2]
+    const runningSet2 = runningExcercise2.querySelectorAll(".tc-exercise-set")[1]
+
+    for (const elem of [runningGroup, runningExcercise, runningExcercise2]) {
+        elem.classList.add("running")
+    }
+
+    runningSet.classList.add("running-set")
+    runningSet2.classList.add("running-pause")
+})
