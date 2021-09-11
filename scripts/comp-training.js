@@ -11,7 +11,7 @@ const noTrainings = document.querySelector(".tc-no-training")
 const landscapeSizeFactor = 1
 const portraitSizeFactor = .8
 
-function onResize() {
+function resizeNoTrainDisp() {
     // Positioning
     const screenHeight = mainScreen.getBoundingClientRect().height
     const watchHeight = watchComponent.getBoundingClientRect().height
@@ -32,9 +32,9 @@ function onResize() {
 }
 
 // Temporary - activate od displaying
-window.addEventListener("load", onResize)
+window.addEventListener("load", resizeNoTrainDisp)
 
-new ResizeObserver(onResize).observe(trainingComponent)
+new ResizeObserver(resizeNoTrainDisp).observe(trainingComponent)
 
 
 // Creating training parts
