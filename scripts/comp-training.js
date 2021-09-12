@@ -90,7 +90,7 @@ function createGroup(groupName) {
     notesButton.addEventListener("click", () => {
         notesButton.style.display = "none"
         notes.style.display = "block"
-        setWidth(groupCont)
+        setGroupWidth(groupCont)
         notes.focus()
     })
 
@@ -110,17 +110,17 @@ function createNoGroup() {
     return [noGroup, noGroupCont]
 }
 
-const widthObserver = new ResizeObserver(setWidthObs)
+const widthObserver = new ResizeObserver(setGroupWidthObs)
 
-function setWidthObs(entries) {
+function setGroupWidthObs(entries) {
     for (const {target} of entries) {
-        setWidth(target)
+        setGroupWidth(target)
     }
 }
 
-function setWidth(elem) {
-    let first = elem.firstElementChild
-    const last = elem.lastElementChild
+function setGroupWidth(groupContainer) {
+    let first = groupContainer.firstElementChild
+    const last = groupContainer.lastElementChild
 
     // If first element isn't displayed
     if (getComputedStyle(first).display == "none") {
@@ -133,7 +133,7 @@ function setWidth(elem) {
     let end = last.getBoundingClientRect().right
     end += float(getComputedStyle(last).marginRight)
 
-    elem.style.width = px(end - start)
+    groupContainer.style.width = px(end - start)
 }
 
 function createExercise(exerciseName, numOfSets) {
@@ -156,7 +156,7 @@ function createExercise(exerciseName, numOfSets) {
 
         // Adjust containing group size
         const group = container.closest(".tcg-container, .tc-no-group")
-        setWidth(group)
+        setGroupWidth(group)
 
         notes.focus()
     })
@@ -177,7 +177,7 @@ function sizeTrainingNotes(e) {
 
     // Resize container
     const group = e.target.closest(".tcg-container, .tc-no-group")
-    if (group) setWidth(group)
+    if (group) setGroupWidth(group)
 }
 
 // Temporary
