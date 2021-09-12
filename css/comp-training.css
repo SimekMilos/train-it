@@ -213,7 +213,7 @@
     width: calc(var(--column-width) / .8);
     flex-shrink: 1;
 
-    margin-bottom: 0.625em;
+    margin: 0 .625em .625em 0;
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
     font-size: .8em;
 
