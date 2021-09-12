@@ -19,8 +19,6 @@
     --border-color: hsl(209, 100%, 70%);
     --border-radius: .35em;
     --shadow: .1em .1em .15em #0002;
-
-    font-size: 20px;
 }
 
 .tc-container {

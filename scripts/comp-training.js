@@ -40,15 +40,8 @@ new ResizeObserver(resizeNoTrainDisp).observe(trainingComponent)
 new ResizeObserver(sizeComponent).observe(trainingComponent)
 
 function sizeComponent() {
-    // max size threshold
     const height = float(getComputedStyle(trainingComponent).height)
-    const size = height * (20/255)
-
-    if (size < 20) {
-        trainingComponent.style.fontSize = px(size)
-    } else {
-        trainingComponent.style.removeProperty("font-size")
-    }
+    trainingComponent.style.fontSize = px(0.03*height + 4.78)
 }
 
 
