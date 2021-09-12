@@ -43,7 +43,6 @@
     content: "";
 
     width: env(safe-area-inset-right, 0);
-    margin-left: -.5em;
 }
 
 
@@ -164,6 +163,7 @@
     left: 0;
 
     width: var(--column-width);
+    margin-right: .5em;
 
     display: flex;
     align-items: center;
