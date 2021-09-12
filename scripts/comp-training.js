@@ -19,7 +19,8 @@ function resizeNoTrainDisp() {
     noTrainings.style.top = px(top)
 
     // Sizing
-    const {width, height} = trainingComponent.getBoundingClientRect()
+    const width = mainScreen.getBoundingClientRect().width
+    const height = trainingComponent.getBoundingClientRect().height
     const min = Math.min(width, height)
 
     let sizeFactor = landscapeSizeFactor
