@@ -30,6 +30,8 @@
     display: flex;
     flex-direction: row;
     overflow: auto;
+
+    scroll-snap-type: x mandatory;
 }
 
 .tc-container > * {
@@ -104,9 +106,12 @@
 .tc-training {
     width: var(--column-width);
 
+    /* Content */
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    scroll-snap-align: center;
 }
 
 .tc-training > * {
@@ -219,6 +224,8 @@
     border-radius: var(--border-radius);
     background-color: var(--background-color2);
     box-shadow: var(--shadow);
+
+    scroll-snap-align: center;
 }
 
 .tcg-notes:focus {
@@ -260,6 +267,8 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    scroll-snap-align: center;
 }
 
 .tc-exercise > * {
