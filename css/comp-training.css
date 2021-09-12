@@ -178,6 +178,7 @@
 }
 
 .tcg-heading {
+    margin-top: -.1em;
     color: var(--main-color);
     font: normal 1.1em "OpenSans Regular", sans-serif;
 }
@@ -187,7 +188,7 @@
 }
 
 .tcg-watch {
-    margin-top: -.05em;
+    margin-top: -.08em;
     font: 2em/.8 "OpenSans Regular", sans-serif;
 }
 
@@ -295,7 +296,7 @@
 }
 
 .tce-watch {
-    margin-right: -.02em;
+    margin: -.05em -.02em 0 0;
     font: 1.8em/.8 "OpenSans Regular", sans-serif;
 }
 
@@ -368,13 +369,17 @@
 
 .tcex-watches {
     margin-left: auto;
-    padding-left: .5em;
+    padding-left: .45em;
+
+    font-size: 1.05em;
+    line-height: .8;
 
     display: flex;
+    align-items: center;
 }
 
 .tcex-set-watch {
-   margin-right: .5em;
+   margin-right: .45em;
 }
 
 .tcex-pause-watch {
