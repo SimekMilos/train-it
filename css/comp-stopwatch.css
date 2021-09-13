@@ -51,6 +51,8 @@
 
 @media (orientation: portrait) {
     .stopwatch-component {
+        --sec-butt-size: clamp(36px, 4vw, 42px);
+
         flex-direction: column;
         justify-content: unset;
         align-items: center;
@@ -58,15 +60,6 @@
 
     .st-first-container, .st-second-container {
         margin: 0 var(--margin-left) 0 var(--margin-right);
-    }
-}
-
-
-/* Size of secondary buttons on touch devices */
-
-@media (pointer: coarse) {
-    .stopwatch-component {
-        --sec-butt-size: clamp(36px, 4vw, 42px);
     }
 }
 
