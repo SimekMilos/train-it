@@ -34,10 +34,6 @@
     scroll-snap-type: x mandatory;
 }
 
-.tc-container > * {
-    flex-shrink: 0;
-}
-
 .tc-container::after{   /* Fix for right padding not working in Safari */
     flex-shrink: 0;
     content: "";
@@ -112,10 +108,6 @@
     align-items: center;
 
     scroll-snap-align: center;
-}
-
-.tc-training > * {
-    flex-shrink: 0;
 }
 
 .tc-training h2 {
@@ -206,10 +198,6 @@
     align-content: flex-start;
 }
 
-.tcg-container > * {
-    flex-shrink: 0;
-}
-
 /* Notes */
 .tcg-notes {
     display: none;
@@ -271,10 +259,6 @@
     scroll-snap-align: center;
 }
 
-.tc-exercise > * {
-    flex-shrink: 0;
-}
-
 .tce-header {
     padding: .5em;
     border-bottom: 1px solid var(--border-color);
@@ -317,10 +301,6 @@
     /* Content */
     display: flex;
     flex-direction: column;
-}
-
-.tce-container > * {
-    flex-shrink: 0;
 }
 
 .tce-container > :nth-child(odd) {

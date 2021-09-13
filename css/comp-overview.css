@@ -97,7 +97,6 @@
 
 .ov-training .handle {
     margin: 0 10px;
-    flex-shrink: 0;
 }
 
     /* Selected state */

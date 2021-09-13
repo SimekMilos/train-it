@@ -158,10 +158,6 @@
     overflow: auto;
 }
 
-.ts-scroll-container > * {
-    flex-shrink: 0;
-}
-
 
 /* Bottom Controls */
 
@@ -200,10 +196,6 @@
 
     display: flex;
     flex-direction: column;
-}
-
-.ts-exercise-container > * {
-    flex-shrink: 0;
 }
 
 /* No Exercises Display */

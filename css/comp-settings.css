@@ -70,10 +70,6 @@
     --list-offset: 21px;
 }
 
-.sett-main-window > * {
-    flex-shrink: 0;
-}
-
 .settings-component.display .sett-main-window {
     opacity: 0;
     --from: -50px;

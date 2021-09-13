@@ -113,10 +113,6 @@ body {
     flex-direction: column;
 }
 
-.main-screen > * {
-    flex-shrink: 0;
-}
-
 /* Temporary disabling */
 .initial-screen {
     display: none;
@@ -133,6 +129,7 @@ body {
     width: var(--comp-default-width);
     height: calc(100% - 2 * var(--comp-default-margin));
     margin: 0 var(--comp-default-margin);
+    flex-shrink: 1;
 
     /* Content */
     display: flex;
