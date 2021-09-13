@@ -15,8 +15,7 @@
     background-color: white;
     border-radius: var(--comp-border-radius);
     box-shadow: var(--comp-shadow);
-    transition: box-shadow ease-in-out;
-        /* For when hiding under setup component */
+    transition: box-shadow ease-in-out;  /* When hiding under setup component */
 
     /* Content */
     flex-direction: column;

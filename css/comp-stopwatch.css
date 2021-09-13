@@ -140,19 +140,10 @@
 
 /* Secondary controls */
 
-.ts-close {
-    position: absolute;
-    top: var(--sec-butt-offset-top);
-    left: var(--sec-butt-offset-left);
-
-    width: var(--sec-butt-size);
-    height: var(--sec-butt-size);
-}
-
 .ts-settings {
     position: absolute;
     top: var(--sec-butt-offset-top);
-    right: var(--sec-butt-offset-right);
+    left: var(--sec-butt-offset-left);
 
     width: var(--sec-butt-size);
     height: var(--sec-butt-size);
@@ -176,4 +167,14 @@
     background: linear-gradient(var(--secondary-color-active),
                                 var(--secondary-color-active)),
                 var(--background);
+}
+
+
+.ts-close {
+    position: absolute;
+    top: var(--sec-butt-offset-top);
+    right: var(--sec-butt-offset-right);
+
+    width: var(--sec-butt-size);
+    height: var(--sec-butt-size);
 }
