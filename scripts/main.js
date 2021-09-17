@@ -1,4 +1,8 @@
-"use strict"
+
+import * as overview from "./comp-overview/overview.js"
+
+
+window.addEventListener("load", onAppLoad)
 
 function onAppLoad() {
     // Deactivate loading screen
@@ -8,11 +12,6 @@ function onAppLoad() {
     const loadingElem = document.querySelector(".loading-screen p")
     loadingElem.style.animationPlayState = "paused"
 
-
-    // Display overview
-    const overview = document.querySelector(".overview-component")
-    overview.classList.add("display")
+    // Display overview component
+    overview.displayComponent()
 }
-
-window.addEventListener("load", onAppLoad)
-
