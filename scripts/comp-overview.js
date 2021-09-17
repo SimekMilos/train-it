@@ -1,24 +1,4 @@
 
-const overviewComponent = document.querySelector(".overview-component")
-const compClassList = overviewComponent.classList
-
-/*
-TODO: at places displaying/hiding Overview
-    - disable access when outro animation starts
-*/
-
-function onAnimationEnd() {
-    // Displaying - enable access to controls
-    if(compClassList.contains("display")) {
-        compClassList.add("enable-access")
-
-    // Hiding - undisplay
-    } else {
-        compClassList.remove("hide")
-    }
-}
-
-overviewComponent.addEventListener("animationend", onAnimationEnd)
 
 
 // Temporary
