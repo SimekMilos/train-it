@@ -82,6 +82,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1;
 
     /* Background */
     background:
@@ -108,18 +109,11 @@ body {
     left: 0;
     right: 0;
 
+    opacity: 0;
+
     /* Content */
     display: flex;
     flex-direction: column;
-}
-
-/* Temporary disabling */
-.initial-screen {
-    display: none;
-}
-
-.main-screen {
-    /*display: none;*/
 }
 
 
