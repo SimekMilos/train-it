@@ -48,7 +48,6 @@
 }
 
 .overview-component h2 {
-    padding-bottom: 10px;
     font: 16px "OpenSans SemiBold", sans-serif;
 }
 
@@ -58,19 +57,25 @@
     flex: 1 0 0;        /* flex-shrink is overwritten by higher priority rule
                         above to the same value 0 */
     padding-left: 15px;
-    border: none;
-
     overflow: auto;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* --- No Trainings Display --- */
 .ov-no-trainings {
-    margin: 1em 1em 1em calc(1em - 15px);
+    margin: auto 1em auto calc(1em - 15px);
 }
 
 
 /* --- Trainings --- */
+
+.ov-training:nth-child(2) {
+    margin-top: 10px;
+}
 
 .ov-training label {
     padding: 10px 0;
