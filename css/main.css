@@ -235,7 +235,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
 
-    --border: 2px solid var(--secondary-control-color);
+    --handle-color: var(--secondary-control-color);   /* Redefinable color */
+    --border: 2px solid var(--handle-color);
 }
 
 .handle::before, .handle::after {
