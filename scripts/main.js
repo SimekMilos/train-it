@@ -12,6 +12,7 @@ function onAppLoad() {
     const loadingElem = document.querySelector(".loading-screen p")
     loadingElem.style.animationPlayState = "paused"
 
-    // Display overview component
+    // Setup overview component
+    overview.loadTrainings()
     overview.displayComponent()
 }
