@@ -2,10 +2,10 @@
 const overviewCom = document.querySelector(".overview-component")
 const compClassList = overviewCom.classList
 
-
-// --- Displaying component ---
-
 let resolveHide = null
+
+
+// --- Interface ---
 
 export function display() {
     compClassList.add("display")
@@ -15,10 +15,13 @@ export function hide() {
     compClassList.add("hide")
     compClassList.remove("display", "enable-access")
 
-    return new Promise((resolve) => {
-        resolveHide = resolve
-    })
+    return new Promise(resolve => resolveHide = resolve)
 }
+
+
+// --- Private ---
+
+overviewCom.addEventListener("animationend", onAnimationEnd)
 
 function onAnimationEnd() {
     // Displaying
@@ -31,5 +34,3 @@ function onAnimationEnd() {
         resolveHide()
     }
 }
-
-overviewCom.addEventListener("animationend", onAnimationEnd)

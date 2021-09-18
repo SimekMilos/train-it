@@ -1,9 +1,9 @@
 
-import * as graphics from "./graphics.js"
+import * as displayFunc from "./display.js"
 import * as func from "./functionality.js"
 
 
 export const loadTrainings = func.loadTrainings
 
-export const display = graphics.display
-export const hide = graphics.hide
+export const display = displayFunc.display
+export const hide = displayFunc.hide
