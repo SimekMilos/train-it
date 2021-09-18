@@ -112,6 +112,12 @@ function floatingMode(mode) {
     if (mode == "resize" && floatingModeActive && !activate) {
         deactivateFloatingMode(false)
     }
+
+    // Set width
+    if (floatingModeActive && mode == "resize") {
+        const overviewWidth = window.getComputedStyle(overviewComponent).width
+        settingsContainer.style.width = px(float(overviewWidth) - 30)
+    }
 }
 
 function activateFloatingMode(animate) {
