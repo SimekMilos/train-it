@@ -3,6 +3,8 @@ const trainingTemplate = document.querySelector(".ov-training-template")
 const trainingList = document.querySelector(".ov-training-list")
 
 
+// --- Loading trainings ---
+
 export function loadTrainings() {
     const storage = window.localStorage
 
@@ -34,3 +36,20 @@ function createTrainingItem(trainingID, trainingName) {
     return training
 }
 
+
+// --- Displaying overview-settings ---
+
+import * as overSettings from "../overview-settings/overview-settings.js"
+
+const settingsButton = document.querySelector(".ov-settings")
+
+async function onSettingsClick() {
+    settingsButton.disabled = true
+
+    if (!overSettings.isDisplayed()) await overSettings.display()
+    else                             await overSettings.hide()
+
+    settingsButton.disabled = false
+}
+
+settingsButton.addEventListener("click", onSettingsClick)
