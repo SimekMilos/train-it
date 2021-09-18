@@ -39,15 +39,15 @@ function createTrainingItem(trainingID, trainingName) {
 
 // --- Displaying overview-settings ---
 
-import * as overSettings from "../overview-settings/overview-settings.js"
+import * as overviewSettings from "../overview-settings/overview-settings.js"
 
 const settingsButton = document.querySelector(".ov-settings")
 
 async function onSettingsClick() {
     settingsButton.disabled = true
 
-    if (!overSettings.isDisplayed()) await overSettings.display()
-    else                             await overSettings.hide()
+    if (!overviewSettings.isDisplayed()) await overviewSettings.display()
+    else                                 await overviewSettings.hide()
 
     settingsButton.disabled = false
 }

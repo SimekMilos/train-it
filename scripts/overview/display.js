@@ -3,7 +3,7 @@ const overviewComponent = document.querySelector(".overview-component")
 const compClassList = overviewComponent.classList
 const compStyle = overviewComponent.style
 
-let resolveTransition = null
+let resolveAction = null
 
 
 // --- Interface ---
@@ -11,14 +11,14 @@ let resolveTransition = null
 export function display() {
     compClassList.add("display")
 
-    return new Promise(resolve => resolveTransition = resolve)
+    return new Promise(resolve => resolveAction = resolve)
 }
 
 export function hide() {
     compClassList.add("hide")
     compClassList.remove("display", "enable-access")
 
-    return new Promise(resolve => resolveTransition = resolve)
+    return new Promise(resolve => resolveAction = resolve)
 }
 
 export function disable(animDuration = 0) {
@@ -27,7 +27,7 @@ export function disable(animDuration = 0) {
     compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
     compClassList.add("disable-visible-display")
 
-    return new Promise(resolve => resolveTransition = resolve)
+    return new Promise(resolve => resolveAction = resolve)
 }
 
 export function enable(animDuration = 0) {
@@ -37,7 +37,7 @@ export function enable(animDuration = 0) {
     compClassList.add("disable-visible-hide")
     compClassList.remove("disable-visible-display")
 
-    return new Promise(resolve => resolveTransition = resolve)
+    return new Promise(resolve => resolveAction = resolve)
 }
 
 
@@ -46,7 +46,7 @@ export function enable(animDuration = 0) {
 overviewComponent.addEventListener("animationend", onAnimationEnd)
 
 function onAnimationEnd() {
-    resolveTransition()
+    resolveAction()
 
     // Disabling/enabling
     if (compClassList.contains("disable-visible-display") ||
