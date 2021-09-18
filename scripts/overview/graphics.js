@@ -6,11 +6,11 @@ const overviewCom = document.querySelector(".overview-component")
 
 let resolveHide = null
 
-export function displayComponent() {
+export function display() {
     overviewCom.classList.add("display")
 }
 
-export function hideComponent() {
+export function hide() {
     overviewCom.classList.add("hide")
     overviewCom.classList.remove("display", "enable-access")
 

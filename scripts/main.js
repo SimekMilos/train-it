@@ -14,5 +14,5 @@ function onAppLoad() {
 
     // Setup overview component
     overview.loadTrainings()
-    overview.displayComponent()
+    overview.display()
 }

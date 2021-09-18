@@ -5,5 +5,5 @@ import * as func from "./functionality.js"
 
 export const loadTrainings = func.loadTrainings
 
-export const displayComponent = graphics.displayComponent
-export const hideComponent = graphics.hideComponent
+export const display = graphics.display
+export const hide = graphics.hide
