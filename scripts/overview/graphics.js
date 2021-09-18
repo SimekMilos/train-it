@@ -1,5 +1,6 @@
 
 const overviewCom = document.querySelector(".overview-component")
+const compClassList = overviewCom.classList
 
 
 // --- Displaying component ---
@@ -7,12 +8,12 @@ const overviewCom = document.querySelector(".overview-component")
 let resolveHide = null
 
 export function display() {
-    overviewCom.classList.add("display")
+    compClassList.add("display")
 }
 
 export function hide() {
-    overviewCom.classList.add("hide")
-    overviewCom.classList.remove("display", "enable-access")
+    compClassList.add("hide")
+    compClassList.remove("display", "enable-access")
 
     return new Promise((resolve) => {
         resolveHide = resolve
@@ -21,12 +22,12 @@ export function hide() {
 
 function onAnimationEnd() {
     // Displaying
-    if(overviewCom.classList.contains("display")) {
-        overviewCom.classList.add("enable-access")
+    if(compClassList.contains("display")) {
+        compClassList.add("enable-access")
 
     // Hiding
     } else {
-        overviewCom.classList.remove("hide")
+        compClassList.remove("hide")
         resolveHide()
     }
 }
