@@ -1,5 +1,5 @@
 
-import * as overview from "./comp-overview/overview.js"
+import * as overview from "./overview/overview.js"
 
 
 window.addEventListener("load", onAppLoad)
