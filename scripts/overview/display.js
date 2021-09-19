@@ -1,5 +1,7 @@
 
 const overviewComponent = document.querySelector(".overview-component")
+const settingsButton = document.querySelector(".ov-settings")
+
 const compClassList = overviewComponent.classList
 const compStyle = overviewComponent.style
 
@@ -38,6 +40,10 @@ export function enable(animDuration = 0) {
     compClassList.remove("disable-visible-display")
 
     return new Promise(resolve => resolveAction = resolve)
+}
+
+export function settingsButtonDisable(disable) {
+    settingsButton.disabled = disable
 }
 
 

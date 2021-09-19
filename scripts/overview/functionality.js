@@ -1,6 +1,10 @@
 
+import {settingsButtonDisable} from "./display.js"
+import * as overviewSettings from "../overview-settings/overview-settings.js"
+
 const trainingTemplate = document.querySelector(".ov-training-template")
 const trainingList = document.querySelector(".ov-training-list")
+const settingsButton = document.querySelector(".ov-settings")
 
 
 // --- Loading trainings ---
@@ -39,17 +43,13 @@ function createTrainingItem(trainingID, trainingName) {
 
 // --- Displaying overview-settings ---
 
-import * as overviewSettings from "../overview-settings/overview-settings.js"
-
-const settingsButton = document.querySelector(".ov-settings")
-
 async function onSettingsClick() {
-    settingsButton.disabled = true
+    settingsButtonDisable(true)
 
     if (!overviewSettings.isDisplayed()) await overviewSettings.display()
     else                                 await overviewSettings.hide()
 
-    settingsButton.disabled = false
+    settingsButtonDisable(false)
 }
 
 settingsButton.addEventListener("click", onSettingsClick)

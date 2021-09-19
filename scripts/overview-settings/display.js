@@ -49,8 +49,14 @@ export function hide() {
 // --- Private ---
 
 settingsComponent.addEventListener("animationend", onAnimationEnd)
-closeButton.addEventListener("click", hide)
+closeButton.addEventListener("click", onCloseClick)
 
+
+async function onCloseClick() {
+    overview.settingsButtonDisable(true)
+    await hide()
+    overview.settingsButtonDisable(false)
+}
 
 function onAnimationEnd() {
     // Displaying
