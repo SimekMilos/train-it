@@ -114,7 +114,7 @@ function floatingMode(mode) {
     }
 
     // Set width
-    if (floatingModeActive && mode == "resize") {
+    if (floatingModeActive) {
         const overviewWidth = window.getComputedStyle(overviewComponent).width
         settingsContainer.style.width = px(float(overviewWidth) - 30)
     }
@@ -128,10 +128,6 @@ function activateFloatingMode(animate) {
     const style = settingsContainer.style
     style.position = "absolute"
     style.transform = "translate(-50%, -50%)"
-
-    // Set width
-    const overviewWidth = window.getComputedStyle(overviewComponent).width
-    style.width = px(float(overviewWidth) - 30)
 }
 
 function deactivateFloatingMode(animate) {
