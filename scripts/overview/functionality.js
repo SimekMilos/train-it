@@ -120,23 +120,23 @@ initialScreen.addEventListener("click", detectDeselection)
 // --- Deleting Training ---
 
 function deleteTraining() {
-    // confirm deletion
-    if (!window.confirm("Do you want to delete selected training?")) return
-    deselectedMode(false)
-
     // find selected training
-    let training = trainingList.querySelectorAll(":scope [name=\"training\"]")
-    training = Array.from(training)
-    training = training.find(value => value.checked)
+    let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
+    trainings = Array.from(trainings)
+    let training = trainings.find(value => value.checked)
     training = training.parentElement
+
+    // confirm deletion
+    const trName = training.querySelector(":scope .ovt-name").textContent
+    if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
+    deselectedMode(false)
 
     // delete element
     training.classList.add("hidden")
     training.addEventListener("transitionend", () => training.remove())
 
-    // delete training id from order list
+    // delete training from order list
     const deleteID = training.firstElementChild.id
-
     let orderArr = JSON.parse(storage.getItem("training-order"))
     orderArr = orderArr.filter(id => id != deleteID)
 
@@ -146,7 +146,7 @@ function deleteTraining() {
         storage.removeItem("training-order")
     }
 
-    // delete training
+    // delete training data
     storage.removeItem(deleteID)
 }
 
