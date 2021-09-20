@@ -167,7 +167,7 @@ async function smoothRemoveBottomPadding(elem, amount, duration) {
     while (amount > 0) {
         amount -= step
         elem.style.paddingBottom = px(amount)
-        await wait(8)
+        await wait(8)                           // 120 fps
     }
     elem.style.removeProperty("padding-bottom")
 }
@@ -197,11 +197,9 @@ async function createTraining() {
     // scroll container
     const tList = trainingList
     if (tList.scrollTop + tList.clientHeight < tList.scrollHeight) {
-        smoothScrollDown(tList, 100)
-        await wait(200)
-    } else {
-        await wait(100)
+        await smoothScrollDown(tList, 100)
     }
+    await wait(100)
 
     // display training item
     const trItem = createTrainingItem(trID, training.name)
@@ -225,12 +223,16 @@ function generateTrainingID() {
 
 async function smoothScrollDown(elem, duration) {
     const diff = elem.scrollHeight - elem.scrollTop - elem.clientHeight
-    const step = Math.ceil(8*diff/duration)
+    const step = 8*diff/duration
+    let scrolled = elem.scrollTop
 
-    while (elem.scrollTop + elem.clientHeight < elem.scrollHeight) {
-        elem.scrollBy({top: step})
+    while (scrolled + elem.clientHeight < elem.scrollHeight) {
+        scrolled += step
+        elem.scroll({top: scrolled})
         await wait(8)               // 120 fps
     }
+
+    elem.scroll({top: elem.scrollHeight - elem.clientHeight})
 }
 
 createButton.addEventListener("click", createTraining)
