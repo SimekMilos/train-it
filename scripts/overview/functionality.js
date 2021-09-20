@@ -37,6 +37,8 @@ function createTrainingItem(trainingID, trainingName) {
     label.htmlFor = trainingID
     name.textContent = trainingName
 
+    label.addEventListener("click", trainingSelectedMode)
+
     return training
 }
 
@@ -53,3 +55,38 @@ async function onSettingsClick() {
 }
 
 settingsButton.addEventListener("click", onSettingsClick)
+
+
+// --- Training select ---
+
+const openTimerButton = document.querySelector(".ov-open-timer")
+const openTrainingButton = document.querySelector(".ov-open-training")
+const createButton = document.querySelector(".ov-create")
+const editButton = document.querySelector(".ov-edit")
+const deleteButton = document.querySelector(".ov-delete")
+
+
+function trainingSelectedMode() {
+    openTrainingButton.style.display = "block"
+    editButton.style.display = "block"
+
+    openTimerButton.style.display = "none"
+    createButton.style.display = "none"
+
+    deleteButton.disabled = false
+}
+
+function trainingDeselectedMode() {
+    // deselect selected training
+    for (const trItem of trainingList.querySelectorAll(":scope [name=\"training\"]")) {
+        trItem.checked = false
+    }
+
+    openTrainingButton.style.display = "none"
+    editButton.style.display = "none"
+
+    openTimerButton.style.display = "block"
+    createButton.style.display = "block"
+
+    deleteButton.disabled = true
+}
