@@ -138,12 +138,16 @@ async function deleteTraining() {
     training.classList.add("hidden")
 
     const itemHeight = float(getComputedStyle(training).height)
-    trainingList.style.paddingBottom = px(itemHeight)
+    if (trainingList.scrollHeight > trainingList.clientHeight) {
+        trainingList.style.paddingBottom = px(itemHeight)
+    }
 
     training.addEventListener("transitionend", async () => {
         training.remove()
         await wait(200)
-        smoothRemoveBottomPadding(trainingList, itemHeight, 250)
+        if (trainingList.style.paddingBottom) {
+            smoothRemoveBottomPadding(trainingList, itemHeight, 250)
+        }
     })
 
     // delete training from order list
