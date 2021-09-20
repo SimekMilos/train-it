@@ -156,17 +156,59 @@ async function deleteTraining() {
 deleteButton.addEventListener("click", deleteTraining)
 
 
+// --- Create/Edit Training ---
+
+import * as setup from "../setup/setup.js"
+
+async function createTraining() {
+    const training = await setup.setupTraining()
+    if (!training) return
+
+    const trID = generateTrainingID()
+
+    // add training in order array
+    let orderArr = JSON.parse(storage.getItem("training-order"))
+    if (!orderArr) orderArr = new Array
+    orderArr.push(trID)
+    storage.setItem("training-order", JSON.stringify(orderArr))
+
+    // save trainind data
+    storage.setItem(trID, JSON.stringify(training))
+
+    // display training item
+    const trItem = createTrainingItem(trID, training.name)
+    const itemElem = trItem.firstElementChild
+    itemElem.classList.add("hidden")
+
+    trainingList.append(trItem)
+    setTimeout(() => itemElem.classList.remove("hidden"), 0)
+}
+
+async function editTraining() {
+
+}
+
+function generateTrainingID() {
+    for(const count of range(1, Infinity)) {
+        const ID = `training-${count}`
+        if (!storage.getItem(ID)) return ID
+    }
+}
+
+createButton.addEventListener("click", createTraining)
+editButton.addEventListener("click", editTraining)
+
 
 
 // Temporary
 // Creating data in local storage
-import {range} from "../tools.js"
 
-(() => {
+;(() => {
+    storage.clear()
     storage.setItem("training-order",
-        JSON.stringify(["training-3", "training-2", "training-1"]))
+        JSON.stringify(["training-2", "training-1"]))
 
-    for (const num of range(1,4)) {
+    for (const num of range(1,3)) {
         storage.setItem(`training-${num}`,
             JSON.stringify({name: `Training ${num}`}))
     }
