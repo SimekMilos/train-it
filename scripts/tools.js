@@ -33,6 +33,15 @@ export function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+export function waitFor(element, event) {
+    return new Promise(resolve => {
+        element.addEventListener(event, function handler() {
+            element.removeEventListener(event, handler)
+            resolve()
+        })
+    })
+}
+
 export function sizeNotes(event) {
     const notes = event.target
     const styles = getComputedStyle(notes)

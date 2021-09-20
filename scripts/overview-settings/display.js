@@ -1,5 +1,5 @@
 
-import {px, float} from "../tools.js"
+import {px, float, waitFor} from "../tools.js"
 import * as overview from "../overview/overview.js"
 
 const settingsContainer = document.querySelector(".ov-container")
@@ -136,7 +136,7 @@ function activateFloatingMode(animate) {
     style.transform = "translate(-50%, -50%)"
 }
 
-function deactivateFloatingMode(animate) {
+async function deactivateFloatingMode(animate) {
     floatingModeActive = false
     overview.enable(animate ? 400 : 0)
 
@@ -149,9 +149,7 @@ function deactivateFloatingMode(animate) {
 
     if (!animate) remove()
     else {
-        settingsComponent.addEventListener("animationend", function defered() {
-            settingsComponent.removeEventListener("animationend", defered)
-            remove()
-        })
+        await waitFor(settingsComponent, "animationend")
+        remove()
     }
 }
