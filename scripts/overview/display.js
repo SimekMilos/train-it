@@ -10,6 +10,8 @@ let resolveAction = null
 
 // --- Interface ---
 
+// Display
+
 export function display() {
     compClassList.add("display")
 
@@ -22,6 +24,9 @@ export function hide() {
 
     return new Promise(resolve => resolveAction = resolve)
 }
+
+
+// Disabling
 
 export function disable(animDuration = 0) {
     /* animDuration - time in ms */
@@ -41,6 +46,13 @@ export function enable(animDuration = 0) {
 
     return new Promise(resolve => resolveAction = resolve)
 }
+
+export function isDisabled() {
+    return compClassList.contains("disable-visible-display")
+}
+
+
+// Settings button
 
 export function settingsButtonDisable(disable) {
     settingsButton.disabled = disable
