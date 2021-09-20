@@ -166,7 +166,7 @@ async function createTraining() {
 
     const trID = generateTrainingID()
 
-    // add training in order array
+    // add training in storage order array
     let orderArr = JSON.parse(storage.getItem("training-order"))
     if (!orderArr) orderArr = new Array
     orderArr.push(trID)
@@ -174,6 +174,15 @@ async function createTraining() {
 
     // save trainind data
     storage.setItem(trID, JSON.stringify(training))
+
+    // scroll container
+    const tList = trainingList
+    if (tList.scrollTop + tList.clientHeight < tList.scrollHeight) {
+        smoothScrollDown(tList, 100)
+        await wait(200)
+    } else {
+        await wait(100)
+    }
 
     // display training item
     const trItem = createTrainingItem(trID, training.name)
@@ -192,6 +201,16 @@ function generateTrainingID() {
     for(const count of range(1, Infinity)) {
         const ID = `training-${count}`
         if (!storage.getItem(ID)) return ID
+    }
+}
+
+async function smoothScrollDown(elem, duration) {
+    const diff = elem.scrollHeight - elem.scrollTop - elem.clientHeight
+    const step = Math.ceil(8*diff/duration)
+
+    while (elem.scrollTop + elem.clientHeight < elem.scrollHeight) {
+        elem.scrollBy({top: step})
+        await wait(8)               // 120 fps
     }
 }
 
