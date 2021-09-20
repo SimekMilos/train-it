@@ -126,13 +126,17 @@
     margin-top: 5px;
 }
 
-.ov-open {
+.ov-open-timer, .ov-open-training {
     width: 100%;
 }
 
-.ov-create-edit {
+.ov-create, .ov-edit {
     flex: 1 1 0;
     margin-right: 5px;
+}
+
+.ov-open-training, .ov-edit {   /* Initial display state */
+    display: none;
 }
 
 .ov-delete {
@@ -149,7 +153,7 @@
 }
 
 .ov-settings:disabled {
-    /* Settings is being disabled during fade in/out animations.
+    /* Settings button is being disabled during fade in/out animations.
        This disabling shouldn't be visible. */
     border-color: var(--button-color);
 }
