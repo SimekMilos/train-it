@@ -6,12 +6,12 @@ const trainingTemplate = document.querySelector(".ov-training-template")
 const trainingList = document.querySelector(".ov-training-list")
 const settingsButton = document.querySelector(".ov-settings")
 
+const storage = window.localStorage
+
 
 // --- Loading trainings ---
 
 export function loadTrainings() {
-    const storage = window.localStorage
-
     let order = storage.getItem("training-order")
     if (!order) return
 
@@ -117,6 +117,40 @@ function detectDeselection(event) {
 initialScreen.addEventListener("click", detectDeselection)
 
 
+// --- Deleting Training ---
+
+function deleteTraining() {
+    // confirm deletion
+    if (!window.confirm("Do you want to delete selected training?")) return
+
+    // find selected training
+    let training = trainingList.querySelectorAll(":scope [name=\"training\"]")
+    training = Array.from(training)
+    training = training.find(value => value.checked)
+    training = training.parentElement
+
+    // delete element
+    training.remove()
+
+    // delete training id from order list
+    const deleteID = training.firstElementChild.id
+
+    let orderArr = JSON.parse(storage.getItem("training-order"))
+    orderArr = orderArr.filter(id => id != deleteID)
+
+    if (orderArr.length) {
+        storage.setItem("training-order", JSON.stringify(orderArr))
+    } else {
+        storage.removeItem("training-order")
+    }
+
+    // delete training
+    storage.removeItem(deleteID)
+}
+
+deleteButton.addEventListener("click", deleteTraining)
+
+
 
 
 // Temporary
@@ -124,8 +158,6 @@ initialScreen.addEventListener("click", detectDeselection)
 import {range} from "../tools.js"
 
 (() => {
-    const storage = localStorage
-
     storage.setItem("training-order",
         JSON.stringify(["training-3", "training-2", "training-1"]))
 
