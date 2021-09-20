@@ -72,27 +72,47 @@
 
 
 /* --- Trainings --- */
+.ov-training {
+    position: relative;
+
+    height: var(--height);
+    overflow: hidden;
+    transition: height .4s;
+
+    --height: 43px;
+}
 
 .ov-training:nth-child(2) {
     margin-top: 10px;
+    border-top: 1px solid var(--main-color);
 }
 
+.ov-training:last-child {
+    margin-bottom: 5px;
+}
+
+/* Displaying/hiding transition */
+.ov-training.hidden {
+    height: 0px;
+}
+
+.ov-training.hidden:nth-child(2) {
+    height: 1px;
+}
+
+
 .ov-training label {
-    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: var(--height);
     border-bottom: 1px solid var(--main-color);
 
     /* Content */
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.ov-training:nth-child(2) label {
-    border-top: 1px solid var(--main-color);
-}
-
-.ov-training:last-child {
-    margin-bottom: 5px;
 }
 
 .ovt-name {

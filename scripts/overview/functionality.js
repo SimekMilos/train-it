@@ -130,7 +130,8 @@ function deleteTraining() {
     training = training.parentElement
 
     // delete element
-    training.remove()
+    training.classList.add("hidden")
+    training.addEventListener("transitionend", () => training.remove())
 
     // delete training id from order list
     const deleteID = training.firstElementChild.id
