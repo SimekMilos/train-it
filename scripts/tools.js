@@ -30,7 +30,7 @@ export function* range(startStop, stop, step) {
 }
 
 export function wait(milliseconds) {
-    return new Promise(resolve => setInterval(resolve, milliseconds))
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 export function sizeNotes(event) {
