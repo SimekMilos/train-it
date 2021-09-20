@@ -79,12 +79,7 @@ function selectedMode() {
     deleteButton.disabled = false
 }
 
-function deselectedMode() {
-    // deselect selected training
-    for (const trItem of trainingList.querySelectorAll(":scope [name=\"training\"]")) {
-        trItem.checked = false
-    }
-
+function deselectedMode(uncheck = true) {
     openTrainingButton.style.display = "none"
     editButton.style.display = "none"
 
@@ -92,6 +87,11 @@ function deselectedMode() {
     createButton.style.display = "block"
 
     deleteButton.disabled = true
+
+    // unchecks selected training
+    if (!uncheck) return
+    const trItems = trainingList.querySelectorAll(":scope [name=\"training\"]")
+    for (const trItem of trItems) trItem.checked = false
 }
 
 function detectDeselection(event) {
@@ -122,6 +122,7 @@ initialScreen.addEventListener("click", detectDeselection)
 function deleteTraining() {
     // confirm deletion
     if (!window.confirm("Do you want to delete selected training?")) return
+    deselectedMode(false)
 
     // find selected training
     let training = trainingList.querySelectorAll(":scope [name=\"training\"]")
