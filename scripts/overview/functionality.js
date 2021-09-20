@@ -1,4 +1,6 @@
 
+import {range, wait} from "../tools.js"
+
 import * as display from "./display.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
 
@@ -119,7 +121,7 @@ initialScreen.addEventListener("click", detectDeselection)
 
 // --- Deleting Training ---
 
-function deleteTraining() {
+async function deleteTraining() {
     // find selected training
     let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
     trainings = Array.from(trainings)
@@ -132,6 +134,7 @@ function deleteTraining() {
     deselectedMode(false)
 
     // delete element
+    await wait(200)
     training.classList.add("hidden")
     training.addEventListener("transitionend", () => training.remove())
 
