@@ -1,5 +1,5 @@
 
-import {settingsButtonDisable} from "./display.js"
+import * as display from "./display.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
 
 const trainingTemplate = document.querySelector(".ov-training-template")
@@ -37,7 +37,7 @@ function createTrainingItem(trainingID, trainingName) {
     label.htmlFor = trainingID
     name.textContent = trainingName
 
-    label.addEventListener("click", trainingSelectedMode)
+    label.addEventListener("click", selectedMode)
 
     return training
 }
@@ -46,18 +46,21 @@ function createTrainingItem(trainingID, trainingName) {
 // --- Displaying overview-settings ---
 
 async function onSettingsClick() {
-    settingsButtonDisable(true)
+    display.settingsButtonDisable(true)
 
     if (!overviewSettings.isDisplayed()) await overviewSettings.display()
     else                                 await overviewSettings.hide()
 
-    settingsButtonDisable(false)
+    display.settingsButtonDisable(false)
 }
 
 settingsButton.addEventListener("click", onSettingsClick)
 
 
 // --- Training select ---
+
+const initialScreen = document.querySelector(".initial-screen")
+const verticalContainer = document.querySelector(".vertical-container")
 
 const openTimerButton = document.querySelector(".ov-open-timer")
 const openTrainingButton = document.querySelector(".ov-open-training")
@@ -66,7 +69,7 @@ const editButton = document.querySelector(".ov-edit")
 const deleteButton = document.querySelector(".ov-delete")
 
 
-function trainingSelectedMode() {
+function selectedMode() {
     openTrainingButton.style.display = "block"
     editButton.style.display = "block"
 
@@ -76,7 +79,7 @@ function trainingSelectedMode() {
     deleteButton.disabled = false
 }
 
-function trainingDeselectedMode() {
+function deselectedMode() {
     // deselect selected training
     for (const trItem of trainingList.querySelectorAll(":scope [name=\"training\"]")) {
         trItem.checked = false
@@ -90,6 +93,28 @@ function trainingDeselectedMode() {
 
     deleteButton.disabled = true
 }
+
+function detectDeselection(event) {
+    /* Deselection applies when:
+        - clicked outside of component
+        - clicked within component but not on any controls
+    */
+
+    const target = event.target
+
+    if (display.isDisabled()) return
+    if (target.closest(".ov-training")) return
+    if (target.closest(".ov-controls")) return
+
+    if (target == initialScreen ||
+        target == verticalContainer ||
+        target.closest(".overview-component")) {
+
+        deselectedMode()
+    }
+}
+
+initialScreen.addEventListener("click", detectDeselection)
 
 
 
