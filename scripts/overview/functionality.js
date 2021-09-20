@@ -90,3 +90,22 @@ function trainingDeselectedMode() {
 
     deleteButton.disabled = true
 }
+
+
+
+
+// Temporary
+// Creating data in local storage
+import {range} from "../tools.js"
+
+(() => {
+    const storage = localStorage
+
+    storage.setItem("training-order",
+        JSON.stringify(["training-3", "training-2", "training-1"]))
+
+    for (const num of range(1,4)) {
+        storage.setItem(`training-${num}`,
+            JSON.stringify({name: `Training ${num}`}))
+    }
+})()
