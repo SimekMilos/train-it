@@ -1,5 +1,5 @@
 
-import {range, wait} from "../tools.js"
+import {px, float, range, wait} from "../tools.js"
 
 import * as display from "./display.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -133,10 +133,18 @@ async function deleteTraining() {
     if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
     deselectedMode(false)
 
-    // delete element
+    // delete element and scroll up
     await wait(200)
     training.classList.add("hidden")
-    training.addEventListener("transitionend", () => training.remove())
+
+    const itemHeight = float(getComputedStyle(training).height)
+    trainingList.style.paddingBottom = px(itemHeight)
+
+    training.addEventListener("transitionend", async () => {
+        training.remove()
+        await wait(200)
+        smoothRemoveBottomPadding(trainingList, itemHeight, 250)
+    })
 
     // delete training from order list
     const deleteID = training.firstElementChild.id
@@ -151,6 +159,17 @@ async function deleteTraining() {
 
     // delete training data
     storage.removeItem(deleteID)
+}
+
+async function smoothRemoveBottomPadding(elem, amount, duration) {
+    const step = 8*amount/duration
+
+    while (amount > 0) {
+        amount -= step
+        elem.style.paddingBottom = px(amount)
+        await wait(8)
+    }
+    elem.style.removeProperty("padding-bottom")
 }
 
 deleteButton.addEventListener("click", deleteTraining)
