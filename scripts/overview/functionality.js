@@ -150,7 +150,7 @@ async function deleteTraining() {
         }
     })
 
-    // delete training from order list
+    // delete training from storage order list
     const deleteID = training.firstElementChild.id
     let orderArr = JSON.parse(storage.getItem("training-order"))
     orderArr = orderArr.filter(id => id != deleteID)
@@ -209,9 +209,10 @@ async function createTraining() {
     const trItem = createTrainingItem(trID, training.name)
     const itemElem = trItem.firstElementChild
     itemElem.classList.add("hidden")
-
     trainingList.append(trItem)
-    setTimeout(() => itemElem.classList.remove("hidden"), 0)
+
+    await wait(0)   // for transition
+    itemElem.classList.remove("hidden")
 }
 
 async function editTraining() {
