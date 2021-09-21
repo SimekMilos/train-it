@@ -263,6 +263,34 @@ createButton.addEventListener("click", createTraining)
 editButton.addEventListener("click", editTraining)
 
 
+// --- Open Training/Timer ---
+
+import * as screens from "../screens.js"
+
+async function openTraining() {
+
+}
+
+async function openTimer() {
+    display.disableAccess()
+
+    // Hide overview settings
+    if (overviewSettings.isDisplayed()) {
+        overviewSettings.hide()
+        await wait(100)
+    }
+    await wait(100)
+
+    // Hide overview
+    await display.hide()
+
+    // Open timer
+    screens.transitionToMainScreen(null)
+}
+
+openTrainingButton.addEventListener("click", openTraining)
+openTimerButton.addEventListener("click", openTimer)
+
 
 // Temporary
 // Creating data in local storage

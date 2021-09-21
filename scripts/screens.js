@@ -14,6 +14,9 @@ export async function initInitScreen() {
     overview.display()
 }
 
+export async function transitionToMainScreen(training) {
+    // training - training data obj/null
+}
 
 // Transition to main screen
     // Hide initial screen
