@@ -189,8 +189,8 @@ deleteButton.addEventListener("click", deleteTraining)
 import * as setup from "../setup/setup.js"
 
 async function createTraining() {
-    const training = await setup.setupTraining()
-    if (!training) return
+    const trData = await setup.setupTraining()
+    if (!trData) return
 
     const trID = generateTrainingID()
 
@@ -201,7 +201,7 @@ async function createTraining() {
     storage.setItem("training-order", JSON.stringify(orderArr))
 
     // Save trainind data
-    storage.setItem(trID, JSON.stringify(training))
+    storage.setItem(trID, JSON.stringify(trData))
 
     // Scroll container
     const tList = trainingList
@@ -211,7 +211,7 @@ async function createTraining() {
     await wait(100)
 
     // Display training item
-    const trItem = createTrainingItem(trID, training.name)
+    const trItem = createTrainingItem(trID, trData.name)
     const itemElem = trItem.firstElementChild
     itemElem.classList.add("hidden")
     trainingList.append(trItem)
@@ -221,7 +221,21 @@ async function createTraining() {
 }
 
 async function editTraining() {
+    // get selected training
+    const trElem = getSelectedTraining()
+    const trID = trElem.firstElementChild.id
+    let trData = JSON.parse(storage.getItem(trID))
 
+    // edit training
+    trData = await setup.setupTraining(trData)
+    if (!trData) return
+
+    // save training data
+    storage.setItem(trID, JSON.stringify(trData))
+
+    // edit text in training item
+    const textElem = trElem.querySelector(":scope .ovt-name")
+    textElem.textContent = trData.name
 }
 
 function generateTrainingID() {
