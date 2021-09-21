@@ -28,12 +28,12 @@
     opacity: 0;
 
     --from: -50px;
-    animation: fade-in .7s .5s forwards;
+    animation: fade-in .7s forwards;
 }
 
 .overview-component.hide {
     display: flex;
-    animation: fade-out .7s .2s forwards;
+    animation: fade-out .7s forwards;
 }
 
 
