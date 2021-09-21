@@ -214,21 +214,18 @@ async function createTraining() {
 }
 
 async function editTraining() {
-    // get selected training
-    const trElem = getSelectedTraining()
-    const trID = trElem.firstElementChild.id
-    let trData = JSON.parse(storage.getItem(trID))
+    // Get selected training
+    let {trID, trData, trNameElem} = getSelectedTraining()
 
-    // edit training
+    // Edit training
     trData = await setup.setupTraining(trData)
     if (!trData) return
 
-    // save training data
+    // Save training data
     storage.setItem(trID, JSON.stringify(trData))
 
-    // edit text in training item
-    const textElem = trElem.querySelector(":scope .ovt-name")
-    textElem.textContent = trData.name
+    // Edit text in training item
+    trNameElem.textContent = trData.name
 }
 
 function generateTrainingID() {
