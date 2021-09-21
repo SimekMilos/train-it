@@ -268,10 +268,20 @@ editButton.addEventListener("click", editTraining)
 import * as screens from "../screens.js"
 
 async function openTraining() {
+    const trElem = getSelectedTraining()
+    const trID = trElem.firstElementChild.id
+    let trData = JSON.parse(storage.getItem(trID))
 
+    await hideComponents()
+    screens.transitionToMainScreen(trData)
 }
 
 async function openTimer() {
+    await hideComponents()
+    screens.transitionToMainScreen(null)
+}
+
+async function hideComponents() {
     display.disableAccess()
 
     // Hide overview settings
@@ -283,9 +293,6 @@ async function openTimer() {
 
     // Hide overview
     await display.hide()
-
-    // Open timer
-    screens.transitionToMainScreen(null)
 }
 
 openTrainingButton.addEventListener("click", openTraining)
