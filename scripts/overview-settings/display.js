@@ -9,7 +9,6 @@ const overviewComponent = document.querySelector(".overview-component")
 const compClassList = settingsComponent.classList
 const closeButton = document.querySelector(".ovs-close")
 
-let resolveDisplayChange = null
 let floatingModeActive = false
 
 
@@ -19,7 +18,7 @@ export function isDisplayed() {
     return compClassList.contains("display")
 }
 
-export function display() {
+export async function display() {
     compClassList.add("display")
     floatingMode("display")
 
@@ -27,11 +26,12 @@ export function display() {
     onResize()
     window.addEventListener("resize", onResize)
 
-    // Wait for animation to end
-    return new Promise(resolve => resolveDisplayChange = resolve)
+    // Enable access when displayed
+    await waitFor("animationend", settingsComponent)
+    compClassList.add("enable-access")
 }
 
-export function hide() {
+export async function hide() {
     closeButton.disabled = true
     compClassList.add("hide")
     compClassList.remove("display", "enable-access")
@@ -41,14 +41,15 @@ export function hide() {
     settingsContainer.style.height = 0
     window.removeEventListener("resize", onResize)
 
-    // Wait for animation to end
-    return new Promise(resolve => resolveDisplayChange = resolve)
+    // Clean up when hidden
+    await waitFor("animationend", settingsComponent)
+    compClassList.remove("hide")
+    closeButton.disabled = false
 }
 
 
 // --- Private ---
 
-settingsComponent.addEventListener("animationend", onAnimationEnd)
 closeButton.addEventListener("click", onCloseClick)
 
 
@@ -56,20 +57,6 @@ async function onCloseClick() {
     overview.settingsButtonDisable(true)
     await hide()
     overview.settingsButtonDisable(false)
-}
-
-function onAnimationEnd() {
-    // Displaying
-    if(compClassList.contains("display")) {
-        compClassList.add("enable-access")
-
-    // Hiding
-    } else {
-        compClassList.remove("hide")
-        closeButton.disabled = false
-    }
-
-    resolveDisplayChange()
 }
 
 function onResize() {
