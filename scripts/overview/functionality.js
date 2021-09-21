@@ -174,14 +174,6 @@ async function smoothRemoveBottomPadding(elem, amount, duration) {
     elem.style.removeProperty("padding-bottom")
 }
 
-function getSelectedTraining() {
-    let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
-    trainings = Array.from(trainings)
-
-    let input = trainings.find(value => value.checked)
-    return input.parentElement
-}
-
 deleteButton.addEventListener("click", deleteTraining)
 
 
@@ -298,6 +290,28 @@ async function hideComponents() {
 
 openTrainingButton.addEventListener("click", openTraining)
 openTimerButton.addEventListener("click", openTimer)
+
+
+
+function getSelectedTraining() {
+    // Find active input
+    let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
+    trainings = Array.from(trainings)
+    let input = trainings.find(value => value.checked)
+
+    // Gather training info
+    const trElem = input.parentElement
+    const trNameElem = trElem.querySelector(":scope .ovt-name")
+    const trID = input.id
+    const trData = JSON.parse(storage.getItem(trID))
+
+    return {
+        trElem: trElem,
+        trNameElem: trNameElem,
+        trID: trID,
+        trData: trData
+    }
+}
 
 
 // Temporary
