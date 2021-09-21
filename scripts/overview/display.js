@@ -7,10 +7,6 @@ const settingsButton = document.querySelector(".ov-settings")
 const compClassList = overviewComponent.classList
 const compStyle = overviewComponent.style
 
-let resolveAction = null
-
-
-// --- Interface ---
 
 // Display
 
@@ -32,23 +28,24 @@ export async function hide() {
 
 // Disabling
 
-export function disable(animDuration = 0) {
+export async function disable(animDuration = 0) {
     /* animDuration - time in ms */
 
     compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
     compClassList.add("disable-visible-display")
 
-    return new Promise(resolve => resolveAction = resolve)
+    await waitFor("animationend", overviewComponent)
 }
 
-export function enable(animDuration = 0) {
+export async function enable(animDuration = 0) {
     /* animDuration - time in ms */
 
     compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
     compClassList.add("disable-visible-hide")
     compClassList.remove("disable-visible-display")
 
-    return new Promise(resolve => resolveAction = resolve)
+    await waitFor("animationend", overviewComponent)
+    compClassList.remove("disable-visible-hide")
 }
 
 export function isDisabled() {
@@ -60,21 +57,4 @@ export function isDisabled() {
 
 export function settingsButtonDisable(disable) {
     settingsButton.disabled = disable
-}
-
-
-// --- Private ---
-
-overviewComponent.addEventListener("animationend", onAnimationEnd)
-
-function onAnimationEnd() {
-    if (resolveAction) resolveAction()
-
-    // Disabling/enabling
-    if (compClassList.contains("disable-visible-display") ||
-        compClassList.contains("disable-visible-hide")) {
-
-        compClassList.remove("disable-visible-hide")
-        return
-    }
 }
