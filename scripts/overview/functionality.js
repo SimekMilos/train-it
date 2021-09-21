@@ -123,10 +123,7 @@ initialScreen.addEventListener("click", detectDeselection)
 
 async function deleteTraining() {
     // Find selected training
-    let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
-    trainings = Array.from(trainings)
-    let training = trainings.find(value => value.checked)
-    training = training.parentElement
+    const training = getSelectedTraining()
 
     // Confirm deletion
     const trName = training.querySelector(":scope .ovt-name").textContent
@@ -174,6 +171,14 @@ async function smoothRemoveBottomPadding(elem, amount, duration) {
         await wait(8)                           // 120 fps
     }
     elem.style.removeProperty("padding-bottom")
+}
+
+function getSelectedTraining() {
+    let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
+    trainings = Array.from(trainings)
+
+    let input = trainings.find(value => value.checked)
+    return input.parentElement
 }
 
 deleteButton.addEventListener("click", deleteTraining)
