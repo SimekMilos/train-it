@@ -123,25 +123,24 @@ initialScreen.addEventListener("click", detectDeselection)
 // --- Deleting Training ---
 
 async function deleteTraining() {
-    // Find selected training
-    const training = getSelectedTraining()
+    const {trElem, trNameElem, trID} = getSelectedTraining()
 
     // Confirm deletion
-    const trName = training.querySelector(":scope .ovt-name").textContent
+    const trName = trNameElem.textContent
     if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
     deselectedMode(false)
 
     // Delete element and scroll up
     await wait(200)
-    training.classList.add("hidden")
+    trElem.classList.add("hidden")
 
-    const itemHeight = float(getComputedStyle(training).height)
+    const itemHeight = float(getComputedStyle(trElem).height)
     if (trainingList.scrollHeight > trainingList.clientHeight) {
         trainingList.style.paddingBottom = px(itemHeight)
     }
 
-    waitFor("transitionend", training).then(async () => {
-        training.remove()
+    waitFor("transitionend", trElem).then(async () => {
+        trElem.remove()
         await wait(200)
         if (trainingList.style.paddingBottom) {
             smoothRemoveBottomPadding(trainingList, itemHeight, 250)
@@ -149,9 +148,8 @@ async function deleteTraining() {
     })
 
     // Delete training from storage order list
-    const deleteID = training.firstElementChild.id
     let orderArr = JSON.parse(storage.getItem("training-order"))
-    orderArr = orderArr.filter(id => id != deleteID)
+    orderArr = orderArr.filter(id => id != trID)
 
     if (orderArr.length) {
         storage.setItem("training-order", JSON.stringify(orderArr))
@@ -160,7 +158,7 @@ async function deleteTraining() {
     }
 
     // Delete training data
-    storage.removeItem(deleteID)
+    storage.removeItem(trID)
 }
 
 async function smoothRemoveBottomPadding(elem, amount, duration) {
