@@ -1,10 +1,13 @@
 
 import {wait, waitFor} from "./tools.js"
+import * as stopwatch from "./stopwatch/stopwatch.js"
 import * as overview from "./overview/overview.js"
 
 const initScreen = document.querySelector(".initial-screen")
 const mainScreen = document.querySelector(".main-screen")
 
+
+// --- Interface ---
 
 export async function initInitScreen() {
     displayScreen(initScreen)
@@ -14,27 +17,31 @@ export async function initInitScreen() {
     overview.display()
 }
 
-export async function transitionToMainScreen(training) {
-    // training - training data obj/null
+export function transitionToMainScreen(training) {
+    // training: null - starts timer, obj - starts training
+
+    stopwatch.initStopwatch(training)
+    displayScreen(mainScreen)
+    hideScreen(initScreen, 1500)
 }
 
-// Transition to main screen
-    // Hide initial screen
-    // await hideScreen(initialScreen, 700)
+export async function transitionToInitScreen() {
+    await displayScreen(initScreen, 800)
+    hideScreen(mainScreen)
 
-    // initialize components - watch will be main - so call init function for watch component
-         // která má parametr - tréning/null (rozlišení timer/training)
+    await wait(200)
+    await overview.display()
+}
 
-    // display main screen - zde nebo ve watch komponentové funkci?
 
-
+// --- Private ---
 
 async function displayScreen(screen, animationDuration = 0) {
     screen.style.animationDuration = `${animationDuration / 1000}s`
 
     await wait(0)       // for animation to pick up duration
     screen.classList.add("display")
-    await waitFor("animationend", screen)
+    if (animationDuration) await waitFor("animationend", screen)
 }
 
 async function hideScreen(screen, animationDuration = 0) {
@@ -44,6 +51,6 @@ async function hideScreen(screen, animationDuration = 0) {
     screen.classList.add("hide")
     screen.classList.remove("display")
 
-    await waitFor("animationend", screen)
+    if (animationDuration) await waitFor("animationend", screen)
     screen.classList.remove("hide")
 }
