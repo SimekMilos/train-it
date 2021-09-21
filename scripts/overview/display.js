@@ -1,4 +1,6 @@
 
+import {waitFor} from "../tools.js"
+
 const overviewComponent = document.querySelector(".overview-component")
 const settingsButton = document.querySelector(".ov-settings")
 
@@ -12,17 +14,19 @@ let resolveAction = null
 
 // Display
 
-export function display() {
+export async function display() {
     compClassList.add("display")
 
-    return new Promise(resolve => resolveAction = resolve)
+    await waitFor("animationend", overviewComponent)
+    compClassList.add("enable-access")
 }
 
-export function hide() {
+export async function hide() {
     compClassList.add("hide")
     compClassList.remove("display", "enable-access")
 
-    return new Promise(resolve => resolveAction = resolve)
+    await waitFor("animationend", overviewComponent)
+    compClassList.remove("hide")
 }
 
 
@@ -64,7 +68,7 @@ export function settingsButtonDisable(disable) {
 overviewComponent.addEventListener("animationend", onAnimationEnd)
 
 function onAnimationEnd() {
-    resolveAction()
+    if (resolveAction) resolveAction()
 
     // Disabling/enabling
     if (compClassList.contains("disable-visible-display") ||
@@ -72,14 +76,5 @@ function onAnimationEnd() {
 
         compClassList.remove("disable-visible-hide")
         return
-    }
-
-    // Displaying
-    if (compClassList.contains("display")) {
-        compClassList.add("enable-access")
-
-    // Hiding
-    } else {
-        compClassList.remove("hide")
     }
 }
