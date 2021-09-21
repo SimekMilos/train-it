@@ -14,12 +14,13 @@ export async function display() {
     compClassList.add("display")
 
     await waitFor("animationend", overviewComponent)
-    compClassList.add("enable-access")
+    enableAccess()
 }
 
 export async function hide() {
     compClassList.add("hide")
-    compClassList.remove("display", "enable-access")
+    compClassList.remove("display")
+    disableAccess()
 
     await waitFor("animationend", overviewComponent)
     compClassList.remove("hide")
@@ -50,6 +51,14 @@ export async function enable(animDuration = 0) {
 
 export function isDisabled() {
     return compClassList.contains("disable-visible-display")
+}
+
+export function disableAccess() {
+    compClassList.remove("enable-access")
+}
+
+export function enableAccess() {
+    compClassList.add("enable-access")
 }
 
 
