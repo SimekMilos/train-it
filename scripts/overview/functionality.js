@@ -261,12 +261,8 @@ editButton.addEventListener("click", editTraining)
 import * as screens from "../screens.js"
 
 async function openTraining() {
-    const trElem = getSelectedTraining()
-    const trID = trElem.firstElementChild.id
-    let trData = JSON.parse(storage.getItem(trID))
-
     await hideComponents()
-    screens.transitionToMainScreen(trData)
+    screens.transitionToMainScreen(getSelectedTraining().trData)
 }
 
 async function openTimer() {
