@@ -33,7 +33,7 @@ export function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-export function waitFor(element, event) {
+export function waitFor(event, element) {
     return new Promise(resolve => {
         element.addEventListener(event, function handler() {
             element.removeEventListener(event, handler)

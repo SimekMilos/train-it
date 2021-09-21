@@ -149,7 +149,7 @@ async function deactivateFloatingMode(animate) {
 
     if (!animate) remove()
     else {
-        await waitFor(settingsComponent, "animationend")
+        await waitFor("animationend", settingsComponent)
         remove()
     }
 }
