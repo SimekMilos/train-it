@@ -40,7 +40,6 @@ function createTrainingItem(trainingID, trainingName) {
     name.textContent = trainingName
 
     label.addEventListener("click", selectedMode)
-    label.addEventListener("dblclick", openTraining)
 
     return training
 }
