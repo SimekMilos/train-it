@@ -1,5 +1,5 @@
 
-import {px, float, range, wait} from "../tools.js"
+import {px, float, range, wait, waitFor} from "../tools.js"
 
 import * as display from "./display.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -140,7 +140,7 @@ async function deleteTraining() {
         trainingList.style.paddingBottom = px(itemHeight)
     }
 
-    training.addEventListener("transitionend", async () => {
+    waitFor("transitionend", training).then(async () => {
         training.remove()
         await wait(200)
         if (trainingList.style.paddingBottom) {
