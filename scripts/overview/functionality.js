@@ -122,18 +122,18 @@ initialScreen.addEventListener("click", detectDeselection)
 // --- Deleting Training ---
 
 async function deleteTraining() {
-    // find selected training
+    // Find selected training
     let trainings = trainingList.querySelectorAll(":scope [name=\"training\"]")
     trainings = Array.from(trainings)
     let training = trainings.find(value => value.checked)
     training = training.parentElement
 
-    // confirm deletion
+    // Confirm deletion
     const trName = training.querySelector(":scope .ovt-name").textContent
     if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
     deselectedMode(false)
 
-    // delete element and scroll up
+    // Delete element and scroll up
     await wait(200)
     training.classList.add("hidden")
 
@@ -150,7 +150,7 @@ async function deleteTraining() {
         }
     })
 
-    // delete training from storage order list
+    // Delete training from storage order list
     const deleteID = training.firstElementChild.id
     let orderArr = JSON.parse(storage.getItem("training-order"))
     orderArr = orderArr.filter(id => id != deleteID)
@@ -161,7 +161,7 @@ async function deleteTraining() {
         storage.removeItem("training-order")
     }
 
-    // delete training data
+    // Delete training data
     storage.removeItem(deleteID)
 }
 
@@ -189,29 +189,29 @@ async function createTraining() {
 
     const trID = generateTrainingID()
 
-    // add training in storage order array
+    // Add training in storage order array
     let orderArr = JSON.parse(storage.getItem("training-order"))
     if (!orderArr) orderArr = new Array
     orderArr.push(trID)
     storage.setItem("training-order", JSON.stringify(orderArr))
 
-    // save trainind data
+    // Save trainind data
     storage.setItem(trID, JSON.stringify(training))
 
-    // scroll container
+    // Scroll container
     const tList = trainingList
     if (tList.scrollTop + tList.clientHeight < tList.scrollHeight) {
         await smoothScrollDown(tList, 100)
     }
     await wait(100)
 
-    // display training item
+    // Display training item
     const trItem = createTrainingItem(trID, training.name)
     const itemElem = trItem.firstElementChild
     itemElem.classList.add("hidden")
     trainingList.append(trItem)
 
-    await wait(0)   // for transition
+    await wait(0)       // to kick start transition
     itemElem.classList.remove("hidden")
 }
 
