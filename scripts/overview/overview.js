@@ -9,7 +9,9 @@ export const display       = displayFunc.display
 export const hide          = displayFunc.hide
 export const disable       = displayFunc.disable
 export const enable        = displayFunc.enable
-export const disableShadow = displayFunc.disableShadow
-export const enableShadow  = displayFunc.enableShadow
+
+export const hideShadow        = displayFunc.hideShadow
+export const displayShadow     = displayFunc.displayShadow
+export const shadowIsDisplayed = displayFunc.shadowIsDisplayed
 
 export const settingsButtonDisabling = displayFunc.settingsButtonDisabling

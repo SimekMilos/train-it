@@ -7,6 +7,8 @@ const settingsButton = document.querySelector(".ov-settings")
 const compClassList = component.classList
 const compStyle = component.style
 
+let shadowDisplayed = true
+
 
 // Display
 
@@ -27,7 +29,7 @@ export async function hide() {
 }
 
 
-// Disabling
+// Visible component disabling
 
 export async function disable(animDuration = 0) {
     /* animDuration - time in ms */
@@ -53,6 +55,9 @@ export function isDisabled() {
     return compClassList.contains("disable-visible-display")
 }
 
+
+// Access disabling
+
 export function disableAccess() {
     compClassList.remove("enable-access")
 }
@@ -61,12 +66,21 @@ export function enableAccess() {
     compClassList.add("enable-access")
 }
 
-export function disableShadow() {
+
+// Shadow disabling
+
+export function hideShadow() {
     component.style.boxShadow = "none"
+    shadowDisplayed = false
 }
 
-export function enableShadow() {
+export function displayShadow() {
     component.style.removeProperty("box-shadow")
+    shadowDisplayed = true
+}
+
+export function shadowIsDisplayed() {
+    return shadowDisplayed
 }
 
 
