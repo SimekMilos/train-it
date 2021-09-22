@@ -29,6 +29,19 @@ export function* range(startStop, stop, step) {
     }
 }
 
+export function wait(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+export function waitFor(event, element) {
+    return new Promise(resolve => {
+        element.addEventListener(event, function handler() {
+            element.removeEventListener(event, handler)
+            resolve()
+        })
+    })
+}
+
 export function sizeNotes(event) {
     const notes = event.target
     const styles = getComputedStyle(notes)

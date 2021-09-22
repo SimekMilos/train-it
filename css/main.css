@@ -76,6 +76,8 @@ body {
 /* --- Screens --- */
 
 .initial-screen {
+    display: none;
+
     /* Position */
     position: absolute;
     top: 0;
@@ -93,7 +95,6 @@ body {
     background-blend-mode: normal, saturation, normal;
 
     /* Content */
-    display: flex;
     justify-content: center;
     align-items: center;
 
@@ -102,6 +103,8 @@ body {
 }
 
 .main-screen {
+    display: none;
+
     /* Position */
     position: absolute;
     top: 0;
@@ -112,9 +115,28 @@ body {
     opacity: 0;
 
     /* Content */
-    display: flex;
     flex-direction: column;
 }
+
+.initial-screen.display, .main-screen.display {
+    display: flex;
+    opacity: 0;
+    animation: screen-fade-in forwards;
+}
+
+.initial-screen.hide, .main-screen.hide {
+    display: flex;
+    opacity: 1;
+    animation: screen-fade-out forwards;
+}
+
+    @keyframes screen-fade-in {
+        to { opacity: 1; }
+    }
+
+    @keyframes screen-fade-out {
+        to { opacity: 0; }
+    }
 
 
 /* --- Vertical alignment --- */
@@ -235,7 +257,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
 
-    --border: 2px solid var(--secondary-control-color);
+    --handle-color: var(--secondary-control-color);   /* Redefinable color */
+    --border: 2px solid var(--handle-color);
 }
 
 .handle::before, .handle::after {

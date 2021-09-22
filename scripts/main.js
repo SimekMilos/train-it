@@ -1,6 +1,8 @@
-"use strict"
 
-function onAppLoad() {
+import {initInitScreen} from "./screens.js"
+
+
+async function onAppLoad() {
     // Deactivate loading screen
     const lScreen = document.querySelector(".loading-screen")
     lScreen.style.display = "none"
@@ -8,11 +10,8 @@ function onAppLoad() {
     const loadingElem = document.querySelector(".loading-screen p")
     loadingElem.style.animationPlayState = "paused"
 
-
-    // Display overview
-    const overview = document.querySelector(".overview-component")
-    overview.classList.add("display")
+    // Initialize application
+    initInitScreen()
 }
 
 window.addEventListener("load", onAppLoad)
-

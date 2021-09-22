@@ -16,17 +16,17 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/comp-overview.css">
-    <link rel="stylesheet" href="css/comp-overview-settings.css">
-    <link rel="stylesheet" href="css/comp-setup.css">
-    <link rel="stylesheet" href="css/comp-stopwatch.css">
-    <link rel="stylesheet" href="css/comp-training.css">
-    <link rel="stylesheet" href="css/comp-settings.css">
+    <link rel="stylesheet" href="css/overview.css">
+    <link rel="stylesheet" href="css/overview-settings.css">
+    <link rel="stylesheet" href="css/setup.css">
+    <link rel="stylesheet" href="css/stopwatch.css">
+    <link rel="stylesheet" href="css/training.css">
+    <link rel="stylesheet" href="css/settings.css">
 
     <!-- Scripts -->
-    <script defer src="scripts/main.js"></script>
-    <script type="module" src="scripts/comp-overview.js"></script>
-    <script type="module" src="scripts/comp-overview-settings.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/overview/overview.js"></script>
+    <script type="module" src="scripts/overview-settings/overview-settings.js"></script>
     <script type="module" src="scripts/comp-setup.js"></script>
     <script type="module" src="scripts/comp-stopwatch.js"></script>
     <script type="module" src="scripts/comp-training.js"></script>
@@ -121,13 +121,20 @@
 
                 </div>
                 <div class="ov-controls">
-                    <button type="button" class="ov-open control-button"
-                        disabled>Open</button>
-                    <button type="button" class="ov-delete control-button"
+                    <button class="ov-open-timer control-button" type="button"
+                        >Open Timer</button>
+                    <button class="ov-open-training control-button" type="button"
+                        >Open Training</button>
+
+                    <button class="ov-delete control-button" type="button"
                         disabled>Delete</button>
-                    <button type="button" class="ov-create-edit control-button">
+
+                    <button class="ov-create control-button" type="button">
                         Create</button>
-                    <button type="button" class="ov-settings control-button">
+                    <button class="ov-edit control-button" type="button">
+                        Edit</button>
+
+                    <button class="ov-settings control-button" type="button">
                         </button>
                 </div>
 
@@ -136,7 +143,7 @@
                     <div class="ov-training">
                         <input type="radio" name="training" value="" id="" hidden>
                         <label for="">
-                            <p></p>
+                            <p class="ovt-name"></p>
                             <div class="handle"><div></div></div>
                         </label>
                     </div>

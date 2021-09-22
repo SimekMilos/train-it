@@ -28,12 +28,12 @@
     opacity: 0;
 
     --from: -50px;
-    animation: fade-in .7s .5s forwards;
+    animation: fade-in .7s forwards;
 }
 
 .overview-component.hide {
     display: flex;
-    animation: fade-out .7s .2s forwards;
+    animation: fade-out .7s forwards;
 }
 
 
@@ -48,7 +48,6 @@
 }
 
 .overview-component h2 {
-    padding-bottom: 10px;
     font: 16px "OpenSans SemiBold", sans-serif;
 }
 
@@ -58,22 +57,56 @@
     flex: 1 0 0;        /* flex-shrink is overwritten by higher priority rule
                         above to the same value 0 */
     padding-left: 15px;
-    border: none;
-
     overflow: auto;
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
 }
 
 
 /* --- No Trainings Display --- */
 .ov-no-trainings {
-    margin: 1em 1em 1em calc(1em - 15px);
+    margin: auto 1em auto calc(1em - 15px);
 }
 
 
 /* --- Trainings --- */
+.ov-training {
+    position: relative;
+
+    height: var(--height);
+    overflow: hidden;
+    transition: height .4s;
+
+    --height: 43px;
+}
+
+.ov-training:nth-child(2) {
+    margin-top: 10px;
+    border-top: 1px solid var(--main-color);
+}
+
+.ov-training:last-child {
+    margin-bottom: calc(var(--height) + 5px);
+}
+
+/* Displaying/hiding transition */
+.ov-training.hidden {
+    height: 0px;
+}
+
+.ov-training.hidden:nth-child(2) {
+    height: 1px;
+}
+
 
 .ov-training label {
-    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: var(--height);
     border-bottom: 1px solid var(--main-color);
 
     /* Content */
@@ -82,40 +115,27 @@
     align-items: center;
 }
 
-.ov-training:nth-child(2) label {
-    border-top: 1px solid var(--main-color);
-}
-
-.ov-training:last-child {
-    margin-bottom: 5px;
-}
-
-.ov-training p {
+.ovt-name {
     margin: 0 10px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .ov-training .handle {
     margin: 0 10px;
 }
 
-    /* Selected state */
+/* Selected state */
 .ov-training :checked + label {
     color: white;
     background-color: hsl(209, 100%, 70%);
 }
 
 .ov-training :checked + label .handle {
-    --border-color: white;
-}
-
-    /* Disabled state */
-.ov-training :disabled + label {
-    color: var(--disabled-control-color);
-    background-color: white;
-}
-
-.ov-training :disabled + label .handle {
-    --border-color: var(--disabled-control-color);
+    --handle-color: white;
 }
 
 
@@ -131,13 +151,17 @@
     margin-top: 5px;
 }
 
-.ov-open {
+.ov-open-timer, .ov-open-training {
     width: 100%;
 }
 
-.ov-create-edit {
+.ov-create, .ov-edit {
     flex: 1 1 0;
     margin-right: 5px;
+}
+
+.ov-open-training, .ov-edit {   /* Initial display state */
+    display: none;
 }
 
 .ov-delete {
@@ -154,7 +178,7 @@
 }
 
 .ov-settings:disabled {
-    /* Settings is being disabled during fade in/out animations.
+    /* Settings button is being disabled during fade in/out animations.
        This disabling shouldn't be visible. */
     border-color: var(--button-color);
 }
