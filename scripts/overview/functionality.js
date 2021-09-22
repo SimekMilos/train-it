@@ -251,12 +251,12 @@ async function hideComponents() {
 buttonSettings.addEventListener("click", onSettingsClick)
 
 async function onSettingsClick() {
-    display.settingsButtonDisable(true)
+    display.settingsButtonDisabling(true)
 
     if (!overviewSettings.isDisplayed()) await overviewSettings.display()
     else                                 await overviewSettings.hide()
 
-    display.settingsButtonDisable(false)
+    display.settingsButtonDisabling(false)
 }
 
 

@@ -9,4 +9,4 @@ export const display               = displayFunc.display
 export const hide                  = displayFunc.hide
 export const disable               = displayFunc.disable
 export const enable                = displayFunc.enable
-export const settingsButtonDisable = displayFunc.settingsButtonDisable
+export const settingsButtonDisabling = displayFunc.settingsButtonDisabling

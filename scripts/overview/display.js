@@ -64,6 +64,6 @@ export function enableAccess() {
 
 // Settings button
 
-export function settingsButtonDisable(disable) {
+export function settingsButtonDisabling(disable) {
     settingsButton.disabled = disable
 }
