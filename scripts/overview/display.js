@@ -1,11 +1,11 @@
 
 import {waitFor} from "../tools.js"
 
-const overviewComponent = document.querySelector(".overview-component")
+const component = document.querySelector(".overview-component")
 const settingsButton = document.querySelector(".ov-settings")
 
-const compClassList = overviewComponent.classList
-const compStyle = overviewComponent.style
+const compClassList = component.classList
+const compStyle = component.style
 
 
 // Display
@@ -13,7 +13,7 @@ const compStyle = overviewComponent.style
 export async function display() {
     compClassList.add("display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     enableAccess()
 }
 
@@ -22,7 +22,7 @@ export async function hide() {
     compClassList.remove("display")
     disableAccess()
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     compClassList.remove("hide")
 }
 
@@ -35,7 +35,7 @@ export async function disable(animDuration = 0) {
     compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
     compClassList.add("disable-visible-display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
 }
 
 export async function enable(animDuration = 0) {
@@ -45,7 +45,7 @@ export async function enable(animDuration = 0) {
     compClassList.add("disable-visible-hide")
     compClassList.remove("disable-visible-display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     compClassList.remove("disable-visible-hide")
 }
 
