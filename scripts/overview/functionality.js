@@ -96,21 +96,19 @@ function deselectedMode(uncheck = true) {
     for (const trItem of trItems) trItem.checked = false
 }
 
-function detectDeselection(event) {
+function detectDeselection() {
     /* Deselection applies when:
         - clicked outside of component
         - clicked within component but not on any controls
     */
 
-    const target = event.target
-
     if (display.isDisabled()) return
-    if (target.closest(".ov-training")) return
-    if (target.closest(".ov-controls")) return
+    if (this.closest(".ov-training")) return
+    if (this.closest(".ov-controls")) return
 
-    if (target == initialScreen ||
-        target == verticalContainer ||
-        target.closest(".overview-component")) {
+    if (this == initialScreen ||
+        this == verticalContainer ||
+        this.closest(".overview-component")) {
 
         deselectedMode()
     }
