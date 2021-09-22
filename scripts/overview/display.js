@@ -61,6 +61,14 @@ export function enableAccess() {
     compClassList.add("enable-access")
 }
 
+export function disableShadow() {
+    component.style.boxShadow = "none"
+}
+
+export function enableShadow() {
+    component.style.removeProperty("box-shadow")
+}
+
 
 // Settings button
 
