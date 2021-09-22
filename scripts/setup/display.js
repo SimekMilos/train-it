@@ -9,6 +9,8 @@ const component = container.firstElementChild
 const containerStyles = window.getComputedStyle(container)
 
 
+// --- Interface ---
+
 export async function display() {
     // Start display animation
     component.classList.add("display")
@@ -56,6 +58,24 @@ export async function hide() {
     container.classList.remove("hide", "animate")
     component.style.removeProperty("width")
 }
+
+
+// --- Private ---
+
+window.addEventListener("resize", overviewShadowResizeToggle)
+
+function overviewShadowResizeToggle() {
+    /* Disables shadow in overview if setup component overlays over it */
+
+    if (containerStyles.display == "none") return
+
+    if (overview.shadowIsDisplayed()) {
+        if (containerStyles.position == "absolute") overview.hideShadow()
+    } else {
+        if (containerStyles.position != "absolute") overview.displayShadow()
+    }
+}
+
 
 function getComponentWidth() {
     let width = initialScreen.clientWidth
