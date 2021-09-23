@@ -34,7 +34,7 @@ export async function hide() {
 export async function disable(animDuration = 0) {
     /* animDuration - time in ms */
 
-    compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
+    compStyle.setProperty("--disable-anim-duration", `${animDuration}ms`)
     compClassList.add("disable-visible-display")
 
     await waitFor("animationend", component)
@@ -43,7 +43,7 @@ export async function disable(animDuration = 0) {
 export async function enable(animDuration = 0) {
     /* animDuration - time in ms */
 
-    compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
+    compStyle.setProperty("--disable-anim-duration", `${animDuration}ms`)
     compClassList.add("disable-visible-hide")
     compClassList.remove("disable-visible-display")
 
