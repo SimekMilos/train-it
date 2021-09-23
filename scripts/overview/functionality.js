@@ -43,19 +43,21 @@ export function loadTrainings() {
 
 initialScreen.addEventListener("click", detectDeselection)
 
-function detectDeselection() {
+function detectDeselection(event) {
     /* Deselection applies when:
         - clicked outside of component
         - clicked within component but not on any controls
     */
 
-    if (display.isDisabled()) return
-    if (this.closest(".ov-training")) return
-    if (this.closest(".ov-controls")) return
+    const target = event.target
 
-    if (this == initialScreen ||
-        this == verticalContainer ||
-        this.closest(".overview-component")) {
+    if (display.isDisabled()) return
+    if (target.closest(".ov-training")) return
+    if (target.closest(".ov-controls")) return
+
+    if (target == initialScreen ||
+        target == verticalContainer ||
+        target.closest(".overview-component")) {
 
         deselectedMode()
     }
