@@ -227,7 +227,7 @@
 
 
 
-/* ===== Group ===== */
+/* ===== Group + No-Group ===== */
 
 .ts-group {
     position: relative;
@@ -240,18 +240,24 @@
     flex-direction: column;
 }
 
-.ts-group:nth-child(2), .ts-exercise + .ts-group {
+.ts-no-group {
+    padding: 0 11px;    /* 1px for group border */
+}
+
+.ts-group:nth-child(2), .ts-no-group:nth-child(2) {
     margin-top: 10px;
 }
 
-.ts-group:not(:last-child) {
+.ts-group:not(:last-child), .ts-no-group:not(:last-child) {
     margin-bottom: 10px;
 }
 
-.ts-group:last-child {
-    margin-bottom: 20px;
+.ts-group:last-child, .ts-no-group:last-child {
+    margin-bottom: 15px;
 }
 
+
+/* Content */
 
 .ts-group-name {
     margin: 0 -6px 5px;
@@ -266,6 +272,7 @@
 /* Group Controlls */
 
 .ts-group-controls {
+    padding-top: 15px;
     display: flex;
     justify-content: center;
 }
@@ -301,28 +308,21 @@
     flex-direction: column;
 }
 
-.ts-exercise:last-child {
-    margin-bottom: 20px;
-}
-
 .ts-group .ts-exercise:nth-child(2) {
     margin-top: 10px;
     border-top: 1px solid var(--main-color);
 }
 
-.ts-group + .ts-exercise {
+.ts-no-group .ts-exercise:first-child {
     border-top: 1px solid var(--main-color);
 }
 
-.ts-exercise-container > .ts-exercise {
-    margin-left: 11px;      /* 1px for group border */
-    margin-right: 11px;
-}
+
+/* Content */
 
 .ts-exercise > :not(:last-child) {
     margin-bottom: 5px;
 }
-
 
 .ts-exercise-name {
     margin-left: -6px;
@@ -384,6 +384,8 @@
     background-color: rgba(0,0,0,.04);
 }
 
+
+/* Content */
 
 .ts-set-handle {
     margin-right: 12px;
