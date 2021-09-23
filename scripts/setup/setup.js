@@ -134,4 +134,38 @@ function createExcercise(data) {
 function readExcercise(excerciseElem) {
 
 }
+
+
+
+
+
+// --- Temporary ---
+
+
+
+const exData = {
+   name: "ahoj",notes: "value", sets: [null, "ahoj", null, null, "nazdar"]
 }
+
+
+// adding empty group
+const g1 = {type: "group"}
+
+// adding group with data
+const g2 ={
+   type: "group",
+   notes: "hello everyone",excercises: [exData, exData, null],
+}
+
+
+// adding no-group with data
+const g3 = {
+   type: "no-group",
+   excercises: [exData, null, exData]
+}
+
+createTraining({
+   name: "new training",
+   notes: "test of notes",
+   groups: [g1, g2, g3]
+})
