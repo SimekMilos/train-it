@@ -25,7 +25,7 @@ export async function display() {
     if(containerStyles.position != "absolute") {
         container.classList.add("animate")
     } else {
-        overview.hideShadow()
+        overview.hideShadow(700)
     }
 
     // Disable overview component in parallel
@@ -54,7 +54,7 @@ export async function hide() {
 
     // Enable overview component in parallel
     overview.enable(700)
-    overview.displayShadow()
+    overview.displayShadow(700)
 
     // Finish hide
     await waitFor("animationend", component)

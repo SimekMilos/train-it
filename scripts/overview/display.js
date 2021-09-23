@@ -69,13 +69,15 @@ export function enableAccess() {
 
 // Shadow disabling
 
-export function hideShadow() {
+export function hideShadow(duration = 0) {
     component.style.boxShadow = "none"
+    component.style.transitionDuration = `${duration}ms`
     shadowDisplayed = false
 }
 
-export function displayShadow() {
+export function displayShadow(duration = 0) {
     component.style.removeProperty("box-shadow")
+    component.style.removeProperty("transition-duration")
     shadowDisplayed = true
 }
 
