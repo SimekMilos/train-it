@@ -13,13 +13,14 @@ const buttonCancel = document.querySelector(".ts-cancel")
 
 
 
-export async function setupTraining(oldTraining = null) {
+export async function setupTraining(trainingData = null) {
    /* Main component function to create/edit training
 
-      oldTraining - training data object/null
+      trainingData - training data object/null
       return - Promise of training object/null
    */
 
+   if (trainingData) createTraining(trainingData)
    display.display()
 
    await waitFor("click", buttonCancel)
@@ -30,12 +31,20 @@ export async function setupTraining(oldTraining = null) {
 }
 
 
+const trainingName = document.querySelector(".ts-training-name")
+const trainingNotes = document.querySelector(".ts-training-notes")
+const groupContainer = document.querySelector(".ts-group-container")
 
-function createTraining(trainingData) {
+function createTraining(data) {
+   trainingName.value = data.name
+   trainingNotes.textContent = data.notes
 
+   for (const group of data.groups) {
+      groupContainer.append(createGroup(group))
+   }
 }
 
-function readTraining(component) {
+function readTraining(component) { //?
 
 }
 
