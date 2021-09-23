@@ -8,7 +8,7 @@ const containerStyles = window.getComputedStyle(container)
 const component = container.firstElementChild
 
 const scrollContainer = document.querySelector(".ts-scroll-container")
-const exerciseContainer = document.querySelector(".ts-exercise-container")
+const groupContainer = document.querySelector(".ts-group-container")
 
 let stickyLineHidden = true
 
@@ -83,12 +83,12 @@ function overviewShadowResizeToggle() {
 
 function stickyLineEffect() {
     if (stickyLineHidden) {
-        if (scrollContainer.scrollTop > exerciseContainer.offsetTop) {
+        if (scrollContainer.scrollTop > groupContainer.offsetTop) {
             scrollContainer.style.borderTopColor = "var(--main-color)"
             stickyLineHidden = false
         }
     } else {
-        if (scrollContainer.scrollTop <= exerciseContainer.offsetTop) {
+        if (scrollContainer.scrollTop <= groupContainer.offsetTop) {
             scrollContainer.style.removeProperty("border-top-color")
             stickyLineHidden = true
         }
