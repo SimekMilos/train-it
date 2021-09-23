@@ -22,11 +22,12 @@ export function createTraining(data) {
    }
 }
 
-function createGroup(data) {
+export function createGroup(data = null) {
    /* Both for groups and no-groups
-      Input - group object
-         - Empty group - input needs to have .type
+      Input - group object/null (empty group)
    */
+
+   if (!data) data = {type: "group"}
 
    let group
    let exerciseContainer
@@ -62,7 +63,7 @@ function createGroup(data) {
    return group
 }
 
-function createExcercise(data) {
+export function createExcercise(data = null) {
    /* Input - excercise object/null (empty excercise) */
 
    const exercise = exerciseTemplate.content.cloneNode(true)
