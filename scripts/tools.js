@@ -42,6 +42,41 @@ export function waitFor(event, element) {
     })
 }
 
+export async function waitForAny(...events) {
+    /*
+       Each event is described as an array:
+        ["event-string", eventElement, optionalReturnValue]
+
+       Output - Promise with optional return value of first event
+    */
+
+    const registered = []
+    const promises = []
+
+    // Register events
+    for (const event of events) {
+        const [eventStr, element, retVal] = event
+
+        promises.push(new Promise(resolve => {
+            const handler = () => resolve(retVal)
+
+            element.addEventListener(eventStr, handler)
+            registered.push([element, eventStr, handler])
+        }))
+    }
+
+    // Wait for first event
+    const retVal = await Promise.any(promises)
+
+    // Unregister events
+    for (const listener of registered) {
+        const [element, eventStr, handler] = listener
+        element.removeEventListener(eventStr, handler)
+    }
+
+    return retVal
+}
+
 export function sizeNotes(event) {
     const notes = event.target
     const styles = getComputedStyle(notes)
