@@ -3,6 +3,9 @@ import {waitForAny} from "../tools.js"
 import * as display from "./display.js"
 import {createTraining} from "./creating.js"
 
+const trainingName = document.querySelector(".ts-training-name")
+const trainingNotes = document.querySelector(".ts-training-notes")
+const groupContainer = document.querySelector(".ts-group-container")
 
 const buttonCancel = document.querySelector(".ts-cancel")
 const buttonSave = document.querySelector(".ts-save")
@@ -15,15 +18,31 @@ export async function setupTraining(trainingData = null) {
       return - Promise of training object/null
    */
 
+   let returnData = null
+
    if (trainingData) createTraining(trainingData)
    display.display()
 
-   const action = await waitForAny(["click", buttonCancel, "cancel"],
-                                   ["click", buttonSave,   "save"])
+   const save = await waitForAny(["click", buttonSave,   true],
+                                 ["click", buttonCancel, false])
 
-   display.hide()
+   if (save) {
+      // read and validate data
+      // save to returnData
+   }
+   // if invalid data, waitForAny again
 
-   return null
+   await display.hide()
+
+   // Delete visual content
+   trainingName.value = ""
+   trainingNotes.textContent = ""
+
+   let groups = Array.from(groupContainer.children)
+   groups = groups.slice(1)         // not first element - no-excercise display
+   for (const group of groups) group.remove()
+
+   return returnData
 }
 
 
