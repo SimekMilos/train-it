@@ -40,9 +40,43 @@ function readTraining(component) {
 }
 
 
-function createGroup(groupData) {
-   /* Both for groups and no-groups */
+function createGroup(data) {
+   /* Both for groups and no-groups
+      Input - group object
+         - Empty group - input needs to have .type
+   */
 
+   let group
+   let exerciseContainer
+
+   // Sets up group header
+   if (data.type == "group") {
+      group = groupTemplate.content.cloneNode(true)
+
+      if (data.name) {
+         const name = group.querySelector(".ts-group-name")
+         const notes = group.querySelector(".ts-group-notes")
+
+         name.value = data.name
+         notes.textContent = data.notes
+      }
+
+      exerciseContainer = group.querySelector(".ts-group-exercise-container")
+
+   // Sets up no-group
+   } else {
+      group = noGroupTemplate.content.cloneNode(true)
+      exerciseContainer = group.querySelector(".ts-no-group")
+   }
+
+   // Add excercises
+   if (data.excercises) {
+      for (const excercise of data.excercises) {
+         exerciseContainer.append(createExcercise(excercise))
+      }
+   }
+
+   return group
 }
 
 function readGroup(groupElem) {
