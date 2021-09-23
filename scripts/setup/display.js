@@ -4,9 +4,13 @@ import * as overview from "../overview/overview.js"
 
 const initialScreen = document.querySelector(".initial-screen")
 const container = document.querySelector(".ts-container")
+const containerStyles = window.getComputedStyle(container)
 const component = container.firstElementChild
 
-const containerStyles = window.getComputedStyle(container)
+const scrollContainer = document.querySelector(".ts-scroll-container")
+const exerciseContainer = document.querySelector(".ts-exercise-container")
+
+let stickyLineHidden = true
 
 
 // --- Interface ---
@@ -63,6 +67,7 @@ export async function hide() {
 // --- Private ---
 
 window.addEventListener("resize", overviewShadowResizeToggle)
+scrollContainer.addEventListener("scroll", stickyLineEffect)
 
 function overviewShadowResizeToggle() {
     /* Disables shadow in overview if setup component overlays over it */
@@ -76,6 +81,19 @@ function overviewShadowResizeToggle() {
     }
 }
 
+function stickyLineEffect() {
+    if (stickyLineHidden) {
+        if (scrollContainer.scrollTop > exerciseContainer.offsetTop) {
+            scrollContainer.style.borderTopColor = "var(--main-color)"
+            stickyLineHidden = false
+        }
+    } else {
+        if (scrollContainer.scrollTop <= exerciseContainer.offsetTop) {
+            scrollContainer.style.removeProperty("border-top-color")
+            stickyLineHidden = true
+        }
+    }
+}
 
 function getComponentWidth() {
     let width = initialScreen.clientWidth
