@@ -1,10 +1,11 @@
 
-import {waitFor} from "../tools.js"
+import {waitForAny} from "../tools.js"
 import * as display from "./display.js"
 import {createTraining} from "./creating.js"
 
 
 const buttonCancel = document.querySelector(".ts-cancel")
+const buttonSave = document.querySelector(".ts-save")
 
 
 export async function setupTraining(trainingData = null) {
@@ -17,7 +18,8 @@ export async function setupTraining(trainingData = null) {
    if (trainingData) createTraining(trainingData)
    display.display()
 
-   await waitFor("click", buttonCancel)
+   const action = await waitForAny(["click", buttonCancel, "cancel"],
+                                   ["click", buttonSave,   "save"])
 
    display.hide()
 
