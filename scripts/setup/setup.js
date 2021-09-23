@@ -1,5 +1,5 @@
 
-import {range, waitFor} from "../tools.js"
+import {range, waitFor, sizeNotes} from "../tools.js"
 import * as display from "./display.js"
 
 
@@ -8,9 +8,7 @@ const noGroupTemplate = document.querySelector(".ts-no-group-template")
 const exerciseTemplate = document.querySelector(".ts-exercise-template")
 const setTemplate = document.querySelector(".ts-set-template")
 
-
 const buttonCancel = document.querySelector(".ts-cancel")
-
 
 
 export async function setupTraining(trainingData = null) {
@@ -35,6 +33,8 @@ const trainingName = document.querySelector(".ts-training-name")
 const trainingNotes = document.querySelector(".ts-training-notes")
 const groupContainer = document.querySelector(".ts-group-container")
 
+trainingNotes.addEventListener("input", sizeNotes)
+
 function createTraining(data) {
    trainingName.value = data.name
    trainingNotes.textContent = data.notes
@@ -44,7 +44,7 @@ function createTraining(data) {
    }
 }
 
-function readTraining(component) { //?
+function readTraining() {
 
 }
 
@@ -61,16 +61,17 @@ function createGroup(data) {
    // Sets up group header
    if (data.type == "group") {
       group = groupTemplate.content.cloneNode(true)
+      exerciseContainer = group.querySelector(".ts-group-exercise-container")
 
+      const name = group.querySelector(".ts-group-name")
+      const notes = group.querySelector(".ts-group-notes")
+      notes.addEventListener("input", sizeNotes)
+
+      // Load data
       if (data.name) {
-         const name = group.querySelector(".ts-group-name")
-         const notes = group.querySelector(".ts-group-notes")
-
          name.value = data.name
          notes.textContent = data.notes
       }
-
-      exerciseContainer = group.querySelector(".ts-group-exercise-container")
 
    // Sets up no-group
    } else {
@@ -101,6 +102,8 @@ function createExcercise(data) {
    const name = exercise.querySelector(".ts-exercise-name")
    const notes = exercise.querySelector(".ts-exercise-notes")
    const setContainer = exercise.querySelector(".ts-exercise-set-container")
+
+   notes.addEventListener("input", sizeNotes)
 
    // Setup excercise
    if (data) {
