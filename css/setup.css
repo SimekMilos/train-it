@@ -186,9 +186,9 @@
 }
 
 
-/* Exercise Container */
+/* Group Container */
 
-.ts-exercise-container {
+.ts-group-container {
     --left-right-padding: 5px;
 
     padding: 0 var(--left-right-padding);
