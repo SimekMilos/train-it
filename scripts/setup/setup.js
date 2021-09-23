@@ -1,12 +1,14 @@
 
 import {waitForAny} from "../tools.js"
 import * as display from "./display.js"
-import {createTraining} from "./creating.js"
+import {createTraining, createGroup, createExcercise} from "./creating.js"
 
 const trainingName = document.querySelector(".ts-training-name")
 const trainingNotes = document.querySelector(".ts-training-notes")
 const groupContainer = document.querySelector(".ts-group-container")
 
+const buttonAddGroup = document.querySelector(".ts-add-group")
+const buttonAddExcercise = document.querySelector(".ts-add-exercise")
 const buttonCancel = document.querySelector(".ts-cancel")
 const buttonSave = document.querySelector(".ts-save")
 
@@ -53,6 +55,27 @@ export async function setupTraining(trainingData = null) {
 }
 
 
+// --- Private ---
+
+buttonAddGroup.addEventListener("click", addGroup)
+buttonAddExcercise.addEventListener("click", addExcercise)
+
+function addGroup() {
+   groupContainer.append(createGroup())
+}
+
+function addExcercise() {
+   const last = groupContainer.lastElementChild
+
+   // Appends excercise
+   if (last.classList.contains("ts-no-group")) {
+      last.append(createExcercise())
+
+   // Creates no-group container if needed (with 1 excercise)
+   } else {
+      last.after(createGroup({type: "no-group", excercises: [null]}))
+   }
+}
 
 // --- Temporary ---
 
