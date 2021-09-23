@@ -19,19 +19,26 @@ export async function setupTraining(trainingData = null) {
    */
 
    let returnData = null
+   let finished = false
 
+   // Display component
    if (trainingData) createTraining(trainingData)
-   display.display()
+   await display.display()
 
-   const save = await waitForAny(["click", buttonSave,   true],
-                                 ["click", buttonCancel, false])
+   // Edit cycle
+   do {
+      const save = await waitForAny(["click", buttonSave,   true],
+                                    ["click", buttonCancel, false])
 
-   if (save) {
-      // read and validate data
-      // save to returnData
-   }
-   // if invalid data, waitForAny again
+      if (save) {
+         // read and validate data
+         // if valid, save to returnData and set finished to true
+      } else {
+         finished = true
+      }
+   } while(!finished)
 
+   // Hide component
    await display.hide()
 
    // Delete visual content
@@ -39,7 +46,7 @@ export async function setupTraining(trainingData = null) {
    trainingNotes.textContent = ""
 
    let groups = Array.from(groupContainer.children)
-   groups = groups.slice(1)         // not first element - no-excercise display
+   groups = groups.slice(1)         // not first element (no-excercise display)
    for (const group of groups) group.remove()
 
    return returnData
