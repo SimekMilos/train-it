@@ -16,7 +16,7 @@ export function readTraining() {
 
     // Read and check training name
     const nameStr = trainingName.value.trim()
-    if (!nameStr) throw new ReadError("Training must have name")
+    if (!nameStr) throw new ReadError("Training must have name.")
     trData.name = nameStr
 
     // Read training notes
@@ -24,7 +24,7 @@ export function readTraining() {
 
     // Check if there is at least one exercise
     if (!groupContainer.querySelector(":scope .ts-exercise")) {
-        throw new ReadError("Training must have at least one exercise")
+        throw new ReadError("Training must have at least one exercise.")
     }
 
     // Read groups
@@ -60,7 +60,7 @@ function readGroup(groupElem) {
     // Read and check group name
     if (nameElem) {
         const nameStr = nameElem.value.trim()
-        if (!nameStr) throw new ReadError("Group must have name")
+        if (!nameStr) throw new ReadError("Group must have name.")
         groupData.name = nameStr
     }
 
@@ -69,7 +69,7 @@ function readGroup(groupElem) {
 
     // Check if there is at least one exercise
     if (!groupElem.querySelector(":scope .ts-exercise")) {
-        throw new ReadError("Group must have at least one exercise")
+        throw new ReadError("Group must have at least one exercise.")
     }
 
     // Read exercises
