@@ -66,13 +66,19 @@ export function createGroup(data = null) {
 export function createExcercise(data = null) {
    /* Input - excercise object/null (empty excercise) */
 
-   const exercise = exerciseTemplate.content.cloneNode(true)
+   const excerciseFrag = exerciseTemplate.content.cloneNode(true)
+   const exercise = excerciseFrag.firstElementChild
+
+   // Elements
    const name = exercise.querySelector(".ts-exercise-name")
    const notes = exercise.querySelector(".ts-exercise-notes")
    const setContainer = exercise.querySelector(".ts-exercise-set-container")
-
    const buttonAddSet = exercise.querySelector(".ts-exercise-add-set")
+   const buttonClose = exercise.querySelector(".ts-exercise-close")
+
+   // Events
    notes.addEventListener("input", sizeNotes)
+   buttonClose.addEventListener("click", () => deleteExcercise(exercise))
    buttonAddSet.addEventListener("click", () => addSet(setContainer))
 
    // Setup excercise
@@ -96,9 +102,18 @@ export function createExcercise(data = null) {
         for (const _ of range(3)) addSet(setContainer)
    }
 
-   return exercise
+   return excerciseFrag
 }
+
+
 // --- Excercise listeners ---
+
+function deleteExcercise(exercise) {
+    const noGroup = exercise.closest(".ts-no-group")
+
+    if (noGroup && noGroup.children.length == 1) noGroup.remove()
+    else                                         exercise.remove()
+}
 
 function addSet(setContainer) {
     const setFrag = setTemplate.content.cloneNode(true)
