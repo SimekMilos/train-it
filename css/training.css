@@ -121,6 +121,7 @@
 .tct-notes {
     display: none;
     width: 100%;
+    height: calc(2*1.5em + 2*var(--notes-tb-padding) + 2px);
     flex-shrink: 1;
 
     margin-bottom: 0.938em;
@@ -202,6 +203,7 @@
 .tcg-notes {
     display: none;
     width: calc(var(--column-width) / .8);
+    height: calc(2*1.5em + 2*var(--notes-tb-padding) + 2px);
     flex-shrink: 1;
 
     margin: 0 .625em .625em 0;
@@ -317,6 +319,7 @@
 
 .tc-notes {
     width: 100%;
+    height: calc(2*1.5em + 2*var(--notes-tb-padding));
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
 
     border: none;
