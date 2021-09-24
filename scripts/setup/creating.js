@@ -15,7 +15,7 @@ trainingNotes.addEventListener("input", sizeNotes)
 
 export function createTraining(data) {
     trainingName.value = data.name
-    trainingNotes.textContent = data.notes
+    trainingNotes.value = data.notes
 
     for (const group of data.groups) {
         groupContainer.append(createGroup(group))
