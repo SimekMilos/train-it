@@ -54,7 +54,7 @@ export function createGroup(data = null) {
         // Load data
         if (data.name) {
             name.value = data.name
-            notes.textContent = data.notes
+            notes.value = data.notes
         }
 
     // Sets up no-group
