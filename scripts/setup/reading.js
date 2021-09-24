@@ -41,9 +41,50 @@ export function readTraining() {
 function readGroup(groupElem) {
     /* For both groups and no-groups */
 
+    const groupData = {}
+
+    const nameElem = groupElem.querySelector(":scope .ts-group-name")
+    const notesElem = groupElem.querySelector(":scope .ts-group-notes")
+    let exerciseContainer
+
+    // Detect and save type
+    if (groupElem.classList.contains("ts-group")) {
+        groupData.type = "group"
+        exerciseContainer = groupElem.querySelector(":scope .ts-group-exercise-container")
+    }
+    else {
+        groupData.type = "no-group"
+        exerciseContainer = groupElem
+    }
+
+    // Read and check group name
+    if (nameElem) {
+        const nameStr = nameElem.value.trim()
+        if (!nameStr) throw new ReadError("Group must have name")
+        groupData.name = nameStr
+    }
+
+    // Read notes
+    if (notesElem) groupData.notes = notesElem.value
+
+    // Check if there is at least one excercise
+    if (!groupElem.querySelector(":scope .ts-exercise")) {
+        throw new ReadError("Group must have at least one excercise")
+    }
+
+    // Read exercises
+    groupData.exercises = []
+    let exercises = Array.from(exerciseContainer.children)
+    if (groupData.type == "group") exercises = exercises.slice(1)
+
+    for (const exercise of exercises) {
+        groupData.exercises.push(readExcercise(exercise))
+    }
+
+    return groupData
 }
 
 
 function readExcercise(excerciseElem) {
-
+    return null
 }
