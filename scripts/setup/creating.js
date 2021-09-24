@@ -35,11 +35,21 @@ export function createGroup(data = null) {
    // Sets up group header
    if (data.type == "group") {
       group = groupTemplate.content.cloneNode(true)
-      exerciseContainer = group.querySelector(".ts-group-exercise-container")
+      const groupElem = group.firstElementChild
 
+      // Elements
       const name = group.querySelector(".ts-group-name")
       const notes = group.querySelector(".ts-group-notes")
+      exerciseContainer = group.querySelector(".ts-group-exercise-container")
+      const buttonAddExercise = group.querySelector(".ts-group-add")
+      const buttonClose = group.querySelector(".ts-group-close")
+
+      // Events
       notes.addEventListener("input", sizeNotes)
+      buttonAddExercise.addEventListener("click", () => {
+        exerciseContainer.append(createExcercise())
+      })
+      buttonClose.addEventListener("click", () => groupElem.remove())
 
       // Load data
       if (data.name) {
