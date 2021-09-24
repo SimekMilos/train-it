@@ -306,13 +306,14 @@ body {
 /* Requires text-input */
 
 .notes {
-    height: calc(8px + 3 * 1.5em);
+    height: calc(8px + 2*1.5em);
     background-color: rgba(0,0,0,.04);
     resize: none;
 
     padding-left: 6px;
     padding-right: 6px;
 
+    color: #000C;
     font-size: .8em;
     line-height: 1.5;
 }
