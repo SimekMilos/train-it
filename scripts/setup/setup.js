@@ -1,7 +1,7 @@
 
 import {waitForAny} from "../tools.js"
 import * as display from "./display.js"
-import {createTraining, createGroup, createExcercise} from "./creating.js"
+import {createTraining, createGroup, createExercise} from "./creating.js"
 import {readTraining, ReadError} from "./reading.js"
 
 const trainingName = document.querySelector(".ts-training-name")
@@ -9,7 +9,7 @@ const trainingNotes = document.querySelector(".ts-training-notes")
 const groupContainer = document.querySelector(".ts-group-container")
 
 const buttonAddGroup = document.querySelector(".ts-add-group")
-const buttonAddExcercise = document.querySelector(".ts-add-exercise")
+const buttonAddExercise = document.querySelector(".ts-add-exercise")
 const buttonCancel = document.querySelector(".ts-cancel")
 const buttonSave = document.querySelector(".ts-save")
 
@@ -66,7 +66,7 @@ export async function setupTraining(trainingData = null) {
     trainingNotes.value = ""
 
     let groups = Array.from(groupContainer.children)
-    groups = groups.slice(1)         // not first element (no-excercise display)
+    groups = groups.slice(1)         // not first element (no-exercise display)
     for (const group of groups) group.remove()
 
     return returnData
@@ -76,21 +76,21 @@ export async function setupTraining(trainingData = null) {
 // --- Private ---
 
 buttonAddGroup.addEventListener("click", addGroup)
-buttonAddExcercise.addEventListener("click", addExcercise)
+buttonAddExercise.addEventListener("click", addExercise)
 
 function addGroup() {
     groupContainer.append(createGroup())
 }
 
-function addExcercise() {
+function addExercise() {
     const last = groupContainer.lastElementChild
 
-    // Appends excercise
+    // Appends exercise
     if (last.classList.contains("ts-no-group")) {
-        last.append(createExcercise())
+        last.append(createExercise())
 
-    // Creates no-group container if needed (with 1 excercise)
+    // Creates no-group container if needed (with 1 exercise)
     } else {
-        last.after(createGroup({type: "no-group", excercises: [null]}))
+        last.after(createGroup({type: "no-group", exercises: [null]}))
     }
 }

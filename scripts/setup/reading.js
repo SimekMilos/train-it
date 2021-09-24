@@ -22,9 +22,9 @@ export function readTraining() {
     // Read training notes
     trData.notes = trainingNotes.value
 
-    // Check if there is at least one excercise
+    // Check if there is at least one exercise
     if (!groupContainer.querySelector(":scope .ts-exercise")) {
-        throw new ReadError("Training must have at least one excercise")
+        throw new ReadError("Training must have at least one exercise")
     }
 
     // Read groups
@@ -67,9 +67,9 @@ function readGroup(groupElem) {
     // Read notes
     if (notesElem) groupData.notes = notesElem.value
 
-    // Check if there is at least one excercise
+    // Check if there is at least one exercise
     if (!groupElem.querySelector(":scope .ts-exercise")) {
-        throw new ReadError("Group must have at least one excercise")
+        throw new ReadError("Group must have at least one exercise")
     }
 
     // Read exercises
@@ -78,13 +78,13 @@ function readGroup(groupElem) {
     if (groupData.type == "group") exercises = exercises.slice(1)
 
     for (const exercise of exercises) {
-        groupData.exercises.push(readExcercise(exercise))
+        groupData.exercises.push(readExercise(exercise))
     }
 
     return groupData
 }
 
 
-function readExcercise(excerciseElem) {
+function readExercise(exerciseElem) {
     return null
 }

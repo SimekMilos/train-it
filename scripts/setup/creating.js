@@ -47,7 +47,7 @@ export function createGroup(data = null) {
         // Events
         notes.addEventListener("input", sizeNotes)
         buttonAddExercise.addEventListener("click", () => {
-            exerciseContainer.append(createExcercise())
+            exerciseContainer.append(createExercise())
         })
         buttonClose.addEventListener("click", () => groupElem.remove())
 
@@ -63,21 +63,21 @@ export function createGroup(data = null) {
         exerciseContainer = group.querySelector(".ts-no-group")
     }
 
-    // Add excercises
-    if (data.excercises) {
-        for (const excercise of data.excercises) {
-            exerciseContainer.append(createExcercise(excercise))
+    // Add exercises
+    if (data.exercises) {
+        for (const exercise of data.exercises) {
+            exerciseContainer.append(createExercise(exercise))
         }
     }
 
     return group
 }
 
-export function createExcercise(data = null) {
-    /* Input - excercise object/null (empty excercise) */
+export function createExercise(data = null) {
+    /* Input - exercise object/null (empty exercise) */
 
-    const excerciseFrag = exerciseTemplate.content.cloneNode(true)
-    const exercise = excerciseFrag.firstElementChild
+    const exerciseFrag = exerciseTemplate.content.cloneNode(true)
+    const exercise = exerciseFrag.firstElementChild
 
     // Elements
     const name = exercise.querySelector(".ts-exercise-name")
@@ -88,10 +88,10 @@ export function createExcercise(data = null) {
 
     // Events
     notes.addEventListener("input", sizeNotes)
-    buttonClose.addEventListener("click", () => deleteExcercise(exercise))
+    buttonClose.addEventListener("click", () => deleteExercise(exercise))
     buttonAddSet.addEventListener("click", () => addSet(setContainer))
 
-    // Setup excercise
+    // Setup exercise
     if (data) {
         name.value = data.name
         notes.textContent = data.notes
@@ -112,13 +112,13 @@ export function createExcercise(data = null) {
         for (const _ of range(3)) addSet(setContainer)
     }
 
-    return excerciseFrag
+    return exerciseFrag
 }
 
 
-// --- Excercise listeners ---
+// --- Exercise listeners ---
 
-function deleteExcercise(exercise) {
+function deleteExercise(exercise) {
     const noGroup = exercise.closest(".ts-no-group")
 
     if (noGroup && noGroup.children.length == 1) noGroup.remove()
