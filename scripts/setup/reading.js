@@ -86,5 +86,33 @@ function readGroup(groupElem) {
 
 
 function readExercise(exerciseElem) {
-    return null
+    const exerciseData = {}
+
+    const nameElem = exerciseElem.querySelector(":scope .ts-exercise-name")
+    const notesElem = exerciseElem.querySelector(":scope .ts-exercise-notes")
+    const setContainer = exerciseElem.querySelector(":scope .ts-exercise-set-container")
+
+    // Read and check exercise name
+    const nameStr = nameElem.value.trim()
+    if (!nameStr) throw new ReadError("Exercise must have name.")
+    exerciseData.name = nameStr
+
+    // Read exercise notes
+    exerciseData.notes = notesElem.value
+
+    // Check if there is at least one set
+    if (!setContainer.children.length) {
+        throw new ReadError("Exercise must have at least one set.")
+    }
+
+    // Read sets
+    exerciseData.sets = []
+    for (const set of setContainer.children) {
+        const setName = set.querySelector(":scope .ts-set-name")
+        const nameStr = setName.value.trim()
+        if (nameStr) exerciseData.sets.push(nameStr)
+        else         exerciseData.sets.push(null)    // Set with default naming
+    }
+
+    return exerciseData
 }
