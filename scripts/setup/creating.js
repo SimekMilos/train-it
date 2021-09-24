@@ -14,105 +14,105 @@ trainingNotes.addEventListener("input", sizeNotes)
 
 
 export function createTraining(data) {
-   trainingName.value = data.name
-   trainingNotes.textContent = data.notes
+    trainingName.value = data.name
+    trainingNotes.textContent = data.notes
 
-   for (const group of data.groups) {
-      groupContainer.append(createGroup(group))
-   }
+    for (const group of data.groups) {
+        groupContainer.append(createGroup(group))
+    }
 }
 
 export function createGroup(data = null) {
-   /* Both for groups and no-groups
+    /* Both for groups and no-groups
       Input - group object/null (empty group)
-   */
+    */
 
-   if (!data) data = {type: "group"}
+    if (!data) data = {type: "group"}
 
-   let group
-   let exerciseContainer
+    let group
+    let exerciseContainer
 
-   // Sets up group header
-   if (data.type == "group") {
-      group = groupTemplate.content.cloneNode(true)
-      const groupElem = group.firstElementChild
+    // Sets up group header
+    if (data.type == "group") {
+        group = groupTemplate.content.cloneNode(true)
+        const groupElem = group.firstElementChild
 
-      // Elements
-      const name = group.querySelector(".ts-group-name")
-      const notes = group.querySelector(".ts-group-notes")
-      exerciseContainer = group.querySelector(".ts-group-exercise-container")
-      const buttonAddExercise = group.querySelector(".ts-group-add")
-      const buttonClose = group.querySelector(".ts-group-close")
+        // Elements
+        const name = group.querySelector(".ts-group-name")
+        const notes = group.querySelector(".ts-group-notes")
+        exerciseContainer = group.querySelector(".ts-group-exercise-container")
+        const buttonAddExercise = group.querySelector(".ts-group-add")
+        const buttonClose = group.querySelector(".ts-group-close")
 
-      // Events
-      notes.addEventListener("input", sizeNotes)
-      buttonAddExercise.addEventListener("click", () => {
-        exerciseContainer.append(createExcercise())
-      })
-      buttonClose.addEventListener("click", () => groupElem.remove())
+        // Events
+        notes.addEventListener("input", sizeNotes)
+        buttonAddExercise.addEventListener("click", () => {
+            exerciseContainer.append(createExcercise())
+        })
+        buttonClose.addEventListener("click", () => groupElem.remove())
 
-      // Load data
-      if (data.name) {
-         name.value = data.name
-         notes.textContent = data.notes
-      }
+        // Load data
+        if (data.name) {
+            name.value = data.name
+            notes.textContent = data.notes
+        }
 
-   // Sets up no-group
-   } else {
-      group = noGroupTemplate.content.cloneNode(true)
-      exerciseContainer = group.querySelector(".ts-no-group")
-   }
+    // Sets up no-group
+    } else {
+        group = noGroupTemplate.content.cloneNode(true)
+        exerciseContainer = group.querySelector(".ts-no-group")
+    }
 
-   // Add excercises
-   if (data.excercises) {
-      for (const excercise of data.excercises) {
-         exerciseContainer.append(createExcercise(excercise))
-      }
-   }
+    // Add excercises
+    if (data.excercises) {
+        for (const excercise of data.excercises) {
+            exerciseContainer.append(createExcercise(excercise))
+        }
+    }
 
-   return group
+    return group
 }
 
 export function createExcercise(data = null) {
-   /* Input - excercise object/null (empty excercise) */
+    /* Input - excercise object/null (empty excercise) */
 
-   const excerciseFrag = exerciseTemplate.content.cloneNode(true)
-   const exercise = excerciseFrag.firstElementChild
+    const excerciseFrag = exerciseTemplate.content.cloneNode(true)
+    const exercise = excerciseFrag.firstElementChild
 
-   // Elements
-   const name = exercise.querySelector(".ts-exercise-name")
-   const notes = exercise.querySelector(".ts-exercise-notes")
-   const setContainer = exercise.querySelector(".ts-exercise-set-container")
-   const buttonAddSet = exercise.querySelector(".ts-exercise-add-set")
-   const buttonClose = exercise.querySelector(".ts-exercise-close")
+    // Elements
+    const name = exercise.querySelector(".ts-exercise-name")
+    const notes = exercise.querySelector(".ts-exercise-notes")
+    const setContainer = exercise.querySelector(".ts-exercise-set-container")
+    const buttonAddSet = exercise.querySelector(".ts-exercise-add-set")
+    const buttonClose = exercise.querySelector(".ts-exercise-close")
 
-   // Events
-   notes.addEventListener("input", sizeNotes)
-   buttonClose.addEventListener("click", () => deleteExcercise(exercise))
-   buttonAddSet.addEventListener("click", () => addSet(setContainer))
+    // Events
+    notes.addEventListener("input", sizeNotes)
+    buttonClose.addEventListener("click", () => deleteExcercise(exercise))
+    buttonAddSet.addEventListener("click", () => addSet(setContainer))
 
-   // Setup excercise
-   if (data) {
-      name.value = data.name
-      notes.textContent = data.notes
+    // Setup excercise
+    if (data) {
+        name.value = data.name
+        notes.textContent = data.notes
 
-      // Setup sets
-      for (const setName of data.sets) {
-         const set = setTemplate.content.cloneNode(true)
+        // Setup sets
+        for (const setName of data.sets) {
+            const set = setTemplate.content.cloneNode(true)
 
-         if (setName) {
-            const nameElem = set.querySelector(".ts-set-name")
-            nameElem.value = setName
-         }
-         setContainer.append(set)
-      }
+            if (setName) {
+                const nameElem = set.querySelector(".ts-set-name")
+                nameElem.value = setName
+            }
+            setContainer.append(set)
+        }
 
-   // Default
-   } else {
+    // Default
+    } else {
         for (const _ of range(3)) addSet(setContainer)
-   }
+    }
 
-   return excerciseFrag
+    return excerciseFrag
 }
 
 
