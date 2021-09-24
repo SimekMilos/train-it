@@ -95,6 +95,8 @@ buttonCreate.addEventListener("click", createTraining)
 buttonEdit.addEventListener("click", editTraining)
 
 async function createTraining() {
+    if (overviewSettings.isDisplayed()) overviewSettings.hide()
+
     const trData = await setup.setupTraining()
     if (!trData) return
 
@@ -127,6 +129,8 @@ async function createTraining() {
 }
 
 async function editTraining() {
+    if (overviewSettings.isDisplayed()) overviewSettings.hide()
+
     // Get selected training
     let {trID, trData, trNameElem} = getSelectedTraining()
 
