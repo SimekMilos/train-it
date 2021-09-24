@@ -4,6 +4,8 @@ const trainingNotes = document.querySelector(".ts-training-notes")
 const groupContainer = document.querySelector(".ts-group-container")
 
 
+// --- Interface ---
+
 export class ReadError extends Error {
     constructor(message) {
         super(message)
@@ -37,6 +39,8 @@ export function readTraining() {
     return trData
 }
 
+
+// --- Private ---
 
 function readGroup(groupElem) {
     /* For both groups and no-groups */
@@ -83,7 +87,6 @@ function readGroup(groupElem) {
 
     return groupData
 }
-
 
 function readExercise(exerciseElem) {
     const exerciseData = {}
