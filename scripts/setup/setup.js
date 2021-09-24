@@ -42,6 +42,8 @@ export async function setupTraining(trainingData = null) {
                 if (trainingData && trainingData.settings) {
                     returnData.settings = trainingData.settings
                 }
+
+            // Inform about incorrect format
             } catch (error) {
                 if (error instanceof ReadError) {
                     finished = false
