@@ -71,7 +71,9 @@ export function createExcercise(data = null) {
    const notes = exercise.querySelector(".ts-exercise-notes")
    const setContainer = exercise.querySelector(".ts-exercise-set-container")
 
+   const buttonAddSet = exercise.querySelector(".ts-exercise-add-set")
    notes.addEventListener("input", sizeNotes)
+   buttonAddSet.addEventListener("click", () => addSet(setContainer))
 
    // Setup excercise
    if (data) {
@@ -91,10 +93,20 @@ export function createExcercise(data = null) {
 
    // Default
    } else {
-      for (const _ of range(3)) {
-         setContainer.append(setTemplate.content.cloneNode(true))
-      }
+        for (const _ of range(3)) addSet(setContainer)
    }
 
    return exercise
 }
+// --- Excercise listeners ---
+
+function addSet(setContainer) {
+    const setFrag = setTemplate.content.cloneNode(true)
+    const set = setFrag.firstElementChild
+    const closeButton = setFrag.querySelector(".ts-set-close")
+
+    closeButton.addEventListener("click", () => set.remove())
+
+    setContainer.append(setFrag)
+}
+
