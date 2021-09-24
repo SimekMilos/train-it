@@ -23,8 +23,8 @@ export function createTraining(data) {
 }
 
 export function createGroup(data = null) {
-    /* Both for groups and no-groups
-      Input - group object/null (empty group)
+    /* For both groups and no-groups
+       Input - group object/null (empty group)
     */
 
     if (!data) data = {type: "group"}

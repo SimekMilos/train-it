@@ -63,7 +63,7 @@ export async function setupTraining(trainingData = null) {
 
     // Delete visual content
     trainingName.value = ""
-    trainingNotes.textContent = ""
+    trainingNotes.value = ""
 
     let groups = Array.from(groupContainer.children)
     groups = groups.slice(1)         // not first element (no-excercise display)

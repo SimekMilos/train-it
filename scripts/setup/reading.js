@@ -20,7 +20,7 @@ export function readTraining() {
     trData.name = nameStr
 
     // Read training notes
-    trData.notes = trainingNotes.textContent
+    trData.notes = trainingNotes.value
 
     // Check if there is at least one excercise
     if (!groupContainer.querySelector(":scope .ts-exercise")) {
@@ -28,13 +28,18 @@ export function readTraining() {
     }
 
     // Read groups
+    trData.groups = []
+    const groups = Array.from(groupContainer.children).slice(1)
+    for (const group of groups) {
+        trData.groups.push(readGroup(group))
+    }
 
     return trData
 }
 
 
 function readGroup(groupElem) {
-    /* Both for groups and no-groups */
+    /* For both groups and no-groups */
 
 }
 
