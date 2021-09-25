@@ -196,19 +196,19 @@ window.addEventListener("load", () => {
 
     for (const container of [groupCont, noGroupCont]) {
         for (const num of range(3)) {
-            container.append(createExercise(`Excercise ${num+1}`, 3))
+            container.append(createExercise(`Exercise ${num+1}`, 3))
         }
     }
 
     // Activating running styles
     const runningGroup = document.querySelector(".tc-group")
-    const runningExcercise = document.querySelectorAll(".tc-exercise")[1]
-    const runningSet = runningExcercise.querySelectorAll(".tc-exercise-set")[1]
+    const runningExercise = document.querySelectorAll(".tc-exercise")[1]
+    const runningSet = runningExercise.querySelectorAll(".tc-exercise-set")[1]
 
-    const runningExcercise2 = document.querySelectorAll(".tc-exercise")[2]
-    const runningSet2 = runningExcercise2.querySelectorAll(".tc-exercise-set")[1]
+    const runningExercise2 = document.querySelectorAll(".tc-exercise")[2]
+    const runningSet2 = runningExercise2.querySelectorAll(".tc-exercise-set")[1]
 
-    for (const elem of [runningGroup, runningExcercise]) {
+    for (const elem of [runningGroup, runningExercise]) {
         elem.classList.add("running")
     }
 
