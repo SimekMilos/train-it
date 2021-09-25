@@ -233,7 +233,7 @@
     position: relative;
     padding: 30px 10px 15px;
 
-    border: 1px solid hsl(0, 0%, 30%);
+    border: 1px solid hsl(0, 100%, 40%);
     border-radius: var(--comp-border-radius);
 
     display: flex;
