@@ -177,7 +177,7 @@ async function deleteTraining() {
     // Confirm deletion
     const trName = trNameElem.textContent
     if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
-    deselectedMode(false)
+    display.disableAccess()
 
     // Delete element and scroll up
     await wait(200)
@@ -190,6 +190,9 @@ async function deleteTraining() {
 
     waitFor("transitionend", trElem).then(async () => {
         trElem.remove()
+        deselectedMode(false)
+        display.enableAccess()
+
         await wait(200)
         if (trainingList.style.paddingBottom) {
             smoothRemoveBottomPadding(trainingList, itemHeight, 250)
