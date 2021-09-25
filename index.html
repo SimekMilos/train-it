@@ -177,11 +177,13 @@
         <div class="ts-container vertical-container">
             <form class="training-setup-component overlay-disabling">
                 <input type="text" class="ts-training-name text-input"
-                    size="1" placeholder="Name this training">
+                    size="1" placeholder="Name this training"
+                    spellcheck="false">
 
                 <div class="ts-scroll-container">
                     <textarea class="ts-training-notes text-input notes"
-                        placeholder="- notes for the training"></textarea>
+                        placeholder="- notes for the training"
+                        spellcheck="false"></textarea>
 
                     <div class="ts-group-container">
                         <div class="ts-no-exercises no-content-display">
@@ -216,10 +218,12 @@
                 <template class="ts-group-template">
                     <div class="ts-group">
                         <input type="text" class="ts-group-name text-input"
-                            size="1" placeholder="Name this group">
+                            size="1" placeholder="Name this group"
+                            spellcheck="false">
 
                         <textarea class="ts-group-notes text-input notes"
-                            placeholder="- notes for the group"></textarea>
+                            placeholder="- notes for the group"
+                            spellcheck="false"></textarea>
 
                         <div class="ts-group-exercise-container">
                             <div class="ts-group-no-exercises no-content-display">
@@ -252,10 +256,12 @@
                 <template class="ts-exercise-template">
                     <div class="ts-exercise">
                         <input type="text" class="ts-exercise-name text-input"
-                            size="1" placeholder="Name this exercise">
+                            size="1" placeholder="Name this exercise"
+                            spellcheck="false">
 
                         <textarea class="ts-exercise-notes text-input notes"
-                            placeholder="- notes for the exercise"></textarea>
+                            placeholder="- notes for the exercise"
+                            spellcheck="false"></textarea>
 
                         <ol class="ts-exercise-set-container">
                             <!-- Sets goes here -->
@@ -276,7 +282,8 @@
                 <template class="ts-set-template">
                     <li class="ts-set">
                         <input type="text" class="ts-set-name text-input"
-                            size="1" placeholder="Set">
+                            size="1" placeholder="Set"
+                            spellcheck="false">
                         <button class="ts-set-close close-button"
                                 type="button"></button>
                         <div class="ts-set-handle handle"><div></div></div>
@@ -338,8 +345,8 @@
                     </button>
 
                     <textarea class="tct-notes text-input notes"
-                            spellcheck="false"
-                            placeholder="- training notes"></textarea>
+                            placeholder="- training notes"
+                            spellcheck="false"></textarea>
                 </div>
             </template>
 
@@ -357,8 +364,8 @@
                     </div>
                     <div class="tcg-container">
                         <textarea class="tcg-notes text-input notes"
-                            spellcheck="false"
-                            placeholder="- group notes"></textarea>
+                            placeholder="- group notes"
+                            spellcheck="false"></textarea>
 
                         <!-- Exercises goes here -->
                     </div>
@@ -408,8 +415,8 @@
             <!-- Exercise notes template -->
             <template class="tc-notes-template">
                 <textarea class="tc-notes text-input notes"
-                          spellcheck="false"
-                          placeholder="- exercise notes"></textarea>
+                          placeholder="- exercise notes"
+                          spellcheck="false"></textarea>
             </template>
         </div>
 
