@@ -398,4 +398,10 @@
 .ts-set-name {
     margin: 0 5px 0 2px;
     flex-grow: 1;
+
+    color: #000C;
+}
+
+.ts-set-name::placeholder {
+    color: #0009;
 }
