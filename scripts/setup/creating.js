@@ -89,7 +89,7 @@ export function createExercise(data = null) {
     // Events
     notes.addEventListener("input", sizeNotes)
     buttonClose.addEventListener("click", () => deleteExercise(exercise))
-    buttonAddSet.addEventListener("click", () => addSet(setContainer))
+    buttonAddSet.addEventListener("click", () => setContainer.append(createSet()))
 
     // Setup exercise
     if (data) {
@@ -98,25 +98,19 @@ export function createExercise(data = null) {
 
         // Setup sets
         for (const setName of data.sets) {
-            const set = setTemplate.content.cloneNode(true)
-
-            if (setName) {
-                const nameElem = set.querySelector(".ts-set-name")
-                nameElem.value = setName
-            }
-            setContainer.append(set)
+            setContainer.append(createSet(setName))
         }
 
     // Default
     } else {
-        for (const _ of range(3)) addSet(setContainer)
+        for (const _ of range(3)) setContainer.append(createSet())
     }
 
     return exerciseFrag
 }
 
 
-// --- Exercise listeners ---
+// --- Private ---
 
 function deleteExercise(exercise) {
     const noGroup = exercise.closest(".ts-no-group")
@@ -125,13 +119,20 @@ function deleteExercise(exercise) {
     else                                         exercise.remove()
 }
 
-function addSet(setContainer) {
+function createSet(setName = null) {
     const setFrag = setTemplate.content.cloneNode(true)
     const set = setFrag.firstElementChild
-    const closeButton = setFrag.querySelector(".ts-set-close")
 
+    // Set name
+    if (setName) {
+        const name = set.querySelector(".ts-set-name")
+        name.value = setName
+    }
+
+    // Setup close button
+    const closeButton = setFrag.querySelector(".ts-set-close")
     closeButton.addEventListener("click", () => set.remove())
 
-    setContainer.append(setFrag)
+    return setFrag
 }
 
