@@ -21,8 +21,8 @@ export function readTraining() {
     if (!nameStr) throw new ReadError("Training must have name.")
     trData.name = nameStr
 
-    // Read training notes
-    trData.notes = trainingNotes.value
+    // Read notes
+    trData.notes = trainingNotes.value.trim()
 
     // Check if there is at least one exercise
     if (!groupContainer.querySelector(":scope .ts-exercise")) {
@@ -69,7 +69,7 @@ function readGroup(groupElem) {
     }
 
     // Read notes
-    if (notesElem) groupData.notes = notesElem.value
+    if (notesElem) groupData.notes = notesElem.value.trim()
 
     // Check if there is at least one exercise
     if (!groupElem.querySelector(":scope .ts-exercise")) {
@@ -100,8 +100,8 @@ function readExercise(exerciseElem) {
     if (!nameStr) throw new ReadError("Exercise must have name.")
     exerciseData.name = nameStr
 
-    // Read exercise notes
-    exerciseData.notes = notesElem.value
+    // Read notes
+    exerciseData.notes = notesElem.value.trim()
 
     // Check if there is at least one set
     if (!setContainer.children.length) {
