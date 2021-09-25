@@ -322,7 +322,7 @@
 
 /* Content */
 
-.ts-exercise > :not(:last-child) {
+.ts-exercise > :nth-child(-n+2) {
     margin-bottom: 5px;
 }
 
@@ -335,6 +335,7 @@
 }
 
 .ts-exercise-set-container {
+    margin-bottom: 10px;
     counter-reset: set-counter;
 }
 
