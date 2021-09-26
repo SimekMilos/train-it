@@ -89,8 +89,14 @@ export function createExercise(data = null) {
 
     // Events
     notes.addEventListener("input", sizeNotes)
-    buttonClose.addEventListener("click", () => deleteExercise(exercise))
-    buttonAddSet.addEventListener("click", () => setContainer.append(createSet()))
+    buttonClose.addEventListener("click", async () => {
+        buttonClose.disabled = true
+        await hideExercise(exercise)
+        deleteExercise(exercise)
+    })
+    buttonAddSet.addEventListener("click", () => {
+        setContainer.append(createSet())
+    })
 
     // Setup exercise
     if (data) {
@@ -116,7 +122,16 @@ export async function displayExercise(elem) {
     elem.classList.add("display")
 
     await waitFor("animationend", elem)
+    elem.classList.remove("display")
     elem.style.removeProperty("height")
+}
+
+export async function hideExercise(elem) {
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("hide")
+
+    await waitFor("animationend", elem)
 }
 
 

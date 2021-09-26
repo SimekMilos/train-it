@@ -312,7 +312,11 @@
 }
 
 .ts-exercise.display {
-    animation: fan-out .5s forwards;
+    animation: fan-out .4s forwards ease-in-out;
+}
+
+.ts-exercise.hide {
+    animation: fan-out .4s reverse forwards ease-in-out;
 }
 
     @keyframes fan-out {
