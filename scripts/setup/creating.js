@@ -29,13 +29,13 @@ export function createGroup(data = null) {
 
     if (!data) data = {type: "group"}
 
-    let group
+    let groupFrag
     let exerciseContainer
 
     // Sets up group header
     if (data.type == "group") {
-        group = groupTemplate.content.cloneNode(true)
-        const groupElem = group.firstElementChild
+        groupFrag = groupTemplate.content.cloneNode(true)
+        const group = groupFrag.firstElementChild
 
         // Elements
         const name = group.querySelector(".ts-group-name")
@@ -51,8 +51,8 @@ export function createGroup(data = null) {
             displayAnim(exerciseContainer.lastElementChild)
         })
         buttonClose.addEventListener("click", async () => {
-            await hideAnim(groupElem)
-            groupElem.remove()
+            await hideAnim(group)
+            group.remove()
         })
 
         // Load data
@@ -63,8 +63,8 @@ export function createGroup(data = null) {
 
     // Sets up no-group
     } else {
-        group = noGroupTemplate.content.cloneNode(true)
-        exerciseContainer = group.querySelector(".ts-no-group")
+        groupFrag = noGroupTemplate.content.cloneNode(true)
+        exerciseContainer = groupFrag.querySelector(".ts-no-group")
     }
 
     // Add exercises
@@ -74,7 +74,7 @@ export function createGroup(data = null) {
         }
     }
 
-    return group
+    return groupFrag
 }
 
 export function createExercise(data = null) {
