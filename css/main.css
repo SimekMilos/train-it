@@ -239,8 +239,10 @@ body {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
 
-.close-button:hover {
-    background-color: var(--secondary-color-hover);
+@media (any-hover: hover) {
+    .close-button:hover {
+        background-color: var(--secondary-color-hover);
+    }
 }
 
 .close-button:active {
