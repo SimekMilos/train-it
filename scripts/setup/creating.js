@@ -1,5 +1,5 @@
 
-import {range, sizeNotes} from "../tools.js"
+import {range, waitFor, sizeNotes} from "../tools.js"
 
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
@@ -48,6 +48,7 @@ export function createGroup(data = null) {
         notes.addEventListener("input", sizeNotes)
         buttonAddExercise.addEventListener("click", () => {
             exerciseContainer.append(createExercise())
+            displayExercise(exerciseContainer.lastElementChild)
         })
         buttonClose.addEventListener("click", () => groupElem.remove())
 
@@ -107,6 +108,15 @@ export function createExercise(data = null) {
     }
 
     return exerciseFrag
+}
+
+export async function displayExercise(elem) {
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("display")
+
+    await waitFor("animationend", elem)
+    elem.style.removeProperty("height")
 }
 
 

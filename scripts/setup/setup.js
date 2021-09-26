@@ -2,6 +2,7 @@
 import {range, waitForAny} from "../tools.js"
 import * as display from "./display.js"
 import {createTraining, createGroup, createExercise} from "./creating.js"
+import {displayExercise} from "./creating.js"
 import {readTraining, ReadError} from "./reading.js"
 
 const trainingName = document.querySelector(".ts-training-name")
@@ -86,16 +87,17 @@ function addGroup() {
 }
 
 function addExercise() {
-    const last = groupContainer.lastElementChild
+    let last = groupContainer.lastElementChild
+
+    // Creates no-group container if needed
+    if (!last.classList.contains("ts-no-group")) {
+        last.after(createGroup({type: "no-group"}))
+        last = groupContainer.lastElementChild
+    }
 
     // Appends exercise
-    if (last.classList.contains("ts-no-group")) {
-        last.append(createExercise())
-
-    // Creates no-group container if needed (with 1 exercise)
-    } else {
-        last.after(createGroup({type: "no-group", exercises: [null]}))
-    }
+    last.append(createExercise())
+    displayExercise(last.lastElementChild)
 }
 
 function hasChanged(originalTrainingData) {

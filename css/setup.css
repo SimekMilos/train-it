@@ -302,13 +302,25 @@
 
 .ts-exercise {
     position: relative;
-    padding: 30px 10px 10px;
+    padding: 0px 10px 10px;
 
     border-bottom: 1px solid var(--main-color);
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
+
+.ts-exercise.display {
+    animation: fan-out .5s forwards;
+}
+
+    @keyframes fan-out {
+        from {
+            height: 0;
+            padding-bottom: 0;
+        }
+    }
 
 .ts-group .ts-exercise:nth-child(2) {
     margin-top: 10px;
@@ -327,8 +339,7 @@
 }
 
 .ts-exercise-name {
-    margin-left: -6px;
-    margin-right: -6px;
+    margin: 30px -6px 0;
 
     color: var(--name-color);
     font: normal 18px "Roboto Light", sans-serif;
