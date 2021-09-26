@@ -19,6 +19,8 @@ export function createTraining(data) {
 
     for (const group of data.groups) {
         groupContainer.append(createGroup(group))
+        setGroupHeight(groupContainer.lastElementChild)
+        groupContainer.lastElementChild.classList.add("enable-access")
     }
 }
 
@@ -71,6 +73,7 @@ export function createGroup(data = null) {
     if (data.exercises) {
         for (const exercise of data.exercises) {
             exerciseContainer.append(createExercise(exercise))
+            exerciseContainer.lastElementChild.classList.add("enable-access")
         }
     }
 
