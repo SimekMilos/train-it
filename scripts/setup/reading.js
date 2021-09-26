@@ -110,9 +110,9 @@ function readExercise(exerciseElem) {
 
     // Read sets
     exerciseData.sets = []
-    for (const set of setContainer.children) {
-        const setName = set.querySelector(":scope .ts-set-name")
-        const nameStr = setName.value.trim()
+    for (const setElem of setContainer.children) {
+        const setNameElem = setElem.querySelector(":scope .ts-set-name")
+        const nameStr = setNameElem.value.trim()
         if (nameStr) exerciseData.sets.push(nameStr)
         else         exerciseData.sets.push(null)    // Set with default naming
     }
