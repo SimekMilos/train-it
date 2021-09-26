@@ -201,7 +201,13 @@
 /* No Exercises Display */
 
 .ts-no-exercises {
+    position: absolute;
+    z-index: -1;
     margin: 1em calc(1em - var(--left-right-padding));
+}
+
+.ts-no-exercises:not(:only-child) {
+    display: block;                    /* Keep visible */
 }
 
 
@@ -235,6 +241,7 @@
 
     border: 1px solid hsl(0, 100%, 40%);
     border-radius: var(--comp-border-radius);
+    background-color: white;
 
     display: flex;
     flex-direction: column;
@@ -260,6 +267,7 @@
 
 .ts-no-group {
     padding: 0 11px;    /* 1px for group border */
+    background-color: white;
 }
 
 .ts-group:nth-child(2), .ts-no-group:nth-child(2) {

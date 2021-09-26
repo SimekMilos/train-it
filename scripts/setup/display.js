@@ -9,6 +9,8 @@ const component = container.firstElementChild
 
 const scrollContainer = document.querySelector(".ts-scroll-container")
 const groupContainer = document.querySelector(".ts-group-container")
+const noExerciseElem = document.querySelector(".ts-no-exercises")
+const noExerciseStyles = getComputedStyle(noExerciseElem)
 
 let stickyLineHidden = true
 
@@ -20,6 +22,7 @@ export async function display() {
     component.classList.add("display")
     container.classList.add("display")
     component.style.width = getComponentWidth()
+    setGroupContainerMinHeight()
 
     // Start push away efekt (standard display)/ disables shadow (overlay)
     if(containerStyles.position != "absolute") {
@@ -68,6 +71,7 @@ export async function hide() {
 
 window.addEventListener("resize", overviewShadowResizeToggle)
 scrollContainer.addEventListener("scroll", stickyLineEffect)
+new ResizeObserver(setGroupContainerMinHeight).observe(component)
 
 function overviewShadowResizeToggle() {
     /* Disables shadow in overview if setup component overlays over it */
@@ -93,6 +97,14 @@ function stickyLineEffect() {
             stickyLineHidden = true
         }
     }
+}
+
+function setGroupContainerMinHeight() {
+    let height = float(noExerciseStyles.height)
+    height += float(noExerciseStyles.marginTop)
+    height += float(noExerciseStyles.marginBottom)
+
+    groupContainer.style.minHeight = px(height)
 }
 
 function getComponentWidth() {
