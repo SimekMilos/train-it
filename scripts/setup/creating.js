@@ -119,22 +119,29 @@ export function createExercise(data = null) {
 }
 
 export async function displayAnim(elem) {
+    // Setup animation
     const height = getComputedStyle(elem).height
     elem.style.height = height
     elem.classList.add("display")
 
     await waitFor("animationend", elem)
+
+    // Finish displaying
+    elem.classList.add("enable-access")
     elem.classList.remove("display")
     elem.style.removeProperty("height")
 }
 
 export async function hideAnim(elem) {
+    elem.classList.remove("enable-access")
+
+    // Setup animation
     const height = getComputedStyle(elem).height
     elem.style.height = height
     elem.classList.add("hide")
 
     await waitFor("animationend", elem)
-    // Cleaning after not necessary
+    // Cleaning after is not necessary
 }
 
 
