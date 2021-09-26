@@ -231,14 +231,32 @@
 
 .ts-group {
     position: relative;
-    padding: 30px 10px 15px;
+    padding: 0px 10px 15px;
 
     border: 1px solid hsl(0, 100%, 40%);
     border-radius: var(--comp-border-radius);
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
+
+.ts-group.display {
+    animation: group-fan-out .4s forwards ease-in-out;
+}
+
+.ts-group.hide {
+    animation: group-fan-out .4s reverse forwards ease-in-out;
+}
+
+    @keyframes group-fan-out {
+        from {
+            height: 0;
+            padding-bottom: 0;
+            padding-top: 0;
+            margin-bottom: 3px;
+        }
+    }
 
 .ts-no-group {
     padding: 0 11px;    /* 1px for group border */
@@ -260,7 +278,7 @@
 /* Content */
 
 .ts-group-name {
-    margin: 0 -6px 5px;
+    margin: 30px -6px 5px;
 
     color: var(--name-color);
     font: normal 21px "Roboto Light", sans-serif;
@@ -312,14 +330,14 @@
 }
 
 .ts-exercise.display {
-    animation: fan-out .4s forwards ease-in-out;
+    animation: exercise-fan-out .4s forwards ease-in-out;
 }
 
 .ts-exercise.hide {
-    animation: fan-out .4s reverse forwards ease-in-out;
+    animation: exercise-fan-out .4s reverse forwards ease-in-out;
 }
 
-    @keyframes fan-out {
+    @keyframes exercise-fan-out {
         from {
             height: 0;
             padding-bottom: 0;

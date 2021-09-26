@@ -48,9 +48,12 @@ export function createGroup(data = null) {
         notes.addEventListener("input", sizeNotes)
         buttonAddExercise.addEventListener("click", () => {
             exerciseContainer.append(createExercise())
-            displayExercise(exerciseContainer.lastElementChild)
+            displayAnim(exerciseContainer.lastElementChild)
         })
-        buttonClose.addEventListener("click", () => groupElem.remove())
+        buttonClose.addEventListener("click", async () => {
+            await hideAnim(groupElem)
+            groupElem.remove()
+        })
 
         // Load data
         if (data.name) {
@@ -90,8 +93,7 @@ export function createExercise(data = null) {
     // Events
     notes.addEventListener("input", sizeNotes)
     buttonClose.addEventListener("click", async () => {
-        buttonClose.disabled = true
-        await hideExercise(exercise)
+        await hideAnim(exercise)
         deleteExercise(exercise)
     })
     buttonAddSet.addEventListener("click", () => {
@@ -116,7 +118,7 @@ export function createExercise(data = null) {
     return exerciseFrag
 }
 
-export async function displayExercise(elem) {
+export async function displayAnim(elem) {
     const height = getComputedStyle(elem).height
     elem.style.height = height
     elem.classList.add("display")
@@ -126,12 +128,13 @@ export async function displayExercise(elem) {
     elem.style.removeProperty("height")
 }
 
-export async function hideExercise(elem) {
+export async function hideAnim(elem) {
     const height = getComputedStyle(elem).height
     elem.style.height = height
     elem.classList.add("hide")
 
     await waitFor("animationend", elem)
+    // Cleaning after not necessary
 }
 
 

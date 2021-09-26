@@ -2,7 +2,7 @@
 import {range, waitForAny} from "../tools.js"
 import * as display from "./display.js"
 import {createTraining, createGroup, createExercise} from "./creating.js"
-import {displayExercise} from "./creating.js"
+import {displayAnim} from "./creating.js"
 import {readTraining, ReadError} from "./reading.js"
 
 const trainingName = document.querySelector(".ts-training-name")
@@ -84,6 +84,7 @@ buttonAddExercise.addEventListener("click", addExercise)
 
 function addGroup() {
     groupContainer.append(createGroup())
+    displayAnim(groupContainer.lastElementChild)
 }
 
 function addExercise() {
@@ -97,7 +98,7 @@ function addExercise() {
 
     // Appends exercise
     last.append(createExercise())
-    displayExercise(last.lastElementChild)
+    displayAnim(last.lastElementChild)
 }
 
 function hasChanged(originalTrainingData) {
