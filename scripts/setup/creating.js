@@ -1,5 +1,5 @@
 
-import {range, waitFor, sizeNotes} from "../tools.js"
+import {px, float, range, waitFor, sizeNotes} from "../tools.js"
 
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
@@ -144,6 +144,23 @@ export async function hideAnim(elem) {
     // Cleaning after is not necessary
 }
 
+export function setGroupHeight(group) {
+    const exerContainer = group.querySelector(".ts-group-exercise-container")
+    const noExerciseElem = group.querySelector(".ts-group-no-exercises")
+    const noExerciseStyles = getComputedStyle(noExerciseElem)
+
+    function setHeight() {
+        let height = float(noExerciseStyles.height)
+        height += float(noExerciseStyles.marginTop)
+        height += float(noExerciseStyles.marginBottom)
+
+        exerContainer.style.minHeight = px(height)
+    }
+
+    setHeight()
+    new ResizeObserver(setHeight).observe(group)
+}
+
 
 // --- Private ---
 
@@ -170,4 +187,3 @@ function createSet(setName = null) {
 
     return setFrag
 }
-
