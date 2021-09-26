@@ -148,6 +148,8 @@ export async function hideAnim(elem) {
 }
 
 export function setGroupHeight(group) {
+    if (!group.classList.contains("ts-group")) return
+
     const exerContainer = group.querySelector(".ts-group-exercise-container")
     const noExerciseElem = group.querySelector(".ts-group-no-exercises")
     const noExerciseStyles = getComputedStyle(noExerciseElem)
