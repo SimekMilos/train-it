@@ -194,6 +194,11 @@ body {
 
     font: var(--button-font);
     color: var(--button-color);
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .control-button:disabled {
@@ -261,6 +266,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     --handle-color: var(--secondary-control-color);   /* Redefinable color */
     --border: 2px solid var(--handle-color);
