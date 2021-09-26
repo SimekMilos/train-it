@@ -1,9 +1,8 @@
 
 import {range, waitForAny} from "../tools.js"
 import * as display from "./display.js"
-import {createTraining, createGroup, createExercise} from "./creating.js"
-import {displayAnim, setGroupHeight} from "./creating.js"
-import {readTraining, ReadError} from "./reading.js"
+import * as create from "./create.js"
+import {readTraining, ReadError} from "./read.js"
 
 const trainingName = document.querySelector(".ts-training-name")
 const trainingNotes = document.querySelector(".ts-training-notes")
@@ -26,7 +25,7 @@ export async function setupTraining(trainingData = null) {
     let finished = false
 
     // Display component
-    if (trainingData) createTraining(trainingData)
+    if (trainingData) create.createTraining(trainingData)
     await display.display()
 
     // Edit cycle
@@ -83,9 +82,9 @@ buttonAddGroup.addEventListener("click", addGroup)
 buttonAddExercise.addEventListener("click", addExercise)
 
 function addGroup() {
-    groupContainer.append(createGroup())
-    setGroupHeight(groupContainer.lastElementChild)
-    displayAnim(groupContainer.lastElementChild)
+    groupContainer.append(create.createGroup())
+    create.setGroupHeight(groupContainer.lastElementChild)
+    create.displayAnim(groupContainer.lastElementChild)
 }
 
 function addExercise() {
@@ -93,13 +92,13 @@ function addExercise() {
 
     // Creates no-group container if needed
     if (!last.classList.contains("ts-no-group")) {
-        last.after(createGroup({type: "no-group"}))
+        last.after(create.createGroup({type: "no-group"}))
         last = groupContainer.lastElementChild
     }
 
     // Appends exercise
-    last.append(createExercise())
-    displayAnim(last.lastElementChild)
+    last.append(create.createExercise())
+    create.displayAnim(last.lastElementChild)
 }
 
 function hasChanged(originalTrainingData) {
