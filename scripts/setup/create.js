@@ -94,13 +94,10 @@ export function createExercise(data = null) {
 
     // Events
     notes.addEventListener("input", sizeNotes)
-    buttonClose.addEventListener("click", async () => {
-        await hideAnim(exercise)
-        deleteExercise(exercise)
-    })
     buttonAddSet.addEventListener("click", () => {
         setContainer.append(createSet())
     })
+    buttonClose.addEventListener("click", () => removeExercise(exercise))
 
     // Setup exercise
     if (data) {
@@ -175,19 +172,35 @@ async function removeGroup(group) {
                     + float(style.marginBottom)
     const remPadd = addDynamicPadding(height, scrollContainer)
 
-    // Removes group
+    // Remove group
     await hideAnim(group)
     group.remove()
 
-    // Scrolls up
+    // Scroll up
     await wait(100)
     remPadd(250)
 }
-function deleteExercise(exercise) {
-    const noGroup = exercise.closest(".ts-no-group")
 
-    if (noGroup && noGroup.children.length == 1) noGroup.remove()
-    else                                         exercise.remove()
+async function removeExercise(exercise) {
+    const style = getComputedStyle(exercise)
+    const noGroup = exercise.closest(".ts-no-group")
+    let height = float(style.height) + float(style.marginBottom)
+
+    // When removing no-group, account for no-group bottom padding
+    const removeNoGroup = noGroup && noGroup.children.length == 1
+    if (removeNoGroup) height += float(getComputedStyle(noGroup).marginBottom)
+
+    // Adds filler padding
+    const remPadd = addDynamicPadding(height, scrollContainer)
+
+    // Remove exercise
+    await hideAnim(exercise)
+    if (removeNoGroup) noGroup.remove()
+    else               exercise.remove()
+
+    // Scroll up
+    await wait(100)
+    remPadd(250)
 }
 
 function createSet(setName = null) {
