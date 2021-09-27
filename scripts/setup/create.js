@@ -1,5 +1,6 @@
 
-import {px, float, range, waitFor, sizeNotes} from "../tools.js"
+import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
+import {addDynamicPadding} from "../tools.js"
 
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
@@ -8,6 +9,7 @@ const setTemplate = document.querySelector(".ts-set-template")
 
 const trainingName = document.querySelector(".ts-training-name")
 const trainingNotes = document.querySelector(".ts-training-notes")
+const scrollContainer = document.querySelector(".ts-scroll-container")
 const groupContainer = document.querySelector(".ts-group-container")
 
 trainingNotes.addEventListener("input", sizeNotes)
@@ -52,10 +54,7 @@ export function createGroup(data = null) {
             exerciseContainer.append(createExercise())
             displayAnim(exerciseContainer.lastElementChild)
         })
-        buttonClose.addEventListener("click", async () => {
-            await hideAnim(group)
-            group.remove()
-        })
+        buttonClose.addEventListener("click", () => removeGroup(group))
 
         // Load data
         if (data.name) {
@@ -169,6 +168,21 @@ export function setGroupHeight(group) {
 
 // --- Private ---
 
+async function removeGroup(group) {
+    // Adds filler padding
+    const style = getComputedStyle(group)
+    const height = float(style.height) + float(style.marginTop)
+                    + float(style.marginBottom)
+    const remPadd = addDynamicPadding(height, scrollContainer)
+
+    // Removes group
+    await hideAnim(group)
+    group.remove()
+
+    // Scrolls up
+    await wait(100)
+    remPadd(250)
+}
 function deleteExercise(exercise) {
     const noGroup = exercise.closest(".ts-no-group")
 
