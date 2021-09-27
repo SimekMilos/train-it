@@ -90,3 +90,37 @@ export function sizeNotes(event) {
         notes.style.height = px(height)             // larger than minimum size
     }
 }
+
+
+// Scrolling
+
+export function addDynamicPadding(maxHeight, scrollContainer) {
+    /* Adds bottom padding to scrolling container as a filler before removing
+    element. Accounts for current scroll and adds only as much as needed.
+
+    maxHeight - maximum padding height to be added (height of the element being
+        removed)
+    Return - function that smoothly removes said padding in specified
+        druation (in ms).
+    */
+
+    const cont = scrollContainer
+
+    const remaining = cont.scrollHeight - cont.scrollTop - cont.clientHeight
+    const addSize = maxHeight - remaining
+    const origPadd = float(getComputedStyle(scrollContainer).paddingBottom)
+    scrollContainer.style.paddingBottom = px(origPadd + addSize)
+
+    return async (duration) => {
+        let amount = origPadd + addSize
+        const step = 8*amount/duration
+
+        while (amount > origPadd) {
+            amount -= step
+            scrollContainer.style.paddingBottom = px(amount)
+            await wait(8)       // 120 fps
+        }
+
+        scrollContainer.style.removeProperty("padding-bottom")
+    }
+}
