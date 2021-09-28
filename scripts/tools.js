@@ -108,7 +108,8 @@ export function addDynamicPadding(maxHeight, scrollContainer) {
 
     const remaining = cont.scrollHeight - cont.scrollTop - cont.clientHeight
     const origPadd = float(getComputedStyle(scrollContainer).paddingBottom)
-    const addSize = maxHeight - remaining
+    let addSize = maxHeight - remaining
+    if (addSize < 0) addSize = 0
 
     scrollContainer.style.paddingBottom = px(origPadd + addSize)
 
