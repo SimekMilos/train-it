@@ -107,14 +107,15 @@ export function addDynamicPadding(maxHeight, scrollContainer) {
     const cont = scrollContainer
 
     const remaining = cont.scrollHeight - cont.scrollTop - cont.clientHeight
-    const addSize = maxHeight - remaining
     const origPadd = float(getComputedStyle(scrollContainer).paddingBottom)
+    const addSize = maxHeight - remaining
+
     scrollContainer.style.paddingBottom = px(origPadd + addSize)
 
     return async (duration = 0) => {
         if (duration) {
             let amount = origPadd + addSize
-            const step = 8*amount/duration
+            const step = 8 * amount/duration
 
             while (amount > origPadd) {
                 amount -= step
