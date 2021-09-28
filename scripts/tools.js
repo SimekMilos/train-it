@@ -126,3 +126,19 @@ export function addDynamicPadding(maxHeight, scrollContainer) {
         scrollContainer.style.removeProperty("padding-bottom")
     }
 }
+
+export async function dynamicScrollDown(distance, duration, scrollContainer) {
+    const removePadding = addDynamicPadding(distance, scrollContainer)
+
+    const start = scrollContainer.scrollTop
+    const stop = start + distance
+    const step = 8 * distance/duration
+
+    for (let scrolled = start + step; scrolled < stop; scrolled += step) {
+        scrollContainer.scrollTop = scrolled
+        await wait(8)   // 120 fps
+    }
+    scrollContainer.scrollTop = stop
+
+    return removePadding
+}
