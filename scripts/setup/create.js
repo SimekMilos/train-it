@@ -1,6 +1,6 @@
 
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
-import {addDynamicPadding} from "../tools.js"
+import {addDynamicPadding, dynamicScrollDown} from "../tools.js"
 
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
@@ -76,7 +76,127 @@ export function createGroup(data = null) {
     return groupFrag
 }
 
-export function createExercise(data = null) {
+export function appendToContainer(container, type) {
+    const currScroll = scrollContainer.scrollTop    // adding element can scroll
+                                                    // container in Chrome and
+    if (type == "group") {                          // Opera
+        container.append(createGroup())
+        setGroupHeight(container.lastElementChild)
+
+    } else {  // exercise
+        container.append(createExercise())
+    }
+
+    scrollContainer.scrollTop = currScroll
+    return container.lastElementChild
+}
+
+export function computeScrollDist(topPos, bottomPos) {
+    const {top: contTop,
+           bottom: contBottom} = scrollContainer.getBoundingClientRect()
+
+    const scrollTop = topPos - contTop
+    const scrollBottom = bottomPos - contBottom
+
+    let scroll = Math.min(scrollTop, scrollBottom)
+    if (scroll < 0) scroll = 0
+
+    return scroll
+}
+
+export async function displayAnim(elem) {
+    // Setup animation
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("display")
+
+    await waitFor("animationend", elem)
+
+    // Finish displaying
+    elem.classList.add("enable-access")
+    elem.classList.remove("display")
+    elem.style.removeProperty("height")
+}
+
+export async function hideAnim(elem) {
+    elem.classList.remove("enable-access")
+
+    // Setup animation
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("hide")
+
+    await waitFor("animationend", elem)
+    // Cleaning after is not necessary
+}
+
+
+// --- Private ---
+
+// Group
+
+function setGroupHeight(group) {
+    if (!group.classList.contains("ts-group")) return
+
+    const exerContainer = group.querySelector(".ts-group-exercise-container")
+    const noExerciseElem = group.querySelector(".ts-group-no-exercises")
+    const noExerciseStyles = getComputedStyle(noExerciseElem)
+
+    function setHeight() {
+        let height = float(noExerciseStyles.height)
+        height += float(noExerciseStyles.marginTop)
+        height += float(noExerciseStyles.marginBottom)
+
+        exerContainer.style.minHeight = px(height)
+    }
+
+    setHeight()
+    new ResizeObserver(setHeight).observe(group)
+}
+
+async function removeGroup(group) {
+    // Adds filler padding
+    const style = getComputedStyle(group)
+    const height = float(style.height) + float(style.marginTop)
+                    + float(style.marginBottom)
+    const remPadd = addDynamicPadding(height, scrollContainer)
+
+    // Remove group
+    await hideAnim(group)
+    group.remove()
+
+    // Scroll up
+    await wait(100)
+    remPadd(250)
+}
+
+async function addExercise(exerciseContainer) {
+    const exercise = appendToContainer(exerciseContainer, "exercise")
+
+    // Get scroll distance
+    const group = exerciseContainer.closest(".ts-group")
+    let {top: exerTop} = exercise.getBoundingClientRect()
+    let {bottom: groupBottom} = group.getBoundingClientRect()
+    const scroll = computeScrollDist(exerTop - 10, groupBottom + 10)
+                                    // 10px offsets from top/bottom
+    exercise.remove()
+
+    // Scroll down
+    let removePadd = null
+    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
+    await wait(100)
+
+    // Add exercise
+    exerciseContainer.append(exercise)
+    await displayAnim(exercise)
+
+    if (removePadd) removePadd()
+}
+
+
+// Exercise
+
+function createExercise(data = null) {
     /* Input - exercise object/null (empty exercise) */
 
     const exerciseFrag = exerciseTemplate.content.cloneNode(true)
@@ -113,80 +233,6 @@ export function createExercise(data = null) {
 
     return exerciseFrag
 }
-
-export async function displayAnim(elem) {
-    // Setup animation
-    const height = getComputedStyle(elem).height
-    elem.style.height = height
-    elem.classList.add("display")
-
-    await waitFor("animationend", elem)
-
-    // Finish displaying
-    elem.classList.add("enable-access")
-    elem.classList.remove("display")
-    elem.style.removeProperty("height")
-}
-
-export async function hideAnim(elem) {
-    elem.classList.remove("enable-access")
-
-    // Setup animation
-    const height = getComputedStyle(elem).height
-    elem.style.height = height
-    elem.classList.add("hide")
-
-    await waitFor("animationend", elem)
-    // Cleaning after is not necessary
-}
-
-export function setGroupHeight(group) {
-    if (!group.classList.contains("ts-group")) return
-
-    const exerContainer = group.querySelector(".ts-group-exercise-container")
-    const noExerciseElem = group.querySelector(".ts-group-no-exercises")
-    const noExerciseStyles = getComputedStyle(noExerciseElem)
-
-    function setHeight() {
-        let height = float(noExerciseStyles.height)
-        height += float(noExerciseStyles.marginTop)
-        height += float(noExerciseStyles.marginBottom)
-
-        exerContainer.style.minHeight = px(height)
-    }
-
-    setHeight()
-    new ResizeObserver(setHeight).observe(group)
-}
-
-
-// --- Private ---
-
-// Group
-
-function addExercise(exerciseContainer) {
-    exerciseContainer.append(createExercise())
-    displayAnim(exerciseContainer.lastElementChild)
-}
-
-async function removeGroup(group) {
-    // Adds filler padding
-    const style = getComputedStyle(group)
-    const height = float(style.height) + float(style.marginTop)
-                    + float(style.marginBottom)
-    const remPadd = addDynamicPadding(height, scrollContainer)
-
-    // Remove group
-    await hideAnim(group)
-    group.remove()
-
-    // Scroll up
-    await wait(100)
-    remPadd(250)
-}
-
-
-// Exercise
 
 async function removeExercise(exercise) {
     const style = getComputedStyle(exercise)
