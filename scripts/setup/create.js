@@ -94,13 +94,12 @@ export async function addTrainingItem(type, container) {
     topScrollPos -= 10          // 10px offset from top
 
     // Get bottom scrolling position
-    let bottomScrollPos
-    const group = container.closest(".ts-group")
+    let bottomScrollPos = addControls.getBoundingClientRect().bottom
+    bottomScrollPos += float(getComputedStyle(addControls).marginBottom)
 
-    if (!group) {   // for groups and exercises outside of group
-        bottomScrollPos = addControls.getBoundingClientRect().bottom
-        bottomScrollPos += float(getComputedStyle(addControls).marginBottom)
-    } else {        // for exercises inside group
+        // Bottom position for exercise inside group that is not at the end
+    const group = container.closest(".ts-group")
+    if (group && group != groupContainer.lastElementChild) {
         bottomScrollPos = group.getBoundingClientRect().bottom
         bottomScrollPos += 10       // 10px offset from bottom
     }
