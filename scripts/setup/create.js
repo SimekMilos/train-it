@@ -12,8 +12,10 @@ const trainingNotes = document.querySelector(".ts-training-notes")
 const scrollContainer = document.querySelector(".ts-scroll-container")
 const groupContainer = document.querySelector(".ts-group-container")
 
-trainingNotes.addEventListener("input", sizeNotes)
+const addControls = document.querySelector(".ts-add-controls")
 
+
+// ===== Public =====
 
 export function createTraining(data) {
     trainingName.value = data.name
@@ -50,7 +52,9 @@ export function createGroup(data = null) {
 
         // Events
         notes.addEventListener("input", sizeNotes)
-        buttonAddExercise.addEventListener("click", () => addExercise(exerCont))
+        buttonAddExercise.addEventListener("click", () => {
+            addTrainingItem("exercise", exerCont)
+        })
         buttonClose.addEventListener("click", () => removeGroup(group))
 
         // Load data
@@ -76,64 +80,56 @@ export function createGroup(data = null) {
     return groupFrag
 }
 
-export function appendToContainer(container, type) {
-    const currScroll = scrollContainer.scrollTop    // adding element can scroll
-                                                    // container in Chrome and
-    if (type == "group") {                          // Opera
-        container.append(createGroup())
-        setGroupHeight(container.lastElementChild)
+export async function addTrainingItem(type, container) {
+    /* Adds training item with intro animation and necessary scrolling
 
-    } else {  // exercise
-        container.append(createExercise())
+    type - "group" or "exercise"
+    container - container to add to
+    */
+
+    let trainingItem = appendToContainer(container, type)
+
+    // Get top scrolling position
+    let topScrollPos = trainingItem.getBoundingClientRect().top
+    topScrollPos -= 10          // 10px offset from top
+
+    // Get bottom scrolling position
+    let bottomScrollPos
+    const group = container.closest(".ts-group")
+
+    if (!group) {   // for groups and exercises outside of group
+        bottomScrollPos = addControls.getBoundingClientRect().bottom
+        bottomScrollPos += float(getComputedStyle(addControls).marginBottom)
+    } else {        // for exercises inside group
+        bottomScrollPos = group.getBoundingClientRect().bottom
+        bottomScrollPos += 10       // 10px offset from bottom
     }
 
-    scrollContainer.scrollTop = currScroll
-    return container.lastElementChild
-}
+    // Compute scroll distance
+    const scroll = computeScrollDist(topScrollPos, bottomScrollPos)
 
-export function computeScrollDist(topPos, bottomPos) {
-    const {top: contTop,
-           bottom: contBottom} = scrollContainer.getBoundingClientRect()
+    // Remove item before scrolling (cannot be visible during scroll)
+    trainingItem.remove()
 
-    const scrollTop = topPos - contTop
-    const scrollBottom = bottomPos - contBottom
+    // Scroll down
+    let removePadd = null
+    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
+    await wait(100)
 
-    let scroll = Math.min(scrollTop, scrollBottom)
-    if (scroll < 0) scroll = 0
+    // Add elem
+    container.append(trainingItem)
+    await displayAnim(trainingItem)
 
-    return scroll
-}
-
-export async function displayAnim(elem) {
-    // Setup animation
-    const height = getComputedStyle(elem).height
-    elem.style.height = height
-    elem.classList.add("display")
-
-    await waitFor("animationend", elem)
-
-    // Finish displaying
-    elem.classList.add("enable-access")
-    elem.classList.remove("display")
-    elem.style.removeProperty("height")
-}
-
-export async function hideAnim(elem) {
-    elem.classList.remove("enable-access")
-
-    // Setup animation
-    const height = getComputedStyle(elem).height
-    elem.style.height = height
-    elem.classList.add("hide")
-
-    await waitFor("animationend", elem)
-    // Cleaning after is not necessary
+    if (removePadd) removePadd()
 }
 
 
-// --- Private ---
+// ===== Private =====
 
-// Group
+trainingNotes.addEventListener("input", sizeNotes)
+
+
+// --- Group ---
 
 function setGroupHeight(group) {
     if (!group.classList.contains("ts-group")) return
@@ -170,31 +166,8 @@ async function removeGroup(group) {
     remPadd(250)
 }
 
-async function addExercise(exerciseContainer) {
-    const exercise = appendToContainer(exerciseContainer, "exercise")
 
-    // Get scroll distance
-    const group = exerciseContainer.closest(".ts-group")
-    let {top: exerTop} = exercise.getBoundingClientRect()
-    let {bottom: groupBottom} = group.getBoundingClientRect()
-    const scroll = computeScrollDist(exerTop - 10, groupBottom + 10)
-                                    // 10px offsets from top/bottom
-    exercise.remove()
-
-    // Scroll down
-    let removePadd = null
-    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
-    await wait(100)
-
-    // Add exercise
-    exerciseContainer.append(exercise)
-    await displayAnim(exercise)
-
-    if (removePadd) removePadd()
-}
-
-
-// Exercise
+// --- Exercise ---
 
 function createExercise(data = null) {
     /* Input - exercise object/null (empty exercise) */
@@ -271,4 +244,62 @@ function createSet(setName = null) {
     closeButton.addEventListener("click", () => set.remove())
 
     return setFrag
+}
+
+
+// --- Other ---
+
+function appendToContainer(container, type) {
+    // Save current scroll position - adding element can scroll, container
+    const currScroll = scrollContainer.scrollTop    // in Chrome and Opera
+
+    if (type == "group") {
+        container.append(createGroup())
+        setGroupHeight(container.lastElementChild)
+
+    } else {  // exercise
+        container.append(createExercise())
+    }
+
+    scrollContainer.scrollTop = currScroll
+    return container.lastElementChild
+}
+
+function computeScrollDist(topPos, bottomPos) {
+    const {top: contTop,
+           bottom: contBottom} = scrollContainer.getBoundingClientRect()
+
+    const scrollTop = topPos - contTop
+    const scrollBottom = bottomPos - contBottom
+
+    let scroll = Math.min(scrollTop, scrollBottom)
+    if (scroll < 0) scroll = 0
+
+    return scroll
+}
+
+async function displayAnim(elem) {
+    // Setup animation
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("display")
+
+    await waitFor("animationend", elem)
+
+    // Finish displaying
+    elem.classList.add("enable-access")
+    elem.classList.remove("display")
+    elem.style.removeProperty("height")
+}
+
+async function hideAnim(elem) {
+    elem.classList.remove("enable-access")
+
+    // Setup animation
+    const height = getComputedStyle(elem).height
+    elem.style.height = height
+    elem.classList.add("hide")
+
+    await waitFor("animationend", elem)
+    // Cleaning after is not necessary - element will be removed
 }

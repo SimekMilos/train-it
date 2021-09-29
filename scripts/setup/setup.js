@@ -82,35 +82,11 @@ buttonAddGroup.addEventListener("click", addGroup)
 buttonAddExercise.addEventListener("click", addExercise)
 
 
-const scrollContainer = document.querySelector(".ts-scroll-container")
-const addControls = document.querySelector(".ts-add-controls")
-import {wait, float, dynamicScrollDown} from "../tools.js"
-
-
-async function addGroup() {
-    const group = create.appendToContainer(groupContainer, "group")
-
-    // Get scroll distance
-    let {top: groupTop} = group.getBoundingClientRect()
-    let {bottom: cntrlsBottom} = addControls.getBoundingClientRect()
-    cntrlsBottom += float(getComputedStyle(addControls).marginBottom)
-    const scroll = create.computeScrollDist(groupTop - 10, cntrlsBottom)
-                                            // 10px offset from top
-    group.remove()
-
-    // Scroll down
-    let removePadd = null
-    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
-    await wait(100)
-
-    // Add group
-    groupContainer.append(group)
-    await create.displayAnim(group)
-
-    if (removePadd) removePadd()
+function addGroup() {
+    create.addTrainingItem("group", groupContainer)
 }
 
-async function addExercise() {
+function addExercise() {
     let last = groupContainer.lastElementChild
 
     // Creates no-group container if needed
@@ -119,27 +95,7 @@ async function addExercise() {
         last = groupContainer.lastElementChild
     }
 
-    // Append exercise
-    const exercise = create.appendToContainer(last, "exercise")
-
-    // Get scroll distance
-    let {top: exerTop} = exercise.getBoundingClientRect()
-    let   {bottom: cntrlsBottom} = addControls.getBoundingClientRect()
-    cntrlsBottom += float(getComputedStyle(addControls).marginBottom)
-    const scroll = create.computeScrollDist(exerTop - 10, cntrlsBottom)
-                                            // 10px offset from top
-    exercise.remove()
-
-    // Scroll down
-    let removePadd = null
-    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
-    await wait(100)
-
-    // Add exercise
-    last.append(exercise)
-    await create.displayAnim(exercise)
-
-    if (removePadd) removePadd()
+    create.addTrainingItem("exercise", last)
 }
 
 function hasChanged(originalTrainingData) {
