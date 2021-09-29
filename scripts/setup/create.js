@@ -239,7 +239,8 @@ async function removeExercise(exercise) {
     const remPadd = addDynamicPadding(height, scrollContainer)
 
     // Remove exercise
-    await hideAnim(exercise)
+    if (removeNoGroup) noGroup.classList.add("hide-bottom-margin")
+    await hideAnim(exercise, removeNoGroup)
     if (removeNoGroup) noGroup.remove()
     else               exercise.remove()
 
@@ -311,11 +312,13 @@ async function displayAnim(elem) {
     elem.style.removeProperty("height")
 }
 
-async function hideAnim(elem) {
+async function hideAnim(elem, only = false) {
     // Setup animation
     const height = getComputedStyle(elem).height
     elem.style.height = height
-    elem.classList.add("hide")
+
+    if (!only) elem.classList.add("hide")
+    else       elem.classList.add("hide-only")
 
     await waitFor("animationend", elem)
     // Cleaning after is not necessary - element will be removed

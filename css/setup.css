@@ -370,11 +370,20 @@
     animation: exercise-fan-out .4s reverse forwards ease-in-out;
 }
 
+.ts-exercise.hide-only {
+    animation: exercise-fan-out .4s reverse forwards ease-in-out,
+               exercise-hide-only .4s forwards ease-in-out;
+}
+
     @keyframes exercise-fan-out {
         from {
             height: 0;
             padding-bottom: 0;
         }
+    }
+
+    @keyframes exercise-hide-only {
+        to { opacity: 0; }
     }
 
 .ts-group .ts-exercise:nth-child(2) {
