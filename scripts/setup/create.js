@@ -2,17 +2,18 @@
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
 import {addDynamicPadding, dynamicScrollDown} from "../tools.js"
 
+const component = document.querySelector(".training-setup-component")
+const trainingName = document.querySelector(".ts-training-name")
+const trainingNotes = document.querySelector(".ts-training-notes")
+const addControls = document.querySelector(".ts-add-controls")
+
+const scrollContainer = document.querySelector(".ts-scroll-container")
+const groupContainer = document.querySelector(".ts-group-container")
+
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
 const exerciseTemplate = document.querySelector(".ts-exercise-template")
 const setTemplate = document.querySelector(".ts-set-template")
-
-const trainingName = document.querySelector(".ts-training-name")
-const trainingNotes = document.querySelector(".ts-training-notes")
-const scrollContainer = document.querySelector(".ts-scroll-container")
-const groupContainer = document.querySelector(".ts-group-container")
-
-const addControls = document.querySelector(".ts-add-controls")
 
 
 // ===== Public =====
@@ -24,7 +25,6 @@ export function createTraining(data) {
     for (const group of data.groups) {
         groupContainer.append(createGroup(group))
         setGroupHeight(groupContainer.lastElementChild)
-        groupContainer.lastElementChild.classList.add("enable-access")
     }
 }
 
@@ -73,7 +73,6 @@ export function createGroup(data = null) {
     if (data.exercises) {
         for (const exercise of data.exercises) {
             exerCont.append(createExercise(exercise))
-            exerCont.lastElementChild.classList.add("enable-access")
         }
     }
 
@@ -87,6 +86,7 @@ export async function addTrainingItem(type, container) {
     container - container to add to
     */
 
+    component.classList.remove("enable-access")
     let trainingItem = appendToContainer(container, type)
 
     // Get top scrolling position
@@ -120,6 +120,7 @@ export async function addTrainingItem(type, container) {
     await displayAnim(trainingItem)
 
     if (removePadd) removePadd()
+    component.classList.add("enable-access")
 }
 
 
@@ -150,6 +151,8 @@ function setGroupHeight(group) {
 }
 
 async function removeGroup(group) {
+    component.classList.remove("enable-access")
+
     // Adds filler padding
     const style = getComputedStyle(group)
     const height = float(style.height) + float(style.marginTop)
@@ -162,7 +165,8 @@ async function removeGroup(group) {
 
     // Scroll up
     await wait(100)
-    remPadd(250)
+    await remPadd(250)
+    component.classList.add("enable-access")
 }
 
 
@@ -207,6 +211,8 @@ function createExercise(data = null) {
 }
 
 async function removeExercise(exercise) {
+    component.classList.remove("enable-access")
+
     const style = getComputedStyle(exercise)
     const noGroup = exercise.closest(".ts-no-group")
     let height = float(style.height) + float(style.marginBottom)
@@ -225,7 +231,8 @@ async function removeExercise(exercise) {
 
     // Scroll up
     await wait(100)
-    remPadd(250)
+    await remPadd(250)
+    component.classList.add("enable-access")
 }
 
 function createSet(setName = null) {
@@ -286,14 +293,11 @@ async function displayAnim(elem) {
     await waitFor("animationend", elem)
 
     // Finish displaying
-    elem.classList.add("enable-access")
     elem.classList.remove("display")
     elem.style.removeProperty("height")
 }
 
 async function hideAnim(elem) {
-    elem.classList.remove("enable-access")
-
     // Setup animation
     const height = getComputedStyle(elem).height
     elem.style.height = height

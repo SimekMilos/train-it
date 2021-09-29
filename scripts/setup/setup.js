@@ -1,5 +1,6 @@
 
 import {range, waitForAny} from "../tools.js"
+
 import * as display from "./display.js"
 import * as create from "./create.js"
 import {readTraining, ReadError} from "./read.js"
@@ -24,7 +25,7 @@ export async function setupTraining(trainingData = null) {
     let returnData = null
     let finished = false
 
-    // Display component
+    // Load data and display component
     if (trainingData) create.createTraining(trainingData)
     await display.display()
 
