@@ -95,12 +95,14 @@ export function sizeNotes(event) {
 // Scrolling
 
 export function addDynamicPadding(maxHeight, scrollContainer) {
-    /* Adds bottom padding to scrolling container as a filler before removing
-    element. Accounts for current scroll and adds only as much as needed.
+    /* Adds bottom padding to scrolling container as a filler before i.e.
+    removing element.
+        - Accounts for current scroll and adds only as much as needed.
 
-    maxHeight - maximum padding height to be added (height of the element being
-        removed)
-    Return - function that smoothly removes said padding in specified
+    maxHeight - maximum padding height to be added
+        - i.e. height of the element being removed)
+
+    return - function that smoothly removes said padding in specified
         druation (in ms).
     */
 
@@ -130,12 +132,25 @@ export function addDynamicPadding(maxHeight, scrollContainer) {
 }
 
 export async function dynamicScrollDown(distance, duration, scrollContainer) {
+    // Detect where content ends
+    const last = scrollContainer.lastElementChild
+    let {bottom: contentEnd} = last.getBoundingClientRect()
+    contentEnd += float(getComputedStyle(last).marginBottom)
+
+    // Add filler distance in case content is smaller than scrollContainer
+    const {bottom: containerEnd} = scrollContainer.getBoundingClientRect()
+    const filler = containerEnd - contentEnd
+    if (filler > 0) distance += filler
+
+    // Add padding
     const removePadding = addDynamicPadding(distance, scrollContainer)
 
+    // Setup values for scrolling
     const start = scrollContainer.scrollTop
     const stop = start + distance
     const step = 8 * distance/duration
 
+    // Scroll
     for (let scrolled = start + step; scrolled < stop; scrolled += step) {
         scrollContainer.scrollTop = scrolled
         await wait(8)   // 120 fps
