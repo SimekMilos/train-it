@@ -34,7 +34,7 @@ export function createGroup(data = null) {
     if (!data) data = {type: "group"}
 
     let groupFrag
-    let exerciseContainer
+    let exerCont
 
     // Sets up group header
     if (data.type == "group") {
@@ -44,16 +44,13 @@ export function createGroup(data = null) {
         // Elements
         const name = group.querySelector(".ts-group-name")
         const notes = group.querySelector(".ts-group-notes")
-        exerciseContainer = group.querySelector(".ts-group-exercise-container")
+        exerCont = group.querySelector(".ts-group-exercise-container")
         const buttonAddExercise = group.querySelector(".ts-group-add")
         const buttonClose = group.querySelector(".ts-group-close")
 
         // Events
         notes.addEventListener("input", sizeNotes)
-        buttonAddExercise.addEventListener("click", () => {
-            exerciseContainer.append(createExercise())
-            displayAnim(exerciseContainer.lastElementChild)
-        })
+        buttonAddExercise.addEventListener("click", () => addExercise(exerCont))
         buttonClose.addEventListener("click", () => removeGroup(group))
 
         // Load data
@@ -65,14 +62,14 @@ export function createGroup(data = null) {
     // Sets up no-group
     } else {
         groupFrag = noGroupTemplate.content.cloneNode(true)
-        exerciseContainer = groupFrag.querySelector(".ts-no-group")
+        exerCont = groupFrag.querySelector(".ts-no-group")
     }
 
     // Add exercises
     if (data.exercises) {
         for (const exercise of data.exercises) {
-            exerciseContainer.append(createExercise(exercise))
-            exerciseContainer.lastElementChild.classList.add("enable-access")
+            exerCont.append(createExercise(exercise))
+            exerCont.lastElementChild.classList.add("enable-access")
         }
     }
 
@@ -165,6 +162,13 @@ export function setGroupHeight(group) {
 
 // --- Private ---
 
+// Group
+
+function addExercise(exerciseContainer) {
+    exerciseContainer.append(createExercise())
+    displayAnim(exerciseContainer.lastElementChild)
+}
+
 async function removeGroup(group) {
     // Adds filler padding
     const style = getComputedStyle(group)
@@ -180,6 +184,9 @@ async function removeGroup(group) {
     await wait(100)
     remPadd(250)
 }
+
+
+// Exercise
 
 async function removeExercise(exercise) {
     const style = getComputedStyle(exercise)
