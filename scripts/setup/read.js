@@ -22,7 +22,7 @@ export function readTraining() {
     trData.name = nameStr
 
     // Read notes
-    trData.notes = trainingNotes.value.trim()
+    trData.notes = trainingNotes.value.trimEnd()
 
     // Check if there is at least one exercise
     if (!groupContainer.querySelector(":scope .ts-exercise")) {
@@ -69,7 +69,7 @@ function readGroup(groupElem) {
     }
 
     // Read notes
-    if (notesElem) groupData.notes = notesElem.value.trim()
+    if (notesElem) groupData.notes = notesElem.value.trimEnd()
 
     // Check if there is at least one exercise
     if (!groupElem.querySelector(":scope .ts-exercise")) {
@@ -101,7 +101,7 @@ function readExercise(exerciseElem) {
     exerciseData.name = nameStr
 
     // Read notes
-    exerciseData.notes = notesElem.value.trim()
+    exerciseData.notes = notesElem.value.trimEnd()
 
     // Check if there is at least one set
     if (!setContainer.children.length) {
