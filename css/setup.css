@@ -278,6 +278,16 @@
     background-color: white;
 }
 
+.ts-no-group.hide-bottom-margin {
+    animation: no-group-hide-margin .4s forwards ease-in-out;
+}
+
+    @keyframes no-group-hide-margin {
+        to {
+            margin-bottom: 0;
+        }
+    }
+
 .ts-group:nth-child(2), .ts-no-group:nth-child(2) {
     margin-top: 10px;
 }

@@ -153,15 +153,29 @@ function setGroupHeight(group) {
 async function removeGroup(group) {
     component.classList.remove("enable-access")
 
-    // Adds filler padding
+    // Test if group is in between of no-groups
+    const previous = group.previousElementSibling
+    const next = group.nextElementSibling
+    const noGroups = previous && previous.classList.contains("ts-no-group") &&
+                     next && next.classList.contains("ts-no-group")
+
+    // Add filler padding
     const style = getComputedStyle(group)
     const height = float(style.height) + float(style.marginTop)
                     + float(style.marginBottom)
     const remPadd = addDynamicPadding(height, scrollContainer)
 
     // Remove group
+    if (noGroups) previous.classList.add("hide-bottom-margin")
     await hideAnim(group)
     group.remove()
+
+    // Merge no-groups
+    if (noGroups) {
+        previous.append(...next.children)
+        next.remove()
+        previous.classList.remove("hide-bottom-margin")
+    }
 
     // Scroll up
     await wait(100)
