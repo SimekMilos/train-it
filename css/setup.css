@@ -246,6 +246,7 @@
 .ts-group {
     position: relative;
     padding: 0px 10px 15px;
+    margin-bottom: 15px;
 
     border: 1px solid hsl(0, 100%, 40%);
     border-radius: var(--comp-border-radius);
@@ -276,6 +277,8 @@
 
 .ts-no-group {
     padding: 0 11px;    /* 1px for group border */
+    margin-bottom: 15px;
+
     background-color: white;
 }
 
@@ -290,15 +293,7 @@
     }
 
 .ts-group:nth-child(2), .ts-no-group:nth-child(2) {
-    margin-top: 10px;
-}
-
-.ts-group:not(:last-child), .ts-no-group:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.ts-group:last-child, .ts-no-group:last-child {
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 
