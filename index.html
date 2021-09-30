@@ -27,7 +27,7 @@
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/overview/overview.js"></script>
     <script type="module" src="scripts/overview-settings/overview-settings.js"></script>
-    <script type="module" src="scripts/comp-setup.js"></script>
+    <script type="module" src="scripts/setup/setup.js"></script>
     <script type="module" src="scripts/comp-stopwatch.js"></script>
     <script type="module" src="scripts/comp-training.js"></script>
     <script type="module" src="scripts/comp-settings.js"></script>
@@ -177,13 +177,15 @@
         <div class="ts-container vertical-container">
             <form class="training-setup-component overlay-disabling">
                 <input type="text" class="ts-training-name text-input"
-                    size="1" placeholder="Name this training">
+                    size="1" placeholder="Name this training"
+                    spellcheck="false">
 
                 <div class="ts-scroll-container">
                     <textarea class="ts-training-notes text-input notes"
-                        placeholder="- notes for the training"></textarea>
+                        placeholder="- notes for the training"
+                        spellcheck="false"></textarea>
 
-                    <div class="ts-exercise-container">
+                    <div class="ts-group-container">
                         <div class="ts-no-exercises no-content-display">
                             <p>Add exercise by clicking
                                 <strong>Add&#160;Exercise</strong>.</p>
@@ -191,7 +193,7 @@
                                 <strong>Add&#160;Group</strong>.</p>
                         </div>
 
-                        <!-- Groups and Exercises goes here -->
+                        <!-- Groups goes here -->
 
                     </div>
 
@@ -208,7 +210,7 @@
                     <button class="ts-cancel control-button"
                         type="button">Cancel</button>
                     <button class="ts-save control-button"
-                        type="button" disabled>Save</button>
+                        type="button">Save</button>
                 </div>
 
 
@@ -216,10 +218,12 @@
                 <template class="ts-group-template">
                     <div class="ts-group">
                         <input type="text" class="ts-group-name text-input"
-                            size="1" placeholder="Name this group">
+                            size="1" placeholder="Name this group"
+                            spellcheck="false">
 
                         <textarea class="ts-group-notes text-input notes"
-                            placeholder="- notes for the group"></textarea>
+                            placeholder="- notes for the group"
+                            spellcheck="false"></textarea>
 
                         <div class="ts-group-exercise-container">
                             <div class="ts-group-no-exercises no-content-display">
@@ -241,18 +245,23 @@
                     </div>
                 </template>
 
+                <!-- No-Group Template -->
+                <template class="ts-no-group-template">
+                    <div class="ts-no-group">
+                        <!-- Exercises goes here -->
+                    </div>
+                </template>
+
                 <!-- Exercise Template -->
                 <template class="ts-exercise-template">
                     <div class="ts-exercise">
                         <input type="text" class="ts-exercise-name text-input"
-                            size="1" placeholder="Name this excercise">
+                            size="1" placeholder="Name this exercise"
+                            spellcheck="false">
 
                         <textarea class="ts-exercise-notes text-input notes"
-                            placeholder="- notes for the excercise"></textarea>
-
-                        <ol class="ts-exercise-set-container">
-                            <!-- Sets goes here -->
-                        </ol>
+                            placeholder="- notes for the exercise"
+                            spellcheck="false"></textarea>
 
                         <div class="ts-exercise-controls">
                             <div class="ts-exercise-handle handle"><div></div></div>
@@ -262,6 +271,10 @@
                             <button class="ts-exercise-add-set control-button"
                                 type="button">Add Set</button>
                         </div>
+
+                        <ol class="ts-exercise-set-container">
+                            <!-- Sets goes here -->
+                        </ol>
                     </div>
                 </template>
 
@@ -269,7 +282,8 @@
                 <template class="ts-set-template">
                     <li class="ts-set">
                         <input type="text" class="ts-set-name text-input"
-                            size="1" placeholder="Set">
+                            size="1" placeholder="Set"
+                            spellcheck="false">
                         <button class="ts-set-close close-button"
                                 type="button"></button>
                         <div class="ts-set-handle handle"><div></div></div>
@@ -331,8 +345,8 @@
                     </button>
 
                     <textarea class="tct-notes text-input notes"
-                            spellcheck="false"
-                            placeholder="- training notes"></textarea>
+                            placeholder="- training notes"
+                            spellcheck="false"></textarea>
                 </div>
             </template>
 
@@ -350,8 +364,8 @@
                     </div>
                     <div class="tcg-container">
                         <textarea class="tcg-notes text-input notes"
-                            spellcheck="false"
-                            placeholder="- group notes"></textarea>
+                            placeholder="- group notes"
+                            spellcheck="false"></textarea>
 
                         <!-- Exercises goes here -->
                     </div>
@@ -365,7 +379,7 @@
                 </div>
             </template>
 
-            <!-- Excercise template -->
+            <!-- Exercise template -->
             <template class="tc-exercise-template">
                 <div class="tc-exercise">
                     <div class="tce-header">
@@ -383,7 +397,7 @@
                 </div>
             </template>
 
-            <!-- Excercise set template -->
+            <!-- Exercise set template -->
             <template class="tc-exercise-set-template">
                 <div class="tc-exercise-set">
                     <!-- Set counter pseudoelement -->
@@ -398,11 +412,11 @@
                 </div>
             </template>
 
-            <!-- Excercise notes template -->
+            <!-- Exercise notes template -->
             <template class="tc-notes-template">
                 <textarea class="tc-notes text-input notes"
-                          spellcheck="false"
-                          placeholder="- excercise notes"></textarea>
+                          placeholder="- exercise notes"
+                          spellcheck="false"></textarea>
             </template>
         </div>
 

@@ -37,7 +37,7 @@ export async function transitionToInitScreen() {
 // --- Private ---
 
 async function displayScreen(screen, animationDuration = 0) {
-    screen.style.animationDuration = `${animationDuration / 1000}s`
+    screen.style.animationDuration = `${animationDuration}ms`
 
     await wait(0)       // for animation to pick up duration
     screen.classList.add("display")
@@ -45,7 +45,7 @@ async function displayScreen(screen, animationDuration = 0) {
 }
 
 async function hideScreen(screen, animationDuration = 0) {
-    screen.style.animationDuration = `${animationDuration / 1000}s`
+    screen.style.animationDuration = `${animationDuration}ms`
 
     await wait(0)       // for animation to pick up duration
     screen.classList.add("hide")

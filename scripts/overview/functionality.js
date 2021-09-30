@@ -43,19 +43,21 @@ export function loadTrainings() {
 
 initialScreen.addEventListener("click", detectDeselection)
 
-function detectDeselection() {
+function detectDeselection(event) {
     /* Deselection applies when:
         - clicked outside of component
         - clicked within component but not on any controls
     */
 
-    if (display.isDisabled()) return
-    if (this.closest(".ov-training")) return
-    if (this.closest(".ov-controls")) return
+    const target = event.target
 
-    if (this == initialScreen ||
-        this == verticalContainer ||
-        this.closest(".overview-component")) {
+    if (display.isDisabled()) return
+    if (target.closest(".ov-training")) return
+    if (target.closest(".ov-controls")) return
+
+    if (target == initialScreen ||
+        target == verticalContainer ||
+        target.closest(".overview-component")) {
 
         deselectedMode()
     }
@@ -93,6 +95,8 @@ buttonCreate.addEventListener("click", createTraining)
 buttonEdit.addEventListener("click", editTraining)
 
 async function createTraining() {
+    if (overviewSettings.isDisplayed()) overviewSettings.hide()
+
     const trData = await setup.setupTraining()
     if (!trData) return
 
@@ -125,6 +129,8 @@ async function createTraining() {
 }
 
 async function editTraining() {
+    if (overviewSettings.isDisplayed()) overviewSettings.hide()
+
     // Get selected training
     let {trID, trData, trNameElem} = getSelectedTraining()
 
@@ -171,7 +177,7 @@ async function deleteTraining() {
     // Confirm deletion
     const trName = trNameElem.textContent
     if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
-    deselectedMode(false)
+    display.disableAccess()
 
     // Delete element and scroll up
     await wait(200)
@@ -184,6 +190,9 @@ async function deleteTraining() {
 
     waitFor("transitionend", trElem).then(async () => {
         trElem.remove()
+        deselectedMode(false)
+        display.enableAccess()
+
         await wait(200)
         if (trainingList.style.paddingBottom) {
             smoothRemoveBottomPadding(trainingList, itemHeight, 250)
@@ -251,12 +260,12 @@ async function hideComponents() {
 buttonSettings.addEventListener("click", onSettingsClick)
 
 async function onSettingsClick() {
-    display.settingsButtonDisable(true)
+    display.settingsButtonDisabling(true)
 
     if (!overviewSettings.isDisplayed()) await overviewSettings.display()
     else                                 await overviewSettings.hide()
 
-    display.settingsButtonDisable(false)
+    display.settingsButtonDisabling(false)
 }
 
 

@@ -54,9 +54,9 @@ closeButton.addEventListener("click", onCloseClick)
 
 
 async function onCloseClick() {
-    overview.settingsButtonDisable(true)
+    overview.settingsButtonDisabling(true)
     await hide()
-    overview.settingsButtonDisable(false)
+    overview.settingsButtonDisabling(false)
 }
 
 function onResize() {

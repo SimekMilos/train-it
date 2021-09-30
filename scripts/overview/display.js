@@ -1,11 +1,13 @@
 
 import {waitFor} from "../tools.js"
 
-const overviewComponent = document.querySelector(".overview-component")
+const component = document.querySelector(".overview-component")
 const settingsButton = document.querySelector(".ov-settings")
 
-const compClassList = overviewComponent.classList
-const compStyle = overviewComponent.style
+const compClassList = component.classList
+const compStyle = component.style
+
+let shadowDisplayed = true
 
 
 // Display
@@ -13,7 +15,7 @@ const compStyle = overviewComponent.style
 export async function display() {
     compClassList.add("display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     enableAccess()
 }
 
@@ -22,36 +24,39 @@ export async function hide() {
     compClassList.remove("display")
     disableAccess()
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     compClassList.remove("hide")
 }
 
 
-// Disabling
+// Visible component disabling
 
 export async function disable(animDuration = 0) {
     /* animDuration - time in ms */
 
-    compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
+    compStyle.setProperty("--disable-anim-duration", `${animDuration}ms`)
     compClassList.add("disable-visible-display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
 }
 
 export async function enable(animDuration = 0) {
     /* animDuration - time in ms */
 
-    compStyle.setProperty("--disable-anim-duration", `${animDuration / 1000}s`)
+    compStyle.setProperty("--disable-anim-duration", `${animDuration}ms`)
     compClassList.add("disable-visible-hide")
     compClassList.remove("disable-visible-display")
 
-    await waitFor("animationend", overviewComponent)
+    await waitFor("animationend", component)
     compClassList.remove("disable-visible-hide")
 }
 
 export function isDisabled() {
     return compClassList.contains("disable-visible-display")
 }
+
+
+// Access disabling
 
 export function disableAccess() {
     compClassList.remove("enable-access")
@@ -62,8 +67,27 @@ export function enableAccess() {
 }
 
 
+// Shadow disabling
+
+export function hideShadow(duration = 0) {
+    component.style.boxShadow = "none"
+    component.style.transitionDuration = `${duration}ms`
+    shadowDisplayed = false
+}
+
+export function displayShadow(duration = 0) {
+    component.style.removeProperty("box-shadow")
+    component.style.removeProperty("transition-duration")
+    shadowDisplayed = true
+}
+
+export function shadowIsDisplayed() {
+    return shadowDisplayed
+}
+
+
 // Settings button
 
-export function settingsButtonDisable(disable) {
+export function settingsButtonDisabling(disable) {
     settingsButton.disabled = disable
 }

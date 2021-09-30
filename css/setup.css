@@ -135,8 +135,8 @@
 .ts-training-name {
     margin: 0px -6px 2px -6px;
 
-    color: var(--main-color);
-    font: 24px "Roboto Light", sans-serif;
+    color: var(--name-color);
+    font: normal 26px "Roboto Light", sans-serif;
 }
 
 .ts-training-name::placeholder {
@@ -156,13 +156,35 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+
+    /* Hiding scrollbar */
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* Edge */
+}
+    /* Hiding scrollbar */
+.ts-scroll-container::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
+}
+
+/* Fade at the bottom of the scroll container */
+.training-setup-component::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 65px;
+
+    height: 15px;
+    content: "";
+
+    background-image: linear-gradient(to bottom, #FFF0, #FFFF);
 }
 
 
 /* Bottom Controls */
 
 .ts-bottom-controlls {
-    margin-top: 15px;
+    margin-top: 10px;
 
     display: flex;
 }
@@ -186,9 +208,9 @@
 }
 
 
-/* Exercise Container */
+/* Group Container */
 
-.ts-exercise-container {
+.ts-group-container {
     --left-right-padding: 5px;
 
     padding: 0 var(--left-right-padding);
@@ -198,10 +220,21 @@
     flex-direction: column;
 }
 
+
 /* No Exercises Display */
 
 .ts-no-exercises {
+    position: absolute;
+    z-index: -1;
     margin: 1em calc(1em - var(--left-right-padding));
+}
+
+.ts-no-exercises:not(:only-child) {
+    display: block;                    /* Keep visible */
+}
+
+.ts-no-exercises.smooth-display {
+    transition: opacity .3s ease-in-out;
 }
 
 
@@ -227,45 +260,85 @@
 
 
 
-/* ===== Group ===== */
+/* ===== Group + No-Group ===== */
 
 .ts-group {
     position: relative;
-    padding: 30px 10px 15px;
+    padding: 0px 10px 15px;
+    margin-bottom: 15px;
 
-    border: 1px solid hsl(0, 0%, 30%);
+    border: 1px solid hsl(0, 100%, 40%);
     border-radius: var(--comp-border-radius);
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-.ts-group:nth-child(2), .ts-exercise + .ts-group {
-    margin-top: 10px;
+.ts-group.display {
+    animation: group-fan-out .4s forwards ease-in-out;
 }
 
-.ts-group:not(:last-child) {
-    margin-bottom: 10px;
+.ts-group.hide {
+    animation: group-fan-out .4s reverse forwards ease-in-out;
 }
 
-.ts-group:last-child {
-    margin-bottom: 20px;
+    @keyframes group-fan-out {
+        from {
+            height: 0;
+            padding-bottom: 0;
+            padding-top: 0;
+            margin-bottom: 0;
+            opacity: 0;
+        }
+    }
+
+.ts-no-group {
+    margin-bottom: 15px;
 }
 
+.ts-no-group.hide-bottom-margin {
+    animation: no-group-hide-margin .4s forwards ease-in-out;
+}
+
+    @keyframes no-group-hide-margin {
+        to {
+            margin-bottom: 0;
+        }
+    }
+
+.ts-group:nth-child(2), .ts-no-group:nth-child(2) {
+    margin-top: 15px;
+}
+
+
+/* Content */
 
 .ts-group-name {
-    margin: 0 -6px 5px;
-    font-family: "Roboto Light", sans-serif;
+    margin: 30px -6px 5px;
+
+    color: var(--name-color);
+    font: normal 21px "Roboto Light", sans-serif;
 }
 
 .ts-group-no-exercises {
-    margin: 1.5em 1em;
+    position: absolute;
+    margin: 1.5em 1em calc(1.5em - 15px);
+}
+
+.ts-group-no-exercises:not(:only-child) {
+    display: block;                         /* Keep visible */
+}
+
+.ts-group-no-exercises.smooth-display {
+    transition: opacity .3s ease-in-out;
 }
 
 
 /* Group Controlls */
 
 .ts-group-controls {
+    padding-top: 15px;
     display: flex;
     justify-content: center;
 }
@@ -293,42 +366,67 @@
 
 .ts-exercise {
     position: relative;
-    padding: 30px 10px 10px;
+    padding: 0px 10px 10px;
 
     border-bottom: 1px solid var(--main-color);
 
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-.ts-exercise:last-child {
-    margin-bottom: 20px;
+.ts-exercise.display {
+    animation: exercise-fan-out .4s forwards ease-in-out;
 }
+
+.ts-exercise.hide {
+    animation: exercise-fan-out .4s reverse forwards ease-in-out;
+}
+
+.ts-exercise.hide-only {
+    animation: exercise-fan-out .4s reverse forwards ease-in-out,
+               exercise-hide-only .4s forwards ease-in-out;
+}
+
+    @keyframes exercise-fan-out {
+        from {
+            height: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    @keyframes exercise-hide-only {
+        to { opacity: 0; }
+    }
 
 .ts-group .ts-exercise:nth-child(2) {
     margin-top: 10px;
     border-top: 1px solid var(--main-color);
 }
 
-.ts-group + .ts-exercise {
+.ts-no-group .ts-exercise:first-child {
     border-top: 1px solid var(--main-color);
 }
 
-.ts-exercise-container > .ts-exercise {
-    margin-left: 11px;      /* 1px for group border */
-    margin-right: 11px;
-}
 
-.ts-exercise > :not(:last-child) {
-    margin-bottom: 5px;
-}
-
+/* Content */
 
 .ts-exercise-name {
-    margin-left: -6px;
-    margin-right: -6px;
+    margin: 30px -6px 5px;
 
-    font-family: "Roboto Light", sans-serif;
+    color: var(--name-color);
+    font: normal 18px "Roboto Light", sans-serif;
+}
+
+.ts-exercise-notes {
+    margin-bottom: 10px;
+}
+
+.ts-exercise-controls {
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: center;
 }
 
 .ts-exercise-set-container {
@@ -337,11 +435,6 @@
 
 
 /* Controls */
-
-.ts-exercise-controls {
-    display: flex;
-    justify-content: center;
-}
 
 .ts-exercise-handle {
     position: absolute;
@@ -352,12 +445,12 @@
 .ts-exercise-close {
     position: absolute;
     top: 3px;
-    right: 2px;
+    right: 4px;
 }
 
 .ts-exercise-add-set {
-    width: 100px;
-    height: 32px;
+    width: 80px;
+    height: 28px;
     font-size: .8em;
 }
 
@@ -380,10 +473,12 @@
     content: counter(set-counter) ".";
 }
 
-.ts-set:nth-child(2n) {
+.ts-set:nth-child(even) {
     background-color: rgba(0,0,0,.04);
 }
 
+
+/* Content */
 
 .ts-set-handle {
     margin-right: 12px;
@@ -393,4 +488,10 @@
 .ts-set-name {
     margin: 0 5px 0 2px;
     flex-grow: 1;
+
+    color: #000C;
+}
+
+.ts-set-name::placeholder {
+    color: #0009;
 }
