@@ -41,6 +41,7 @@
 .overview-settings-component p {
     margin: 0 20px;
 
+    color: #000C;
     text-align: center;
     font-size: 14px;
 }
@@ -52,8 +53,8 @@
     top: 5px;
     right: 5px;
 
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
 }
 
 .ovs-controls {
