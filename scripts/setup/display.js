@@ -23,6 +23,7 @@ export async function display() {
     container.classList.add("display")
     component.style.width = getComponentWidth()
     setGroupContainerMinHeight()
+    scrollContainer.scrollTop = 0
 
     // Start push away efekt (standard display)/ disables shadow (overlay)
     if(containerStyles.position != "absolute") {
