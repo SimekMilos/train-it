@@ -211,6 +211,7 @@ async function deleteTraining() {
 
     // Delete training data
     storage.removeItem(trID)
+    overviewSettings.onStorageRemove()  // notify component about removal
 }
 
 async function smoothRemoveBottomPadding(elem, amount, duration) {

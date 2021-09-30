@@ -23,10 +23,7 @@ export async function display() {
     compClassList.add("display")
     floatingMode("display")
 
-    // Disable export if there is nothing to export
-    if (!localStorage["training-order"]) {
-        exportButton.disabled = true
-    }
+    setExportState()
 
     // Resize
     onResize()
@@ -52,6 +49,14 @@ export async function hide() {
     compClassList.remove("hide")
     closeButton.disabled = false
     exportButton.disabled = false
+}
+
+export function setExportState() {
+    // Disable export if there is nothing to export
+
+    if (!localStorage["training-order"]) {
+        exportButton.disabled = true
+    }
 }
 
 
