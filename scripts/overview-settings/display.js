@@ -8,6 +8,7 @@ const overviewComponent = document.querySelector(".overview-component")
 
 const compClassList = settingsComponent.classList
 const closeButton = document.querySelector(".ovs-close")
+const exportButton = document.querySelector(".ovs-export")
 
 let floatingModeActive = false
 
@@ -21,6 +22,11 @@ export function isDisplayed() {
 export async function display() {
     compClassList.add("display")
     floatingMode("display")
+
+    // Disable export if there is nothing to export
+    if (!localStorage["training-order"]) {
+        exportButton.disabled = true
+    }
 
     // Resize
     onResize()
@@ -45,6 +51,7 @@ export async function hide() {
     await waitFor("animationend", settingsComponent)
     compClassList.remove("hide")
     closeButton.disabled = false
+    exportButton.disabled = false
 }
 
 
