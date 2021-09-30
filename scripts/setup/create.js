@@ -9,6 +9,7 @@ const addControls = document.querySelector(".ts-add-controls")
 
 const scrollContainer = document.querySelector(".ts-scroll-container")
 const groupContainer = document.querySelector(".ts-group-container")
+const noExerciseDisp = document.querySelector(".ts-no-exercises")
 
 const groupTemplate = document.querySelector(".ts-group-template")
 const noGroupTemplate = document.querySelector(".ts-no-group-template")
@@ -19,6 +20,8 @@ const setTemplate = document.querySelector(".ts-set-template")
 // ===== Public =====
 
 export function createTraining(data) {
+    hideNoDisplay(noExerciseDisp)
+
     trainingName.value = data.name
     trainingNotes.value = data.notes
 
@@ -116,6 +119,7 @@ export async function addTrainingItem(type, container) {
     await wait(100)
 
     // Add elem
+    hideNoDisplay(noExerciseDisp)
     container.append(trainingItem)
     await displayAnim(trainingItem)
 
@@ -169,6 +173,8 @@ async function removeGroup(group) {
     if (noGroups) previous.classList.add("hide-bottom-margin")
     await hideAnim(group)
     group.remove()
+
+    if (groupContainer.children.length == 1) displayNoDisplay(noExerciseDisp)
 
     // Merge no-groups
     if (noGroups) {
@@ -243,6 +249,8 @@ async function removeExercise(exercise) {
     await hideAnim(exercise, removeNoGroup)
     if (removeNoGroup) noGroup.remove()
     else               exercise.remove()
+
+    if (groupContainer.children.length == 1) displayNoDisplay(noExerciseDisp)
 
     // Scroll up
     await wait(100)
@@ -322,4 +330,14 @@ async function hideAnim(elem, only = false) {
 
     await waitFor("animationend", elem)
     // Cleaning after is not necessary - element will be removed
+}
+
+function hideNoDisplay(noDisplay) {
+    noDisplay.classList.remove("smooth-display")
+    noDisplay.style.opacity = 0
+}
+
+function displayNoDisplay(noDisplay) {
+    noDisplay.classList.add("smooth-display")
+    noDisplay.style.opacity = 1
 }

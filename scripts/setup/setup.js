@@ -8,6 +8,7 @@ import {readTraining, ReadError} from "./read.js"
 const trainingName = document.querySelector(".ts-training-name")
 const trainingNotes = document.querySelector(".ts-training-notes")
 const groupContainer = document.querySelector(".ts-group-container")
+const noExerciseDisp = document.querySelector(".ts-no-exercises")
 
 const buttonAddGroup = document.querySelector(".ts-add-group")
 const buttonAddExercise = document.querySelector(".ts-add-exercise")
@@ -72,6 +73,10 @@ export async function setupTraining(trainingData = null) {
     let groups = Array.from(groupContainer.children)
     groups = groups.slice(1)         // not first element (no-exercise display)
     for (const group of groups) group.remove()
+
+    // Reset no-exercise display
+    noExerciseDisp.style.removeProperty("opacity")
+    noExerciseDisp.classList.remove("smooth-display")
 
     return returnData
 }
