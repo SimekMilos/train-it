@@ -16,6 +16,8 @@ const buttonCancel = document.querySelector(".ts-cancel")
 const buttonSave = document.querySelector(".ts-save")
 
 
+// --- Public ---
+
 export async function setupTraining(trainingData = null) {
     /* Main component function to create/edit training
 

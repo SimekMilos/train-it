@@ -74,6 +74,7 @@ window.addEventListener("resize", overviewShadowResizeToggle)
 scrollContainer.addEventListener("scroll", stickyLineEffect)
 new ResizeObserver(setGroupContainerMinHeight).observe(component)
 
+
 function overviewShadowResizeToggle() {
     /* Disables shadow in overview if setup component overlays over it */
 

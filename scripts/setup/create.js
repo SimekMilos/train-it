@@ -243,14 +243,14 @@ async function removeExercise(exercise) {
     const style = getComputedStyle(exercise)
     const group = exercise.closest(".ts-group")
     const noGroup = exercise.closest(".ts-no-group")
-    let height = float(style.height) + float(style.marginBottom)
+    let exerHeight = float(style.height) + float(style.marginBottom)
 
     // When removing no-group, account for no-group bottom padding
     const removeNoGroup = noGroup && noGroup.children.length == 1
-    if (removeNoGroup) height += float(getComputedStyle(noGroup).marginBottom)
+    if (removeNoGroup) exerHeight += float(getComputedStyle(noGroup).marginBottom)
 
     // Adds filler padding
-    const remPadd = addDynamicPadding(height, scrollContainer)
+    const remPadd = addDynamicPadding(exerHeight, scrollContainer)
 
     // Remove exercise
     if (removeNoGroup) noGroup.classList.add("hide-bottom-margin")
