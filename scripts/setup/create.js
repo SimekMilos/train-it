@@ -67,7 +67,7 @@ export function createGroup(data = null) {
             notes.value = data.notes
 
             hideNoDisplay(noExerciseDisp)
-            if (!data.exercises.length) throw Error("Incorrect data")
+            if (!data.exercises.length) throw new Error("Incorrect data")
         }
 
     // Sets up no-group
