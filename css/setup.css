@@ -166,11 +166,25 @@
     display: none;              /* Chrome, Safari, Opera */
 }
 
+/* Fade at the bottom of the scroll container */
+.training-setup-component::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 65px;
+
+    height: 15px;
+    content: "";
+
+    background-image: linear-gradient(to bottom, #FFF0, #FFFF);
+}
+
 
 /* Bottom Controls */
 
 .ts-bottom-controlls {
-    margin-top: 15px;
+    margin-top: 10px;
 
     display: flex;
 }
@@ -227,7 +241,7 @@
 /* Add Controls */
 
 .ts-add-controls {
-    margin: 0 0 15px;
+    margin: 0 0 20px;
 
     display: flex;
     justify-content: center;
