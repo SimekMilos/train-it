@@ -39,7 +39,7 @@ export function createGroup(data = null) {
     if (!data) data = {type: "group"}
 
     let groupFrag
-    let exerCont
+    let exerContainer
 
     // Sets up group header
     if (data.type == "group") {
@@ -49,14 +49,15 @@ export function createGroup(data = null) {
         // Elements
         const name = group.querySelector(".ts-group-name")
         const notes = group.querySelector(".ts-group-notes")
-        exerCont = group.querySelector(".ts-group-exercise-container")
+        exerContainer = group.querySelector(".ts-group-exercise-container")
+        const noExerciseDisp = group.querySelector(".ts-group-no-exercises")
         const buttonAddExercise = group.querySelector(".ts-group-add")
         const buttonClose = group.querySelector(".ts-group-close")
 
         // Events
         notes.addEventListener("input", sizeNotes)
         buttonAddExercise.addEventListener("click", () => {
-            addTrainingItem("exercise", exerCont)
+            addTrainingItem("exercise", exerContainer)
         })
         buttonClose.addEventListener("click", () => removeGroup(group))
 
@@ -64,18 +65,21 @@ export function createGroup(data = null) {
         if (data.name) {
             name.value = data.name
             notes.value = data.notes
+
+            hideNoDisplay(noExerciseDisp)
+            if (!data.exercises.length) throw Error("Incorrect data")
         }
 
     // Sets up no-group
     } else {
         groupFrag = noGroupTemplate.content.cloneNode(true)
-        exerCont = groupFrag.querySelector(".ts-no-group")
+        exerContainer = groupFrag.querySelector(".ts-no-group")
     }
 
     // Add exercises
     if (data.exercises) {
         for (const exercise of data.exercises) {
-            exerCont.append(createExercise(exercise))
+            exerContainer.append(createExercise(exercise))
         }
     }
 
@@ -118,8 +122,11 @@ export async function addTrainingItem(type, container) {
     if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
     await wait(100)
 
-    // Add elem
+    // Hide no-training displays
     hideNoDisplay(noExerciseDisp)
+    if (group) hideNoDisplay(group.querySelector(".ts-group-no-exercises"))
+
+    // Add elem
     container.append(trainingItem)
     await displayAnim(trainingItem)
 
@@ -234,6 +241,7 @@ async function removeExercise(exercise) {
     component.classList.remove("enable-access")
 
     const style = getComputedStyle(exercise)
+    const group = exercise.closest(".ts-group")
     const noGroup = exercise.closest(".ts-no-group")
     let height = float(style.height) + float(style.marginBottom)
 
@@ -250,7 +258,13 @@ async function removeExercise(exercise) {
     if (removeNoGroup) noGroup.remove()
     else               exercise.remove()
 
+    // Display no-exercises displays
     if (groupContainer.children.length == 1) displayNoDisplay(noExerciseDisp)
+    if (group) {
+        const exerCont = group.querySelector(".ts-group-exercise-container")
+        const noExerciseDisp = exerCont.firstElementChild
+        if (exerCont.children.length == 1) displayNoDisplay(noExerciseDisp)
+    }
 
     // Scroll up
     await wait(100)

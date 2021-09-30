@@ -206,6 +206,7 @@
     flex-direction: column;
 }
 
+
 /* No Exercises Display */
 
 .ts-no-exercises {
@@ -314,6 +315,10 @@
 
 .ts-group-no-exercises:not(:only-child) {
     display: block;                         /* Keep visible */
+}
+
+.ts-group-no-exercises.smooth-display {
+    transition: opacity .3s ease-in-out;
 }
 
 
