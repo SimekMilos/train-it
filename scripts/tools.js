@@ -36,10 +36,7 @@ export function wait(milliseconds) {
 
 export function waitFor(event, element) {
     return new Promise(resolve => {
-        element.addEventListener(event, function handler() {
-            element.removeEventListener(event, handler)
-            resolve()
-        })
+        element.addEventListener(event, () => resolve(), {once: true})
     })
 }
 
