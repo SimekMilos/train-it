@@ -43,7 +43,7 @@ export function waitFor(event, element) {
 export async function waitForAny(...events) {
     /*
        Each event is described as an array:
-        ["event-string", eventElement, optionalReturnValue]
+        [eventString, eventElement, optionalReturnValue, optionalUseCapture]
 
        Output - Promise with optional return value of first event
     */
@@ -53,13 +53,13 @@ export async function waitForAny(...events) {
 
     // Register events
     for (const event of events) {
-        const [eventStr, element, retVal] = event
+        const [eventStr, element, retVal, useCapture = false] = event
 
         promises.push(new Promise(resolve => {
             const handler = () => resolve(retVal)
 
-            element.addEventListener(eventStr, handler)
-            registered.push([element, eventStr, handler])
+            element.addEventListener(eventStr, handler, useCapture)
+            registered.push([element, eventStr, handler, useCapture])
         }))
     }
 
@@ -68,8 +68,8 @@ export async function waitForAny(...events) {
 
     // Unregister events
     for (const listener of registered) {
-        const [element, eventStr, handler] = listener
-        element.removeEventListener(eventStr, handler)
+        const [element, eventStr, handler, useCapture] = listener
+        element.removeEventListener(eventStr, handler, useCapture)
     }
 
     return retVal
