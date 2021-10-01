@@ -1,6 +1,7 @@
 
 export const float = Number.parseFloat
 export const int = Number.parseInt
+window.log = console.log
 
 export function px(value) {
     if(typeof value == "number") value = value.toFixed(2)
