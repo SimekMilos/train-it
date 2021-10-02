@@ -128,5 +128,18 @@ function checkOrderArray(data) {
 }
 
 function checkTraining(training) {
+function parseName(obj) {
+    if (typeof obj.name != "string") return false
+    obj.name = obj.name.trim()
+
+    // Name cannot be empty
+    if (!obj.name.length) return false
+    return true
+}
+
+function parseNotes(obj) {
+    if (typeof obj.notes != "string") return false
+    obj.notes = obj.notes.trimEnd()
+
     return true
 }
