@@ -131,10 +131,25 @@ function parseTraining(training) {
     if (!parseName(training)) return false
     if (!parseNotes(training)) return false
     if (!testObjectArray(training.groups)) return false
+    if (!parseSettings(training.settings)) return false
 
+    // Parse groups
     for (const group of training.groups) {
         if (!parseGroup(group)) return false
     }
+
+    return true
+}
+
+
+function parseSettings(settingsObj) {
+    // settings dont have to be defined
+    if (settingsObj === undefined) return true
+
+    if (!(settingsObj instanceof Object)) return false
+
+    //TODO: add tests acording to settings definition and test it
+    //  - if there are no edits to settingsObj, rename to checkSettings
 
     return true
 }
@@ -157,8 +172,8 @@ function parseNotes(obj) {
 
 function testObjectArray(array) {
     if (!(array instanceof Array)) return false
-    if (!array.length) return false
-
+    if (!array.length) return false             // at least 1 group in training
+                                                // at least 1 exercise in group
     for (const obj of array) {
         if (!(obj instanceof Object)) return false
     }
