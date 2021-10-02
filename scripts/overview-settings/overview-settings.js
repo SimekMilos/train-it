@@ -143,3 +143,16 @@ function parseNotes(obj) {
 
     return true
 }
+
+function testObjectArray(array) {
+    if (!(array instanceof Array)) return false
+    if (!array.length) return false
+
+    for (const obj of array) {
+        if (!(obj instanceof Object)) return false
+    }
+
+    return true
+}
+
+}
