@@ -3,11 +3,13 @@ import {waitForAny} from "../tools.js"
 import * as displayFunc from "./display.js"
 import {parseFile, ParserError} from "./file-parser.js"
 
+
 const exportButton = document.querySelector(".ovs-export")
 const importButton = document.querySelector(".ovs-import")
 
 const fileExtension = ".train-it"
 const exportFileName = "trainings" + fileExtension
+
 
 // --- Public ---
 
@@ -25,8 +27,16 @@ importButton.addEventListener("click", onImport)
 
 
 function onExport() {
+    // Parse storage
+    const data = {}
+    data["training-order"] = JSON.parse(localStorage["training-order"])
+
+    for (const training of data["training-order"]) {
+        data[training] = JSON.parse(localStorage[training])
+    }
+
     // Create data file
-    const file = new File([JSON.stringify(localStorage)],
+    const file = new File([JSON.stringify(data, null, 4)],
                           exportFileName,
                           {type: "application/octet-stream"})
 

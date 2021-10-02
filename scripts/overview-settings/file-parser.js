@@ -15,7 +15,6 @@ export function parseFile(data) {
     // Parse storage structure
     try {
         data = JSON.parse(data)
-        for (const key in data) data[key] = JSON.parse(data[key])
     } catch {
         throw new ParserError
     }
