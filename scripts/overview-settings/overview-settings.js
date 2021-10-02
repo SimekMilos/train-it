@@ -46,19 +46,28 @@ async function onImport() {
     input.accept = fileExtension
     input.click()
 
-    // Wait for interaction
+    // Wait for user interaction
     const canceled = await waitForAny(["change", input, false],
                                       ["click", window, true, true])
     if (canceled) return
 
+    // Load file
+    const reader = new FileReader()
+    reader.readAsText(input.files[0])
+    const success = await waitForAny(["load", reader, true],
+                                     ["errror", reader, false])
+    if (!success) {
+        alert("File loading not successful.")
+        return
+    }
+
     // Parse file
     let fileData
     try {
-        fileData = await parseFile(input.files[0])
+        fileData = parseFile(reader.result)
     } catch (err) {
         if (err instanceof ParserError) {
-            if (err.message == "reading-error") alert("File loading not successful.")
-            else alert("File cannot be imported. Incorrect file format!")
+            alert("File cannot be imported. Incorrect file format!")
             return
         } else throw err
     }
@@ -76,5 +85,6 @@ class ParserError extends Error {
         this.name = "ParserError"
     }
 }
-async function parseFile(file) {
+
+function parseFile(data) {
 }
