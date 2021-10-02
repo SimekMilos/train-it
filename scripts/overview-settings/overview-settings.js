@@ -141,6 +141,26 @@ function parseTraining(training) {
     return true
 }
 
+function parseGroup(group) {
+    if (group.type != "group" && group.type != "no-group") return false
+
+    if (group.type == "group") {
+        if (!parseName(group)) return false
+        if (!parseNotes(group)) return false
+    }
+    if (!testObjectArray(group.exercises)) return false
+
+    // Parse exercises
+    for (const exercise of group.exercises) {
+        if (!parseExercise(exercise)) return false
+    }
+
+    return true
+}
+
+function parseExercise(exercise) {
+    return true
+}
 
 function parseSettings(settingsObj) {
     // settings dont have to be defined
@@ -178,9 +198,5 @@ function testObjectArray(array) {
         if (!(obj instanceof Object)) return false
     }
 
-    return true
-}
-
-function parseGroup(group) {
     return true
 }
