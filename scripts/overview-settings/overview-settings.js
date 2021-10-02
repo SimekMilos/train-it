@@ -100,7 +100,7 @@ function parseFile(data) {
 
     // Test trainings
     for (const trID of data["training-order"]) {
-        if (!checkTraining(data[trID])) {
+        if (!parseTraining(data[trID])) {
             throw new ParserError
         }
     }
@@ -127,7 +127,18 @@ function checkOrderArray(data) {
     return true
 }
 
-function checkTraining(training) {
+function parseTraining(training) {
+    if (!parseName(training)) return false
+    if (!parseNotes(training)) return false
+    if (!testObjectArray(training.groups)) return false
+
+    for (const group of training.groups) {
+        if (!parseGroup(group)) return false
+    }
+
+    return true
+}
+
 function parseName(obj) {
     if (typeof obj.name != "string") return false
     obj.name = obj.name.trim()
@@ -155,4 +166,6 @@ function testObjectArray(array) {
     return true
 }
 
+function parseGroup(group) {
+    return true
 }
