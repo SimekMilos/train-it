@@ -87,4 +87,31 @@ class ParserError extends Error {
 }
 
 function parseFile(data) {
+    // Parse storage structure
+    try {
+        data = JSON.parse(data)
+        for (const key in data) data[key] = JSON.parse(data[key])
+    } catch {
+        throw new ParserError
+    }
+
+    // Test order array
+    if (!checkOrderArray(data)) throw new ParserError
+
+    // Test trainings
+    for (const trID of data["training-order"]) {
+        if (!checkTraining(data[trID])) {
+            throw new ParserError
+        }
+    }
+
+    return data
+}
+
+function checkOrderArray(data) {
+    return true
+}
+
+function checkTraining(training) {
+    return true
 }
