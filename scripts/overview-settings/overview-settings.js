@@ -109,6 +109,21 @@ function parseFile(data) {
 }
 
 function checkOrderArray(data) {
+    const orderArray = data["training-order"]
+
+    // Check array
+    if (!(orderArray instanceof Array)) return false
+    if (!orderArray.length) return false
+
+    // Check ids
+    for (const id of orderArray) {
+        if (typeof id != "string") return false
+        if (!id.trim().length) return false
+
+        // check arr id - training id bindings
+        if (!(data[id] instanceof Object)) return false
+    }
+
     return true
 }
 
