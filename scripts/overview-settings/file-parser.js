@@ -36,6 +36,8 @@ export function parseFile(data) {
 
 // --- Private ---
 
+// Data structure hierarchy
+
 function checkOrderArray(data) {
     const orderArray = data["training-order"]
 
@@ -90,22 +92,15 @@ function parseExercise(exercise) {
     if (!parseName(exercise)) return false
     if (!parseNotes(exercise)) return false
 
-    // Parse sets
+    // Test set array
     const sets = exercise.sets
     if (!(sets instanceof Array)) return false
     if (!sets.length) return false         // Must have at least 1 set
 
-        // Trim sets
+    // Parse sets
     for (const index of range(sets.length)) {
-        if (typeof sets[index] == "string") {
-            sets[index] = sets[index].trim()
-        }
-    }
-
-        // Test set values - null or non-empty string
-    for (const set of sets) {
-        if (set !== null && typeof set != "string") return false
-        if (typeof set == "string" && !set.length) return false
+        if (typeof sets[index] != "string") return false
+        sets[index] = sets[index].trim()
     }
 
     return true
@@ -124,7 +119,7 @@ function parseSettings(settingsObj) {
 }
 
 
-
+// Smaller parsing units
 
 function parseName(obj) {
     if (typeof obj.name != "string") return false

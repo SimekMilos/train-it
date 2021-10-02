@@ -272,15 +272,15 @@ async function removeExercise(exercise) {
     component.classList.add("enable-access")
 }
 
-function createSet(setName = null) {
+function createSet(setName = "") {
+    /* empty string = default set name value */
+
     const setFrag = setTemplate.content.cloneNode(true)
     const set = setFrag.firstElementChild
 
     // Set name
-    if (setName) {
-        const name = set.querySelector(".ts-set-name")
-        name.value = setName
-    }
+    const name = set.querySelector(".ts-set-name")
+    name.value = setName
 
     // Setup close button
     const closeButton = setFrag.querySelector(".ts-set-close")
