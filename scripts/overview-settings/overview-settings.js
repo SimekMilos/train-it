@@ -1,10 +1,12 @@
 
+import {waitForAny} from "../tools.js"
 import * as displayFunc from "./display.js"
 
 const exportButton = document.querySelector(".ovs-export")
 const importButton = document.querySelector(".ovs-import")
 
-const exportFileName = "trainings.train-it"
+const fileExtension = ".train-it"
+const exportFileName = "trainings" + fileExtension
 
 // --- Public ---
 
@@ -37,6 +39,42 @@ function onExport() {
     URL.revokeObjectURL(a.href)
 }
 
-function onImport() {
+async function onImport() {
+    // Create file input
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = fileExtension
+    input.click()
 
+    // Wait for interaction
+    const canceled = await waitForAny(["change", input, false],
+                                      ["click", window, true, true])
+    if (canceled) return
+
+    // Parse file
+    let fileData
+    try {
+        fileData = await parseFile(input.files[0])
+    } catch (err) {
+        if (err instanceof ParserError) {
+            if (err.message == "reading-error") alert("File loading not successful.")
+            else alert("File cannot be imported. Incorrect file format!")
+            return
+        } else throw err
+    }
+
+    // Save data (override/merge)
+    log(fileData)
+}
+
+
+// Parsing file
+
+class ParserError extends Error {
+    constructor(message) {
+        super(message)
+        this.name = "ParserError"
+    }
+}
+async function parseFile(file) {
 }
