@@ -218,7 +218,7 @@ body {
 .control-button:disabled {
     color: var(--disabled-control-color);
     border-color: var(--disabled-control-color);
-    background-color: transparent;'
+    background-color: transparent;
     cursor: auto;
 }
 
