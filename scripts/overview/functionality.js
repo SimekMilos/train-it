@@ -1,5 +1,5 @@
 
-import {px, float, wait, waitFor, generateTrainingID} from "../tools.js"
+import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -26,6 +26,11 @@ const storage = localStorage
 export function loadTrainings() {
     let order = storage.getItem("training-order")
     if (!order) return
+
+    // Delete current trainings from list (if there are any)
+    for (const _ of range(1, trainingList.children.length)) {
+        trainingList.children[1].remove()
+    }
 
     order = JSON.parse(order)
     const trainings = document.createDocumentFragment()
