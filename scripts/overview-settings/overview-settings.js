@@ -1,5 +1,5 @@
 
-import {waitForAny} from "../tools.js"
+import {waitForAny, generateTrainingID} from "../tools.js"
 import * as displayFunc from "./display.js"
 import {parseFile, ParserError} from "./file-parser.js"
 
@@ -85,4 +85,25 @@ async function onImport() {
 
     // Save data (override/merge)
     log(fileData)
+}
+
+function mergeData(fileData) {
+    const storage = localStorage
+
+    // Get order array
+    let orderArr = storage["training-order"]
+    if (orderArr) orderArr = JSON.parse(orderArr)
+    else orderArr = []
+
+    // Save new trainings
+    for (const fileID of fileData["training-order"]) {
+        const localID = generateTrainingID()
+
+        orderArr.push(localID)
+        storage[localID] = JSON.stringify(fileData[fileID])
+    }
+
+    // Save order
+    if (!orderArr.length) throw new Error("Order array empty after import")
+    storage["training-order"] = JSON.stringify(orderArr)
 }
