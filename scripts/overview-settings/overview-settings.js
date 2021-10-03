@@ -1,5 +1,7 @@
 
-import {waitForAny, generateTrainingID} from "../tools.js"
+import {waitForAny, dialog, generateTrainingID} from "../tools.js"
+
+import * as overview from "../overview/overview.js"
 import * as displayFunc from "./display.js"
 import {parseFile, ParserError} from "./file-parser.js"
 
@@ -83,8 +85,19 @@ async function onImport() {
         } else throw err
     }
 
-    // Save data (override/merge)
-    log(fileData)
+    // Ask for action (only if app isn't empty)
+    if (localStorage["training-order"]) {
+        const action = await dialog("You have trainings in the app. \
+            Do you want to add new trainings to existing ones or \
+            overwrite them?", "Add", "Overwrite", "Cancel")
+
+        if (action == "Cancel") return
+        if (action == "Overwrite") localStorage.clear()
+    }
+
+    // Save data
+    mergeData(fileData)
+    overview.loadTrainings()
 }
 
 function mergeData(fileData) {
