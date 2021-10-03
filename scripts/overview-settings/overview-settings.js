@@ -70,7 +70,7 @@ async function onImport() {
     const success = await waitForAny(["load", reader, true],
                                      ["errror", reader, false])
     if (!success) {
-        alert("File loading not successful.")
+        await dialog("File loading not successful.", "OK")
         return
     }
 
@@ -80,7 +80,7 @@ async function onImport() {
         fileData = parseFile(reader.result)
     } catch (err) {
         if (err instanceof ParserError) {
-            alert("File cannot be imported. Incorrect file format!")
+            await dialog("File cannot be imported. Incorrect file format!", "OK")
             return
         } else throw err
     }
