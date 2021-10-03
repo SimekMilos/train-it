@@ -83,7 +83,43 @@ export function generateTrainingID() {
 }
 
 export async function dialog(message, ...buttons) {
-    return "Replace"
+    if (!buttons.length) throw new Error("Dialog must have at least 1 button.")
+
+    // Create overlay elem
+    const dialogOverlay = document.createElement("div")
+    dialogOverlay.classList.add("dialog")
+
+    // Create main dialog window
+    const dialog = document.createElement("div")
+    dialog.classList.add("main")
+    dialogOverlay.append(dialog)
+
+    // Add message
+    const messageElem = document.createElement("p")
+    messageElem.textContent = message
+    dialog.append(messageElem)
+
+    // Add buttons
+    const buttonOrganiser = document.createElement("div")
+    buttonOrganiser.classList.add("buttons")
+    dialog.append(buttonOrganiser)
+
+    const events = []
+    for (const buttName of buttons) {
+        const button = document.createElement("button")
+        button.textContent = buttName
+        buttonOrganiser.append(button)
+
+        events.push(["click", button, buttName])
+    }
+
+    // Display dialog
+    document.body.append(dialogOverlay)
+    const action = await waitForAny(...events)
+
+    // Close
+    dialogOverlay.remove()
+    return action
 }
 
 export function sizeNotes(event) {
