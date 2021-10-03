@@ -82,6 +82,10 @@ export function generateTrainingID() {
     }
 }
 
+export function dialog(message, ...buttons) {
+    return "Overwrite"
+}
+
 export function sizeNotes(event) {
     const notes = event.target
     const styles = getComputedStyle(notes)
