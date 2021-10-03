@@ -82,8 +82,8 @@ export function generateTrainingID() {
     }
 }
 
-export function dialog(message, ...buttons) {
-    return "Overwrite"
+export async function dialog(message, ...buttons) {
+    return "Replace"
 }
 
 export function sizeNotes(event) {
