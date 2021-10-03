@@ -113,6 +113,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .ovt-name {
@@ -132,6 +134,8 @@
 .ov-training :checked + label {
     color: white;
     background-color: hsl(209, 100%, 70%);
+
+    cursor: auto;
 }
 
 .ov-training :checked + label .handle {
