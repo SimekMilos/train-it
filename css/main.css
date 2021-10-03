@@ -201,9 +201,25 @@ body {
     user-select: none;
 }
 
+@media (any-hover: hover) {
+    .control-button:hover {
+        color: var(--main-color);
+        border-color: var(--main-color);
+        cursor: pointer;
+    }
+}
+
+.control-button:active {
+    color: white;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+}
+
 .control-button:disabled {
     color: var(--disabled-control-color);
     border-color: var(--disabled-control-color);
+    background-color: transparent;'
+    cursor: auto;
 }
 
 
@@ -247,6 +263,7 @@ body {
 @media (any-hover: hover) {
     .close-button:hover {
         background-color: var(--secondary-color-hover);
+        cursor: pointer;
     }
 }
 

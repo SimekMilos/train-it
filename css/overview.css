@@ -181,6 +181,15 @@
     background: var(--background);
 }
 
+.ov-settings:active {
+    background:
+        linear-gradient(var(--main-color), var(--main-color)),
+        linear-gradient(white, white),
+        linear-gradient(white, white),
+        var(--background), white;
+    background-blend-mode: screen, overlay, difference, normal;
+}
+
 .ov-settings:disabled {
     /* Settings button is being disabled during fade in/out animations.
        This disabling shouldn't be visible. */
