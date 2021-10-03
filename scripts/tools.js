@@ -75,6 +75,13 @@ export async function waitForAny(...events) {
     return retVal
 }
 
+export function generateTrainingID() {
+    for(const count of range(1, Infinity)) {
+        const ID = `training-${count}`
+        if (!localStorage.getItem(ID)) return ID
+    }
+}
+
 export function sizeNotes(event) {
     const notes = event.target
     const styles = getComputedStyle(notes)

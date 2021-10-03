@@ -1,5 +1,5 @@
 
-import {px, float, range, wait, waitFor} from "../tools.js"
+import {px, float, wait, waitFor, generateTrainingID} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -18,7 +18,7 @@ const buttonCreate = document.querySelector(".ov-create")
 const buttonEdit = document.querySelector(".ov-edit")
 const buttonSettings = document.querySelector(".ov-settings")
 
-const storage = window.localStorage
+const storage = localStorage
 
 
 // --- Loading trainings ---
@@ -143,13 +143,6 @@ async function editTraining() {
 
     // Edit text in training item
     trNameElem.textContent = trData.name
-}
-
-function generateTrainingID() {
-    for(const count of range(1, Infinity)) {
-        const ID = `training-${count}`
-        if (!storage.getItem(ID)) return ID
-    }
 }
 
 async function smoothScrollDown(elem, duration) {
