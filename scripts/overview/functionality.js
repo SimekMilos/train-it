@@ -121,15 +121,13 @@ async function createTraining() {
     const trList = trainingList
     const trItem = createTrainingItem(trID, trData.name).firstElementChild
 
-    // Get training item height
+    // Get scroll distance
     trList.append(trItem)
-    let height = float(getComputedStyle(trItem).height)
-    if (trList.scrollHeight == trList.clientHeight) height = 0  // no scrolling
+    let distance = trItem.getBoundingClientRect().bottom
+                   - trList.getBoundingClientRect().bottom
     trItem.remove()
 
     // Scroll container
-    let distance = trList.scrollHeight - (trList.scrollTop + trList.clientHeight)
-    distance += height
     const remPadd = await dynamicScrollDown(distance, 100, trList)
     await wait(200)
 
