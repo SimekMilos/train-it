@@ -26,13 +26,20 @@ export function transitionToMainScreen(trainingData) {
     settings.init(trainingData)
     training.init(trainingData)
     stopwatch.init(trainingData)
+
     displayScreen(mainScreen)
     hideScreen(initScreen, 1500)
+
+    training.display()
 }
 
 export async function transitionToInitScreen() {
     await displayScreen(initScreen, 800)
     hideScreen(mainScreen)
+
+    stopwatch.destroy()
+    training.destroy()
+    settings.destroy()
 
     await wait(200)
     await overview.display()
