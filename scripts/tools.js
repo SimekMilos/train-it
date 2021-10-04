@@ -1,6 +1,7 @@
 
 export const float = Number.parseFloat
 export const int = Number.parseInt
+window.log = console.log
 
 export function px(value) {
     if(typeof value == "number") value = value.toFixed(2)
@@ -35,17 +36,14 @@ export function wait(milliseconds) {
 
 export function waitFor(event, element) {
     return new Promise(resolve => {
-        element.addEventListener(event, function handler() {
-            element.removeEventListener(event, handler)
-            resolve()
-        })
+        element.addEventListener(event, () => resolve(), {once: true})
     })
 }
 
 export async function waitForAny(...events) {
     /*
        Each event is described as an array:
-        ["event-string", eventElement, optionalReturnValue]
+        [eventString, eventElement, optionalReturnValue, optionalUseCapture]
 
        Output - Promise with optional return value of first event
     */
@@ -55,13 +53,13 @@ export async function waitForAny(...events) {
 
     // Register events
     for (const event of events) {
-        const [eventStr, element, retVal] = event
+        const [eventStr, element, retVal, useCapture = false] = event
 
         promises.push(new Promise(resolve => {
             const handler = () => resolve(retVal)
 
-            element.addEventListener(eventStr, handler)
-            registered.push([element, eventStr, handler])
+            element.addEventListener(eventStr, handler, useCapture)
+            registered.push([element, eventStr, handler, useCapture])
         }))
     }
 
@@ -70,11 +68,69 @@ export async function waitForAny(...events) {
 
     // Unregister events
     for (const listener of registered) {
-        const [element, eventStr, handler] = listener
-        element.removeEventListener(eventStr, handler)
+        const [element, eventStr, handler, useCapture] = listener
+        element.removeEventListener(eventStr, handler, useCapture)
     }
 
     return retVal
+}
+
+export function asyncContextManager(before, after) {
+    return async (inContext) => {
+        const retVal = await before()
+        try {
+            await inContext(retVal)
+        } finally {
+            await after(retVal)
+        }
+    }
+}
+
+export function generateTrainingID() {
+    for(const count of range(1, Infinity)) {
+        const ID = `training-${count}`
+        if (!localStorage.getItem(ID)) return ID
+    }
+}
+
+export async function dialog(message, ...buttons) {
+    if (!buttons.length) throw new Error("Dialog must have at least 1 button.")
+
+    // Create overlay elem
+    const dialogOverlay = document.createElement("div")
+    dialogOverlay.classList.add("dialog")
+
+    // Create main dialog window
+    const dialog = document.createElement("div")
+    dialog.classList.add("main")
+    dialogOverlay.append(dialog)
+
+    // Add message
+    const messageElem = document.createElement("p")
+    messageElem.textContent = message
+    dialog.append(messageElem)
+
+    // Add buttons
+    const buttonOrganiser = document.createElement("div")
+    buttonOrganiser.classList.add("buttons")
+    dialog.append(buttonOrganiser)
+
+    const events = []
+    for (const buttName of buttons) {
+        const button = document.createElement("button")
+        button.textContent = buttName
+        buttonOrganiser.append(button)
+
+        events.push(["click", button, buttName])
+    }
+
+    // Display dialog
+    document.body.append(dialogOverlay)
+    const action = await waitForAny(...events)
+
+    // Close
+    dialogOverlay.remove()
+    return action
 }
 
 export function sizeNotes(event) {

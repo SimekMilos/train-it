@@ -113,6 +113,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    cursor: pointer;
 }
 
 .ovt-name {
@@ -132,6 +134,8 @@
 .ov-training :checked + label {
     color: white;
     background-color: hsl(209, 100%, 70%);
+
+    cursor: auto;
 }
 
 .ov-training :checked + label .handle {
@@ -175,6 +179,15 @@
 
     width: var(--button-height);
     background: var(--background);
+}
+
+.ov-settings:active {
+    background:
+        linear-gradient(var(--main-color), var(--main-color)),
+        linear-gradient(white, white),
+        linear-gradient(white, white),
+        var(--background), white;
+    background-blend-mode: screen, overlay, difference, normal;
 }
 
 .ov-settings:disabled {

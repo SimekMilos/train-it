@@ -1,5 +1,5 @@
 
-import {px, float, range, wait, waitFor} from "../tools.js"
+import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -18,7 +18,7 @@ const buttonCreate = document.querySelector(".ov-create")
 const buttonEdit = document.querySelector(".ov-edit")
 const buttonSettings = document.querySelector(".ov-settings")
 
-const storage = window.localStorage
+const storage = localStorage
 
 
 // --- Loading trainings ---
@@ -26,6 +26,11 @@ const storage = window.localStorage
 export function loadTrainings() {
     let order = storage.getItem("training-order")
     if (!order) return
+
+    // Delete current trainings from list (if there are any)
+    for (const _ of range(1, trainingList.children.length)) {
+        trainingList.children[1].remove()
+    }
 
     order = JSON.parse(order)
     const trainings = document.createDocumentFragment()
@@ -145,13 +150,6 @@ async function editTraining() {
     trNameElem.textContent = trData.name
 }
 
-function generateTrainingID() {
-    for(const count of range(1, Infinity)) {
-        const ID = `training-${count}`
-        if (!storage.getItem(ID)) return ID
-    }
-}
-
 async function smoothScrollDown(elem, duration) {
     const diff = elem.scrollHeight - elem.scrollTop - elem.clientHeight
     const step = 8*diff/duration
@@ -211,6 +209,7 @@ async function deleteTraining() {
 
     // Delete training data
     storage.removeItem(trID)
+    overviewSettings.onStorageRemove()  // notify component about removal
 }
 
 async function smoothRemoveBottomPadding(elem, amount, duration) {

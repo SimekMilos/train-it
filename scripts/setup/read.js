@@ -113,8 +113,7 @@ function readExercise(exerciseElem) {
     for (const setElem of setContainer.children) {
         const setNameElem = setElem.querySelector(":scope .ts-set-name")
         const nameStr = setNameElem.value.trim()
-        if (nameStr) exerciseData.sets.push(nameStr)
-        else         exerciseData.sets.push(null)    // Set with default naming
+        exerciseData.sets.push(nameStr)        // empty string = default naming
     }
 
     return exerciseData

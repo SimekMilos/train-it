@@ -1,0 +1,54 @@
+
+.dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+
+    background-color: #0005;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog .main {
+    max-width: 460px;
+    width: calc(100vw - 60px);
+
+    border-radius: 6px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, .6);
+    background-color: white;
+}
+
+.dialog p {
+    padding: 20px 20px 15px;
+    border-bottom: 1px solid #d4d5d4;
+
+    font: 14px "OpenSans Light", sans-serif;
+}
+
+.dialog .buttons {
+    margin: 4px 10px;
+
+    /* Content */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.dialog button {
+    padding: 6px 10px;
+    margin: 0 5px;
+
+    border: none;
+    background-color: transparent;
+
+    color: hsl(0, 100%, 40%);
+    font: 14px "OpenSans Regular", sans-serif;
+
+    cursor: pointer;
+}
