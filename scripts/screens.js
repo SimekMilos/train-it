@@ -1,7 +1,10 @@
 
 import {wait, waitFor} from "./tools.js"
-import * as stopwatch from "./stopwatch/stopwatch.js"
 import * as overview from "./overview/overview.js"
+
+import * as settings from "./settings/settings.js"
+import * as training from "./training/training.js"
+import * as stopwatch from "./stopwatch/stopwatch.js"
 
 const initScreen = document.querySelector(".initial-screen")
 const mainScreen = document.querySelector(".main-screen")
@@ -17,10 +20,12 @@ export async function initInitScreen() {
     overview.display()
 }
 
-export function transitionToMainScreen(training) {
+export function transitionToMainScreen(trainingData) {
     // training: null - starts timer, obj - starts training
 
-    stopwatch.initStopwatch(training)
+    settings.init(trainingData)
+    training.init(trainingData)
+    stopwatch.init(trainingData)
     displayScreen(mainScreen)
     hideScreen(initScreen, 1500)
 }
