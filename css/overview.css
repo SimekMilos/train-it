@@ -96,7 +96,7 @@
 }
 
 .ov-training:last-child {
-    margin-bottom: calc(var(--height) + 5px);
+    margin-bottom: 5px;
 }
 
 /* Displaying/hiding transition */
