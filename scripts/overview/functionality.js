@@ -1,6 +1,6 @@
 
 import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
-import {dialog, dynamicScrollDown} from "../tools.js"
+import {dialog, addDynamicPadding, dynamicScrollDown} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -180,9 +180,10 @@ async function deleteTraining() {
     await wait(200)
     trElem.classList.add("hidden")
 
+    let remPadd = null
     const itemHeight = float(getComputedStyle(trElem).height)
     if (trainingList.scrollHeight > trainingList.clientHeight) {
-        trainingList.style.paddingBottom = px(itemHeight)
+        remPadd = addDynamicPadding(itemHeight, trainingList)
     }
 
     waitFor("transitionend", trElem).then(async () => {
@@ -191,9 +192,7 @@ async function deleteTraining() {
         display.enableAccess()
 
         await wait(200)
-        if (trainingList.style.paddingBottom) {
-            smoothRemoveBottomPadding(trainingList, itemHeight, 250)
-        }
+        if (remPadd) remPadd(250)
     })
 
     // Delete training from storage order list
@@ -209,17 +208,6 @@ async function deleteTraining() {
     // Delete training data
     storage.removeItem(trID)
     overviewSettings.onStorageRemove()  // notify component about removal
-}
-
-async function smoothRemoveBottomPadding(elem, amount, duration) {
-    const step = 8*amount/duration
-
-    while (amount > 0) {
-        amount -= step
-        elem.style.paddingBottom = px(amount)
-        await wait(8)                           // 120 fps
-    }
-    elem.style.removeProperty("padding-bottom")
 }
 
 
