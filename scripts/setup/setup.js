@@ -1,5 +1,5 @@
 
-import {range, waitForAny} from "../tools.js"
+import {range, waitForAny, dialog} from "../tools.js"
 
 import * as display from "./display.js"
 import * as create from "./create.js"
@@ -51,14 +51,16 @@ export async function setupTraining(trainingData = null) {
             } catch (error) {
                 if (error instanceof ReadError) {
                     finished = false
-                    alert(error.message)
+                    await dialog(error.message, "OK")
                 } else throw error
             }
 
         // Cancel edit
         } else {
             if (hasChanged(trainingData)) {
-                finished = confirm("Do you want to delete unsaved changes?")
+                const action = await dialog(
+                    "Do you want to delete unsaved changes?", "Yes", "No")
+                if (action == "Yes") finished = true
             } else {
                 finished = true
             }

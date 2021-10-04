@@ -90,7 +90,7 @@ function onImport() {
         // Ask for action (only if app isn't empty)
         if (localStorage["training-order"]) {
             const action = await dialog("You have trainings in the app. \
-                Do you want to add imported trainings after existing ones or \
+                Do you want to add imported trainings to existing ones or \
                 replace them?", "Add", "Replace", "Cancel")
 
             if (action == "Cancel") return

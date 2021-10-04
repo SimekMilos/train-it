@@ -1,5 +1,6 @@
 
 import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
+import {dialog} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -174,7 +175,9 @@ async function deleteTraining() {
 
     // Confirm deletion
     const trName = trNameElem.textContent
-    if (!window.confirm(`Do you want to delete training - ${trName}?`)) return
+    const action = await dialog(`Do you want to delete training ${trName}?`,
+                                "Yes", "No")
+    if (action == "No") return
     display.disableAccess()
 
     // Delete element and scroll up
