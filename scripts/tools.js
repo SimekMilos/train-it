@@ -75,6 +75,17 @@ export async function waitForAny(...events) {
     return retVal
 }
 
+export function asyncContextManager(before, after) {
+    return async (inContext) => {
+        const retVal = await before()
+        try {
+            await inContext(retVal)
+        } finally {
+            await after(retVal)
+        }
+    }
+}
+
 export function generateTrainingID() {
     for(const count of range(1, Infinity)) {
         const ID = `training-${count}`
