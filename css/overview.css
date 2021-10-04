@@ -62,6 +62,14 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    /* Hiding scrollbar */
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* Edge */
+}
+    /* Hiding scrollbar */
+.ov-training-list::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
 }
 
 
@@ -88,7 +96,7 @@
 }
 
 .ov-training:last-child {
-    margin-bottom: calc(var(--height) + 5px);
+    margin-bottom: 5px;
 }
 
 /* Displaying/hiding transition */
@@ -145,7 +153,7 @@
 
 /* --- Controls --- */
 .ov-controls {
-    margin-top: 10px;
+    margin-top: 5px;
 
     display: flex;
     flex-wrap: wrap;

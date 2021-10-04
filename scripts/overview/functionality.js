@@ -1,6 +1,6 @@
 
 import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
-import {dialog} from "../tools.js"
+import {dialog, addDynamicPadding, dynamicScrollDown} from "../tools.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -117,21 +117,29 @@ async function createTraining() {
     // Save trainind data
     storage.setItem(trID, JSON.stringify(trData))
 
+    // Create training item
+    const trList = trainingList
+    const trItem = createTrainingItem(trID, trData.name).firstElementChild
+
+    // Get scroll distance
+    trList.append(trItem)
+    let distance = trItem.getBoundingClientRect().bottom
+                   - trList.getBoundingClientRect().bottom
+    trItem.remove()
+
     // Scroll container
-    const tList = trainingList
-    if (tList.scrollTop + tList.clientHeight < tList.scrollHeight) {
-        await smoothScrollDown(tList, 100)
-    }
-    await wait(100)
+    const remPadd = await dynamicScrollDown(distance, 100, trList)
+    await wait(200)
 
-    // Display training item
-    const trItem = createTrainingItem(trID, trData.name)
-    const itemElem = trItem.firstElementChild
-    itemElem.classList.add("hidden")
-    trainingList.append(trItem)
+    // Setup training item
+    trItem.classList.add("hidden")
+    trList.append(trItem)
+    await wait(0)           // to kick start transition
 
-    await wait(0)       // to kick start transition
-    itemElem.classList.remove("hidden")
+    // Transition trainin item
+    trItem.classList.remove("hidden")
+    await waitFor("transitionend", trItem)
+    remPadd()
 }
 
 async function editTraining() {
@@ -149,20 +157,6 @@ async function editTraining() {
 
     // Edit text in training item
     trNameElem.textContent = trData.name
-}
-
-async function smoothScrollDown(elem, duration) {
-    const diff = elem.scrollHeight - elem.scrollTop - elem.clientHeight
-    const step = 8*diff/duration
-    let scrolled = elem.scrollTop
-
-    while (scrolled + elem.clientHeight < elem.scrollHeight) {
-        scrolled += step
-        elem.scroll({top: scrolled})
-        await wait(8)               // 120 fps
-    }
-
-    elem.scroll({top: elem.scrollHeight - elem.clientHeight})
 }
 
 
@@ -184,9 +178,10 @@ async function deleteTraining() {
     await wait(200)
     trElem.classList.add("hidden")
 
+    let remPadd = null
     const itemHeight = float(getComputedStyle(trElem).height)
     if (trainingList.scrollHeight > trainingList.clientHeight) {
-        trainingList.style.paddingBottom = px(itemHeight)
+        remPadd = addDynamicPadding(itemHeight, trainingList)
     }
 
     waitFor("transitionend", trElem).then(async () => {
@@ -195,9 +190,7 @@ async function deleteTraining() {
         display.enableAccess()
 
         await wait(200)
-        if (trainingList.style.paddingBottom) {
-            smoothRemoveBottomPadding(trainingList, itemHeight, 250)
-        }
+        if (remPadd) remPadd(250)
     })
 
     // Delete training from storage order list
@@ -213,17 +206,6 @@ async function deleteTraining() {
     // Delete training data
     storage.removeItem(trID)
     overviewSettings.onStorageRemove()  // notify component about removal
-}
-
-async function smoothRemoveBottomPadding(elem, amount, duration) {
-    const step = 8*amount/duration
-
-    while (amount > 0) {
-        amount -= step
-        elem.style.paddingBottom = px(amount)
-        await wait(8)                           // 120 fps
-    }
-    elem.style.removeProperty("padding-bottom")
 }
 
 

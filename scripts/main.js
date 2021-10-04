@@ -2,7 +2,7 @@
 import {initInitScreen} from "./screens.js"
 
 
-async function onAppLoad() {
+function onAppLoad() {
     // Deactivate loading screen
     const lScreen = document.querySelector(".loading-screen")
     lScreen.style.display = "none"
