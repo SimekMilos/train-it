@@ -1,20 +1,47 @@
 
-import {waitFor} from "../tools.js"
+import {float, waitFor, dialog} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
 const mainWidnow = component.firstElementChild
 
 const closeButton = document.querySelector(".sett-close")
+const trStartDelayInput = document.querySelector(".sett-tr-start-delay")
+const setStartDelayInput = document.querySelector(".sett-set-start-delay")
+const precedingPauseInput = document.querySelector(".sett-preceding-pause")
+
+let trainingData = null
 
 
 // --- Public ---
 
-export function init(trainingData) {
+export function init(trData) {
+    if (!trData) {
+        trStartDelayInput.disabled = true
+        setStartDelayInput.disabled = true
+        precedingPauseInput.disabled = true
+        return
+    }
+    trainingData = trData
 
+    // Load values
+    const settings = trData.settings
+    if(!settings) return
+
+    trStartDelayInput.value = settings.trainingStartDelay
+    setStartDelayInput.value = settings.setStartDelay
+    precedingPauseInput.value = settings.precedingPause
 }
 
 export function destroy() {
+    trainingData = null
 
+    trStartDelayInput.disabled = false
+    setStartDelayInput.disabled = false
+    precedingPauseInput.disabled = false
+
+    trStartDelayInput.value = 0
+    setStartDelayInput.value = 0
+    precedingPauseInput.value = 0
 }
 
 export async function open() {
