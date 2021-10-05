@@ -52,11 +52,26 @@ export async function open() {
     await waitFor("animationend", mainWidnow)
     mainWidnow.classList.add("enable-access")
 
-    // Wait for close event
-    do {        // Close by clicking on close button or background
-        const event = await waitFor("click", component)
-    } while (event.target != closeButton && event.target != component)
+    // Input validity cycle
+    let cont
+    do {
+        cont = true
 
+        // Wait for close event
+        do {        // Close by clicking on close button or background
+            const event = await waitFor("click", component)
+        } while (event.target != closeButton && event.target != component)
+
+        // Test for invalid inputs
+        if (!isValid(trStartDelayInput.value) ||
+            !isValid(setStartDelayInput.value) ||
+            !isValid(precedingPauseInput.value)) {
+
+            cont = false
+            await dialog("You've entered invalid delay. Delay can be whole \
+                         number ranging from 0 to 60 seconds.", "OK")
+        }
+    } while (!cont)
     // Hide component
     mainWidnow.classList.remove("enable-access")
     component.classList.add("hide")
@@ -65,5 +80,18 @@ export async function open() {
     await waitFor("animationend", mainWidnow)
     component.classList.remove("hide")
 
+}
+
+
+// --- Private ---
+
+function isValid(value) {
+    if (!value) return false
+
+    value = float(value)
+    if (!Number.isInteger(value)) return false
+    if (value < 0 || value > 60) return false
+
+    return true
     return false
 }
