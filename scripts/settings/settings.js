@@ -72,7 +72,7 @@ export async function open() {
 
             cont = false
             await dialog("You've entered invalid delay. Delay can be whole \
-                         number ranging from 0 to 60 seconds.", "OK")
+                         number ranging from 0 to 300 seconds.", "OK")
         }
     } while (!cont)
 
@@ -120,7 +120,7 @@ function isValid(value) {
 
     value = float(value)
     if (!Number.isInteger(value)) return false
-    if (value < 0 || value > 60) return false
+    if (value < 0 || value > 300) return false
 
     return true
 }
