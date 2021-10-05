@@ -128,7 +128,8 @@ async function createTraining() {
     trItem.remove()
 
     // Scroll container
-    const remPadd = await dynamicScrollDown(distance, 100, trList)
+    let remPadd = null
+    if (distance > 0) remPadd = await dynamicScrollDown(distance, 100, trList)
     await wait(200)
 
     // Setup training item
@@ -139,7 +140,7 @@ async function createTraining() {
     // Transition trainin item
     trItem.classList.remove("hidden")
     await waitFor("transitionend", trItem)
-    remPadd()
+    if (remPadd) remPadd()
 }
 
 async function editTraining() {
