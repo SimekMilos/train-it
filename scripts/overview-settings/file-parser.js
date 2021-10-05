@@ -1,5 +1,5 @@
 
-import {range} from "../tools.js"
+import {range, float} from "../tools.js"
 
 
 // --- Public ---
@@ -60,7 +60,7 @@ function parseTraining(training) {
     if (!parseName(training)) return false
     if (!parseNotes(training)) return false
     if (!testObjectArray(training.groups)) return false
-    if (!parseSettings(training.settings)) return false
+    if (!testSettings(training.settings)) return false
 
     // Parse groups
     for (const group of training.groups) {
@@ -105,14 +105,22 @@ function parseExercise(exercise) {
     return true
 }
 
-function parseSettings(settingsObj) {
-    // settings dont have to be defined
+function testSettings(settingsObj) {    // settings dont have to be defined
     if (settingsObj === undefined) return true
-
     if (!(settingsObj instanceof Object)) return false
 
-    //TODO: add tests acording to settings definition and test it
-    //  - if there are no edits to settingsObj, rename to checkSettings
+    // Test all three properties
+    for (const setting of ["trainingStartDelay", "setStartDelay",
+                           "precedingPause"]) {
+        // Existence
+        if (!settingsObj[setting]) return false
+        if (typeof settingsObj[setting] != "number") return false
+
+        // Value
+        const value = float(settingsObj[setting])
+        if (!Number.isInteger(value)) return false
+        if (value < 0 || value > 300) return false
+    }
 
     return true
 }

@@ -217,7 +217,14 @@ buttonOpenTimer.addEventListener("click", openTimer)
 
 async function openTraining() {
     await hideComponents()
-    screens.transitionToMainScreen(getSelectedTraining().trData)
+    const trInfo = getSelectedTraining()
+
+    // Append store function
+    trInfo.trData.store = function() {
+        storage[trInfo.trID] = JSON.stringify(this)
+    }
+
+    screens.transitionToMainScreen(trInfo.trData)
 }
 
 async function openTimer() {

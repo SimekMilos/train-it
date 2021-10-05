@@ -30,7 +30,6 @@
     <!-- To be removed -->
     <script type="module" src="scripts/comp-stopwatch.js"></script>
     <script type="module" src="scripts/comp-training.js"></script>
-    <script type="module" src="scripts/comp-settings.js"></script>
 
     <title>Train It</title>
 
@@ -456,7 +455,8 @@
                     </ul>
                     <label>
                         Delay (s):
-                        <input type="number" value="0" min="0" max="60" step="1">
+                        <input type="number" class="sett-tr-start-delay"
+                               value="0" min="0" max="300" step="30">
                     </label>
 
                     <h3>Set Start Delay</h3>
@@ -465,17 +465,19 @@
                     </ul>
                     <label>
                         Delay (s):
-                        <input type="number" value="0" min="0" max="60" step="1">
+                        <input type="number" class="sett-set-start-delay"
+                               value="0" min="0" max="300" step="5">
                     </label>
 
                     <h3>Preceding Pause Start</h3>
                     <ul class="sett-explanation">
-                        <li>This setting will set pause clock to start with specified count of seconds when <em>Next</em> button is clicked.</li>
+                        <li>This setting will set pause clock to start with specified amount of seconds when <em>Next</em> button is clicked.</li>
                         <li>It is useful so you don't have to click <em>Next</em> imediatelly after finishing set.</li>
                     </ul>
                     <label>
                         Delay (s):
-                        <input type="number" value="0" min="0" max="60" step="1">
+                        <input type="number" class="sett-preceding-pause"
+                               value="0" min="0" max="300" step="5">
                     </label>
 
                     <small>
