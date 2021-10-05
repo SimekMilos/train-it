@@ -47,6 +47,9 @@ export function destroy() {
 export async function open() {
     /* return - true if settings were changed */
 
+    const oldValues = getValues()
+    let changed = false
+
     // Display component
     component.classList.add("display")
     await waitFor("animationend", mainWidnow)
@@ -72,14 +75,23 @@ export async function open() {
                          number ranging from 0 to 60 seconds.", "OK")
         }
     } while (!cont)
+
+    // Store new values
+    const newValues = getValues()
+    if (hasChanged(oldValues, newValues)) {
+        trainingData.settings = newValues
+        trainingData.store()
+        changed = true
+    }
+
     // Hide component
     mainWidnow.classList.remove("enable-access")
     component.classList.add("hide")
     component.classList.remove("display")
-
     await waitFor("animationend", mainWidnow)
     component.classList.remove("hide")
 
+    return changed
 }
 
 
@@ -93,5 +105,20 @@ function isValid(value) {
     if (value < 0 || value > 60) return false
 
     return true
+}
+
+function getValues() {
+    return {
+        trainingStartDelay: float(trStartDelayInput.value),
+        setStartDelay: float(setStartDelayInput.value),
+        precedingPause: float(precedingPauseInput.value)
+    }
+}
+
+function hasChanged(oldVal, newVal) {
+    for (const key of Object.keys(oldVal)) {
+        if (oldVal[key] != newVal[key]) return true
+    }
+
     return false
 }
