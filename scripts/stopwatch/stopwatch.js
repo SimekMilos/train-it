@@ -8,3 +8,14 @@ export function init(trainingData) {
 export function destroy() {
 
 }
+
+
+// Temporary
+import {transitionToInitScreen} from "../screens.js"
+
+const closeButton = document.querySelector(".ts-close")
+closeButton.addEventListener("click", onClose)
+
+function onClose() {
+    transitionToInitScreen()
+}
