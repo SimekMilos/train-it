@@ -142,7 +142,6 @@
     height: var(--sec-butt-size);
 
     border-color: transparent;
-    transition: border-color .2s;
 
     --background:
         center/contain no-repeat content-box url("../res/icons/cog-wheel.jpg");
@@ -151,12 +150,14 @@
 }
 
 .ts-settings:hover {
+    border-color: transparent;
     background: linear-gradient(var(--secondary-color-hover),
                                 var(--secondary-color-hover)),
                 var(--background);
 }
 
 .ts-settings:active {
+    border-color: transparent;
     background: linear-gradient(var(--secondary-color-active),
                                 var(--secondary-color-active)),
                 var(--background);
