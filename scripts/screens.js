@@ -28,7 +28,7 @@ export function transitionToMainScreen(trainingData) {
     stopwatch.init(trainingData)
 
     displayScreen(mainScreen)
-    hideScreen(initScreen, 1500)
+    hideScreen(initScreen, 1000)
 
     training.display()
 }
