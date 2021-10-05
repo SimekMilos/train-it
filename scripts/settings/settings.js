@@ -1,5 +1,5 @@
 
-import {float, waitFor, dialog} from "../tools.js"
+import {int, float, waitFor, dialog} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
 const mainWidnow = component.firstElementChild
@@ -94,6 +94,24 @@ export async function open() {
     return changed
 }
 
+export function getTrainingStartDelay() {
+    if (!trainingData) throw new Error("settings - no training loaded")
+    if (!trainingData.settings) return 0
+    return trainingData.settings.trainingStartDelay
+}
+
+export function getSetStartDelay() {
+    if (!trainingData) throw new Error("settings - no training loaded")
+    if (!trainingData.settings) return 0
+    return trainingData.settings.setStartDelay
+}
+
+export function getPrecedingPause() {
+    if (!trainingData) throw new Error("settings - no training loaded")
+    if (!trainingData.settings) return 0
+    return trainingData.settings.precedingPause
+}
+
 
 // --- Private ---
 
@@ -109,9 +127,9 @@ function isValid(value) {
 
 function getValues() {
     return {
-        trainingStartDelay: float(trStartDelayInput.value),
-        setStartDelay: float(setStartDelayInput.value),
-        precedingPause: float(precedingPauseInput.value)
+        trainingStartDelay: int(trStartDelayInput.value),
+        setStartDelay: int(setStartDelayInput.value),
+        precedingPause: int(precedingPauseInput.value)
     }
 }
 
