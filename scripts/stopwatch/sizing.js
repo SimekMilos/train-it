@@ -197,5 +197,6 @@ function setMainControls() {
     for (const button of buttons) {
         button.style.fontSize = px(.5 * height)
         button.style.borderRadius = px(.1 * height)
+        button.style.borderWidth = px(Math.max(1, 1/25 * height + 1/5))
     }
 }
