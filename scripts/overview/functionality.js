@@ -1,5 +1,5 @@
 
-import {px, float, range, wait, waitFor, generateTrainingID} from "../tools.js"
+import {float, range, wait, waitFor, generateTrainingID} from "../tools.js"
 import {dialog, addDynamicPadding, dynamicScrollDown} from "../tools.js"
 
 import * as screens from "../screens.js"
@@ -110,7 +110,7 @@ async function createTraining() {
 
     // Add training in storage order array
     let orderArr = JSON.parse(storage.getItem("training-order"))
-    if (!orderArr) orderArr = new Array
+    if (!orderArr) orderArr = []
     orderArr.push(trID)
     storage.setItem("training-order", JSON.stringify(orderArr))
 

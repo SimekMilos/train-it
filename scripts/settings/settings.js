@@ -56,13 +56,13 @@ export async function open() {
     mainWindow.classList.add("enable-access")
 
     // Input validity cycle
-    let cont
+    let cont, event
     do {
         cont = true
 
         // Wait for close event
         do {        // Close by clicking on close button or background
-            const event = await waitFor("click", component)
+            event = await waitFor("click", component)
         } while (event.target != closeButton && event.target != component)
 
         // Test for invalid inputs
