@@ -12,8 +12,10 @@
     justify-content: center;
 
     --sec-butt-offset-top: 5px;
-    --sec-butt-offset-left: max(var(--sec-butt-offset-top), env(safe-area-inset-left));
-    --sec-butt-offset-right: max(var(--sec-butt-offset-top), env(safe-area-inset-right));
+    --sec-butt-offset-left:  max(var(--sec-butt-offset-top),
+                                 env(safe-area-inset-left));
+    --sec-butt-offset-right: max(var(--sec-butt-offset-top),
+                                 env(safe-area-inset-right));
 
     --sec-butt-size: clamp(26px, 3.5vw, 42px);
 
@@ -122,11 +124,7 @@
     height: unset;
 }
 
-.st-main-controls > :not(:last-child) {
-    margin-right: 1vw;
-}
-
-.st-main-controls > :nth-child(2) {
+.st-start, .st-stop, .st-next, .st-continue {
     flex-grow: 2;
 }
 

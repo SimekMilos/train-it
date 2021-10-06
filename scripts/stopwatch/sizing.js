@@ -14,6 +14,7 @@ const totalStopwatch = document.querySelector(".st-total-stopwatch")
 
 const mainCtrContainer = document.querySelector(".st-main-controls")
 const buttons = document.querySelectorAll(".st-main-controls > *")
+const marginButtons = document.querySelectorAll("[class |= st].margin")
 
 const resizeObserver = new ResizeObserver(onResize)
 
@@ -187,14 +188,12 @@ function setMainControls() {
     mainCtrContainer.style.marginTop = px(offset * compHeight)
 
     // set space between
-    for (const [index, button] of buttons.entries()) {
-        if (index == buttons.length - 1) break          // not the last one
-
+    for (const button of marginButtons) {
         button.style.marginRight = px(offset * compHeight)
     }
 
     // set font size & border
-    const height = float(getComputedStyle(buttons[0]).height)
+    const height = float(getComputedStyle(mainCtrContainer).height)
     for (const button of buttons) {
         button.style.fontSize = px(.5 * height)
         button.style.borderRadius = px(.1 * height)
