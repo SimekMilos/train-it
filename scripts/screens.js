@@ -13,29 +13,29 @@ const mainScreen = document.querySelector(".main-screen")
 // --- Interface ---
 
 export async function initInitScreen() {
-    displayScreen(initScreen)
+    await displayScreen(initScreen)
 
     await wait(500)
     overview.loadTrainings()
     overview.display()
 }
 
-export function transitionToMainScreen(trainingData) {
+export async function transitionToMainScreen(trainingData) {
     // training: null - starts timer, obj - starts training
 
     settings.init(trainingData)
     training.init(trainingData)
     stopwatch.init(trainingData)
 
-    displayScreen(mainScreen)
-    hideScreen(initScreen, 1000)
+    await displayScreen(mainScreen)
+    await hideScreen(initScreen, 1000)
 
     training.display()
 }
 
 export async function transitionToInitScreen() {
     await displayScreen(initScreen, 800)
-    hideScreen(mainScreen)
+    await hideScreen(mainScreen)
 
     stopwatch.destroy()
     training.destroy()
