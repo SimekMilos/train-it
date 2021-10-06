@@ -142,7 +142,7 @@ export function sizeNotes(event) {
     notes.style.removeProperty("height")            // for shrinking
     const height = notes.scrollHeight + border
 
-    if (Math.ceil(float(styles.height)) < height) { // necesary size must be
+    if (Math.ceil(float(styles.height)) < height) { // necessary size must be
         notes.style.height = px(height)             // larger than minimum size
     }
 }
@@ -159,7 +159,7 @@ export function addDynamicPadding(maxHeight, scrollContainer) {
         - i.e. height of the element being removed)
 
     return - function that smoothly removes said padding in specified
-        druation (in ms).
+        duration (in ms).
     */
 
     const cont = scrollContainer

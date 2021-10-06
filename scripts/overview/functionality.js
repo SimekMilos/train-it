@@ -114,7 +114,7 @@ async function createTraining() {
     orderArr.push(trID)
     storage.setItem("training-order", JSON.stringify(orderArr))
 
-    // Save trainind data
+    // Save training data
     storage.setItem(trID, JSON.stringify(trData))
 
     // Create training item
@@ -137,7 +137,7 @@ async function createTraining() {
     trList.append(trItem)
     await wait(0)           // to kick start transition
 
-    // Transition trainin item
+    // Transition training item
     trItem.classList.remove("hidden")
     await waitFor("transitionend", trItem)
     if (remPadd) remPadd()

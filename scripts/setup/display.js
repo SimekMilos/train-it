@@ -25,7 +25,7 @@ export async function display() {
     setGroupContainerMinHeight()
     scrollContainer.scrollTop = 0
 
-    // Start push away efekt (standard display)/ disables shadow (overlay)
+    // Start push away effect (standard display)/ disables shadow (overlay)
     if(containerStyles.position != "absolute") {
         container.classList.add("animate")
     } else {
@@ -51,7 +51,7 @@ export async function hide() {
     container.classList.add("hide")
     container.classList.remove("display")
 
-    // Start push away efekt in standard display
+    // Start push away effect in standard display
     if (containerStyles.position != "absolute") {
         container.classList.add("animate")
     }

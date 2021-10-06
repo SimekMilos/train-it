@@ -2,7 +2,7 @@
 import {int, float, waitFor, dialog} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
-const mainWidnow = component.firstElementChild
+const mainWindow = component.firstElementChild
 
 const closeButton = document.querySelector(".sett-close")
 const trStartDelayInput = document.querySelector(".sett-tr-start-delay")
@@ -52,8 +52,8 @@ export async function open() {
 
     // Display component
     component.classList.add("display")
-    await waitFor("animationend", mainWidnow)
-    mainWidnow.classList.add("enable-access")
+    await waitFor("animationend", mainWindow)
+    mainWindow.classList.add("enable-access")
 
     // Input validity cycle
     let cont
@@ -85,10 +85,10 @@ export async function open() {
     }
 
     // Hide component
-    mainWidnow.classList.remove("enable-access")
+    mainWindow.classList.remove("enable-access")
     component.classList.add("hide")
     component.classList.remove("display")
-    await waitFor("animationend", mainWidnow)
+    await waitFor("animationend", mainWindow)
     component.classList.remove("hide")
 
     return changed

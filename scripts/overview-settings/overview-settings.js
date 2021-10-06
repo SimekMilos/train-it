@@ -70,7 +70,7 @@ function onImport() {
         const reader = new FileReader()
         reader.readAsText(input.files[0])
         const success = await waitForAny(["load", reader, true],
-                                         ["errror", reader, false])
+                                         ["error", reader, false])
         if (!success) {
             await dialog("File loading not successful.", "OK")
             return
@@ -124,7 +124,7 @@ function mergeData(fileData) {
     storage["training-order"] = JSON.stringify(orderArr)
 }
 
-// Disables applicaton until importing is finished
+// Disables application until importing is finished
 const overlayContext = asyncContextManager(() => {
     const overlay = document.createElement("div")
     const style = overlay.style
