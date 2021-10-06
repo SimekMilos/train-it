@@ -349,14 +349,14 @@ body {
     line-height: 1.5;
 }
 
-.notes:placeholder {
+.notes::placeholder {
     line-height: 1.5;
 }
 
 
 /* --- Overlay Disabling --- */
 /* Creates pseudo-element overlay so component can't be accessed
-    during inproper times (i.e. during animations) */
+    during improper times (i.e. during animations) */
 
 .overlay-disabling::before {
     display: block;
@@ -375,7 +375,7 @@ body {
     display: none;
 }
 
-    /* Visible disabling with intro/outro animaton */
+    /* Visible disabling with intro/outro animation */
 .overlay-disabling.disable-visible-display::before {
     display: block;
     background-color: var(--disabled-component-color);

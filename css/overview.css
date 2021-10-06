@@ -101,7 +101,7 @@
 
 /* Displaying/hiding transition */
 .ov-training.hidden {
-    height: 0px;
+    height: 0;
 }
 
 .ov-training.hidden:nth-child(2) {

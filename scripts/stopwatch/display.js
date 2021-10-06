@@ -57,13 +57,13 @@ function onResize() {
 }
 
 function setComponentHeight() {
-    let height = innerHeight * .4   // size shoud be 2/5 of viewport
+    let height = innerHeight * .4   // size should be 2/5 of viewport
     let maxHeight
 
     const containerStyles = [getComputedStyle(firstContainer),
                              getComputedStyle(secondContainer)]
 
-    // Landskape mode
+    // Landscape mode
     if (matchMedia("(orientation: landscape)").matches) {
         // compute paddings and margins
         const compStyles = getComputedStyle(stopwatchComp)

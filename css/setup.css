@@ -133,7 +133,7 @@
 /* Training Name */
 
 .ts-training-name {
-    margin: 0px -6px 2px -6px;
+    margin: 0 -6px 2px -6px;
 
     color: var(--name-color);
     font: normal 26px "Roboto Light", sans-serif;
@@ -183,13 +183,13 @@
 
 /* Bottom Controls */
 
-.ts-bottom-controlls {
+.ts-bottom-controls {
     margin-top: 10px;
 
     display: flex;
 }
 
-.ts-bottom-controlls > * {
+.ts-bottom-controls > * {
     flex: 1 1 0;
 }
 
@@ -264,7 +264,7 @@
 
 .ts-group {
     position: relative;
-    padding: 0px 10px 15px;
+    padding: 0 10px 15px;
     margin-bottom: 15px;
 
     border: 1px solid hsl(0, 100%, 40%);
@@ -335,7 +335,7 @@
 }
 
 
-/* Group Controlls */
+/* Group Controls */
 
 .ts-group-controls {
     padding-top: 15px;
@@ -366,7 +366,7 @@
 
 .ts-exercise {
     position: relative;
-    padding: 0px 10px 10px;
+    padding: 0 10px 10px;
 
     border-bottom: 1px solid var(--main-color);
 
