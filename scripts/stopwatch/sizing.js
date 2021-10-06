@@ -32,12 +32,12 @@ const buttonOffset = 0.06
 
 // --- Public ---
 
-export function activateSizingAlg() {
+export function activate() {
     onResize()
     resizeObserver.observe(mainScreen)
 }
 
-export function deactivateSizingAlg() {
+export function deactivate() {
     resizeObserver.disconnect()
 }
 

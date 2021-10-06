@@ -1,14 +1,14 @@
 
-import * as display from "./display.js"
+import * as sizing from "./sizing.js"
 
 export function init(trainingData) {
     /* trainingData: null - starts timer, obj - starts training */
 
-    display.activateSizingAlg()
+    sizing.activate()
 }
 
 export function destroy() {
-    display.deactivateSizingAlg()
+    sizing.deactivate()
 }
 
 
