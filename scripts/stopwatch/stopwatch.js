@@ -1,5 +1,6 @@
 
 import * as sizing from "./sizing.js"
+import * as display from "./display.js"
 
 export function init(trainingData) {
     /* trainingData: null - starts timer, obj - starts training */
