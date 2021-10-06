@@ -21,3 +21,15 @@ closeButton.addEventListener("click", onClose)
 function onClose() {
     transitionToInitScreen()
 }
+
+
+import * as settings from "../settings/settings.js"
+
+const settingsButton = document.querySelector(".ts-settings")
+
+settingsButton.addEventListener("click", onSettingsClick)
+
+async function onSettingsClick() {
+    const ret = await settings.open()
+    log("Return value: " + ret)
+}
