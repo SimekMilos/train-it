@@ -1,12 +1,14 @@
 
+import * as display from "./display.js"
 
 export function init(trainingData) {
-    // training: null - starts timer, obj - starts training
+    /* trainingData: null - starts timer, obj - starts training */
 
+    display.activateSizingAlg()
 }
 
 export function destroy() {
-
+    display.deactivateSizingAlg()
 }
 
 

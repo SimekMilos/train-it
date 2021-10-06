@@ -1,5 +1,5 @@
 
-import {float, px, range} from "./tools.js"
+import {float, px, range} from "../tools.js"
 
 const mainScreen = document.querySelector(".main-screen")
 const stopwatchComp = document.querySelector(".stopwatch-component")
@@ -15,6 +15,8 @@ const totalStopwatch = document.querySelector(".st-total-stopwatch")
 const mainCtrContainer = document.querySelector(".st-main-controls")
 const buttons = document.querySelectorAll(".st-main-controls > *")
 
+const resizeObserver = new ResizeObserver(onResize)
+
 // Constants
 const headingHeightFactorLandscape = 0.2
 const headingHeightFactorPortrait  = 0.25
@@ -27,17 +29,20 @@ const watchFontMagnFactor = 1.25
 const buttonOffset = 0.06
 
 
-// temporary - activate when first displaying stopwatch
-//           - deactivate when stopwatch is hidden
 
-function onAppLoad() {
+// --- Public ---
+
+export function activateSizingAlg() {
     onResize()
+    resizeObserver.observe(mainScreen)
 }
 
-window.addEventListener("load", onAppLoad)
+export function deactivateSizingAlg() {
+    resizeObserver.disconnect()
+}
 
-new ResizeObserver(onResize).observe(mainScreen)
 
+// --- Private ---
 
 function onResize() {
     for (const _ of range(2)) {     // some situations need 2 passes
@@ -101,17 +106,6 @@ function setBottomPadding() {
     stopwatchComp.style.paddingBottom = px(compHeight * paddingFactor)
 }
 
-function setContainerOffset() {
-    if(matchMedia("(orientation: portrait)").matches) {
-        const compHeight = float(getComputedStyle(stopwatchComp).height)
-        const marginFactor = bottomPaddingHeightFactor / 2
-
-        secondContainer.style.marginTop = px(compHeight * marginFactor)
-    } else {
-        secondContainer.style.removeProperty("margin-top")
-    }
-}
-
 function setContainerHeight() {
     if(matchMedia("(orientation: portrait)").matches) {
         const compStyles = getComputedStyle(stopwatchComp)
@@ -130,6 +124,17 @@ function setContainerHeight() {
             firstContainer.style.removeProperty("height")
             secondContainer.style.removeProperty("height")
         }
+    }
+}
+
+function setContainerOffset() {
+    if(matchMedia("(orientation: portrait)").matches) {
+        const compHeight = float(getComputedStyle(stopwatchComp).height)
+        const marginFactor = bottomPaddingHeightFactor / 2
+
+        secondContainer.style.marginTop = px(compHeight * marginFactor)
+    } else {
+        secondContainer.style.removeProperty("margin-top")
     }
 }
 
