@@ -75,8 +75,11 @@ export function hideShadow(duration = 0) {
     shadowDisplayed = false
 }
 
-export function displayShadow(duration = 0) {
+export async function displayShadow(duration = 0) {
+    component.style.transitionDuration = `${duration}ms`
     component.style.removeProperty("box-shadow")
+
+    if (duration) await waitFor("transitionend", component)
     component.style.removeProperty("transition-duration")
     shadowDisplayed = true
 }
