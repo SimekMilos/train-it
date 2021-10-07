@@ -22,31 +22,31 @@ const buttonClose = document.querySelector(".st-close")
 // --- Public ---
 
 export const timers = {
-    timerState() {
+    timerMode() {
         firstHeading.textContent = secondHeading.textContent = "Timer:"
         currentStopwatch.classList.remove("running-set", "running-pause")
     },
 
-    initialState() {
+    initialMode() {
         firstHeading.textContent = "Current Time:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
     },
 
-    countDownState() {
+    countDownMode() {
         firstHeading.textContent = "Starting In:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
     },
 
-    setState() {
+    setMode() {
         firstHeading.textContent = "Current Set:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.add("running-set")
         currentStopwatch.classList.remove("running-pause")
     },
 
-    pauseState() {
+    pauseMode() {
         firstHeading.textContent = "Current Pause:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.add("running-pause")
@@ -57,22 +57,22 @@ export const timers = {
 }
 
 export const buttons = {
-    initialState() {
+    initialMode() {
         clearButtons()
         return activateButtons(fillerLeft, buttonStart, fillerRight)[1]
     },
 
-    timerRunningState() {
+    timerRunningMode() {
         clearButtons()
         return activateButtons(fillerLeft, buttonStop, fillerRight)[1]
     },
 
-    trainingRunningState() {
+    trainingRunningMode() {
         clearButtons()
         return activateButtons(buttonBack, buttonNext, buttonPause)
     },
 
-    pauseState() {
+    pauseMode() {
         clearButtons()
         return activateButtons(buttonReset, buttonContinue, buttonClose)
     }

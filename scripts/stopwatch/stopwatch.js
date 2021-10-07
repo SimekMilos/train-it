@@ -23,14 +23,14 @@ export function init(trData) {
     /* trData: null - starts timer, obj - starts training */
 
     sizing.activate()
-    display.buttons.initialState()
+    display.buttons.initialMode()
     trainingData = trData
 
     resetCurrentWatch()
     resetTotalWatch()
 
-    if (!trData) display.timers.timerState()
-    else display.timers.initialState()
+    if (!trData) display.timers.timerMode()
+    else display.timers.initialMode()
 }
 
 export function destroy() {
