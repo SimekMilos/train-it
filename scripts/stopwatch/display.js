@@ -62,12 +62,12 @@ export const buttons = {
         return activateButtons(fillerLeft, buttonStart, fillerRight)[1]
     },
 
-    timerState() {
+    timerRunningState() {
         clearButtons()
         return activateButtons(fillerLeft, buttonStop, fillerRight)[1]
     },
 
-    trainingState() {
+    trainingRunningState() {
         clearButtons()
         return activateButtons(buttonBack, buttonNext, buttonPause)
     },
@@ -77,9 +77,6 @@ export const buttons = {
         return activateButtons(buttonReset, buttonContinue, buttonClose)
     }
 }
-
-buttons.initialState()    // Temporary
-timers.initialState()
 
 
 // --- Private ---

@@ -6,6 +6,13 @@ export function init(trainingData) {
     /* trainingData: null - starts timer, obj - starts training */
 
     sizing.activate()
+    display.buttons.initialState()
+
+    if (!trainingData) {
+        display.timers.timerState()
+    } else {
+        display.timers.initialState()
+    }
 }
 
 export function destroy() {
