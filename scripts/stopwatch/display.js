@@ -1,6 +1,9 @@
 
-const mainCtrContainer = document.querySelector(".st-main-controls")
+const firstHeading = document.querySelector(".st-first-container h2")
+const secondHeading = document.querySelector(".st-second-container h2")
+const currentStopwatch = document.querySelector(".st-current-stopwatch")
 
+const mainCtrContainer = document.querySelector(".st-main-controls")
 const fillerLeft = document.querySelector(".st-filler-left")
 const fillerRight = document.querySelector(".st-filler-right")
 
@@ -18,12 +21,39 @@ const buttonClose = document.querySelector(".st-close")
 
 // --- Public ---
 
-buttonInitState()    // Temporary
+export const timers = {
+    timerState() {
+        firstHeading.textContent = secondHeading.textContent = "Timer:"
+        currentStopwatch.classList.remove("running-set", "running-pause")
+    },
 
-export function buttonInitState() {
-    clearButtons()
-    activateButtons(fillerLeft, buttonStart, fillerRight)
-    return buttonStart
+    initialState() {
+        firstHeading.textContent = "Current Time:"
+        secondHeading.textContent = this._totalTrainingHeading
+        currentStopwatch.classList.remove("running-set", "running-pause")
+    },
+
+    countDownState() {
+        firstHeading.textContent = "Starting In:"
+        secondHeading.textContent = this._totalTrainingHeading
+        currentStopwatch.classList.remove("running-set", "running-pause")
+    },
+
+    setState() {
+        firstHeading.textContent = "Current Set:"
+        secondHeading.textContent = this._totalTrainingHeading
+        currentStopwatch.classList.add("running-set")
+        currentStopwatch.classList.remove("running-pause")
+    },
+
+    pauseState() {
+        firstHeading.textContent = "Current Pause:"
+        secondHeading.textContent = this._totalTrainingHeading
+        currentStopwatch.classList.add("running-pause")
+        currentStopwatch.classList.remove("running-set")
+    },
+
+    _totalTrainingHeading: "Total Time:"
 }
 
 export const buttons = {
@@ -49,6 +79,7 @@ export const buttons = {
 }
 
 buttons.initialState()    // Temporary
+timers.initialState()
 
 
 // --- Private ---
