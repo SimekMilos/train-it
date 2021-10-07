@@ -5,10 +5,15 @@ import { transitionToInitScreen } from "../screens.js"
 import * as sizing from "./sizing.js"
 import * as display from "./display.js"
 
+const currentWatch = document.querySelector(".st-current-stopwatch")
+const totalWatch = document.querySelector(".st-total-stopwatch")
+
 const closeButton = document.querySelector(".ts-close")
 const closeEvent = ["click", closeButton, "end"]
 
 let trainingData = null
+let currentWatchTime = 0
+let totalWatchTime = 0
 
 
 // --- Public ---
@@ -19,6 +24,9 @@ export function init(trData) {
     sizing.activate()
     display.buttons.initialState()
     trainingData = trData
+
+    resetCurrentWatch()
+    resetTotalWatch()
 
     if (!trData) display.timers.timerState()
     else display.timers.initialState()
@@ -72,6 +80,17 @@ export async function main() {
     }
 
     transitionToInitScreen()
+}
+
+
+function resetCurrentWatch() {
+    currentWatchTime = 0
+    currentWatch.textContent = "00:00"
+}
+
+function resetTotalWatch() {
+    totalWatchTime = 0
+    totalWatch.textContent = "00:00:00"
 }
 
 
