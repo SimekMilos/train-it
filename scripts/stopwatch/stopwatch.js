@@ -97,10 +97,10 @@ const timerMode = {
     async _pause() {
         // Setup buttons
         const buttons = display.buttons.pauseMode()
-        const [resetButton, continueButton, closeButton] = buttons
+        const [resetButton, continueButton, mainCloseButton] = buttons
         const newMode = await waitForAny(["click", resetButton, "initial"],
                                          ["click", continueButton, "run"],
-                                         ["click", closeButton, "end"],
+                                         ["click", mainCloseButton, "end"],
                                          ["click", closeButton, "end"])
         // Reset action
         if (newMode == "initial") {
@@ -139,16 +139,34 @@ const trainingMode = {
     },
 
     async _initial() {
-
-
+        const startButton = display.buttons.initialMode()
+        const newMode = await waitForAny(["click", startButton, "run"],
+                                         ["click", closeButton, "end"])
+        return newMode
     },
 
     async _run() {
+        const buttons = display.buttons.trainingRunningMode()
+        const [buttonBack, buttonNext, buttonPause] = buttons
+        let action = await waitForAny(["click", buttonBack, "back"],
+                                      ["click", buttonNext, "next"],
+                                      ["click", buttonPause, "pause"],
+                                      ["click", closeButton, "end"])
+        let newMode
+        if (action == "back" || action == "next") newMode = "run"
+        else newMode = action
 
+        return newMode
     },
 
     async _pause() {
-
+        const buttons = display.buttons.pauseMode()
+        const [resetButton, continueButton, mainCloseButton] = buttons
+        const newMode = await waitForAny(["click", resetButton, "initial"],
+                                         ["click", continueButton, "run"],
+                                         ["click", mainCloseButton, "end"],
+                                         ["click", closeButton, "end"])
+        return newMode
     }
 }
 
