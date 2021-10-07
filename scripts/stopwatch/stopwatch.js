@@ -8,9 +8,7 @@ import { Timer } from "./timer.js"
 
 const currentWatch = document.querySelector(".st-current-stopwatch")
 const totalWatch = document.querySelector(".st-total-stopwatch")
-
 const closeButton = document.querySelector(".ts-close")
-const closeEvent = ["click", closeButton, "end"]
 
 let trainingData = null
 let currentWatchTime = 0
@@ -38,62 +36,85 @@ export function destroy() {
 }
 
 export async function main() {
-    let state = "initial"
+    if (!trainingData) await timerMode.eventCycle()
 
-    const timer = new Timer
-    timer.registerCallback(addToCurrentWatch)
-    timer.registerCallback(addToTotalWatch)
-
-    // Timer mode
-    if (!trainingData) {
-        do {
-            switch (state) {
-                case "initial":
-                    const start = display.buttons.initialState()
-                    state = await waitForAny(["click", start, "run"],
-                                             closeEvent)
-                    timer.start()
-                    break;
-
-                case "run":
-                    const stop = display.buttons.timerRunningState()
-                    state = await waitForAny(["click", stop, "pause"],
-                                             closeEvent)
-
-                    if (state == "end") {
-                        const action = await dialog("Timer is running, are you\
-                                                    sure you want to close it?",
-                                                    "Close", "Cancel")
-                        if (action == "Cancel") state = "run"
-                    }
-                    if (state != "run") timer.stop()
-                    break;
-
-                case "pause":
-                    const buttons = display.buttons.pauseState()
-                    const [reset, continueButt, close] = buttons
-
-                    state = await waitForAny(["click", reset, "initial"],
-                                             ["click", continueButt, "run"],
-                                             ["click", close, "end"],
-                                             closeEvent)
-                    if (state == "initial") {
-                        resetCurrentWatch()
-                        resetTotalWatch()
-                    }
-                    if (state == "run") timer.start()
-                    break;
-            }
-        } while(state != "end")
-
-    // Training mode
-    } else {
-
-    }
-
-    timer.stop()
     transitionToInitScreen()
 }
+
+
+// --- Private ---
+
+const timerMode = {
+    async eventCycle() {
+        // Create timer
+        this.timer = new Timer
+        this.timer.registerCallback(addToCurrentWatch)
+        this.timer.registerCallback(addToTotalWatch)
+
+        // Cycle through events
+        let mode = "initial"
+        do {
+            switch (mode) {
+                case "initial": mode = await this._initial() ;break
+                case "run":     mode = await this._run()     ;break
+                case "pause":   mode = await this._pause()   ;break
+            }
+        } while (mode != "end")
+
+        // Finish
+        this.timer.stop()
+    },
+
+    async _initial() {
+        // Setup buttons
+        const startButton = display.buttons.initialMode()
+        const newMode = await waitForAny(["click", startButton, "run"],
+                                         ["click", closeButton, "end"])
+        // Start action
+        this.timer.start()
+        return newMode
+    },
+
+    async _run() {
+        // Setup buttons
+        const stopButton = display.buttons.timerRunningMode()
+        let newMode = await waitForAny(["click", stopButton, "pause"],
+                                       ["click", closeButton, "end"])
+
+        // Dialog in case of close event
+        if (newMode == "end") {
+            const action = await dialog("Timer is running, are you sure you \
+                                        want to close it?", "Close", "Cancel")
+            if (action == "Cancel") newMode = "run"
+        }
+
+        // Stop action
+        if (newMode != "run") this.timer.stop()
+        return newMode
+    },
+
+    async _pause() {
+        // Setup buttons
+        const buttons = display.buttons.pauseMode()
+        const [resetButton, continueButton, closeButton] = buttons
+        const newMode = await waitForAny(["click", resetButton, "initial"],
+                                         ["click", continueButton, "run"],
+                                         ["click", closeButton, "end"],
+                                         ["click", closeButton, "end"])
+        // Reset action
+        if (newMode == "initial") {
+            resetCurrentWatch()
+            resetTotalWatch()
+        }
+
+        // Continue action
+        if (newMode == "run") {
+            this.timer.start()
+        }
+        return newMode
+    }
+}
+
 
 function addToCurrentWatch() {
     currentWatchTime++
