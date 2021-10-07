@@ -36,7 +36,8 @@ export function destroy() {
 }
 
 export async function main() {
-    if (!trainingData) await timerMode.eventCycle()
+    if (trainingData) await trainingMode.eventCycle()
+    else              await timerMode.eventCycle()
 
     transitionToInitScreen()
 }
@@ -112,6 +113,42 @@ const timerMode = {
             this.timer.start()
         }
         return newMode
+    }
+}
+
+
+const trainingMode = {
+    async eventCycle() {
+        // Create timer
+        this.timer = new Timer
+        this.timer.registerCallback(addToCurrentWatch)
+        this.timer.registerCallback(addToTotalWatch)
+
+        // Cycle through events
+        let mode = "initial"
+        do {
+            switch (mode) {
+                case "initial": mode = await this._initial() ;break
+                case "run":     mode = await this._run()     ;break
+                case "pause":   mode = await this._pause()   ;break
+            }
+        } while (mode != "end")
+
+        // Finish
+        this.timer.stop()
+    },
+
+    async _initial() {
+
+
+    },
+
+    async _run() {
+
+    },
+
+    async _pause() {
+
     }
 }
 
