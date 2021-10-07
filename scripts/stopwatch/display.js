@@ -26,21 +26,29 @@ export function buttonInitState() {
     return buttonStart
 }
 
-export function buttonTimerState() {
-    clearButtons()
-    activateButtons(fillerLeft, buttonStop, fillerRight)
-    return buttonStop
+export const buttons = {
+    initialState() {
+        clearButtons()
+        return activateButtons(fillerLeft, buttonStart, fillerRight)[1]
+    },
+
+    timerState() {
+        clearButtons()
+        return activateButtons(fillerLeft, buttonStop, fillerRight)[1]
+    },
+
+    trainingState() {
+        clearButtons()
+        return activateButtons(buttonBack, buttonNext, buttonPause)
+    },
+
+    pauseState() {
+        clearButtons()
+        return activateButtons(buttonReset, buttonContinue, buttonClose)
+    }
 }
 
-export function buttonTrainingState() {
-    clearButtons()
-    return activateButtons(buttonBack, buttonNext, buttonPause)
-}
-
-export function buttonPauseState() {
-    clearButtons()
-    return activateButtons(buttonReset, buttonContinue, buttonClose)
-}
+buttons.initialState()    // Temporary
 
 
 // --- Private ---
