@@ -4,6 +4,7 @@ import { transitionToInitScreen } from "../screens.js"
 
 import * as sizing from "./sizing.js"
 import * as display from "./display.js"
+import { Timer } from "./timer.js"
 
 const currentWatch = document.querySelector(".st-current-stopwatch")
 const totalWatch = document.querySelector(".st-total-stopwatch")
@@ -39,6 +40,10 @@ export function destroy() {
 export async function main() {
     let state = "initial"
 
+    const timer = new Timer
+    timer.registerCallback(addToCurrentWatch)
+    timer.registerCallback(addToTotalWatch)
+
     // Timer mode
     if (!trainingData) {
         do {
@@ -47,6 +52,7 @@ export async function main() {
                     const start = display.buttons.initialState()
                     state = await waitForAny(["click", start, "run"],
                                              closeEvent)
+                    timer.start()
                     break;
 
                 case "run":
@@ -60,6 +66,7 @@ export async function main() {
                                                     "Close", "Cancel")
                         if (action == "Cancel") state = "run"
                     }
+                    if (state != "run") timer.stop()
                     break;
 
                 case "pause":
@@ -70,6 +77,11 @@ export async function main() {
                                              ["click", continueButt, "run"],
                                              ["click", close, "end"],
                                              closeEvent)
+                    if (state == "initial") {
+                        resetCurrentWatch()
+                        resetTotalWatch()
+                    }
+                    if (state == "run") timer.start()
                     break;
             }
         } while(state != "end")
@@ -79,9 +91,33 @@ export async function main() {
 
     }
 
+    timer.stop()
     transitionToInitScreen()
 }
 
+function addToCurrentWatch() {
+    currentWatchTime++
+
+    let seconds = currentWatchTime % 60
+    let minutes = ((currentWatchTime - seconds) / 60) % 3600
+    seconds = String(seconds).padStart(2, "0")
+    minutes = String(minutes).padStart(2, "0")
+
+    currentWatch.textContent = `${minutes}:${seconds}`
+}
+
+function addToTotalWatch() {
+    totalWatchTime++
+
+    let seconds = currentWatchTime % 60
+    let minutes = ((currentWatchTime - seconds) / 60) % 3600
+    let hours = ((totalWatchTime - minutes*60 - seconds) / 3600 ) % 86400  // 24h
+    seconds = String(seconds).padStart(2, "0")
+    minutes = String(minutes).padStart(2, "0")
+    hours = String(hours).padStart(2, "0")
+
+    totalWatch.textContent = `${hours}:${minutes}:${seconds}`
+}
 
 function resetCurrentWatch() {
     currentWatchTime = 0
