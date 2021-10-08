@@ -57,16 +57,11 @@ async function initialMode() {
 async function runMode() {
     const buttons = display.buttons.trainingRunMode()
     const [buttonBack, buttonNext, buttonPause] = buttons
-    let action = await waitForAny(["click", buttonBack, "back"],
-                                  ["click", buttonNext, "next"],
-                                  ["click", buttonPause, "pause"],
-                                  ["click", closeButton, "end"])
-    let newMode
-    if (action == "back") newMode = "run"
-    if (action == "next") newMode = "finish"
-    if (action != "back" && action != "next") newMode = action
-
-    return newMode
+    let action = await waitForAny(["click", buttonBack, back],
+                                  ["click", buttonNext, next],
+                                  ["click", buttonPause, pause],
+                                  ["click", closeButton, confirmEnd])
+    return action()
 }
 
 async function pauseMode() {
@@ -130,7 +125,14 @@ function start() {
 // Run
 
 function back() {
+    let {phase: newPhase, time: newTime} = training.back()
+    if (!newPhase) return "run"
 
+    if (newPhase == "set") display.watches.setMode()
+    else                   display.watches.pauseMode()
+
+    watches.setCurrentWatchTime(newTime)
+    return "run"
 }
 
 function next() {
@@ -186,4 +188,8 @@ function finish() {
 
 function end() {
     return "end"
+}
+
+function confirmEnd() {
+
 }
