@@ -1,5 +1,5 @@
 
-import {waitForAny} from "../tools.js"
+import {waitForAny, dialog} from "../tools.js"
 import * as training from "../training/training.js"
 
 import * as display from "./display.js"
@@ -60,8 +60,8 @@ async function runMode() {
     let action = await waitForAny(["click", buttonBack, back],
                                   ["click", buttonNext, next],
                                   ["click", buttonPause, pause],
-                                  ["click", closeButton, confirmEnd])
-    return action()
+                                  ["click", closeButton, confirmEnd("run")])
+    return await action()
 }
 
 async function pauseMode() {
@@ -185,11 +185,17 @@ function finish() {
 // }
 
 
+// Quit actions
 
 function end() {
     return "end"
 }
 
-function confirmEnd() {
-
+function confirmEnd(sameMode) {
+    return async () => {
+        const action = await dialog("Training is running, are you sure you \
+                                     want to close it?", "Close", "Cancel")
+        if (action == "Cancel") return sameMode
+        return "end"
+    }
 }
