@@ -75,8 +75,8 @@ async function pauseMode() {
                                      ["click", closeButton, "end"])
     // Reset action
     if (newMode == "initial") {
-        watches.resetCurrentWatch()
-        watches.resetTotalWatch()
+        watches.resetCurrentWatchTime()
+        watches.resetTotalWatchTime()
     }
 
     // Continue action

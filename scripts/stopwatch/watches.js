@@ -30,12 +30,12 @@ export function addToTotalWatch() {
     totalWatch.textContent = `${hours}:${minutes}:${seconds}`
 }
 
-export function resetCurrentWatch() {
+export function resetCurrentWatchTime() {
     currentWatchTime = 0
     currentWatch.textContent = "00:00"
 }
 
-export function resetTotalWatch() {
+export function resetTotalWatchTime() {
     totalWatchTime = 0
     totalWatch.textContent = "00:00:00"
 }

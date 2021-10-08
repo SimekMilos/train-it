@@ -19,8 +19,8 @@ export function init(trData) {
     display.buttons.initialMode()
     trainingData = trData
 
-    watches.resetCurrentWatch()
-    watches.resetTotalWatch()
+    watches.resetCurrentWatchTime()
+    watches.resetTotalWatchTime()
 
     if (!trData) display.watches.timerMode()
     else display.watches.initialMode()
