@@ -1,5 +1,5 @@
 
-import { transitionToInitScreen } from "../screens.js"
+import {transitionToInitScreen} from "../screens.js"
 
 import * as sizing from "./sizing.js"
 import * as display from "./display.js"

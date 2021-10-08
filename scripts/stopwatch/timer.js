@@ -21,6 +21,9 @@ export class Timer {
         this._callbacks.push(callback)
     }
 
+
+    // --- Private ---
+
     _trigger() {
         for (const callback of this._callbacks) callback()
     }

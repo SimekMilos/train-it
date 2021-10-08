@@ -1,10 +1,10 @@
 
-import { waitForAny } from "../tools.js"
+import {waitForAny} from "../tools.js"
 import * as training from "../training/training.js"
 
 import * as display from "./display.js"
 import * as watches from "./watches.js"
-import { Timer } from "./timer.js"
+import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
 const buttonNext = document.querySelector(".st-next")

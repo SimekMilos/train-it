@@ -1,9 +1,9 @@
 
-import { waitForAny, dialog } from "../tools.js"
+import {waitForAny, dialog} from "../tools.js"
 
 import * as watches from "./watches.js"
 import * as display from "./display.js"
-import { Timer } from "./timer.js"
+import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
 
