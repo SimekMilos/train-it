@@ -7,7 +7,6 @@ import * as watches from "./watches.js"
 import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
-const buttonNext = document.querySelector(".st-next")
 
 let timer = null
 
@@ -20,9 +19,6 @@ export async function eventCycle() {
     timer.registerCallback(watches.addToCurrentWatch)
     timer.registerCallback(watches.addToTotalWatch)
     training.setTimer(timer)
-
-    document.addEventListener("keydown", keyDown)
-    document.addEventListener("keyup", keyUp)
 
     // Cycle through events
     let mode = "initial"
@@ -38,8 +34,6 @@ export async function eventCycle() {
 
     // Finish
     timer.stop()
-    document.removeEventListener("keydown", keyDown)
-    document.removeEventListener("keyup", keyUp)
 }
 
 
@@ -90,23 +84,6 @@ async function doneMode() {
                                    ["click", buttonClose, end],
                                    ["click", closeButton, end])
     return action()
-}
-
-
-// Spacebar "Next" functionality
-function keyDown(ev) {
-    if (ev.code != "Space") return
-    if (getComputedStyle(buttonNext).display == "none") return
-
-    buttonNext.classList.add("spacebar-active")
-}
-
-function keyUp(ev) {
-    if (ev.code != "Space") return
-    buttonNext.classList.remove("spacebar-active")
-
-    if (getComputedStyle(buttonNext).display == "none") return
-    buttonNext.click()
 }
 
 

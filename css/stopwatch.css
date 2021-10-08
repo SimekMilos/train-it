@@ -133,7 +133,7 @@
     border-color: transparent;
 }
 
-.st-next.spacebar-active {
+.st-main-controls > .spacebar-active {
     color: white;
     border-color: var(--main-color);
     background-color: var(--main-color);
