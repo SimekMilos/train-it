@@ -29,8 +29,8 @@ export function addToCurrentWatch() {
 export function addToTotalWatch() {
     totalWatchTime++
 
-    let seconds = currentWatchTime % 60
-    let minutes = ((currentWatchTime - seconds) / 60) % 60
+    let seconds = totalWatchTime % 60
+    let minutes = ((totalWatchTime - seconds) / 60) % 60
     let hours = ((totalWatchTime - minutes*60 - seconds) / 3600 ) % 24
     seconds = String(seconds).padStart(2, "0")
     minutes = String(minutes).padStart(2, "0")
@@ -43,8 +43,8 @@ export function addToTotalWatch() {
 // --- Private ---
 
 function getWatchString(time) {
-    let seconds = currentWatchTime % 60
-    let minutes = ((currentWatchTime - seconds) / 60) % 60
+    let seconds = time % 60
+    let minutes = ((time - seconds) / 60) % 60
     seconds = String(seconds).padStart(2, "0")
     minutes = String(minutes).padStart(2, "0")
 
