@@ -159,8 +159,8 @@ function end() { return "end" }
 
 function confirmEnd(sameMode) {
     return async () => {
-        const action = await dialog("Training is running, are you sure you \
-                                     want to close it?", "Close", "Cancel")
+        const action = await dialog("Are you sure you want to close this \
+                                     training?", "Close", "Cancel")
         if (action == "Cancel") return sameMode
         return "end"
     }
