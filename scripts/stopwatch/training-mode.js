@@ -125,7 +125,7 @@ function start() {
 // Run
 
 function back() {
-    let {phase: newPhase, time: newTime} = training.back()
+    const {phase: newPhase, time: newTime} = training.back()
     if (!newPhase) return "run"
 
     if (newPhase == "set") display.watches.setMode()
@@ -136,7 +136,13 @@ function back() {
 }
 
 function next() {
+    const {phase: newPhase, isLast} = training.next()
 
+    if (newPhase == "set") display.watches.setMode()
+    else                   display.watches.pauseMode()
+
+    watches.resetCurrentWatchTime()
+    return isLast ? "finish" : "run"
 }
 
 function pause() {

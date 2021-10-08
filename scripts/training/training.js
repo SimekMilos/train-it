@@ -28,11 +28,11 @@ export function setTimer(timer) {
 export function next() {
     /* return {
           phase: "set" / "pause" / null (no next phase)
-          last: true/false    - true if it's last training phase
+          isLast: true/false    - true if it's last training phase
        }
     */
 
-    return { phase: "set", last: false }
+    return { phase: "set", isLast: true }
 }
 
 export function back() {
