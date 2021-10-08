@@ -113,3 +113,74 @@ function keyUp(ev) {
     if (getComputedStyle(buttonNext).display == "none") return
     buttonNext.click()
 }
+
+
+// --- Button actions ---
+
+// Initial
+
+function start() {
+
+}
+
+
+// Run
+
+function back() {
+
+}
+
+function next() {
+
+}
+
+function pause() {
+
+}
+
+
+// Pause
+
+function reset() {
+
+}
+
+function continueAct() {
+
+}
+
+function close() {
+
+}
+
+
+// Finish
+
+// function back() {
+
+// }
+
+function finish() {
+
+}
+
+// function pause() {
+
+// }
+
+
+// Done
+
+// function reset() {
+
+// }
+
+// function close() {
+
+// }
+
+
+
+function end() {
+    return "end"
+}
