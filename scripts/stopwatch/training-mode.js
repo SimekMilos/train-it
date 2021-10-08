@@ -1,7 +1,9 @@
 
 import { waitForAny } from "../tools.js"
+import * as training from "../training/training.js"
 
 import * as display from "./display.js"
+import * as watches from "./watches.js"
 import { Timer } from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
@@ -15,8 +17,9 @@ let timer = null
 export async function eventCycle() {
     // Create timer
     timer = new Timer
-    // timer.registerCallback(addToCurrentWatch)
-    // timer.registerCallback(addToTotalWatch)
+    timer.registerCallback(watches.addToCurrentWatch)
+    timer.registerCallback(watches.addToTotalWatch)
+    training.setTimer(timer)
 
     document.addEventListener("keydown", keyDown)
     document.addEventListener("keyup", keyUp)

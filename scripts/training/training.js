@@ -32,7 +32,7 @@ export function next() {
        }
     */
 
-    return "set"
+    return { phase: "set", last: false }
 }
 
 export function back() {
