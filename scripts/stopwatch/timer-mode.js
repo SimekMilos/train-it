@@ -53,7 +53,7 @@ async function runMode() {
     let newMode = await waitForAny(["click", stopButton, "pause"],
                                    ["click", closeButton, "end"])
 
-    // Dialog in case of close event
+    // Close action
     if (newMode == "end") {
         const action = await dialog("Timer is running, are you sure you \
                                     want to close it?", "Close", "Cancel")
@@ -80,8 +80,6 @@ async function pauseMode() {
     }
 
     // Continue action
-    if (newMode == "run") {
-        timer.start()
-    }
+    if (newMode == "run") timer.start()
     return newMode
 }
