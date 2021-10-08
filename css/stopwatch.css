@@ -124,7 +124,7 @@
     height: unset;
 }
 
-.st-start, .st-stop, .st-next, .st-continue {
+.st-start, .st-stop, .st-next, .st-finish, .st-continue {
     flex-grow: 2;
 }
 

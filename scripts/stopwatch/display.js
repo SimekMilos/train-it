@@ -12,6 +12,7 @@ const buttonStop = document.querySelector(".st-stop")
 
 const buttonBack = document.querySelector(".st-back")
 const buttonNext = document.querySelector(".st-next")
+const buttonFinish = document.querySelector(".st-finish")
 const buttonPause = document.querySelector(".st-pause")
 
 const buttonReset = document.querySelector(".st-reset")
@@ -62,12 +63,12 @@ export const buttons = {
         return activateButtons(fillerLeft, buttonStart, fillerRight)[1]
     },
 
-    timerRunningMode() {
+    timerRunMode() {
         clearButtons()
         return activateButtons(fillerLeft, buttonStop, fillerRight)[1]
     },
 
-    trainingRunningMode() {
+    trainingRunMode() {
         clearButtons()
         return activateButtons(buttonBack, buttonNext, buttonPause)
     },
@@ -75,6 +76,16 @@ export const buttons = {
     pauseMode() {
         clearButtons()
         return activateButtons(buttonReset, buttonContinue, buttonClose)
+    },
+
+    finishMode() {
+        clearButtons()
+        return activateButtons(buttonBack, buttonFinish, buttonPause)
+    },
+
+    doneMode() {
+        clearButtons()
+        return activateButtons(buttonReset, buttonClose)
     }
 }
 

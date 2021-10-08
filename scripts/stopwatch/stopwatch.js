@@ -79,7 +79,7 @@ const timerMode = {
 
     async _run() {
         // Setup buttons
-        const stopButton = display.buttons.timerRunningMode()
+        const stopButton = display.buttons.timerRunMode()
         let newMode = await waitForAny(["click", stopButton, "pause"],
                                        ["click", closeButton, "end"])
 
@@ -135,6 +135,8 @@ const trainingMode = {
                 case "initial": mode = await this._initial() ;break
                 case "run":     mode = await this._run()     ;break
                 case "pause":   mode = await this._pause()   ;break
+                case "finish":  mode = await this._finish()  ;break
+                case "done":    mode = await this._done()    ;break
             }
         } while (mode != "end")
 
@@ -152,15 +154,16 @@ const trainingMode = {
     },
 
     async _run() {
-        const buttons = display.buttons.trainingRunningMode()
+        const buttons = display.buttons.trainingRunMode()
         const [buttonBack, buttonNext, buttonPause] = buttons
         let action = await waitForAny(["click", buttonBack, "back"],
                                       ["click", buttonNext, "next"],
                                       ["click", buttonPause, "pause"],
                                       ["click", closeButton, "end"])
         let newMode
-        if (action == "back" || action == "next") newMode = "run"
-        else newMode = action
+        if (action == "back") newMode = "run"
+        if (action == "next") newMode = "finish"
+        if (action != "back" && action != "next") newMode = action
 
         return newMode
     },
@@ -172,6 +175,24 @@ const trainingMode = {
                                          ["click", continueButton, "run"],
                                          ["click", mainCloseButton, "end"],
                                          ["click", closeButton, "end"])
+        return newMode
+    },
+
+    async _finish() {
+        const buttons = display.buttons.finishMode()
+        const [buttonBack, buttonFinish, buttonPause] = buttons
+        let newMode = await waitForAny(["click", buttonBack, "run"],
+                                       ["click", buttonFinish, "done"],
+                                       ["click", buttonPause, "pause"],
+                                       ["click", closeButton, "end"])
+        return newMode
+    },
+
+    async _done() {
+        const [buttonReset, buttonClose] = display.buttons.doneMode()
+        let newMode = await waitForAny(["click", buttonReset, "initial"],
+                                       ["click", buttonClose, "end"],
+                                       ["click", closeButton, "end"])
         return newMode
     },
 
