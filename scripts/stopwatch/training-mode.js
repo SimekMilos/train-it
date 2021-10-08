@@ -86,10 +86,10 @@ async function finishMode() {
 
 async function doneMode() {
     const [buttonReset, buttonClose] = display.buttons.doneMode()
-    let newMode = await waitForAny(["click", buttonReset, "initial"],
-                                   ["click", buttonClose, "end"],
-                                   ["click", closeButton, "end"])
-    return newMode
+    let action = await waitForAny(["click", buttonReset, reset],
+                                   ["click", buttonClose, end],
+                                   ["click", closeButton, end])
+    return action()
 }
 
 
@@ -142,7 +142,7 @@ function next() {
     else                   display.watches.pauseMode()
 
     watches.resetCurrentWatchTime()
-    return training.isLast() ? "finish" : "run"
+    return !training.isLast() ? "run" : "finish"
 }
 
 function pause() {
@@ -164,7 +164,7 @@ function reset() {
 
 function continueAction() {
     timer.start()
-    return training.isLast() ? "finish" : "run"
+    return !training.isLast() ? "run" : "finish"
 }
 
 
@@ -176,22 +176,9 @@ function finish() {
 }
 
 
-// Done
-
-// function reset() {
-
-// }
-
-// function close() {
-
-// }
-
-
 // Quit actions
 
-function end() {
-    return "end"
-}
+function end() { return "end" }
 
 function confirmEnd(sameMode) {
     return async () => {
