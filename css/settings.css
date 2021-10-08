@@ -142,6 +142,7 @@
 }
 
 .settings-component em {
+    color: black;
     font-style: normal;
     text-decoration: underline;
 }
