@@ -22,8 +22,8 @@ export function init(trData) {
     watches.resetCurrentWatch()
     watches.resetTotalWatch()
 
-    if (!trData) display.timers.timerMode()
-    else display.timers.initialMode()
+    if (!trData) display.watches.timerMode()
+    else display.watches.initialMode()
 }
 
 export function destroy() {

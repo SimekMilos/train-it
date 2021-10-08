@@ -22,7 +22,7 @@ const buttonClose = document.querySelector(".st-close")
 
 // --- Public ---
 
-export const timers = {
+export const watches = {
     timerMode() {
         firstHeading.textContent = secondHeading.textContent = "Timer:"
         currentStopwatch.classList.remove("running-set", "running-pause")
