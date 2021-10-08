@@ -133,6 +133,12 @@
     border-color: transparent;
 }
 
+.st-next.spacebar-active {
+    color: white;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+}
+
 
 /* Secondary controls */
 

@@ -9,6 +9,7 @@ import { Timer } from "./timer.js"
 const currentWatch = document.querySelector(".st-current-stopwatch")
 const totalWatch = document.querySelector(".st-total-stopwatch")
 const closeButton = document.querySelector(".ts-close")
+const buttonNext = document.querySelector(".st-next")
 
 let trainingData = null
 let currentWatchTime = 0
@@ -124,6 +125,9 @@ const trainingMode = {
         this.timer.registerCallback(addToCurrentWatch)
         this.timer.registerCallback(addToTotalWatch)
 
+        document.addEventListener("keydown", this.keyDown)
+        document.addEventListener("keyup", this.keyUp)
+
         // Cycle through events
         let mode = "initial"
         do {
@@ -136,6 +140,8 @@ const trainingMode = {
 
         // Finish
         this.timer.stop()
+        document.removeEventListener("keydown", this.keyDown)
+        document.removeEventListener("keyup", this.keyUp)
     },
 
     async _initial() {
@@ -167,6 +173,22 @@ const trainingMode = {
                                          ["click", mainCloseButton, "end"],
                                          ["click", closeButton, "end"])
         return newMode
+    },
+
+    // Spacebar "Next" functionality
+    keyDown(ev) {
+        if (ev.code != "Space") return
+        if (getComputedStyle(buttonNext).display == "none") return
+
+        buttonNext.classList.add("spacebar-active")
+    },
+
+    keyUp(ev) {
+        if (ev.code != "Space") return
+        buttonNext.classList.remove("spacebar-active")
+
+        if (getComputedStyle(buttonNext).display == "none") return
+        buttonNext.click()
     }
 }
 
