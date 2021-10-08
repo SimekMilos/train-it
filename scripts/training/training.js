@@ -26,16 +26,20 @@ export function setTimer(timer) {
 // Actions
 
 export function next() {
-    /* return - "set", "pause", null (no next phase) */
+    /* return {
+          phase: "set" / "pause" / null (no next phase)
+          last: true/false    - true if it's last training phase
+       }
+    */
 
     return "set"
 }
 
 export function back() {
     /* return {
-        phase: "set" / "pause" / null (no previous phase)
-        time: Number    - current time of the previous phase
-        }
+          phase: "set" / "pause" / null (no previous phase)
+          time: Number    - current time of the previous phase
+       }
     */
 
     return { phase: "pause", time: 123 }

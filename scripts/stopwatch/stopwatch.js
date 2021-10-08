@@ -4,12 +4,12 @@ import { transitionToInitScreen } from "../screens.js"
 
 import * as sizing from "./sizing.js"
 import * as display from "./display.js"
+import * as trainingMode from "./training-mode.js"
 import { Timer } from "./timer.js"
 
 const currentWatch = document.querySelector(".st-current-stopwatch")
 const totalWatch = document.querySelector(".st-total-stopwatch")
 const closeButton = document.querySelector(".ts-close")
-const buttonNext = document.querySelector(".st-next")
 
 let trainingData = null
 let currentWatchTime = 0
@@ -114,102 +114,6 @@ const timerMode = {
             this.timer.start()
         }
         return newMode
-    }
-}
-
-
-const trainingMode = {
-    async eventCycle() {
-        // Create timer
-        this.timer = new Timer
-        this.timer.registerCallback(addToCurrentWatch)
-        this.timer.registerCallback(addToTotalWatch)
-
-        document.addEventListener("keydown", this.keyDown)
-        document.addEventListener("keyup", this.keyUp)
-
-        // Cycle through events
-        let mode = "initial"
-        do {
-            switch (mode) {
-                case "initial": mode = await this._initial() ;break
-                case "run":     mode = await this._run()     ;break
-                case "pause":   mode = await this._pause()   ;break
-                case "finish":  mode = await this._finish()  ;break
-                case "done":    mode = await this._done()    ;break
-            }
-        } while (mode != "end")
-
-        // Finish
-        this.timer.stop()
-        document.removeEventListener("keydown", this.keyDown)
-        document.removeEventListener("keyup", this.keyUp)
-    },
-
-    async _initial() {
-        const startButton = display.buttons.initialMode()
-        const newMode = await waitForAny(["click", startButton, "run"],
-                                         ["click", closeButton, "end"])
-        return newMode
-    },
-
-    async _run() {
-        const buttons = display.buttons.trainingRunMode()
-        const [buttonBack, buttonNext, buttonPause] = buttons
-        let action = await waitForAny(["click", buttonBack, "back"],
-                                      ["click", buttonNext, "next"],
-                                      ["click", buttonPause, "pause"],
-                                      ["click", closeButton, "end"])
-        let newMode
-        if (action == "back") newMode = "run"
-        if (action == "next") newMode = "finish"
-        if (action != "back" && action != "next") newMode = action
-
-        return newMode
-    },
-
-    async _pause() {
-        const buttons = display.buttons.pauseMode()
-        const [resetButton, continueButton, mainCloseButton] = buttons
-        const newMode = await waitForAny(["click", resetButton, "initial"],
-                                         ["click", continueButton, "run"],
-                                         ["click", mainCloseButton, "end"],
-                                         ["click", closeButton, "end"])
-        return newMode
-    },
-
-    async _finish() {
-        const buttons = display.buttons.finishMode()
-        const [buttonBack, buttonFinish, buttonPause] = buttons
-        let newMode = await waitForAny(["click", buttonBack, "run"],
-                                       ["click", buttonFinish, "done"],
-                                       ["click", buttonPause, "pause"],
-                                       ["click", closeButton, "end"])
-        return newMode
-    },
-
-    async _done() {
-        const [buttonReset, buttonClose] = display.buttons.doneMode()
-        let newMode = await waitForAny(["click", buttonReset, "initial"],
-                                       ["click", buttonClose, "end"],
-                                       ["click", closeButton, "end"])
-        return newMode
-    },
-
-    // Spacebar "Next" functionality
-    keyDown(ev) {
-        if (ev.code != "Space") return
-        if (getComputedStyle(buttonNext).display == "none") return
-
-        buttonNext.classList.add("spacebar-active")
-    },
-
-    keyUp(ev) {
-        if (ev.code != "Space") return
-        buttonNext.classList.remove("spacebar-active")
-
-        if (getComputedStyle(buttonNext).display == "none") return
-        buttonNext.click()
     }
 }
 
