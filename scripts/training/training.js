@@ -26,13 +26,15 @@ export function setTimer(timer) {
 // Actions
 
 export function next() {
-    /* return {
-          phase: "set" / "pause" / null (no next phase)
-          isLast: true/false    - true if it's last training phase
-       }
-    */
+    /* return - "set" / "pause" / null (no next phase) */
 
-    return { phase: "set", isLast: true }
+    return "set"
+}
+
+export function isLast() {
+    /* return - true if current phase is the last one in the training */
+
+    return true
 }
 
 export function back() {
