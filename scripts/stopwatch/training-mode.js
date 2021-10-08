@@ -45,13 +45,13 @@ export async function eventCycle() {
 
 // --- Private ---
 
-// Button modes
+// --- Button modes ---
 
 async function initialMode() {
     const startButton = display.buttons.initialMode()
-    const newMode = await waitForAny(["click", startButton, "run"],
-                                     ["click", closeButton, "end"])
-    return newMode
+    const action = await waitForAny(["click", startButton, start],
+                                    ["click", closeButton, end])
+    return action()
 }
 
 async function runMode() {
@@ -120,7 +120,10 @@ function keyUp(ev) {
 // Initial
 
 function start() {
+    display.watches.setMode()
+    timer.start()
 
+    return "run"
 }
 
 
