@@ -8,6 +8,8 @@ import * as watches from "./watches.js"
 import * as trainingMode from "./training-mode.js"
 import * as timerMode from "./timer-mode.js"
 
+const settingsButton = document.querySelector(".ts-settings")
+
 const buttonStart = document.querySelector(".st-start")
 const buttonStop = document.querySelector(".st-stop")
 const buttonContinue = document.querySelector(".st-continue")
@@ -62,10 +64,12 @@ export async function main() {
 
 // --- Private ---
 
-// Space bar button activation
-
 document.addEventListener("keydown", keyDown)
 document.addEventListener("keyup", keyUp)
+settingsButton.addEventListener("click", onSettingsClick)
+
+
+// Space bar button activation
 
 function keyDown(ev) {      // Activates button press appearance
     if (!trainingInProgress || ev.code != "Space") return
@@ -110,13 +114,9 @@ function keyUp(ev) {
 }
 
 
-// Temporary
-
-const settingsButton = document.querySelector(".ts-settings")
-
-settingsButton.addEventListener("click", onSettingsClick)
+// Changing settings
 
 async function onSettingsClick() {
-    const ret = await settings.open()
-    log("Return value: " + ret)
+    const changed = await settings.open()           // Can't be changed in
+    if (changed) trainingMode.settingsUpdate()      // timer mode
 }

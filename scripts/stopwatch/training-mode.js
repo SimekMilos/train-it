@@ -36,6 +36,10 @@ export async function eventCycle() {
     timer.stop()
 }
 
+export function settingsUpdate() {
+
+}
+
 
 // --- Private ---
 
