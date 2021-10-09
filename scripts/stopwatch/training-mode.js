@@ -8,6 +8,7 @@ import * as watches from "./watches.js"
 import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
+const buttonBack = document.querySelector(".st-back")
 
 let timer = null
 let countdownTimer = null
@@ -42,6 +43,7 @@ export async function eventCycle() {
     // Finish
     timer.stop()
     countdownTimer.stop()
+    buttonBack.textContent = "Back"
 }
 
 export function settingsUpdate() {
@@ -114,6 +116,7 @@ function start() {
     // Start countdown mode if set
     if (display.watches.mode == "countdown") {
         countdownTimer.start()
+        buttonBack.textContent = "+ 30 s"
 
     // Start first set
     } else {
@@ -132,6 +135,8 @@ function countdownTick() {
         display.watches.setMode()
         countdownTimer.stop()
         timer.start()
+
+        buttonBack.textContent = "Back"
     }
 }
 
@@ -139,9 +144,9 @@ function countdownTick() {
 // Run
 
 function back() {
-    // Reseting countdown
+    // Adds aditional 30s in countdown mode
     if (display.watches.mode == "countdown") {
-        watches.setCurrentWatchTime(settings.getTrainingCountdown())
+        watches.setCurrentWatchTime(watches.getCurrentWatchTime() + 30)
         return "run"
     }
 
@@ -161,7 +166,9 @@ function next() {
     if (display.watches.mode == "countdown") {
         countdownTimer.stop()
         timer.start()
+
         newPhase = "set"
+        buttonBack.textContent = "Back"
     } else {
         newPhase = training.next()
     }
