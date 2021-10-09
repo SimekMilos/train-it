@@ -23,21 +23,26 @@ const buttonClose = document.querySelector(".st-close")
 // --- Public ---
 
 export const watches = {
+    get mode() { return this._mode },
+
     timerMode() {
         firstHeading.textContent = secondHeading.textContent = "Timer:"
         currentStopwatch.classList.remove("running-set", "running-pause")
+        this._mode = "timer"
     },
 
     initialMode() {
         firstHeading.textContent = "Current Time:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
+        this._mode = "initial"
     },
 
     countdownMode() {
         firstHeading.textContent = "Countdown:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
+        this._mode = "countdown"
     },
 
     setMode() {
@@ -45,6 +50,7 @@ export const watches = {
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.add("running-set")
         currentStopwatch.classList.remove("running-pause")
+        this._mode = "set"
     },
 
     pauseMode() {
@@ -52,8 +58,10 @@ export const watches = {
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.add("running-pause")
         currentStopwatch.classList.remove("running-set")
+        this._mode = "pause"
     },
 
+    _mode: null,
     _totalTrainingHeading: "Total Time:"
 }
 
