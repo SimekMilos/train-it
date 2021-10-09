@@ -1,5 +1,6 @@
 
 import {transitionToInitScreen} from "../screens.js"
+import * as settings from "../settings/settings.js"
 
 import * as sizing from "./sizing.js"
 import * as display from "./display.js"
@@ -29,8 +30,17 @@ export function init(trData) {
     watches.resetCurrentWatchTime()
     watches.resetTotalWatchTime()
 
+    // Set initial watch display
     if (!trData) display.watches.timerMode()
-    else display.watches.initialMode()
+    else {
+        const startDelay = settings.getTrainingStartDelay()
+
+        if (!startDelay) display.watches.initialMode()
+        else {
+            display.watches.countDownMode()
+            watches.setCurrentWatchTime(startDelay)
+        }
+    }
 }
 
 export function destroy() {
@@ -101,7 +111,6 @@ function keyUp(ev) {
 
 
 // Temporary
-import * as settings from "../settings/settings.js"
 
 const settingsButton = document.querySelector(".ts-settings")
 

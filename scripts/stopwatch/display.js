@@ -35,7 +35,7 @@ export const watches = {
     },
 
     countDownMode() {
-        firstHeading.textContent = "Starting In:"
+        firstHeading.textContent = "Countdown:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
     },
