@@ -31,12 +31,6 @@ export function next() {
     return "set"
 }
 
-export function isLast() {
-    /* return - true if current phase is the last one in the training */
-
-    return true
-}
-
 export function back() {
     /* return {
           phase: "set" / "pause" / null (no previous phase)
@@ -45,6 +39,22 @@ export function back() {
     */
 
     return { phase: "pause", time: 123 }
+}
+
+export function isFirst() {
+    /* return - true if current phase is the first one in the training */
+
+    return false
+}
+
+export function isLast() {
+    /* return - true if current phase is the last one in the training */
+
+    return true
+}
+
+export function resetPhase() {
+
 }
 
 export function reset() {
