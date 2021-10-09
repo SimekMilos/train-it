@@ -75,7 +75,7 @@ async function runMode() {
     let action = await waitForAny(["click", buttonBack, back],
                                   ["click", buttonNext, next],
                                   ["click", buttonPause, pause],
-                                  ["click", closeButton, confirmEnd("run")])
+                                  ["click", closeButton, confirmEnd])
     return await action()
 }
 
@@ -83,9 +83,9 @@ async function pauseMode() {
     const buttons = display.buttons.pauseMode()
     const [resetButton, continueButton, mainCloseButton] = buttons
     const action = await waitForAny(["click", resetButton, reset],
-                                ["click", continueButton, continueAction],
-                                ["click", mainCloseButton, confirmEnd("pause")],
-                                ["click", closeButton, confirmEnd("pause")])
+                                    ["click", continueButton, continueAction],
+                                    ["click", mainCloseButton, confirmEnd],
+                                    ["click", closeButton, confirmEnd])
     return await action()
 }
 
@@ -95,7 +95,7 @@ async function finishMode() {
     let action = await waitForAny(["click", buttonBack, back],
                                   ["click", buttonFinish, finish],
                                   ["click", buttonPause, pause],
-                                  ["click", closeButton, confirmEnd("finish")])
+                                  ["click", closeButton, confirmEnd])
     return await action()
 }
 
@@ -235,11 +235,9 @@ function finish() {
 
 function end() { return "end" }
 
-function confirmEnd(sameMode) {
-    return async () => {
-        const action = await dialog("Are you sure you want to close this \
-                                     training?", "Close", "Cancel")
-        if (action == "Cancel") return sameMode
-        return "end"
-    }
+async function confirmEnd() {
+    const action = await dialog("Are you sure you want to close this training?",
+                                "Close", "Cancel")
+    if (action == "Cancel") return mode
+    return "end"
 }
