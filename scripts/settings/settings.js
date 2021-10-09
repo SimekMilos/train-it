@@ -5,7 +5,7 @@ const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
 
 const closeButton = document.querySelector(".sett-close")
-const trStartDelayInput = document.querySelector(".sett-tr-start-delay")
+const trCountdownInput = document.querySelector(".sett-tr-countdown")
 const setStartDelayInput = document.querySelector(".sett-set-start-delay")
 const precedingPauseInput = document.querySelector(".sett-preceding-pause")
 
@@ -16,7 +16,7 @@ let trainingData = null
 
 export function init(trData) {
     if (!trData) {
-        trStartDelayInput.disabled = true
+        trCountdownInput.disabled = true
         setStartDelayInput.disabled = true
         precedingPauseInput.disabled = true
         return
@@ -27,7 +27,7 @@ export function init(trData) {
     const settings = trData.settings
     if(!settings) return
 
-    trStartDelayInput.value = settings.trainingStartDelay
+    trCountdownInput.value = settings.trainingStartDelay
     setStartDelayInput.value = settings.setStartDelay
     precedingPauseInput.value = settings.precedingPause
 }
@@ -35,11 +35,11 @@ export function init(trData) {
 export function destroy() {
     trainingData = null
 
-    trStartDelayInput.disabled = false
+    trCountdownInput.disabled = false
     setStartDelayInput.disabled = false
     precedingPauseInput.disabled = false
 
-    trStartDelayInput.value = 0
+    trCountdownInput.value = 0
     setStartDelayInput.value = 0
     precedingPauseInput.value = 0
 }
@@ -66,7 +66,7 @@ export async function open() {
         } while (event.target != closeButton && event.target != component)
 
         // Test for invalid inputs
-        if (!isValid(trStartDelayInput.value) ||
+        if (!isValid(trCountdownInput.value) ||
             !isValid(setStartDelayInput.value) ||
             !isValid(precedingPauseInput.value)) {
 
@@ -94,7 +94,7 @@ export async function open() {
     return changed
 }
 
-export function getTrainingStartDelay() {
+export function getTrainingCountdown() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
     return trainingData.settings.trainingStartDelay
@@ -127,7 +127,7 @@ function isValid(value) {
 
 function getValues() {
     return {
-        trainingStartDelay: int(trStartDelayInput.value),
+        trainingStartDelay: int(trCountdownInput.value),
         setStartDelay: int(setStartDelayInput.value),
         precedingPause: int(precedingPauseInput.value)
     }

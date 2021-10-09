@@ -33,12 +33,12 @@ export function init(trData) {
     // Set initial watch display
     if (!trData) display.watches.timerMode()
     else {
-        const startDelay = settings.getTrainingStartDelay()
+        const countdown = settings.getTrainingCountdown()
 
-        if (!startDelay) display.watches.initialMode()
+        if (!countdown) display.watches.initialMode()
         else {
             display.watches.countDownMode()
-            watches.setCurrentWatchTime(startDelay)
+            watches.setCurrentWatchTime(countdown)
         }
     }
 }
