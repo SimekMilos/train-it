@@ -6,6 +6,12 @@ let currentWatchTime = 0
 let totalWatchTime = 0
 
 
+// Current watch
+
+export function getCurrentWatchTime() {
+    return currentWatchTime
+}
+
 export function setCurrentWatchTime(time) {
     currentWatchTime = time
     currentWatch.textContent = getWatchString(currentWatchTime)
@@ -16,14 +22,22 @@ export function resetCurrentWatchTime() {
     currentWatch.textContent = "00:00"
 }
 
-export function resetTotalWatchTime() {
-    totalWatchTime = 0
-    totalWatch.textContent = "00:00:00"
-}
-
 export function addToCurrentWatch() {
     currentWatchTime++
     currentWatch.textContent = getWatchString(currentWatchTime)
+}
+
+export function substractFromCurrentWatch() {
+    currentWatchTime--
+    currentWatch.textContent = getWatchString(currentWatchTime)
+}
+
+
+// Total watch
+
+export function resetTotalWatchTime() {
+    totalWatchTime = 0
+    totalWatch.textContent = "00:00:00"
 }
 
 export function addToTotalWatch() {
