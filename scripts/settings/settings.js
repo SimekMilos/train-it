@@ -6,7 +6,7 @@ const mainWindow = component.firstElementChild
 
 const closeButton = document.querySelector(".sett-close")
 const trCountdownInput = document.querySelector(".sett-tr-countdown")
-const setStartDelayInput = document.querySelector(".sett-set-start-delay")
+const setCountdownInput = document.querySelector(".sett-set-countdown")
 const precedingPauseInput = document.querySelector(".sett-preceding-pause")
 
 let trainingData = null
@@ -17,7 +17,7 @@ let trainingData = null
 export function init(trData) {
     if (!trData) {
         trCountdownInput.disabled = true
-        setStartDelayInput.disabled = true
+        setCountdownInput.disabled = true
         precedingPauseInput.disabled = true
         return
     }
@@ -28,7 +28,7 @@ export function init(trData) {
     if(!settings) return
 
     trCountdownInput.value = settings.trainingStartDelay
-    setStartDelayInput.value = settings.setStartDelay
+    setCountdownInput.value = settings.setStartDelay
     precedingPauseInput.value = settings.precedingPause
 }
 
@@ -36,11 +36,11 @@ export function destroy() {
     trainingData = null
 
     trCountdownInput.disabled = false
-    setStartDelayInput.disabled = false
+    setCountdownInput.disabled = false
     precedingPauseInput.disabled = false
 
     trCountdownInput.value = 0
-    setStartDelayInput.value = 0
+    setCountdownInput.value = 0
     precedingPauseInput.value = 0
 }
 
@@ -67,7 +67,7 @@ export async function open() {
 
         // Test for invalid inputs
         if (!isValid(trCountdownInput.value) ||
-            !isValid(setStartDelayInput.value) ||
+            !isValid(setCountdownInput.value) ||
             !isValid(precedingPauseInput.value)) {
 
             cont = false
@@ -128,7 +128,7 @@ function isValid(value) {
 function getValues() {
     return {
         trainingStartDelay: int(trCountdownInput.value),
-        setStartDelay: int(setStartDelayInput.value),
+        setStartDelay: int(setCountdownInput.value),
         precedingPause: int(precedingPauseInput.value)
     }
 }
