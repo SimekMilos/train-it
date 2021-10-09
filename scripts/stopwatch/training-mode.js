@@ -1,6 +1,7 @@
 
 import {waitForAny, dialog} from "../tools.js"
 import * as training from "../training/training.js"
+import * as settings from "../settings/settings.js"
 
 import * as display from "./display.js"
 import * as watches from "./watches.js"
@@ -9,6 +10,8 @@ import {Timer} from "./timer.js"
 const closeButton = document.querySelector(".ts-close")
 
 let timer = null
+let countdownTimer = null
+let mode = "initial"
 
 
 // --- Public ---
@@ -18,10 +21,14 @@ export async function eventCycle() {
     timer = new Timer
     timer.registerCallback(watches.addToCurrentWatch)
     timer.registerCallback(watches.addToTotalWatch)
+
+    countdownTimer = new Timer
+    countdownTimer.registerCallback(countdownTick)
+
     training.setTimer(timer)
 
     // Cycle through events
-    let mode = "initial"
+    mode = "initial"
     do {
         switch (mode) {
             case "initial": mode = await initialMode() ;break
@@ -34,10 +41,18 @@ export async function eventCycle() {
 
     // Finish
     timer.stop()
+    countdownTimer.stop()
 }
 
 export function settingsUpdate() {
+    // Update countdown
+    if (mode == "initial") {
+        const countdown = settings.getTrainingCountdown()
+        watches.setCurrentWatchTime(countdown)
 
+        if (countdown) display.watches.countdownMode()
+        else           display.watches.initialMode()
+    }
 }
 
 
@@ -96,16 +111,40 @@ async function doneMode() {
 // Initial
 
 function start() {
-    display.watches.setMode()
-    timer.start()
+    // Start countdown mode if set
+    if (display.watches.mode == "countdown") {
+        countdownTimer.start()
+
+    // Start first set
+    } else {
+        display.watches.setMode()
+        timer.start()
+    }
 
     return "run"
+}
+
+function countdownTick() {
+    watches.substractFromCurrentWatch()
+
+    // Start set when countdown reaches 0
+    if (!watches.getCurrentWatchTime()) {
+        display.watches.setMode()
+        countdownTimer.stop()
+        timer.start()
+    }
 }
 
 
 // Run
 
 function back() {
+    // Reseting countdown
+    if (display.watches.mode == "countdown") {
+        watches.setCurrentWatchTime(settings.getTrainingCountdown())
+        return "run"
+    }
+
     const {phase: newPhase, time: newTime} = training.back()
     if (!newPhase) return "run"
 
@@ -117,7 +156,15 @@ function back() {
 }
 
 function next() {
-    const newPhase = training.next()
+    let newPhase
+
+    if (display.watches.mode == "countdown") {
+        countdownTimer.stop()
+        timer.start()
+        newPhase = "set"
+    } else {
+        newPhase = training.next()
+    }
 
     if (newPhase == "set") display.watches.setMode()
     else                   display.watches.pauseMode()
@@ -127,7 +174,12 @@ function next() {
 }
 
 function pause() {
-    timer.stop()
+    if (display.watches.mode == "countdown") {
+        countdownTimer.stop()
+    } else {
+        timer.stop()
+    }
+
     return "pause"
 }
 
@@ -140,11 +192,20 @@ function reset() {
     display.watches.initialMode()
     training.reset()
 
+    // Countdown mode
+    const countdown = settings.getTrainingCountdown()
+    if (countdown) {
+        display.watches.countdownMode()
+        watches.setCurrentWatchTime(countdown)
+    }
+
     return "initial"
 }
 
 function continueAction() {
-    timer.start()
+    if (display.watches.mode == "countdown") countdownTimer.start()
+    else                                     timer.start()
+
     return !training.isLast() ? "run" : "finish"
 }
 
