@@ -39,7 +39,7 @@ export function init(trData) {
 
         if (!countdown) display.watches.initialMode()
         else {
-            display.watches.countDownMode()
+            display.watches.countdownMode()
             watches.setCurrentWatchTime(countdown)
         }
     }

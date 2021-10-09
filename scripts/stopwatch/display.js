@@ -34,7 +34,7 @@ export const watches = {
         currentStopwatch.classList.remove("running-set", "running-pause")
     },
 
-    countDownMode() {
+    countdownMode() {
         firstHeading.textContent = "Countdown:"
         secondHeading.textContent = this._totalTrainingHeading
         currentStopwatch.classList.remove("running-set", "running-pause")
