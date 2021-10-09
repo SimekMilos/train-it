@@ -193,7 +193,13 @@ function pause() {
 
 // Pause
 
-function reset() {
+async function reset() {
+    if (mode == "pause") {
+        const action = await dialog("Are you sure you want to reset this \
+                                     training?", "Reset", "Cancel")
+        if (action == "Cancel") return "pause"
+    }
+
     watches.resetCurrentWatchTime()
     watches.resetTotalWatchTime()
     display.watches.initialMode()
