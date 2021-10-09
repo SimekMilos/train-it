@@ -116,7 +116,7 @@ function start() {
     // Start countdown mode if set
     if (display.watches.mode == "countdown") {
         countdownTimer.start()
-        buttonBack.textContent = "+ 30 s"
+        buttonBack.textContent = "+ 15 s"
 
     // Start first set
     } else {
@@ -144,9 +144,9 @@ function countdownTick() {
 // Run
 
 function back() {
-    // Adds aditional 30s in countdown mode
+    // Adds aditional 15s in countdown mode
     if (display.watches.mode == "countdown") {
-        watches.setCurrentWatchTime(watches.getCurrentWatchTime() + 30)
+        watches.setCurrentWatchTime(watches.getCurrentWatchTime() + 15)
         return "run"
     }
 
