@@ -27,8 +27,8 @@ export function init(trData) {
     const settings = trData.settings
     if(!settings) return
 
-    trCountdownInput.value = settings.trainingStartDelay
-    setCountdownInput.value = settings.setStartDelay
+    trCountdownInput.value = settings.trainingCountdown
+    setCountdownInput.value = settings.setCountdown
     precedingPauseInput.value = settings.precedingPause
 }
 
@@ -97,13 +97,13 @@ export async function open() {
 export function getTrainingCountdown() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
-    return trainingData.settings.trainingStartDelay
+    return trainingData.settings.trainingCountdown
 }
 
 export function getSetStartDelay() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
-    return trainingData.settings.setStartDelay
+    return trainingData.settings.setCountdown
 }
 
 export function getPrecedingPause() {
@@ -127,8 +127,8 @@ function isValid(value) {
 
 function getValues() {
     return {
-        trainingStartDelay: int(trCountdownInput.value),
-        setStartDelay: int(setCountdownInput.value),
+        trainingCountdown: int(trCountdownInput.value),
+        setCountdown: int(setCountdownInput.value),
         precedingPause: int(precedingPauseInput.value)
     }
 }

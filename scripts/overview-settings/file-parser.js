@@ -110,7 +110,7 @@ function testSettings(settingsObj) {    // settings dont have to be defined
     if (!(settingsObj instanceof Object)) return false
 
     // Test all three properties
-    for (const setting of ["trainingStartDelay", "setStartDelay",
+    for (const setting of ["trainingCountdown", "setCountdown",
                            "precedingPause"]) {
         // Existence
         if (typeof settingsObj[setting] != "number") return false
