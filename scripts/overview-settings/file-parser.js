@@ -113,7 +113,6 @@ function testSettings(settingsObj) {    // settings dont have to be defined
     for (const setting of ["trainingStartDelay", "setStartDelay",
                            "precedingPause"]) {
         // Existence
-        if (!settingsObj[setting]) return false
         if (typeof settingsObj[setting] != "number") return false
 
         // Value
