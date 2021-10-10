@@ -7,7 +7,7 @@ export class Timer {
 
     start() {
         if (this._timer) return
-        this._timer = setInterval(this._trigger.bind(this), 1000)
+        this._timer = setInterval(this._tick.bind(this), 1000)
     }
 
     stop() {
@@ -21,10 +21,14 @@ export class Timer {
         this._callbacks.push(callback)
     }
 
+    removeCallback(callback) {
+        this._callbacks = this._callbacks.filter(val => val != callback)
+    }
+
 
     // --- Private ---
 
-    _trigger() {
+    _tick() {
         for (const callback of this._callbacks) callback()
     }
 }
