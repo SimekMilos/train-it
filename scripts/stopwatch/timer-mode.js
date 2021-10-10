@@ -26,6 +26,11 @@ export async function eventCycle() {
             case "run":     mode = await runMode()     ;break
             case "pause":   mode = await pauseMode()   ;break
         }
+
+        // Activate app close warning in "run" mode
+        if (mode == "run") window.addEventListener("beforeunload", closeWarning)
+        else            window.removeEventListener("beforeunload", closeWarning)
+
     } while (mode != "end")
 
     // Finish
@@ -82,4 +87,13 @@ async function pauseMode() {
     // Continue action
     if (newMode == "run") timer.start()
     return newMode
+}
+
+
+// Close warning
+
+function closeWarning(ev) {
+    ev.preventDefault()
+    ev.returnValue = ""
+    return ""
 }
