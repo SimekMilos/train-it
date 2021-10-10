@@ -176,7 +176,8 @@ async function back() {
     return "run"
 }
 
-function next() {
+async function next() {
+    await waitForTick()
     let newPhase
 
     if (display.watches.mode == "countdown") {
