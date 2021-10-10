@@ -40,6 +40,14 @@ export async function eventCycle() {
             case "finish":  mode = await finishMode()  ;break
             case "done":    mode = await doneMode()    ;break
         }
+
+        // Acitvates app close warning during active training
+        if ((new Set(["run", "pause", "finish"])).has(mode)) {
+            window.addEventListener("beforeunload", closeWarning)
+        } else {
+            window.removeEventListener("beforeunload", closeWarning)
+        }
+
     } while (mode != "end")
 
     // Finish
@@ -286,4 +294,10 @@ async function waitForTick() {
     await promise
     timer.removeCallback(waiter)
     countdownTimer.removeCallback(waiter)
+}
+
+function closeWarning(ev) {
+    ev.preventDefault()
+    ev.returnValue = ""
+    return ""
 }
