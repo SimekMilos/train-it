@@ -13,6 +13,7 @@ const buttonBack = document.querySelector(".st-back")
 
 let timer = null
 let countdownTimer = null
+let delayCountdownTick = null
 let mode = "initial"
 
 
@@ -128,7 +129,8 @@ function start() {
     return "run"
 }
 
-function countdownTick() {
+async function countdownTick() {
+    await delayCountdownTick
     watches.substractFromCurrentWatch()
 
     // Start set when countdown reaches 0
@@ -144,7 +146,13 @@ function countdownTick() {
 
 // Run
 
-function back() {
+async function back() {
+    // Synchronizes action with timer tick and delays countdown tick after
+    let resolve
+    delayCountdownTick = new Promise(res => resolve = res)
+    await waitForTick()
+    resolve()
+
     // Adds aditional 15s in countdown mode
     if (display.watches.mode == "countdown") {
         watches.setCurrentWatchTime(watches.getCurrentWatchTime() + 15)
@@ -250,4 +258,20 @@ async function confirmEnd() {
                                 "Close", "Cancel")
     if (action == "Cancel") return mode
     return "end"
+}
+
+
+// --- Other ---
+
+async function waitForTick() {
+    let resolve
+    const promise = new Promise(res => resolve = res)
+    const waiter = () => resolve()
+
+    timer.registerCallback(waiter)
+    countdownTimer.registerCallback(waiter)
+
+    await promise
+    timer.removeCallback(waiter)
+    countdownTimer.removeCallback(waiter)
 }
