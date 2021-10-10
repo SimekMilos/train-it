@@ -6,6 +6,7 @@ import * as settings from "../settings/settings.js"
 import * as display from "./display.js"
 import * as watches from "./watches.js"
 import {Timer} from "./timer.js"
+import {deactSpacebarContext} from "./spacebar.js"
 
 const closeButton = document.querySelector(".ts-close")
 const buttonBack = document.querySelector(".st-back")
@@ -76,7 +77,7 @@ async function runMode() {
                                   ["click", buttonNext, next],
                                   ["click", buttonPause, pause],
                                   ["click", closeButton, confirmEnd])
-    return await action()
+    return await deactSpacebarContext(action)
 }
 
 async function pauseMode() {
@@ -86,7 +87,7 @@ async function pauseMode() {
                                     ["click", continueButton, continueAction],
                                     ["click", mainCloseButton, confirmEnd],
                                     ["click", closeButton, confirmEnd])
-    return await action()
+    return await deactSpacebarContext(action)
 }
 
 async function finishMode() {
@@ -96,7 +97,7 @@ async function finishMode() {
                                   ["click", buttonFinish, finish],
                                   ["click", buttonPause, pause],
                                   ["click", closeButton, confirmEnd])
-    return await action()
+    return await deactSpacebarContext(action)
 }
 
 async function doneMode() {

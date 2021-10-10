@@ -1,6 +1,8 @@
 
 /* Spacebar button activation functionality */
 
+import {asyncContextManager} from "../tools.js"
+
 const buttonStart = document.querySelector(".st-start")
 const buttonStop = document.querySelector(".st-stop")
 const buttonContinue = document.querySelector(".st-continue")
@@ -20,6 +22,8 @@ export function deactivate() {
     document.removeEventListener("keyup", keyUp)
     removePressAppearance()
 }
+
+export const deactSpacebarContext = asyncContextManager(deactivate, activate)
 
 
 // --- Private ---
