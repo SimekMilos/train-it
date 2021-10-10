@@ -53,6 +53,11 @@ export function isLast() {
     return true
 }
 
+export function substractTime(time) {
+    /* Substracts time from current phase */
+
+}
+
 export function resetPhase() {
 
 }

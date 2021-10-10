@@ -177,23 +177,34 @@ async function back() {
 }
 
 async function next() {
+    let precedeTime = 0, newPhase
     await waitForTick()
-    let newPhase
 
+    // Preceding pause
+    if (display.watches.mode == "set") {
+        precedeTime = Math.min(settings.getPrecedingPause(),
+                               watches.getCurrentWatchTime())
+        training.substractTime(precedeTime)
+    }
+
+    // Countdown mode
     if (display.watches.mode == "countdown") {
         countdownTimer.stop()
         timer.start()
 
         newPhase = "set"
         buttonBack.textContent = "Back"
+
+    // Standard mode
     } else {
         newPhase = training.next()
     }
 
+    // Change appearance
     if (newPhase == "set") display.watches.setMode()
     else                   display.watches.pauseMode()
 
-    watches.resetCurrentWatchTime()
+    watches.setCurrentWatchTime(precedeTime)
     return !training.isLast() ? "run" : "finish"
 }
 
