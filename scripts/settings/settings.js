@@ -100,7 +100,7 @@ export function getTrainingCountdown() {
     return trainingData.settings.trainingCountdown
 }
 
-export function getSetStartDelay() {
+export function getSetCountdown() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
     return trainingData.settings.setCountdown

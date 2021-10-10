@@ -1,5 +1,5 @@
 
-import {waitForAny, dialog} from "../tools.js"
+import {wait, waitForAny, dialog} from "../tools.js"
 import * as training from "../training/training.js"
 import * as settings from "../settings/settings.js"
 
@@ -188,6 +188,11 @@ async function next() {
     let precedeTime = 0, newPhase
     await waitForTick()
 
+    // Set countdown
+    if (display.watches.mode == "pause" && settings.getSetCountdown()) {
+        await setCoutdown()
+    }
+
     // Preceding pause
     if (display.watches.mode == "set") {
         precedeTime = Math.min(settings.getPrecedingPause(),
@@ -300,4 +305,69 @@ function closeWarning(ev) {
     ev.preventDefault()
     ev.returnValue = ""
     return ""
+}
+
+async function setCoutdown() {
+    let finish = false
+
+    // Create subcomponent
+    const component = document.createElement("div")
+    component.classList.add("set-countdown")
+
+    const mainDisplay = document.createElement("div")
+    mainDisplay.classList.add("main")
+    component.append(mainDisplay)
+
+    const counter = document.createElement("p")
+    counter.classList.add("counter")
+    mainDisplay.append(counter)
+
+    const startNowButton = document.createElement("button")
+    startNowButton.classList.add("control-button")
+    startNowButton.textContent = "Start Now"
+    mainDisplay.append(startNowButton)
+
+    // Register button events
+    function keyDown(ev) {
+        if (ev.code != "Space") return
+        startNowButton.classList.add("spacebar-active")
+    }
+
+    function keyUp(ev) {
+        if (ev.code != "Space") return
+        startNowButton.classList.remove("spacebar-active")
+        startNowButton.click()
+    }
+
+    async function onClick() {
+        await wait(200)
+        finish = true
+    }
+
+    document.addEventListener("keydown", keyDown)
+    document.addEventListener("keyup", keyUp)
+    startNowButton.addEventListener("click", onClick)
+
+    // Display
+    let countdownTime = settings.getSetCountdown()
+    counter.textContent = countdownTime - 1
+    document.body.append(component)
+
+    // Countdown
+    let resolve
+    const promise = new Promise(res => resolve = res)
+
+    function count() {
+        countdownTime--
+        counter.textContent = countdownTime - 1
+        if (!countdownTime || finish) resolve()
+    }
+    timer.registerCallback(count)
+
+    // Finish
+    await promise
+    component.remove()
+    timer.removeCallback(count)
+    document.removeEventListener("keydown", keyDown)
+    document.removeEventListener("keyup", keyUp)
 }
