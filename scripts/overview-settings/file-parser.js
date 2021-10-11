@@ -110,16 +110,21 @@ function testSettings(settingsObj) {    // settings dont have to be defined
     if (!(settingsObj instanceof Object)) return false
 
     // Test all three properties
-    for (const setting of ["trainingStartDelay", "setStartDelay",
+    for (const setting of ["trainingCountdown", "setCountdown",
                            "precedingPause"]) {
         // Existence
-        if (!settingsObj[setting]) return false
         if (typeof settingsObj[setting] != "number") return false
 
         // Value
         const value = float(settingsObj[setting])
         if (!Number.isInteger(value)) return false
-        if (value < 0 || value > 300) return false
+
+        if (setting == "trainingCountdown") {
+            if (value < 0 || value > 300) return false
+            if (value % 5) return false                 // in 5 step intervals
+        } else {
+            if (value < 0 || value > 60) return false
+        }
     }
 
     return true

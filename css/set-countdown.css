@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+.set-countdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #0005;
+
+    --size: 66vmin;
+}
+
+.set-countdown .main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding-top: calc(.045 * var(--size));
+    padding-bottom: calc(.08 * var(--size));
+
+    width: var(--size);
+    height: var(--size);
+
+    background-color: #000000BF;
+    border-radius: calc(.1 * var(--size));
+    box-shadow: 0 0 calc(.03 * var(--size)) calc(.0136 * var(--size)) #0003;
+
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+
+    /* Content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@supports not ((backdrop-filter: none) or (-webkit-backdrop-filter: none)) {
+    .set-countdown .main {
+        background-color: #000D;
+    }
+}
+
+.set-countdown .counter {
+    flex: 1 1;
+    margin-top: -.13em;
+
+    color: white;
+    line-height: .8;
+    font-size: calc(.6 * var(--size));
+
+    /* Centering text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Button */
+
+.set-countdown button {
+    width: calc(.66 * var(--size));
+    height: calc(.11 * var(--size));
+
+    border-color: white;
+    border-radius: calc(.02 * var(--size));
+    border-width: max(1px, calc(.005 * var(--size)));
+
+    color: white;
+    font-size: calc(.055 * var(--size));
+}
+
+.set-countdown button:hover {
+    color: white;
+    border-color: white;
+}
+
+.set-countdown button:active, .set-countdown button.spacebar-active {
+    color: black;
+    background: white;
+}

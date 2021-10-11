@@ -1,13 +1,14 @@
 
-import {int, float, waitFor, dialog} from "../tools.js"
+import {int, range, waitFor} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
+const scrollContainer = document.querySelector(".sett-scroll-container")
 
 const closeButton = document.querySelector(".sett-close")
-const trStartDelayInput = document.querySelector(".sett-tr-start-delay")
-const setStartDelayInput = document.querySelector(".sett-set-start-delay")
-const precedingPauseInput = document.querySelector(".sett-preceding-pause")
+const trCountdownSelect = document.querySelector(".sett-tr-countdown")
+const setCountdownSelect = document.querySelector(".sett-set-countdown")
+const precedingPauseSelect = document.querySelector(".sett-preceding-pause")
 
 let trainingData = null
 
@@ -16,32 +17,33 @@ let trainingData = null
 
 export function init(trData) {
     if (!trData) {
-        trStartDelayInput.disabled = true
-        setStartDelayInput.disabled = true
-        precedingPauseInput.disabled = true
+        trCountdownSelect.disabled = true
+        setCountdownSelect.disabled = true
+        precedingPauseSelect.disabled = true
         return
     }
     trainingData = trData
 
     // Load values
+    generateSelectOptions()
     const settings = trData.settings
     if(!settings) return
 
-    trStartDelayInput.value = settings.trainingStartDelay
-    setStartDelayInput.value = settings.setStartDelay
-    precedingPauseInput.value = settings.precedingPause
+    trCountdownSelect.value = settings.trainingCountdown
+    setCountdownSelect.value = settings.setCountdown
+    precedingPauseSelect.value = settings.precedingPause
 }
 
 export function destroy() {
     trainingData = null
 
-    trStartDelayInput.disabled = false
-    setStartDelayInput.disabled = false
-    precedingPauseInput.disabled = false
+    trCountdownSelect.disabled = false
+    setCountdownSelect.disabled = false
+    precedingPauseSelect.disabled = false
 
-    trStartDelayInput.value = 0
-    setStartDelayInput.value = 0
-    precedingPauseInput.value = 0
+    trCountdownSelect.value = 0
+    setCountdownSelect.value = 0
+    precedingPauseSelect.value = 0
 }
 
 export async function open() {
@@ -52,29 +54,15 @@ export async function open() {
 
     // Display component
     component.classList.add("display")
+    scrollContainer.scrollTop = 0
     await waitFor("animationend", mainWindow)
     mainWindow.classList.add("enable-access")
 
-    // Input validity cycle
-    let cont, event
-    do {
-        cont = true
-
-        // Wait for close event
-        do {        // Close by clicking on close button or background
-            event = await waitFor("click", component)
-        } while (event.target != closeButton && event.target != component)
-
-        // Test for invalid inputs
-        if (!isValid(trStartDelayInput.value) ||
-            !isValid(setStartDelayInput.value) ||
-            !isValid(precedingPauseInput.value)) {
-
-            cont = false
-            await dialog("You've entered invalid delay. Delay can be whole \
-                         number ranging from 0 to 300 seconds.", "OK")
-        }
-    } while (!cont)
+    // Wait for close event
+    let event
+    do {        // Close by clicking on close button or background
+        event = await waitFor("click", component)
+    } while (event.target != closeButton && event.target != component)
 
     // Store new values
     const newValues = getValues()
@@ -94,16 +82,16 @@ export async function open() {
     return changed
 }
 
-export function getTrainingStartDelay() {
+export function getTrainingCountdown() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
-    return trainingData.settings.trainingStartDelay
+    return trainingData.settings.trainingCountdown
 }
 
-export function getSetStartDelay() {
+export function getSetCountdown() {
     if (!trainingData) throw new Error("settings - no training loaded")
     if (!trainingData.settings) return 0
-    return trainingData.settings.setStartDelay
+    return trainingData.settings.setCountdown
 }
 
 export function getPrecedingPause() {
@@ -115,21 +103,11 @@ export function getPrecedingPause() {
 
 // --- Private ---
 
-function isValid(value) {
-    if (!value) return false
-
-    value = float(value)
-    if (!Number.isInteger(value)) return false
-    if (value < 0 || value > 300) return false
-
-    return true
-}
-
 function getValues() {
     return {
-        trainingStartDelay: int(trStartDelayInput.value),
-        setStartDelay: int(setStartDelayInput.value),
-        precedingPause: int(precedingPauseInput.value)
+        trainingCountdown: int(trCountdownSelect.value),
+        setCountdown: int(setCountdownSelect.value),
+        precedingPause: int(precedingPauseSelect.value)
     }
 }
 
@@ -139,4 +117,44 @@ function hasChanged(oldVal, newVal) {
     }
 
     return false
+}
+
+function generateSelectOptions() {
+    if (trCountdownSelect.children.length) return
+    const fragment = document.createDocumentFragment()
+
+    // Training Countdown
+    for (const value of range(0, 301, 5)) {
+        const option = document.createElement("option")
+        const seconds = value % 60
+        const minutes = (value - seconds) / 60
+
+        option.value = value
+        option.textContent = `${minutes}:${String(seconds).padStart(2, "0")}`
+
+        fragment.append(option)
+    }
+    trCountdownSelect.append(fragment)
+
+    // Set Countdown
+    for (const value of range(61)) {
+        const option = document.createElement("option")
+
+        option.value = value
+        option.textContent = String(value).padStart(2, "0") + " s"
+
+        fragment.append(option)
+    }
+    setCountdownSelect.append(fragment)
+
+    // Preceding Pause
+    for (const value of range(61)) {
+        const option = document.createElement("option")
+
+        option.value = value
+        option.textContent = String(value).padStart(2, "0") + " s"
+
+        fragment.append(option)
+    }
+    precedingPauseSelect.append(fragment)
 }

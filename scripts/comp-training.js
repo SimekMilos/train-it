@@ -214,7 +214,5 @@ window.addEventListener("load", () => {
 
     runningSet.classList.add("running-set")
     runningSet2.classList.add("running-pause")
-
-    document.querySelector(".st-current-stopwatch").classList.add("running-set")
 })
 

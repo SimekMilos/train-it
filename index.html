@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/dialog.css">
+    <link rel="stylesheet" href="css/set-countdown.css">
     <link rel="stylesheet" href="css/overview.css">
     <link rel="stylesheet" href="css/overview-settings.css">
     <link rel="stylesheet" href="css/setup.css">
@@ -316,17 +317,29 @@
         <div class="stopwatch-component">
 
             <div class="st-first-container">
-                <h2>Current Set:</h2>
-                <p class="st-current-stopwatch">00:00</p>
+                <h2></h2>
+                <p class="st-current-stopwatch"></p>
             </div>
 
             <div class="st-second-container">
-                <h2>Total Time:</h2>
-                <p class="st-total-stopwatch">00:00:00</p>
+                <h2></h2>
+                <p class="st-total-stopwatch"></p>
                 <div class="st-main-controls">
-                    <button class="st-back control-button">Back</button>
-                    <button class="st-next control-button">Next</button>
+                    <div class="st-filler-left margin"></div>
+
+                    <button class="st-start control-button margin">Start</button>
+                    <button class="st-stop control-button margin">Stop</button>
+
+                    <button class="st-back control-button margin">Back</button>
+                    <button class="st-next control-button margin">Next</button>
+                    <button class="st-finish control-button margin">Finish</button>
                     <button class="st-pause control-button">Pause</button>
+
+                    <button class="st-reset control-button margin">Reset</button>
+                    <button class="st-continue control-button margin">Continue</button>
+                    <button class="st-close control-button">Close</button>
+
+                    <div class="st-filler-right"></div>
                 </div>
             </div>
 
@@ -442,41 +455,38 @@
 
                 <div class="sett-scroll-container">
                     <ul class="sett-info">
-                        <li>Settings are independent for every training.</li>
-                        <li>You can use space bar instead of <em>Next</em> button.</li>
+                        <li>Settings are separate for every training.</li>
+                        <li>You can use space bar to click on the wide buttons. i.e. <em>Start</em>, <em>Stop</em>, <em>Next</em>, <em>Continue</em>, <em>Start&#160;Now</em> and <em>Finish</em> buttons.</li>
                         <li>Notes for particular training, group or exercise are editable during training.</li>
                         <li>Changes to notes and settings are saved automatically.</li>
                     </ul>
 
-                    <h3>Training Start Delay</h3>
+                    <h3>Training Countdown</h3>
                     <ul class="sett-explanation">
-                        <li>This setting will delay start of the training.</li>
+                        <li>This setting will delay the start of the training.</li>
                     </ul>
                     <label>
-                        Delay (s):
-                        <input type="number" class="sett-tr-start-delay"
-                               value="0" min="0" max="300" step="30">
+                        Countdown:
+                        <select class="sett-tr-countdown"></select>
                     </label>
 
-                    <h3>Set Start Delay</h3>
+                    <h3>Set Countdown</h3>
                     <ul class="sett-explanation">
                         <li>This setting will delay start of each set.</li>
                     </ul>
                     <label>
-                        Delay (s):
-                        <input type="number" class="sett-set-start-delay"
-                               value="0" min="0" max="300" step="5">
+                        Countdown:
+                        <select class="sett-set-countdown"></select>
                     </label>
 
-                    <h3>Preceding Pause Start</h3>
+                    <h3>Preceding Pause</h3>
                     <ul class="sett-explanation">
-                        <li>This setting will set pause clock to start with specified amount of seconds when <em>Next</em> button is clicked.</li>
-                        <li>It is useful so you don't have to click <em>Next</em> immediately after finishing set.</li>
+                        <li>Pause clock will start with specified amount of seconds when <em>Next</em> button is clicked.</li>
+                        <li>This is useful so you don't have to click <em>Next</em> immediately after finishing set.</li>
                     </ul>
                     <label>
-                        Delay (s):
-                        <input type="number" class="sett-preceding-pause"
-                               value="0" min="0" max="300" step="5">
+                        Precede by:
+                        <select class="sett-preceding-pause"></select>
                     </label>
 
                     <small>
