@@ -5,6 +5,7 @@ import * as settings from "../settings/settings.js"
 
 import * as display from "./display.js"
 import * as watches from "./watches.js"
+import * as nosleep from "./nosleep.js"
 import {Timer} from "./timer.js"
 import {deactSpacebarContext} from "./spacebar.js"
 
@@ -41,12 +42,16 @@ export async function eventCycle() {
             case "done":    mode = await doneMode()    ;break
         }
 
-        // Acitvates app close warning during active training
+        // Activate app close warning during active training
         if ((new Set(["run", "pause", "finish"])).has(mode)) {
             window.addEventListener("beforeunload", closeWarning)
         } else {
             window.removeEventListener("beforeunload", closeWarning)
         }
+
+        // Prevent device sleep during running training
+        if ((new Set(["run", "finish"])).has(mode)) nosleep.activate()
+        else nosleep.deactivate()
 
     } while (mode != "end")
 
