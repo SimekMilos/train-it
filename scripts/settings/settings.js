@@ -1,8 +1,9 @@
 
-import {int, float, range, waitFor, dialog} from "../tools.js"
+import {int, range, waitFor} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
+const scrollContainer = document.querySelector(".sett-scroll-container")
 
 const closeButton = document.querySelector(".sett-close")
 const trCountdownSelect = document.querySelector(".sett-tr-countdown")
@@ -53,6 +54,7 @@ export async function open() {
 
     // Display component
     component.classList.add("display")
+    scrollContainer.scrollTop = 0
     await waitFor("animationend", mainWindow)
     mainWindow.classList.add("enable-access")
 
