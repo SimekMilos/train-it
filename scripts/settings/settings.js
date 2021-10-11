@@ -5,9 +5,9 @@ const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
 
 const closeButton = document.querySelector(".sett-close")
-const trCountdownInput = document.querySelector(".sett-tr-countdown")
-const setCountdownInput = document.querySelector(".sett-set-countdown")
-const precedingPauseInput = document.querySelector(".sett-preceding-pause")
+const trCountdownSelect = document.querySelector(".sett-tr-countdown")
+const setCountdownSelect = document.querySelector(".sett-set-countdown")
+const precedingPauseSelect = document.querySelector(".sett-preceding-pause")
 
 let trainingData = null
 
@@ -16,9 +16,9 @@ let trainingData = null
 
 export function init(trData) {
     if (!trData) {
-        trCountdownInput.disabled = true
-        setCountdownInput.disabled = true
-        precedingPauseInput.disabled = true
+        trCountdownSelect.disabled = true
+        setCountdownSelect.disabled = true
+        precedingPauseSelect.disabled = true
         return
     }
     trainingData = trData
@@ -27,21 +27,21 @@ export function init(trData) {
     const settings = trData.settings
     if(!settings) return
 
-    trCountdownInput.value = settings.trainingCountdown
-    setCountdownInput.value = settings.setCountdown
-    precedingPauseInput.value = settings.precedingPause
+    trCountdownSelect.value = settings.trainingCountdown
+    setCountdownSelect.value = settings.setCountdown
+    precedingPauseSelect.value = settings.precedingPause
 }
 
 export function destroy() {
     trainingData = null
 
-    trCountdownInput.disabled = false
-    setCountdownInput.disabled = false
-    precedingPauseInput.disabled = false
+    trCountdownSelect.disabled = false
+    setCountdownSelect.disabled = false
+    precedingPauseSelect.disabled = false
 
-    trCountdownInput.value = 0
-    setCountdownInput.value = 0
-    precedingPauseInput.value = 0
+    trCountdownSelect.value = 0
+    setCountdownSelect.value = 0
+    precedingPauseSelect.value = 0
 }
 
 export async function open() {
@@ -66,9 +66,9 @@ export async function open() {
         } while (event.target != closeButton && event.target != component)
 
         // Test for invalid inputs
-        if (!isValid(trCountdownInput.value) ||
-            !isValid(setCountdownInput.value) ||
-            !isValid(precedingPauseInput.value)) {
+        if (!isValid(trCountdownSelect.value) ||
+            !isValid(setCountdownSelect.value) ||
+            !isValid(precedingPauseSelect.value)) {
 
             cont = false
             await dialog("You've entered invalid delay. Delay can be whole \
@@ -127,9 +127,9 @@ function isValid(value) {
 
 function getValues() {
     return {
-        trainingCountdown: int(trCountdownInput.value),
-        setCountdown: int(setCountdownInput.value),
-        precedingPause: int(precedingPauseInput.value)
+        trainingCountdown: int(trCountdownSelect.value),
+        setCountdown: int(setCountdownSelect.value),
+        precedingPause: int(precedingPauseSelect.value)
     }
 }
 
