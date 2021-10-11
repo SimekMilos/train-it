@@ -158,9 +158,9 @@
     font-family: "OpenSans SemiBold", sans-serif;
 }
 
-.settings-component input {
-    width: 3.1em;
+.settings-component select {
     margin-left: 5px;
+    padding: 0 5px;
 
     border: 1px solid transparent;
     border-bottom: 1px solid var(--main-color);
@@ -168,14 +168,13 @@
 
     font-family: "OpenSans Regular", sans-serif;
     font-size: inherit;
-    text-align: right;
 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
 }
 
-.settings-component input:focus {
+.settings-component select:focus {
     border: 1px solid var(--main-color);
     border-radius: var(--comp-border-radius);
     outline: none;
