@@ -26,7 +26,7 @@
 
     background-color: #000000BF;
     border-radius: calc(.1 * var(--size));
-    box-shadow: 0 0 calc(.02 * var(--size)) calc(.0136 * var(--size)) #0003;
+    box-shadow: 0 0 calc(.03 * var(--size)) calc(.0136 * var(--size)) #0003;
 
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
