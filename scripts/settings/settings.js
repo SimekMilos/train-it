@@ -56,26 +56,11 @@ export async function open() {
     await waitFor("animationend", mainWindow)
     mainWindow.classList.add("enable-access")
 
-    // Input validity cycle
-    let cont, event
-    do {
-        cont = true
-
-        // Wait for close event
-        do {        // Close by clicking on close button or background
-            event = await waitFor("click", component)
-        } while (event.target != closeButton && event.target != component)
-
-        // Test for invalid inputs
-        if (!isValid(trCountdownSelect.value) ||
-            !isValid(setCountdownSelect.value) ||
-            !isValid(precedingPauseSelect.value)) {
-
-            cont = false
-            await dialog("You've entered invalid delay. Delay can be whole \
-                         number ranging from 0 to 300 seconds.", "OK")
-        }
-    } while (!cont)
+    // Wait for close event
+    let event
+    do {        // Close by clicking on close button or background
+        event = await waitFor("click", component)
+    } while (event.target != closeButton && event.target != component)
 
     // Store new values
     const newValues = getValues()
@@ -115,16 +100,6 @@ export function getPrecedingPause() {
 
 
 // --- Private ---
-
-function isValid(value) {
-    if (!value) return false
-
-    value = float(value)
-    if (!Number.isInteger(value)) return false
-    if (value < 0 || value > 300) return false
-
-    return true
-}
 
 function getValues() {
     return {
