@@ -1,5 +1,5 @@
 
-import {int, float, waitFor, dialog} from "../tools.js"
+import {int, float, range, waitFor, dialog} from "../tools.js"
 
 const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
@@ -24,6 +24,7 @@ export function init(trData) {
     trainingData = trData
 
     // Load values
+    generateSelectOptions()
     const settings = trData.settings
     if(!settings) return
 
@@ -139,4 +140,44 @@ function hasChanged(oldVal, newVal) {
     }
 
     return false
+}
+
+function generateSelectOptions() {
+    if (trCountdownSelect.children.length) return
+    const fragment = document.createDocumentFragment()
+
+    // Training Countdown
+    for (const value of range(0, 301, 5)) {
+        const option = document.createElement("option")
+        const seconds = value % 60
+        const minutes = (value - seconds) / 60
+
+        option.value = value
+        option.textContent = `${minutes}:${String(seconds).padStart(2, "0")}`
+
+        fragment.append(option)
+    }
+    trCountdownSelect.append(fragment)
+
+    // Set Countdown
+    for (const value of range(61)) {
+        const option = document.createElement("option")
+
+        option.value = value
+        option.textContent = String(value).padStart(2, "0") + " s"
+
+        fragment.append(option)
+    }
+    setCountdownSelect.append(fragment)
+
+    // Preceding Pause
+    for (const value of range(61)) {
+        const option = document.createElement("option")
+
+        option.value = value
+        option.textContent = String(value).padStart(2, "0") + " s"
+
+        fragment.append(option)
+    }
+    precedingPauseSelect.append(fragment)
 }
