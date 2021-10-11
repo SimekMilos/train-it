@@ -30,7 +30,6 @@ const watchFontMagnFactor = 1.25
 const buttonOffset = 0.06
 
 
-
 // --- Public ---
 
 export function activate() {
