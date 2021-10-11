@@ -24,11 +24,20 @@ export function setTimer(timer) {
 
 
 // Actions
+let last = "set"
 
 export function next() {
     /* return - "set" / "pause" / null (no next phase) */
 
-    return "set"
+    if (last == "pause") {
+        last = "set"
+        return "set"
+    } else {
+        last = "pause"
+        return "pause"
+    }
+
+    // return "pause"
 }
 
 export function back() {
@@ -50,7 +59,7 @@ export function isFirst() {
 export function isLast() {
     /* return - true if current phase is the last one in the training */
 
-    return true
+    return false
 }
 
 export function substractTime(time) {
@@ -59,6 +68,7 @@ export function substractTime(time) {
 }
 
 export function resetPhase() {
+    /* Resets current phase clock, not group clock */
 
 }
 
