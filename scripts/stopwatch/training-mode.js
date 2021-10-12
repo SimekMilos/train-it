@@ -329,8 +329,12 @@ async function setCoutdown() {
 
     const startNowButton = document.createElement("button")
     startNowButton.classList.add("control-button")
-    startNowButton.textContent = "Start Now"
     mainDisplay.append(startNowButton)
+
+    const fontCentering = document.createElement("div")
+    fontCentering.classList.add("center-font")
+    fontCentering.textContent = "Start Now"
+    startNowButton.append(fontCentering)
 
     // Register button events
     function keyDown(ev) {

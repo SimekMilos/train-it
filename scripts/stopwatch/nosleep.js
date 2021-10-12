@@ -1,7 +1,7 @@
 
 import {wait} from "../tools.js"
 
-let audio = new Audio("../../res/empty.mp3")
+const audio = new Audio("../../res/empty.mp3")
 let noSleep = null
 
 

@@ -72,6 +72,10 @@
     font-size: calc(.055 * var(--size));
 }
 
+.set-countdown button .center-font {
+    margin-top: -.06em;
+}
+
 .set-countdown button:hover {
     color: white;
     border-color: white;
