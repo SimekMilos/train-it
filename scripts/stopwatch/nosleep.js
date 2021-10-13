@@ -1,7 +1,6 @@
 
 import {wait} from "../tools.js"
 
-const audio = new Audio("../../res/empty.mp3")
 let noSleep = null
 
 
@@ -23,7 +22,7 @@ export function deactivate() {
 
 window.addEventListener("click", function enable() {
     window.removeEventListener("click", enable)
-    audio.play()
+    video.play()
 })
 
 class NoSleep {
@@ -38,8 +37,21 @@ class NoSleep {
 
     async _keepAwake() {
         while(this._noSleep) {
-            audio.play()
+            video.play()
             await wait(10000)
         }
     }
 }
+
+const video = document.createElement("video")
+video.setAttribute("playsinline", "")
+
+let source = document.createElement("source")
+source.src = "../../res/empty.mp4"
+source.type = "video/mp4"
+video.append(source)
+
+source = document.createElement("source")
+source.src = "../../res/empty.webm"
+source.type = "video/webm"
+video.append(source)
