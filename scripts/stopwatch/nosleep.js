@@ -20,6 +20,20 @@ export function deactivate() {
 
 // --- Private ---
 
+const video = document.createElement("video")
+video.setAttribute("playsinline", "")
+
+let source = document.createElement("source")
+source.src = "../../res/nosleep/empty.mp4"
+source.type = "video/mp4"
+video.append(source)
+
+source = document.createElement("source")
+source.src = "../../res/nosleep/empty.webm"
+source.type = "video/webm"
+video.append(source)
+
+
 window.addEventListener("click", function enable() {
     window.removeEventListener("click", enable)
     video.play()
@@ -42,16 +56,3 @@ class NoSleep {
         }
     }
 }
-
-const video = document.createElement("video")
-video.setAttribute("playsinline", "")
-
-let source = document.createElement("source")
-source.src = "../../res/empty.mp4"
-source.type = "video/mp4"
-video.append(source)
-
-source = document.createElement("source")
-source.src = "../../res/empty.webm"
-source.type = "video/webm"
-video.append(source)
