@@ -13,6 +13,10 @@ let timer = null
 
 // --- Public ---
 
+export function init() {
+    display.watches.timerMode()
+}
+
 export async function eventCycle() {
     // Create timer
     timer = new Timer

@@ -20,6 +20,18 @@ let mode = "initial"
 
 // --- Public ---
 
+export function init() {
+    const countdown = settings.getTrainingCountdown()
+
+    if (countdown) {
+        display.watches.countdownMode()
+        watches.setCurrentWatchTime(countdown)
+        return
+    }
+
+    display.watches.initialMode()
+}
+
 export async function eventCycle() {
     // Create timer
     timer = new Timer

@@ -26,17 +26,8 @@ export function init(trData) {
     watches.resetCurrentWatchTime()
     watches.resetTotalWatchTime()
 
-    // Set initial watch display
-    if (!trData) display.watches.timerMode()
-    else {
-        const countdown = settings.getTrainingCountdown()
-
-        if (!countdown) display.watches.initialMode()
-        else {
-            display.watches.countdownMode()
-            watches.setCurrentWatchTime(countdown)
-        }
-    }
+    if (trainingData) trainingMode.init()
+    else              timerMode.init()
 }
 
 export function destroy() {
