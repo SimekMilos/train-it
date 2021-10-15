@@ -1,6 +1,7 @@
 
 import {float, range, wait, waitFor, generateTrainingID} from "../tools.js"
 import {dialog, addDynamicPadding, dynamicScrollDown} from "../tools.js"
+import {storageVersion} from "../main.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
@@ -116,6 +117,9 @@ async function createTraining() {
 
     // Save training data
     storage.setItem(trID, JSON.stringify(trData))
+    if (!storage.getItem("storage-version")) {
+        storage.setItem("storage-version", storageVersion)
+    }
 
     // Create training item
     const trList = trainingList
@@ -202,6 +206,7 @@ async function deleteTraining() {
         storage.setItem("training-order", JSON.stringify(orderArr))
     } else {
         storage.removeItem("training-order")
+        storage.removeItem("storage-version")
     }
 
     // Delete training data
@@ -259,7 +264,6 @@ async function onSettingsClick() {
 
     display.settingsButtonDisabling(false)
 }
-
 
 
 // --- Other ---

@@ -1,6 +1,7 @@
 
 import {waitForAny, dialog,
         asyncContextManager, generateTrainingID} from "../tools.js"
+import {storageVersion} from "../main.js"
 
 import * as overview from "../overview/overview.js"
 import * as displayFunc from "./display.js"
@@ -31,7 +32,7 @@ importButton.addEventListener("click", onImport)
 
 function onExport() {
     // Parse storage
-    const data = {}
+    const data = {"storage-version": storageVersion}
     data["training-order"] = JSON.parse(localStorage["training-order"])
 
     for (const training of data["training-order"]) {
@@ -105,6 +106,8 @@ function onImport() {
 
 function mergeData(fileData) {
     const storage = localStorage
+
+    storage["storage-version"] = storageVersion
 
     // Get order array
     let orderArr = storage["training-order"]

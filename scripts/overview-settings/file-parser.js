@@ -1,5 +1,6 @@
 
 import {range, float} from "../tools.js"
+import {storageVersion} from "../main.js"
 
 
 // --- Public ---
@@ -19,6 +20,9 @@ export function parseFile(data) {
         throw new ParserError
     }
 
+    // Test storage version
+    if (!checkStorageVersion(data)) throw new ParserError
+
     // Test order array
     if (!checkOrderArray(data)) throw new ParserError
 
@@ -36,6 +40,15 @@ export function parseFile(data) {
 // --- Private ---
 
 // Data structure hierarchy
+
+function checkStorageVersion(data) {
+    const dataVersion = data["storage-version"]
+
+    if (typeof dataVersion != "number") return false
+    if (dataVersion < 1 || dataVersion > storageVersion) return false
+
+    return true
+}
 
 function checkOrderArray(data) {
     const orderArray = data["training-order"]

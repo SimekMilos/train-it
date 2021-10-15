@@ -1,6 +1,7 @@
 
 import {initInitScreen} from "./screens.js"
 
+export const storageVersion = 1
 
 function onAppLoad() {
     // Deactivate loading screen
