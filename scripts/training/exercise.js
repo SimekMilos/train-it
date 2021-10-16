@@ -1,5 +1,6 @@
 
 import {sizeNotes} from "../tools.js"
+import {Set} from "./set.js"
 
 const exerciseTemplate = document.querySelector(".tc-exercise-template")
 const notesTemplate = document.querySelector(".tc-notes-template")
@@ -40,7 +41,10 @@ export class Exercise {
         // notes.addEventListener("input", sizeTrainingNotes)
 
         // Sets
-
+        const sets = []
+        for (const setNameStr of exerciseData.sets) {
+            sets.push(new Set(setNameStr, exerciseContainer))
+        }
 
         container.append(exerciseFrag)
     }
