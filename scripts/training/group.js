@@ -1,12 +1,12 @@
 
 import {sizeNotes} from "../tools.js"
-import {Exercise} from "./exercise.js"
+import Exercise from "./exercise.js"
 
 const groupTemplate = document.querySelector(".tc-group-template")
 const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 
-export class Group {
+export default class Group {
     constructor(groupData, container) {
         let groupFrag, groupContainer
 
@@ -16,9 +16,9 @@ export class Group {
             this._group = groupFrag.firstElementChild
             groupContainer = this._group.querySelector(":scope .tcg-container")
 
-            // Heading
-            const heading = this._group.querySelector("h3")
-            heading.textContent = groupData.name
+            // Name
+            const name = this._group.querySelector("h3")
+            name.textContent = groupData.name
 
             // Notes
             const notes = this._group.querySelector(":scope .tcg-notes")

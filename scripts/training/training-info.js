@@ -4,14 +4,14 @@ import {sizeNotes} from "../tools.js"
 const template = document.querySelector(".tc-training-template")
 
 
-export class TrainingInfo {
+export default class TrainingInfo {
     constructor(trainingData, container) {
         const trInfoFrag = template.content.cloneNode(true)
         this._trInfo = trInfoFrag.firstElementChild
 
-        // Heading
-        const heading = this._trInfo.querySelector(":scope .tct-heading")
-        heading.textContent = trainingData.name
+        // Name
+        const name = this._trInfo.querySelector(":scope .tct-heading")
+        name.textContent = trainingData.name
 
         // Notes
         const notes = this._trInfo.querySelector(":scope .tct-notes")

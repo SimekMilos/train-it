@@ -1,6 +1,6 @@
 
-import {TrainingInfo} from "./training-info.js"
-import {Group} from "./group.js"
+import TrainingInfo from "./training-info.js"
+import Group from "./group.js"
 
 const compContainer = document.querySelector(".tc-container")
 

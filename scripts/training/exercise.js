@@ -1,20 +1,20 @@
 
 import {sizeNotes} from "../tools.js"
-import {Set} from "./set.js"
+import Set from "./set.js"
 
 const exerciseTemplate = document.querySelector(".tc-exercise-template")
 const notesTemplate = document.querySelector(".tc-notes-template")
 
 
-export class Exercise {
+export default class Exercise {
     constructor(exerciseData, container) {
         const exerciseFrag = exerciseTemplate.content.cloneNode(true)
         const exercise = exerciseFrag.firstElementChild
         const exerciseContainer = exercise.querySelector(":scope .tce-container")
 
-        // Heading
-        const heading = exercise.querySelector(":scope .tce-name")
-        heading.textContent = exerciseData.name
+        // Name
+        const name = exercise.querySelector(":scope .tce-name")
+        name.textContent = exerciseData.name
 
         // Notes
         const notesButton = exercise.querySelector(":scope .tce-notes-button")
