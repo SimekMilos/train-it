@@ -1,5 +1,6 @@
 
 import {sizeNotes} from "../tools.js"
+import {Exercise} from "./exercise.js"
 
 const groupTemplate = document.querySelector(".tc-group-template")
 const nogroupTemplate = document.querySelector(".tc-no-group-template")
@@ -46,6 +47,11 @@ export class Group {
             groupContainer = this._group
         }
 
+        // Add exercises
+        const exercises = []
+        for (const exerciseData of groupData.exercises) {
+            exercises.push(new Exercise(exerciseData, groupContainer))
+        }
 
         container.append(groupFrag)
     }
