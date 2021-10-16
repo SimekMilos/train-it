@@ -9,35 +9,32 @@ export class TrainingInfo {
         const trInfoFrag = template.content.cloneNode(true)
         const trInfo = trInfoFrag.firstElementChild
 
-        this._notesButton = trInfo.querySelector(".tct-notes-button")
-        this._notes = trInfo.querySelector(".tct-notes")
-
         // Heading
-        const heading = trInfo.querySelector(".tct-heading")
+        const heading = trInfo.querySelector(":scope .tct-heading")
         heading.textContent = trainingData.name
 
         // Notes
+        const notes = trInfo.querySelector(":scope .tct-notes")
+        const notesButton = trInfo.querySelector(":scope .tct-notes-button")
+
         if (trainingData.notes) {
-            this._notes.value = trainingData.notes
-            this._displayNotes()
+            notes.value = trainingData.notes
+
+            notes.style.display = "block"
+            notesButton.style.display = "none"
 
             // Note sizing on display
             const observer = new ResizeObserver(() => {
-                sizeNotes(this._notes)
+                sizeNotes(notes)
                 observer.disconnect()
             })
-            observer.observe(this._notes)
+            observer.observe(notes)
         }
 
         // Note sizing
-        this._notes.addEventListener("input", sizeNotes)
+        notes.addEventListener("input", sizeNotes)
 
         container.append(trInfoFrag)
-    }
-
-    _displayNotes() {
-        this._notesButton.style.display = "none"
-        this._notes.style.display = "block"
     }
 }
 
