@@ -1,5 +1,10 @@
 
-//TODO - edit in screens.js if it should be called when trainingData == null
+import {TrainingInfo} from "./training-info.js"
+import {Group} from "./group.js"
+
+const compContainer = document.querySelector(".tc-container")
+
+const training = []
 
 
 // --- Public ---
@@ -7,11 +12,20 @@
 // Initialization
 
 export function init(trainingData) {
+    if (!trainingData) return
 
+    // Add training info
+    training.push(new TrainingInfo(trainingData, compContainer))
+
+    // Add groups
+    for (const groupData of trainingData.groups) {
+        training.push(new Group(groupData, compContainer))
+    }
 }
 
 export function destroy() {
-
+    for (const trObj of training) trObj.destruct()
+    training.length = 0
 }
 
 export function display() {
@@ -68,7 +82,7 @@ export function substractTime(time) {
 }
 
 export function resetPhase() {
-    /* Resets current phase clock, not group clock */
+    /* Resets current phase clock, not group or exercise clock */
 
 }
 
