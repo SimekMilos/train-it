@@ -7,12 +7,14 @@ const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 export class Group {
     constructor(groupData, container) {
-        let group, groupContainer
+        let group, groupFrag, groupContainer
 
         // Group
         if (groupData.type == "group") {
-            group = groupTemplate.content.cloneNode(true)
+            groupFrag = groupTemplate.content.cloneNode(true)
+            group = groupFrag.firstElementChild
             groupContainer = group.querySelector(".tcg-container")
+
             this._notesButton = group.querySelector(".tcg-notes-button")
             this._notes = group.querySelector(".tcg-notes")
 
@@ -35,11 +37,12 @@ export class Group {
 
         // No Group
         } else {
-            group = nogroupTemplate.content.cloneNode(true)
+            groupFrag = nogroupTemplate.content.cloneNode(true)
+            group = groupFrag.firstElementChild
             groupContainer = group.querySelector(".tc-no-group")
         }
 
-        container.append(group)
+        container.append(groupFrag)
     }
 
     _displayNotes() {

@@ -6,7 +6,9 @@ const template = document.querySelector(".tc-training-template")
 
 export class TrainingInfo {
     constructor(trainingData, container) {
-        const trInfo = template.content.cloneNode(true)
+        const trInfoFrag = template.content.cloneNode(true)
+        const trInfo = trInfoFrag.firstElementChild
+
         this._notesButton = trInfo.querySelector(".tct-notes-button")
         this._notes = trInfo.querySelector(".tct-notes")
 
@@ -30,7 +32,7 @@ export class TrainingInfo {
         // Note sizing
         this._notes.addEventListener("input", sizeNotes)
 
-        container.append(trInfo)
+        container.append(trInfoFrag)
     }
 
     _displayNotes() {
