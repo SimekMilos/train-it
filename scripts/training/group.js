@@ -13,40 +13,40 @@ export class Group {
         if (groupData.type == "group") {
             groupFrag = groupTemplate.content.cloneNode(true)
             group = groupFrag.firstElementChild
-            groupContainer = group.querySelector(".tcg-container")
-
-            this._notesButton = group.querySelector(".tcg-notes-button")
-            this._notes = group.querySelector(".tcg-notes")
+            groupContainer = group.querySelector(":scope .tcg-container")
 
             // Heading
             const heading = group.querySelector("h3")
             heading.textContent = groupData.name
 
             // Notes
+            const notes = group.querySelector(":scope .tcg-notes")
+            const notesButton = group.querySelector(":scope .tcg-notes-button")
+
             if (groupData.notes) {
-                this._notes.value = groupData.notes
-                this._displayNotes()
+                notes.value = groupData.notes
+
+                notesButton.style.display = "none"
+                notes.style.display = "block"
 
                 // Note sizing on display
                 const observer = new ResizeObserver(() => {
-                    sizeNotes(this._notes)
+                    sizeNotes(notes)
                     observer.disconnect()
                 })
-                observer.observe(this._notes)
+                observer.observe(notes)
             }
+
+            // notes.addEventListener("input", )
 
         // No Group
         } else {
             groupFrag = nogroupTemplate.content.cloneNode(true)
             group = groupFrag.firstElementChild
-            groupContainer = group.querySelector(".tc-no-group")
+            groupContainer = group
         }
 
-        container.append(groupFrag)
-    }
 
-    _displayNotes() {
-        this._notesButton.style.display = "none"
-        this._notes.style.display = "block"
+        container.append(groupFrag)
     }
 }
