@@ -133,13 +133,16 @@ export async function dialog(message, ...buttons) {
     return action
 }
 
-export function sizeNotes(event) {
-    const notes = event.target
+export function sizeNotes(elemOrEvent) {
+    let notes
+    if (elemOrEvent instanceof Event) notes = elemOrEvent.target
+    else                              notes = elemOrEvent
+
     const styles = getComputedStyle(notes)
     const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
 
     // Set new height
-    notes.style.removeProperty("height")            // for shrinking
+    notes.style.removeProperty("height")            // enables shrinking
     const height = notes.scrollHeight + border
 
     if (Math.ceil(float(styles.height)) < height) { // necessary size must be
