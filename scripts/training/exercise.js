@@ -25,16 +25,11 @@ export default class Exercise {
             notes.value = exerciseData.notes
             exerciseContainer.append(notesFrag)
 
-            notesButton.style.display = "none"
-
-            // Note sizing on display
-            const observer = new ResizeObserver(() => {
-                sizeNotes(notes)
-                observer.disconnect()
-
-                // resize group here
-            })
+            // Notes sizing
+            const observer = new ResizeObserver(() => sizeNotes(notes))
             observer.observe(notes)
+
+            notesButton.style.display = "none"
         }
 
         // Notes sizing

@@ -138,14 +138,17 @@ export function sizeNotes(elemOrEvent) {
     if (elemOrEvent instanceof Event) notes = elemOrEvent.target
     else                              notes = elemOrEvent
 
-    const styles = getComputedStyle(notes)
-    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
+    // Test for display
+    const style = getComputedStyle(notes)
+    if (style.display == "none") return
+
+    const border = float(style.borderTopWidth) + float(style.borderBottomWidth)
 
     // Set new height
     notes.style.removeProperty("height")            // enables shrinking
     const height = notes.scrollHeight + border
 
-    if (Math.ceil(float(styles.height)) < height) { // necessary size must be
+    if (Math.ceil(float(style.height)) < height) { // necessary size must be
         notes.style.height = px(height)             // larger than minimum size
     }
 }

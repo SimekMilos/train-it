@@ -22,17 +22,12 @@ export default class TrainingInfo {
 
             notes.style.display = "block"
             notesButton.style.display = "none"
-
-            // Note sizing on display
-            const observer = new ResizeObserver(() => {
-                sizeNotes(notes)
-                observer.disconnect()
-            })
-            observer.observe(notes)
         }
 
         // Note sizing
         notes.addEventListener("input", sizeNotes)
+        const observer = new ResizeObserver(() => sizeNotes(notes))
+        observer.observe(container)
 
         container.append(trInfoFrag)
     }

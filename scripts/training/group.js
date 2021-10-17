@@ -8,7 +8,7 @@ const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 export default class Group {
     constructor(groupData, container) {
-        let groupFrag
+        let groupFrag, notes = null
 
         // Group
         if (groupData.type == "group") {
@@ -21,7 +21,7 @@ export default class Group {
             name.textContent = groupData.name
 
             // Notes
-            const notes = this._group.querySelector(":scope .tcg-notes")
+            notes = this._group.querySelector(":scope .tcg-notes")
             const notesButton = this._group.querySelector(":scope .tcg-notes-button")
 
             if (groupData.notes) {
@@ -29,13 +29,6 @@ export default class Group {
 
                 notesButton.style.display = "none"
                 notes.style.display = "block"
-
-                // Note sizing on display
-                const observer = new ResizeObserver(() => {
-                    sizeNotes(notes)
-                    observer.disconnect()
-                })
-                observer.observe(notes)
             }
 
             // notes.addEventListener("input", )
@@ -48,7 +41,10 @@ export default class Group {
         }
 
         // Sizing
-        const widthObserver = new ResizeObserver(() => this.fitWidth())
+        const widthObserver = new ResizeObserver(() => {
+            if (notes) sizeNotes(notes)
+            this.fitWidth()
+        })
         widthObserver.observe(container)
 
         // Add exercises
