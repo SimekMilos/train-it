@@ -1,5 +1,6 @@
 
 import {sizeNotes} from "../tools.js"
+import * as stopwatch from "../stopwatch/stopwatch.js"
 
 const compContainer = document.querySelector(".tc-container")
 
@@ -58,4 +59,8 @@ export function notesFunctionality(notes, notesButton, objData,
         objData.notes = newValue
         dataStructure.store()
     })
+
+    // Disable spacebar functionality while typing
+    notes.addEventListener("focus", stopwatch.deactivateSpacebar)
+    notes.addEventListener("blur", stopwatch.activateSpacebar)
 }
