@@ -41,6 +41,14 @@ export function notesFunctionality(notes, notesButton, objData,
     })
 
     // Undisplay
+    notes.addEventListener("blur", () => {
+        if (notes.value) return             // Only when empty
+
+        notes.style.display = "none"
+        notesButton.style.display = "block"
+
+        if (resizeCallback) resizeCallback()
+    })
 
     // Save
 }
