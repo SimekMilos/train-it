@@ -1,4 +1,5 @@
 
+import {} from "./display.js"
 import TrainingInfo from "./training-info.js"
 import Group from "./group.js"
 
