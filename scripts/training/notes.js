@@ -51,4 +51,11 @@ export function notesFunctionality(notes, notesButton, objData,
     })
 
     // Save
+    notes.addEventListener("change", () => {
+        const newValue = notes.value.trimEnd()
+        if (objData.notes == newValue) return
+
+        objData.notes = newValue
+        dataStructure.store()
+    })
 }
