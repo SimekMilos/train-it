@@ -1,5 +1,5 @@
 
-import {sizeNotes} from "../tools.js"
+import {float, px, sizeNotes} from "../tools.js"
 import Exercise from "./exercise.js"
 
 const groupTemplate = document.querySelector(".tc-group-template")
@@ -8,13 +8,13 @@ const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 export default class Group {
     constructor(groupData, container) {
-        let groupFrag, groupContainer
+        let groupFrag
 
         // Group
         if (groupData.type == "group") {
             groupFrag = groupTemplate.content.cloneNode(true)
             this._group = groupFrag.firstElementChild
-            groupContainer = this._group.querySelector(":scope .tcg-container")
+            this._groupContainer = this._group.querySelector(":scope .tcg-container")
 
             // Name
             const name = this._group.querySelector("h3")
@@ -44,13 +44,17 @@ export default class Group {
         } else {
             groupFrag = nogroupTemplate.content.cloneNode(true)
             this._group = groupFrag.firstElementChild
-            groupContainer = this._group
+            this._groupContainer = this._group
         }
+
+        // Sizing
+        const widthObserver = new ResizeObserver(() => this.fitWidth())
+        widthObserver.observe(container)
 
         // Add exercises
         const exercises = []
         for (const exerciseData of groupData.exercises) {
-            exercises.push(new Exercise(exerciseData, groupContainer))
+            exercises.push(new Exercise(exerciseData, this._groupContainer))
         }
 
         container.append(groupFrag)
@@ -58,5 +62,23 @@ export default class Group {
 
     destruct() {
         this._group.remove()
+    }
+
+    fitWidth() {
+        let first = this._groupContainer.firstElementChild
+        const last = this._groupContainer.lastElementChild
+
+        // When first element isn't displayed
+        if (getComputedStyle(first).display == "none") {
+            first = first.nextElementSibling
+        }
+
+        let start = first.getBoundingClientRect().left
+        start -= float(getComputedStyle(first).marginLeft)
+
+        let end = last.getBoundingClientRect().right
+        end += float(getComputedStyle(last).marginRight)
+
+        this._groupContainer.style.width = px(end - start)
     }
 }
