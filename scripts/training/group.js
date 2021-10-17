@@ -1,6 +1,8 @@
 
-import {float, px, sizeNotes} from "../tools.js"
+import {float, px} from "../tools.js"
+
 import Exercise from "./exercise.js"
+import {notesFunctionality} from "./notes.js"
 
 const groupTemplate = document.querySelector(".tc-group-template")
 const nogroupTemplate = document.querySelector(".tc-no-group-template")
@@ -8,7 +10,7 @@ const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 export default class Group {
     constructor(groupData, container) {
-        let groupFrag, notes = null
+        let groupFrag
 
         // Group
         if (groupData.type == "group") {
@@ -21,17 +23,10 @@ export default class Group {
             name.textContent = groupData.name
 
             // Notes
-            notes = this._group.querySelector(":scope .tcg-notes")
+            const notes = this._group.querySelector(":scope .tcg-notes")
             const notesButton = this._group.querySelector(":scope .tcg-notes-button")
-
-            if (groupData.notes) {
-                notes.value = groupData.notes
-
-                notesButton.style.display = "none"
-                notes.style.display = "block"
-            }
-
-            // notes.addEventListener("input", )
+            notesFunctionality(notes, notesButton, groupData,
+                               this._fitWidth.bind(this))
 
         // No Group
         } else {
@@ -40,17 +35,11 @@ export default class Group {
             this._groupContainer = this._group
         }
 
-        // Sizing
-        const widthObserver = new ResizeObserver(() => {
-            if (notes) sizeNotes(notes)
-            this.fitWidth()
-        })
-        widthObserver.observe(container)
-
         // Add exercises
         const exercises = []
         for (const exerciseData of groupData.exercises) {
-            exercises.push(new Exercise(exerciseData, this._groupContainer))
+            exercises.push(new Exercise(exerciseData, this._groupContainer,
+                           this._fitWidth.bind(this)))
         }
 
         container.append(groupFrag)
@@ -60,7 +49,10 @@ export default class Group {
         this._group.remove()
     }
 
-    fitWidth() {
+
+    // --- Private ---
+
+    _fitWidth() {
         let first = this._groupContainer.firstElementChild
         const last = this._groupContainer.lastElementChild
 

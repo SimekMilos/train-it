@@ -1,12 +1,12 @@
 
-import {sizeNotes} from "../tools.js"
 import Set from "./set.js"
+import {notesFunctionality} from "./notes.js"
 
 const exerciseTemplate = document.querySelector(".tc-exercise-template")
 
 
 export default class Exercise {
-    constructor(exerciseData, container) {
+    constructor(exerciseData, container, resizeCallback) {
         const exerciseFrag = exerciseTemplate.content.cloneNode(true)
         const exercise = exerciseFrag.firstElementChild
         this._exerciseContainer = exercise.querySelector(":scope .tce-container")
@@ -18,20 +18,10 @@ export default class Exercise {
         // Notes
         this._notes = exercise.querySelector(":scope .tce-notes")
         const notesButton = exercise.querySelector(":scope .tce-notes-button")
+
         this._setupRows()
-
-        if (exerciseData.notes) {
-            this._notes.value = exerciseData.notes
-
-            this._notes.style.display = "block"
-            notesButton.style.display = "none"
-        }
-
-        // Notes sizing
-        // notes.addEventListener("input", sizeNotes)
-        const observer = new ResizeObserver(() => sizeNotes(this._notes))
-        observer.observe(this._notes)
-
+        notesFunctionality(this._notes, notesButton, exerciseData,
+                           resizeCallback)
         // Sets
         const sets = []
         for (const setNameStr of exerciseData.sets) {
@@ -40,6 +30,9 @@ export default class Exercise {
 
         container.append(exerciseFrag)
     }
+
+
+    // --- Private ---
 
     _setupRows() {
         /* Changes row styles while notes are displayed */

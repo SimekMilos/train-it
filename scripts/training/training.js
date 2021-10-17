@@ -2,6 +2,7 @@
 import {} from "./display.js"
 import TrainingInfo from "./training-info.js"
 import Group from "./group.js"
+import * as notes from "./notes.js"
 
 const compContainer = document.querySelector(".tc-container")
 
@@ -14,6 +15,7 @@ const training = []
 
 export function init(trainingData) {
     if (!trainingData) return
+    notes.setDataStructure(trainingData)
 
     // Add training info
     training.push(new TrainingInfo(trainingData, compContainer))

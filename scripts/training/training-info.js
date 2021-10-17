@@ -1,5 +1,5 @@
 
-import {sizeNotes} from "../tools.js"
+import {notesFunctionality} from "./notes.js"
 
 const template = document.querySelector(".tc-training-template")
 
@@ -16,18 +16,7 @@ export default class TrainingInfo {
         // Notes
         const notes = this._trInfo.querySelector(":scope .tct-notes")
         const notesButton = this._trInfo.querySelector(":scope .tct-notes-button")
-
-        if (trainingData.notes) {
-            notes.value = trainingData.notes
-
-            notes.style.display = "block"
-            notesButton.style.display = "none"
-        }
-
-        // Note sizing
-        notes.addEventListener("input", sizeNotes)
-        const observer = new ResizeObserver(() => sizeNotes(notes))
-        observer.observe(container)
+        notesFunctionality(notes, notesButton, trainingData)
 
         container.append(trInfoFrag)
     }
@@ -36,9 +25,3 @@ export default class TrainingInfo {
         this._trInfo.remove()
     }
 }
-
-
-// this._notesButton.addEventListener("click", () => {
-//     this._displayNotes()
-//     this._notes.focus()
-// })
