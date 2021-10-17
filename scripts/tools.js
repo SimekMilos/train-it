@@ -134,9 +134,8 @@ export async function dialog(message, ...buttons) {
 }
 
 export function sizeNotes(elemOrEvent) {
-    let notes
+    let notes = elemOrEvent
     if (elemOrEvent instanceof Event) notes = elemOrEvent.target
-    else                              notes = elemOrEvent
 
     // Test for display
     const style = getComputedStyle(notes)

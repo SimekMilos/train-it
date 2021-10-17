@@ -33,7 +33,7 @@ export function createTraining(data) {
 
 export function createGroup(data = null) {
     /* For both groups and no-groups
-       Input - group object/null (empty group)
+        Input - group object/null (empty group)
     */
 
     if (!data) data = {type: "group"}
@@ -56,6 +56,8 @@ export function createGroup(data = null) {
 
         // Events
         notes.addEventListener("input", sizeNotes)
+        sizeNotesOnResize(notes)
+
         buttonAddExercise.addEventListener("click", () => {
             addTrainingItem("exercise", exerContainer)
         })
@@ -89,8 +91,8 @@ export function createGroup(data = null) {
 export async function addTrainingItem(type, container) {
     /* Adds training item with intro animation and necessary scrolling
 
-    type - "group" or "exercise"
-    container - container to add to
+        type - "group" or "exercise"
+        container - container to add to
     */
 
     component.classList.remove("enable-access")
@@ -138,6 +140,7 @@ export async function addTrainingItem(type, container) {
 // ===== Private =====
 
 trainingNotes.addEventListener("input", sizeNotes)
+sizeNotesOnResize(trainingNotes)
 
 
 // --- Group ---
@@ -214,6 +217,8 @@ function createExercise(data = null) {
 
     // Events
     notes.addEventListener("input", sizeNotes)
+    sizeNotesOnResize(notes)
+
     buttonAddSet.addEventListener("click", () => {
         setContainer.append(createSet())
     })
@@ -291,6 +296,11 @@ function createSet(setName = "") {
 
 
 // --- Other ---
+
+function sizeNotesOnResize(notes) {
+    const observer = new ResizeObserver(() => sizeNotes(notes))
+    observer.observe(component)
+}
 
 function appendToContainer(container, type) {
     // Save current scroll position - adding element can scroll, container
