@@ -35,6 +35,10 @@ export default class Group {
             this._groupContainer = this._group
         }
 
+        // Sizing
+        const widthObserver = new ResizeObserver(() => this._fitWidth())
+        widthObserver.observe(container)
+
         // Add exercises
         const exercises = []
         for (const exerciseData of groupData.exercises) {
