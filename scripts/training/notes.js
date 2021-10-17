@@ -30,4 +30,17 @@ export function notesFunctionality(notes, notesButton, objData,
     const observer = new ResizeObserver(sizing)
     observer.observe(compContainer)
     notes.addEventListener("input", sizing)
+
+    // Display
+    notesButton.addEventListener("click", () => {
+        notes.style.display = "block"
+        notesButton.style.display = "none"
+
+        if (resizeCallback) resizeCallback()
+        notes.focus()
+    })
+
+    // Undisplay
+
+    // Save
 }
