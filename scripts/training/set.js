@@ -19,13 +19,9 @@ export default class Set {
         // Watches
         this._setWatch = set.querySelector(":scope .tcex-set-watch")
         this._pauseWatch = set.querySelector(":scope .tcex-pause-watch")
-        this._setWatch.textContent = "00:00"
-        this._pauseWatch.textContent = "00:00"
-        this._setWatchTime = 0
-        this._pauseWatchTime = 0
-        this._timerTick = this._timerTick.bind(this)
+        this._initWatches()
 
-        this._activeWatch = this._setWatch
+        this._timerTick = this._timerTick.bind(this)
 
         container.append(setFrag)
     }
@@ -52,6 +48,7 @@ export default class Set {
 
     deactivate() {
         this._timer.removeCallback(this._timerTick)
+        this._timer = null
     }
 
     next() {
@@ -79,8 +76,26 @@ export default class Set {
         return false
     }
 
+    reset() {
+        this._initWatches()
+
+        if (this._timer) {
+            this._timer.removeCallback(this._timerTick)
+            this._timer = null
+        }
+    }
+
 
     // --- Private ---
+
+    _initWatches() {
+        this._setWatch.textContent = "00:00"
+        this._pauseWatch.textContent = "00:00"
+        this._setWatchTime = 0
+        this._pauseWatchTime = 0
+
+        this._activeWatch = this._setWatch
+    }
 
     _timerTick() {
         if (this._activeWatch == this._setWatch) {

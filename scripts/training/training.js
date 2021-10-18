@@ -112,5 +112,8 @@ export function resetPhase() {
 }
 
 export function reset() {
+    activeGroupIndex = 0
+    for (const group of groups) group.reset()
 
+    groups[0].activate(timer)
 }

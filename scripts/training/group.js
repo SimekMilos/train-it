@@ -57,6 +57,10 @@ export default class Group {
         container.append(groupFrag)
     }
 
+    destruct() {
+        this._group.remove()
+    }
+
     set currentTime(value) {
         if (this._watch) {
             this._watchTime = --value
@@ -68,10 +72,6 @@ export default class Group {
         return this._exercises[this._activeExerciseIndex].currentSet
     }
 
-    destruct() {
-        this._group.remove()
-    }
-
     activate(timer) {
         this._timer = timer
         if (this._watch) timer.registerCallback(this._timerTick)
@@ -80,7 +80,10 @@ export default class Group {
     }
 
     deactivate() {
-        if (this._watch) this._timer.removeCallback(this._timerTick)
+        if (this._watch) {
+            this._timer.removeCallback(this._timerTick)
+            this._timer = null
+        }
         this._exercises[this._activeExerciseIndex].deactivate()
     }
 
@@ -103,6 +106,21 @@ export default class Group {
     isLast() {
         if (this._activeExerciseIndex < this._exercises.length - 1) return false
         return this._exercises[this._activeExerciseIndex].isLast()
+    }
+
+    reset() {
+        if (this._watch) {
+            this._watch.textContent = "00:00"
+            this._watchTime = 0
+        }
+
+        if (this._timer) {
+            this._timer.removeCallback(this._timerTick)
+            this._timer = null
+        }
+
+        this._activeExerciseIndex = 0
+        for (const exercise of this._exercises) exercise.reset()
     }
 
 

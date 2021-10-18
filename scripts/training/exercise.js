@@ -59,6 +59,8 @@ export default class Exercise {
 
     deactivate() {
         this._timer.removeCallback(this._timerTick)
+        this._timer = null
+
         this._sets[this._activeSetIndex].deactivate()
     }
 
@@ -81,6 +83,19 @@ export default class Exercise {
     isLast() {
         if (this._activeSetIndex < this._sets.length - 1) return false
         return this._sets[this._activeSetIndex].isLast()
+    }
+
+    reset() {
+        this._watch.textContent = "00:00"
+        this._watchTime = 0
+
+        if (this._timer) {
+            this._timer.removeCallback(this._timerTick)
+            this._timer = null
+        }
+
+        this._activeSetIndex = 0
+        for (const set of this._sets) set.reset()
     }
 
 
