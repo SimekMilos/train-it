@@ -1,15 +1,16 @@
 
 export function setNextPhase(objArray, activeIndex, timer) {
-    let phase = objArray[activeIndex].next()
+    let nextPhase = objArray[activeIndex].next()
 
-    if (!phase) {
+    if (!nextPhase) {
+        // Return null if cannot go next
         if (activeIndex == objArray.length - 1) return [null, activeIndex]
 
         // Move to the next object
         objArray[activeIndex].deactivate()
         activeIndex++
-        phase = objArray[activeIndex].activate(timer)
+        nextPhase = objArray[activeIndex].activate(timer)
     }
 
-    return [phase, activeIndex]
+    return [nextPhase, activeIndex]
 }

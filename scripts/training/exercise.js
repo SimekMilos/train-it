@@ -54,11 +54,11 @@ export default class Exercise {
     }
 
     next() {
-        let phase
-        [phase, this._activeSetIndex] = setNextPhase(this._sets,
-                                                     this._activeSetIndex,
-                                                     this._timer)
-        return phase
+        let nextPhase
+        [nextPhase, this._activeSetIndex] = setNextPhase(this._sets,
+                                                         this._activeSetIndex,
+                                                         this._timer)
+        return nextPhase
     }
 
     isLast() {

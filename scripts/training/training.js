@@ -55,9 +55,10 @@ export function setTimer(timerObj) {
 export function next() {
     /* return - "set" / "pause" / null (no next phase) */
 
-    let phase
-    [phase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex, timer)
-    return phase
+    let nextPhase
+    [nextPhase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex,
+                                                 timer)
+    return nextPhase
 }
 
 export function back() {

@@ -74,11 +74,11 @@ export default class Group {
     }
 
     next() {
-        let phase
-        [phase, this._activeExerciseIndex] = setNextPhase(this._exercises,
+        let nextPhase
+        [nextPhase, this._activeExerciseIndex] = setNextPhase(this._exercises,
                                                   this._activeExerciseIndex,
                                                   this._timer)
-        return phase
+        return nextPhase
     }
 
     isLast() {
