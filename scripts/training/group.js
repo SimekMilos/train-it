@@ -1,5 +1,6 @@
 
 import {float, px, getWatchString} from "../tools.js"
+import {setNextPhase} from "./training-tools.js"
 
 import Exercise from "./exercise.js"
 import {notesFunctionality} from "./notes.js"
@@ -64,12 +65,20 @@ export default class Group {
         this._timer = timer
         if (this._watch) timer.registerCallback(this._timerTick)
 
-        this._exercises[this._activeExerciseIndex].activate(timer)
+        return this._exercises[this._activeExerciseIndex].activate(timer)
     }
 
     deactivate() {
         if (this._watch) this._timer.removeCallback(this._timerTick)
         this._exercises[this._activeExerciseIndex].deactivate()
+    }
+
+    next() {
+        let phase
+        [phase, this._activeExerciseIndex] = setNextPhase(this._exercises,
+                                                  this._activeExerciseIndex,
+                                                  this._timer)
+        return phase
     }
 
 

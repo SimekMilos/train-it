@@ -1,5 +1,6 @@
 
 import {getWatchString} from "../tools.js"
+import {setNextPhase} from "./training-tools.js"
 
 import Set from "./set.js"
 import {notesFunctionality} from "./notes.js"
@@ -44,12 +45,20 @@ export default class Exercise {
         this._timer = timer
         timer.registerCallback(this._timerTick)
 
-        this._sets[this._activeSetIndex].activate(timer)
+        return this._sets[this._activeSetIndex].activate(timer)
     }
 
     deactivate() {
         this._timer.removeCallback(this._timerTick)
         this._sets[this._activeSetIndex].deactivate()
+    }
+
+    next() {
+        let phase
+        [phase, this._activeSetIndex] = setNextPhase(this._sets,
+                                                     this._activeSetIndex,
+                                                     this._timer)
+        return phase
     }
 
 

@@ -1,4 +1,6 @@
 
+import {setNextPhase} from "./training-tools.js"
+
 import {} from "./display.js"
 import TrainingInfo from "./training-info.js"
 import Group from "./group.js"
@@ -49,20 +51,13 @@ export function setTimer(timerObj) {
 
 
 // Actions
-let last = "set"
 
 export function next() {
     /* return - "set" / "pause" / null (no next phase) */
 
-    if (last == "pause") {
-        last = "set"
-        return "set"
-    } else {
-        last = "pause"
-        return "pause"
-    }
-
-    // return "pause"
+    let phase
+    [phase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex, timer)
+    return phase
 }
 
 export function back() {

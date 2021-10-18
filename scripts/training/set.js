@@ -33,10 +33,22 @@ export default class Set {
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)
+
+        if (this._activeWatch == this._setWatch) return "set"
+        else return "pause"
     }
 
     deactivate() {
         this._timer.removeCallback(this._timerTick)
+    }
+
+    next() {
+        if (this._activeWatch == this._setWatch) {
+            this._activeWatch = this._pauseWatch
+            return "pause"
+        }
+
+        return null
     }
 
 
