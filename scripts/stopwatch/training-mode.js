@@ -234,6 +234,7 @@ async function next() {
     if (newPhase == "set") display.watches.setMode()
     else                   display.watches.pauseMode()
 
+    training.addTime(precedeTime)
     watches.setCurrentWatchTime(precedeTime)
     return !training.isLast() ? "run" : "finish"
 }

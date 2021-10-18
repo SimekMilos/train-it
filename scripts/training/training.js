@@ -91,9 +91,18 @@ export function getCurrentTime() {
     return groups[activeGroupIndex].currentSet.currentTime
 }
 
+export function addTime(time) {
+    /* Adds time to current phase */
+
+    const currentSet = groups[activeGroupIndex].currentSet
+    currentSet.currentTime = currentSet.currentTime + time
+}
+
 export function substractTime(time) {
     /* Substracts time from current phase */
 
+    const currentSet = groups[activeGroupIndex].currentSet
+    currentSet.currentTime = currentSet.currentTime - time
 }
 
 export function resetPhase() {
