@@ -64,6 +64,8 @@ export default class Set {
     }
 
     back() {
+        this.currentTime = 0
+
         if (this._activeWatch == this._pauseWatch) {
             this._activeWatch = this._setWatch
             return "set"

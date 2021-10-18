@@ -62,7 +62,11 @@ export function next() {
 }
 
 export function back() {
-    /* return - "set" / "pause" / null (no previous phase) */
+    /* Goes 1 phase back
+       Clears all clocks (set, exercise, group) related to the next phase.
+
+       return: new phase - "set" / "pause" / null (no previous phase)
+    */
 
     let prevPhase
     [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,

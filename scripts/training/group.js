@@ -57,6 +57,13 @@ export default class Group {
         container.append(groupFrag)
     }
 
+    set currentTime(value) {
+        if (this._watch) {
+            this._watchTime = --value
+            this._timerTick()
+        }
+    }
+
     get currentSet() {
         return this._exercises[this._activeExerciseIndex].currentSet
     }
@@ -89,7 +96,7 @@ export default class Group {
         let prevPhase
         [prevPhase, this._activeExerciseIndex] = setPreviousPhase(this._exercises,
                                                   this._activeExerciseIndex,
-                                                  this._timer)
+                                                  this._timer, this)
         return prevPhase
     }
 

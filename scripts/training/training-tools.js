@@ -15,12 +15,14 @@ export function setNextPhase(objArray, activeIndex, timer) {
     return [nextPhase, activeIndex]
 }
 
-export function setPreviousPhase(objArray, activeIndex, timer) {
+export function setPreviousPhase(objArray, activeIndex, timer, obj = null) {
     let previousPhase = objArray[activeIndex].back()
 
     if (!previousPhase) {
-        // Return null if cannot go back
-        if (activeIndex == 0) return [null, activeIndex]
+        if (activeIndex == 0) {     // When can't go back
+            if (obj) obj.currentTime = 0
+            return [null, activeIndex]
+        }
 
         // Move to the previous object
         objArray[activeIndex].deactivate()

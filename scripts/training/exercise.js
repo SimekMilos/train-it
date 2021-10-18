@@ -41,6 +41,11 @@ export default class Exercise {
         container.append(exerciseFrag)
     }
 
+    set currentTime(value) {
+        this._watchTime = --value
+        this._timerTick()
+    }
+
     get currentSet() {
         return this._sets[this._activeSetIndex]
     }
@@ -69,7 +74,7 @@ export default class Exercise {
         let prevPhase
         [prevPhase, this._activeSetIndex] = setPreviousPhase(this._sets,
                                                          this._activeSetIndex,
-                                                         this._timer)
+                                                         this._timer, this)
         return prevPhase
     }
 
