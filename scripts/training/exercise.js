@@ -1,6 +1,6 @@
 
 import {getWatchString} from "../tools.js"
-import {setNextPhase} from "./training-tools.js"
+import {setNextPhase, setPreviousPhase} from "./training-tools.js"
 
 import Set from "./set.js"
 import {notesFunctionality} from "./notes.js"
@@ -59,6 +59,14 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer)
         return nextPhase
+    }
+
+    back() {
+        let prevPhase
+        [prevPhase, this._activeSetIndex] = setPreviousPhase(this._sets,
+                                                         this._activeSetIndex,
+                                                         this._timer)
+        return prevPhase
     }
 
     isLast() {

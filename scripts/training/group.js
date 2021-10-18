@@ -1,6 +1,6 @@
 
 import {float, px, getWatchString} from "../tools.js"
-import {setNextPhase} from "./training-tools.js"
+import {setNextPhase, setPreviousPhase} from "./training-tools.js"
 
 import Exercise from "./exercise.js"
 import {notesFunctionality} from "./notes.js"
@@ -79,6 +79,14 @@ export default class Group {
                                                   this._activeExerciseIndex,
                                                   this._timer)
         return nextPhase
+    }
+
+    back() {
+        let prevPhase
+        [prevPhase, this._activeExerciseIndex] = setPreviousPhase(this._exercises,
+                                                  this._activeExerciseIndex,
+                                                  this._timer)
+        return prevPhase
     }
 
     isLast() {

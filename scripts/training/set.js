@@ -51,6 +51,15 @@ export default class Set {
         return null
     }
 
+    back() {
+        if (this._activeWatch == this._pauseWatch) {
+            this._activeWatch = this._setWatch
+            return "set"
+        }
+
+        return null
+    }
+
     isLast() {
         if (this._activeWatch == this._pauseWatch) return true
         return false

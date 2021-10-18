@@ -1,5 +1,5 @@
 
-import {setNextPhase} from "./training-tools.js"
+import {setNextPhase, setPreviousPhase} from "./training-tools.js"
 
 import {} from "./display.js"
 import TrainingInfo from "./training-info.js"
@@ -64,11 +64,14 @@ export function next() {
 export function back() {
     /* return {
           phase: "set" / "pause" / null (no previous phase)
-          time: Number    - current time of the previous phase
+          time: Number    - current time of the new (previous) phase
        }
     */
 
-    return { phase: "pause", time: 123 }
+    let prevPhase
+    [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,
+                                                     timer)
+    return { phase: prevPhase, time: 3 }
 }
 
 export function isFirst() {
