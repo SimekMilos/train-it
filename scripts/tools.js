@@ -133,6 +133,15 @@ export async function dialog(message, ...buttons) {
     return action
 }
 
+export function getWatchString(time) {
+    let seconds = time % 60
+    let minutes = ((time - seconds) / 60) % 60
+    seconds = String(seconds).padStart(2, "0")
+    minutes = String(minutes).padStart(2, "0")
+
+    return `${minutes}:${seconds}`
+}
+
 export function sizeNotes(elemOrEvent) {
     let notes = elemOrEvent
     if (elemOrEvent instanceof Event) notes = elemOrEvent.target

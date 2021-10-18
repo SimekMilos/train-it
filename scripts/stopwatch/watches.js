@@ -1,4 +1,6 @@
 
+import {getWatchString} from "../tools.js"
+
 const currentWatch = document.querySelector(".st-current-stopwatch")
 const totalWatch = document.querySelector(".st-total-stopwatch")
 
@@ -51,16 +53,4 @@ export function addToTotalWatch() {
     hours = String(hours).padStart(2, "0")
 
     totalWatch.textContent = `${hours}:${minutes}:${seconds}`
-}
-
-
-// --- Private ---
-
-function getWatchString(time) {
-    let seconds = time % 60
-    let minutes = ((time - seconds) / 60) % 60
-    seconds = String(seconds).padStart(2, "0")
-    minutes = String(minutes).padStart(2, "0")
-
-    return `${minutes}:${seconds}`
 }
