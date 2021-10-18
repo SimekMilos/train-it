@@ -30,6 +30,11 @@ export default class Set {
         container.append(setFrag)
     }
 
+    get currentTime() {
+        if (this._activeWatch == this._setWatch) return this._setWatchTime
+        return this._pauseWatchTime
+    }
+
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)

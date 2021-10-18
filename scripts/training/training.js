@@ -84,7 +84,7 @@ export function isLast() {
 }
 
 export function getCurrentTime() {
-    return 123
+    return groups[activeGroupIndex].currentSet.currentTime
 }
 
 export function substractTime(time) {

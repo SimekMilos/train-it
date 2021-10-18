@@ -41,6 +41,10 @@ export default class Exercise {
         container.append(exerciseFrag)
     }
 
+    get currentSet() {
+        return this._sets[this._activeSetIndex]
+    }
+
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)

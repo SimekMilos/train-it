@@ -57,6 +57,10 @@ export default class Group {
         container.append(groupFrag)
     }
 
+    get currentSet() {
+        return this._exercises[this._activeExerciseIndex].currentSet
+    }
+
     destruct() {
         this._group.remove()
     }
