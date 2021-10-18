@@ -81,6 +81,11 @@ export default class Group {
         return phase
     }
 
+    isLast() {
+        if (this._activeExerciseIndex < this._exercises.length - 1) return false
+        return this._exercises[this._activeExerciseIndex].isLast()
+    }
+
 
     // --- Private ---
 

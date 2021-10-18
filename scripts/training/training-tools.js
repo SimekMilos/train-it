@@ -3,7 +3,7 @@ export function setNextPhase(objArray, activeIndex, timer) {
     let phase = objArray[activeIndex].next()
 
     if (!phase) {
-        if (activeIndex + 1 == objArray.length) return [null, activeIndex]
+        if (activeIndex == objArray.length - 1) return [null, activeIndex]
 
         // Move to the next object
         objArray[activeIndex].deactivate()

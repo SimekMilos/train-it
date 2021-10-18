@@ -61,6 +61,11 @@ export default class Exercise {
         return phase
     }
 
+    isLast() {
+        if (this._activeSetIndex < this._sets.length - 1) return false
+        return this._sets[this._activeSetIndex].isLast()
+    }
+
 
     // --- Private ---
 

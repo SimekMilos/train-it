@@ -79,7 +79,8 @@ export function isFirst() {
 export function isLast() {
     /* return - true if current phase is the last one in the training */
 
-    return false
+    if (activeGroupIndex < groups.length - 1) return false
+    return groups[activeGroupIndex].isLast()
 }
 
 export function substractTime(time) {
