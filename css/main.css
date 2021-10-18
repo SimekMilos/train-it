@@ -190,6 +190,7 @@ body {
     border: 1px solid var(--button-color);
     border-radius: var(--comp-border-radius);
     background-color: transparent;
+    outline: none;                  /* Chrome tends to add outline */
 
     font: var(--button-font);
     color: var(--button-color);
