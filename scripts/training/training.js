@@ -95,6 +95,7 @@ export function substractTime(time) {
 export function resetPhase() {
     /* Resets current phase clock, not group or exercise clock */
 
+    groups[activeGroupIndex].currentSet.currentTime = 0
 }
 
 export function reset() {

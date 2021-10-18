@@ -35,6 +35,13 @@ export default class Set {
         return this._pauseWatchTime
     }
 
+    set currentTime(value) {
+        if (this._activeWatch == this._setWatch) this._setWatchTime = --value
+        else this._pauseWatchTime = --value
+
+        this._timerTick()
+    }
+
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)
