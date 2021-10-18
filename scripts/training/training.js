@@ -6,7 +6,10 @@ import * as notes from "./notes.js"
 
 const compContainer = document.querySelector(".tc-container")
 
-const training = []
+const groups = []
+let activeGroupIndex = 0
+let trainingInfo = null
+let timer = null
 
 
 // --- Public ---
@@ -18,25 +21,30 @@ export function init(trainingData) {
     notes.setDataStructure(trainingData)
 
     // Add training info
-    training.push(new TrainingInfo(trainingData, compContainer))
+    trainingInfo = new TrainingInfo(trainingData, compContainer)
 
     // Add groups
     for (const groupData of trainingData.groups) {
-        training.push(new Group(groupData, compContainer))
+        groups.push(new Group(groupData, compContainer))
     }
 }
 
 export function destroy() {
-    for (const trObj of training) trObj.destruct()
-    training.length = 0
+    trainingInfo.destruct()
+
+    for (const group of groups) group.destruct()
+    groups.length = 0
 }
 
 export function display() {
 
 }
 
-export function setTimer(timer) {
+export function setTimer(timerObj) {
+    timer = timerObj
 
+    activeGroupIndex = 0
+    groups[0].activate(timer)
 }
 
 
