@@ -1,5 +1,5 @@
 
-import {float, px} from "../tools.js"
+import {float, px, getWatchString} from "../tools.js"
 
 import Exercise from "./exercise.js"
 import {notesFunctionality} from "./notes.js"
@@ -22,6 +22,12 @@ export default class Group {
             const name = this._group.querySelector("h3")
             name.textContent = groupData.name
 
+            // Watch
+            this._watch = this._group.querySelector(":scope .tcg-watch")
+            this._watch.textContent = "00:00"
+            this._watchTime = 0
+            this._timerTick = this._timerTick.bind(this)
+
             // Notes
             const notes = this._group.querySelector(":scope .tcg-notes")
             const notesButton = this._group.querySelector(":scope .tcg-notes-button")
@@ -40,10 +46,11 @@ export default class Group {
         widthObserver.observe(container)
 
         // Add exercises
-        const exercises = []
+        this._exercises = []
+        this._activeExerciseIndex = 0
         for (const exerciseData of groupData.exercises) {
-            exercises.push(new Exercise(exerciseData, this._groupContainer,
-                           this._fitWidth.bind(this)))
+            this._exercises.push(new Exercise(exerciseData, this._groupContainer,
+                                 this._fitWidth.bind(this)))
         }
 
         container.append(groupFrag)
@@ -53,8 +60,25 @@ export default class Group {
         this._group.remove()
     }
 
+    activate(timer) {
+        this._timer = timer
+        if (this._watch) timer.registerCallback(this._timerTick)
+
+        this._exercises[this._activeExerciseIndex].activate(timer)
+    }
+
+    deactivate() {
+        if (this._watch) this._timer.removeCallback(this._timerTick)
+        this._exercises[this._activeExerciseIndex].deactivate()
+    }
+
 
     // --- Private ---
+
+    _timerTick() {
+        this._watchTime++
+        this._watch.textContent = getWatchString(this._watchTime)
+    }
 
     _fitWidth() {
         let first = this._groupContainer.firstElementChild
