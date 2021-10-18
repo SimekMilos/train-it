@@ -221,6 +221,10 @@ body {
     cursor: auto;
 }
 
+.control-button .center-font {
+    margin-top: -.06em;
+}
+
 
 /* --- Close Button --- */
 
