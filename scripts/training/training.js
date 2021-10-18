@@ -62,16 +62,12 @@ export function next() {
 }
 
 export function back() {
-    /* return {
-          phase: "set" / "pause" / null (no previous phase)
-          time: Number    - current time of the new (previous) phase
-       }
-    */
+    /* return - "set" / "pause" / null (no previous phase) */
 
     let prevPhase
     [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,
                                                      timer)
-    return { phase: prevPhase, time: 3 }
+    return prevPhase
 }
 
 export function isFirst() {
@@ -85,6 +81,10 @@ export function isLast() {
 
     if (activeGroupIndex < groups.length - 1) return false
     return groups[activeGroupIndex].isLast()
+}
+
+export function getCurrentTime() {
+    return 123
 }
 
 export function substractTime(time) {
