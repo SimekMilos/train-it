@@ -1,4 +1,6 @@
 
+import {getWatchString} from "../tools.js"
+
 import Set from "./set.js"
 import {notesFunctionality} from "./notes.js"
 
@@ -15,6 +17,12 @@ export default class Exercise {
         const name = exercise.querySelector(":scope .tce-name")
         name.textContent = exerciseData.name
 
+        // Watch
+        this._watch = exercise.querySelector(":scope .tce-watch")
+        this._watch.textContent = "00:00"
+        this._watchTime = 0
+        this._timerTick = this._timerTick.bind(this)
+
         // Notes
         this._notes = exercise.querySelector(":scope .tce-notes")
         const notesButton = exercise.querySelector(":scope .tce-notes-button")
@@ -23,16 +31,34 @@ export default class Exercise {
         notesFunctionality(this._notes, notesButton, exerciseData,
                            resizeCallback)
         // Sets
-        const sets = []
+        this._sets = []
+        this._activeSetIndex = 0
         for (const setNameStr of exerciseData.sets) {
-            sets.push(new Set(setNameStr, this._exerciseContainer))
+            this._sets.push(new Set(setNameStr, this._exerciseContainer))
         }
 
         container.append(exerciseFrag)
     }
 
+    activate(timer) {
+        this._timer = timer
+        timer.registerCallback(this._timerTick)
+
+        this._sets[this._activeSetIndex].activate(timer)
+    }
+
+    deactivate() {
+        this._timer.removeCallback(this._timerTick)
+        this._sets[this._activeSetIndex].deactivate()
+    }
+
 
     // --- Private ---
+
+    _timerTick() {
+        this._watchTime++
+        this._watch.textContent = getWatchString(this._watchTime)
+    }
 
     _setupRows() {
         /* Changes row styles while notes are displayed */
