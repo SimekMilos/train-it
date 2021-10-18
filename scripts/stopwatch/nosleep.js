@@ -44,7 +44,7 @@ window.addEventListener("click", function enable() {
 
     // Initialize video element
     video = document.createElement("video")
-    video.setAttribute("playsinline", "")
+    video.playsInline = true
 
     // Add mp4 source
     let source = document.createElement("source")
