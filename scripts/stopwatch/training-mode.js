@@ -244,7 +244,7 @@ async function next() {
 
     training.addTime(precedeTime)
     watches.setCurrentWatchTime(precedeTime)
-    return !training.isLast() ? "run" : "finish"
+    return !training.isLastPhase() ? "run" : "finish"
 }
 
 function pause() {
@@ -288,7 +288,7 @@ function continueAction() {
     if (display.watches.mode == "countdown") countdownTimer.start()
     else                                     timer.start()
 
-    return !training.isLast() ? "run" : "finish"
+    return !training.isLastPhase() ? "run" : "finish"
 }
 
 

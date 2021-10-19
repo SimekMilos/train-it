@@ -85,9 +85,9 @@ export default class Exercise {
         return prevPhase
     }
 
-    isLast() {
+    isLastPhase() {
         if (this._activeSetIndex < this._sets.length - 1) return false
-        return this._sets[this._activeSetIndex].isLast()
+        return this._sets[this._activeSetIndex].isLastPhase()
     }
 
     reset() {

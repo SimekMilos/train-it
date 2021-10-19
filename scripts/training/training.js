@@ -79,11 +79,11 @@ export function back() {
     return prevPhase
 }
 
-export function isLast() {
+export function isLastPhase() {
     /* Returns true if current phase is the last one in the training */
 
     if (activeGroupIndex < groups.length - 1) return false
-    return groups[activeGroupIndex].isLast()
+    return groups[activeGroupIndex].isLastPhase()
 }
 
 export function getCurrentTime() {

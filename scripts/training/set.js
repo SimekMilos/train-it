@@ -86,7 +86,7 @@ export default class Set {
         return null
     }
 
-    isLast() {
+    isLastPhase() {
         if (this._activeWatch == this._pauseWatch) return true
         return false
     }

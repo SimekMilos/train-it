@@ -103,9 +103,9 @@ export default class Group {
         return prevPhase
     }
 
-    isLast() {
+    isLastPhase() {
         if (this._activeExerciseIndex < this._exercises.length - 1) return false
-        return this._exercises[this._activeExerciseIndex].isLast()
+        return this._exercises[this._activeExerciseIndex].isLastPhase()
     }
 
     reset() {
