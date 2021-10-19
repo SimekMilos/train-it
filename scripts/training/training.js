@@ -53,7 +53,10 @@ export function setTimer(timerObj) {
 // Actions
 
 export function next() {
-    /* return - "set" / "pause" / null (no next phase) */
+    /* Moves 1 phase forward
+
+       return: new phase - "set" / "pause" / null (no next phase)
+    */
 
     let nextPhase
     [nextPhase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex,
@@ -62,7 +65,7 @@ export function next() {
 }
 
 export function back() {
-    /* Goes 1 phase back
+    /* Moves 1 phase back
        Clears all clocks (set, exercise, group) related to the next phase.
 
        return: new phase - "set" / "pause" / null (no previous phase)
@@ -75,13 +78,15 @@ export function back() {
 }
 
 export function isLast() {
-    /* return - true if current phase is the last one in the training */
+    /* Returns true if current phase is the last one in the training */
 
     if (activeGroupIndex < groups.length - 1) return false
     return groups[activeGroupIndex].isLast()
 }
 
 export function getCurrentTime() {
+    /* Gets time of current phase */
+
     return groups[activeGroupIndex].currentSet.currentTime
 }
 
@@ -93,7 +98,7 @@ export function addTime(time) {
 }
 
 export function substractTime(time) {
-    /* Substracts time from current phase */
+    /* Subtracts time from current phase */
 
     const currentSet = groups[activeGroupIndex].currentSet
     currentSet.currentTime = currentSet.currentTime - time
@@ -106,6 +111,8 @@ export function resetPhase() {
 }
 
 export function reset() {
+    /* Resets whole training */
+
     activeGroupIndex = 0
     for (const group of groups) group.reset()
 
