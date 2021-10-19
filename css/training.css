@@ -14,11 +14,15 @@
     --notes-tb-padding: .4em;    /* Top Bottom */
     --notes-lr-padding: .6em;    /* Left Right */
 
-    --background-color1: hsl(209, 100%, 95%);
-    --background-color2: hsl(209, 100%, 98%);
+    --border-width: .1em;
     --border-color: hsl(209, 100%, 70%);
     --border-radius: .35em;
+
+    --border: var(--border-width) solid var(--border-color);
     --shadow: .1em .1em .15em #0002;
+
+    --background-color1: hsl(209, 100%, 95%);
+    --background-color2: hsl(209, 100%, 98%);
 }
 
 .tc-container {
@@ -128,8 +132,9 @@
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
     font-size: .8em;
 
-    border: 1px solid var(--border-color);
+    border: calc(var(--border-width) / .8) solid var(--border-color);
     border-radius: var(--border-radius);
+
     background-color: var(--background-color2);
     box-shadow: var(--shadow);
 }
@@ -145,7 +150,7 @@
     margin: 0 .5em .75em;
     padding: .5em 0 0 .5em;
 
-    border: 1px solid var(--main-color);
+    border: var(--border-width) solid var(--main-color);
     border-radius: var(--border-radius);
 
     /* For dynamic sizing of tcg-container */
@@ -210,8 +215,9 @@
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
     font-size: .8em;
 
-    border: 1px solid var(--border-color);
+    border: calc(var(--border-width) / .8) solid var(--border-color);
     border-radius: var(--border-radius);
+
     background-color: var(--background-color2);
     box-shadow: var(--shadow);
 
@@ -220,11 +226,6 @@
 
 .tcg-notes:focus {
     background-color: var(--background-color2);
-}
-
-/* Running group */
-.tc-group.running .tcg-watch {
-    color: var(--running-color);
 }
 
 
@@ -248,7 +249,7 @@
     max-height: calc(100% - .5em);
     margin: 0 .5em .5em 0;
 
-    border: 1px solid var(--border-color);
+    border: var(--border);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
 
@@ -282,7 +283,7 @@
 
 .tce-name {
     font: normal 1.1em "OpenSans Regular", sans-serif;
-    color: hsl(209, 100%, 40%);
+    color: hsl(209, 100%, 50%);
 }
 
 .tce-notes-button {
@@ -331,9 +332,13 @@
     border: none;
 }
 
-/* Running exercise */
-.tc-exercise.running .tce-watch {
-    color: var(--running-color);
+/* Active exercise */
+.tc-exercise.active-set {
+    border-color: var(--active-set-color);
+}
+
+.tc-exercise.active-pause {
+    border-color: var(--active-pause-color);
 }
 
 
@@ -380,28 +385,28 @@
     color: var(--secondary-watch-color);
 }
 
-/* Running set */
-.tc-exercise-set.running-set::before {
-    color: var(--running-color);
+/* Active set */
+.tc-exercise-set.active-set::before {
+    color: var(--active-set-color);
 }
 
-.tc-exercise-set.running-set .tcex-name {
-    color: var(--running-color);
+.tc-exercise-set.active-set .tcex-name {
+    color: var(--active-set-color);
 }
 
-.tc-exercise-set.running-set .tcex-set-watch {
-    color: var(--running-color);
+.tc-exercise-set.active-set .tcex-set-watch {
+    color: var(--active-set-color);
 }
 
-/* Running pause */
-.tc-exercise-set.running-pause::before {
-    color: var(--running-pause-color);
+/* Active pause */
+.tc-exercise-set.active-pause::before {
+    color: var(--active-pause-color);
 }
 
-.tc-exercise-set.running-pause .tcex-name {
-    color: var(--running-pause-color);
+.tc-exercise-set.active-pause .tcex-name {
+    color: var(--active-pause-color);
 }
 
-.tc-exercise-set.running-pause .tcex-pause-watch {
-    color: var(--running-pause-color);
+.tc-exercise-set.active-pause .tcex-pause-watch {
+    color: var(--active-pause-color);
 }
