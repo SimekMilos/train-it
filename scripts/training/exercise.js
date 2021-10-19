@@ -105,6 +105,7 @@ export default class Exercise {
         }
 
         setStyle(this, null)
+        this.isNext = false
         this._activeSetIndex = 0
         for (const set of this._sets) set.reset()
     }
