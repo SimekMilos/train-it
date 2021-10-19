@@ -373,7 +373,7 @@ async function setCoutdown() {
 
     // Display
     let countdownTime = settings.getSetCountdown()
-    counter.textContent = countdownTime - 1
+    counter.textContent = countdownTime
     document.body.append(component)
 
     // Countdown
@@ -382,7 +382,7 @@ async function setCoutdown() {
 
     function count() {
         countdownTime--
-        counter.textContent = countdownTime - 1
+        counter.textContent = countdownTime
         if (!countdownTime || finish) resolve()
     }
     timer.registerCallback(count)
