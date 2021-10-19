@@ -181,8 +181,17 @@ body {
 }
 
 
+/* --- Buttons --- */
+
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 /* --- Control Button --- */
-/* General styles for buttons */
 
 .control-button {
     height: var(--button-height);
@@ -194,11 +203,6 @@ body {
 
     font: var(--button-font);
     color: var(--button-color);
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 @media (any-hover: hover) {
