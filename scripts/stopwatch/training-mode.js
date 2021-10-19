@@ -5,7 +5,7 @@ import * as settings from "../settings/settings.js"
 
 import * as display from "./display.js"
 import * as watches from "./watches.js"
-import * as nosleep from "./nosleep.js"
+// import * as nosleep from "./nosleep.js"
 import {Timer} from "./timer.js"
 import {deactSpacebarContext} from "./spacebar.js"
 
@@ -62,8 +62,8 @@ export async function eventCycle() {
         }
 
         // Prevent device sleep during running training
-        if ((new Set(["run", "finish"])).has(mode)) nosleep.activate()
-        else nosleep.deactivate()
+        // if ((new Set(["run", "finish"])).has(mode)) nosleep.activate()
+        // else nosleep.deactivate()
 
     } while (mode != "end")
 
