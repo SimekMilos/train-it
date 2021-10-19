@@ -148,6 +148,7 @@ function start() {
     // Start first set
     } else {
         display.watches.setMode()
+        training.start()
         timer.start()
     }
 
@@ -162,6 +163,7 @@ async function countdownTick() {
     if (!watches.getCurrentWatchTime()) {
         display.watches.setMode()
         countdownTimer.stop()
+        training.start()
         timer.start()
 
         buttonBack.textContent = "Back"
@@ -225,6 +227,7 @@ async function next() {
     // Countdown mode
     if (display.watches.mode == "countdown") {
         countdownTimer.stop()
+        training.start()
         timer.start()
 
         newPhase = "set"

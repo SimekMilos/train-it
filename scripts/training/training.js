@@ -44,13 +44,15 @@ export function display() {
 
 export function setTimer(timerObj) {
     timer = timerObj
-
-    activeGroupIndex = 0
-    groups[0].activate(timer)
 }
 
 
 // Actions
+
+export function start() {
+    activeGroupIndex = 0
+    groups[0].activate(timer)
+}
 
 export function next() {
     /* Moves 1 phase forward
@@ -113,8 +115,5 @@ export function resetPhase() {
 export function reset() {
     /* Resets whole training */
 
-    activeGroupIndex = 0
     for (const group of groups) group.reset()
-
-    groups[0].activate(timer)
 }
