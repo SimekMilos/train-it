@@ -51,6 +51,11 @@ export default class Exercise {
         return this._sets[this._activeSetIndex]
     }
 
+    set isNext(value) {
+        if (value) this._classList.add("next")
+        else this._classList.remove("next")
+    }
+
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)

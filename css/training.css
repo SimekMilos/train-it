@@ -341,6 +341,16 @@
     border-color: var(--active-pause-color);
 }
 
+.tc-exercise.next {
+    animation: next-exercise 2s ease-in-out infinite;
+}
+
+    @keyframes next-exercise {
+        50% {
+            border-color: var(--active-set-color);
+        }
+    }
+
 
 /* --- Set --- */
 
