@@ -32,3 +32,19 @@ export function setPreviousPhase(objArray, activeIndex, timer, obj = null) {
 
     return [previousPhase, activeIndex]
 }
+
+export function setStyle(obj, phase) {
+    if (phase == "set") {
+        obj._classList.remove("active-pause")
+        obj._classList.add("active-set")
+    }
+
+    if (phase == "pause") {
+        obj._classList.remove("active-set")
+        obj._classList.add("active-pause")
+    }
+
+    if (phase == null) {
+        obj._classList.remove("active-set", "active-pause")
+    }
+}

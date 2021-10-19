@@ -1,6 +1,6 @@
 
 import {getWatchString} from "../tools.js"
-import {setNextPhase, setPreviousPhase} from "./training-tools.js"
+import {setNextPhase, setPreviousPhase, setStyle} from "./training-tools.js"
 
 import Set from "./set.js"
 import {notesFunctionality} from "./notes.js"
@@ -12,6 +12,7 @@ export default class Exercise {
     constructor(exerciseData, container, resizeCallback) {
         const exerciseFrag = exerciseTemplate.content.cloneNode(true)
         const exercise = exerciseFrag.firstElementChild
+        this._classList = exercise.classList
         this._exerciseContainer = exercise.querySelector(":scope .tce-container")
 
         // Name
@@ -54,6 +55,7 @@ export default class Exercise {
         this._timer = timer
         timer.registerCallback(this._timerTick)
 
+        setStyle(this, this.currentSet.currentPhase)
         return this._sets[this._activeSetIndex].activate(timer)
     }
 
@@ -61,6 +63,7 @@ export default class Exercise {
         this._timer.removeCallback(this._timerTick)
         this._timer = null
 
+        setStyle(this, null)
         this._sets[this._activeSetIndex].deactivate()
     }
 
@@ -69,6 +72,7 @@ export default class Exercise {
         [nextPhase, this._activeSetIndex] = setNextPhase(this._sets,
                                                          this._activeSetIndex,
                                                          this._timer)
+        setStyle(this, nextPhase)
         return nextPhase
     }
 
@@ -77,6 +81,7 @@ export default class Exercise {
         [prevPhase, this._activeSetIndex] = setPreviousPhase(this._sets,
                                                          this._activeSetIndex,
                                                          this._timer, this)
+        setStyle(this, prevPhase)
         return prevPhase
     }
 
@@ -94,6 +99,7 @@ export default class Exercise {
             this._timer = null
         }
 
+        setStyle(this, null)
         this._activeSetIndex = 0
         for (const set of this._sets) set.reset()
     }
