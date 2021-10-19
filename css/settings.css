@@ -166,6 +166,8 @@
     border-bottom: 1px solid var(--main-color);
     border-radius: 0;
 
+    background-color: transparent;
+
     font-family: "OpenSans Regular", sans-serif;
     font-size: inherit;
 
