@@ -129,8 +129,8 @@ async function finishMode() {
 async function doneMode() {
     const [buttonReset, buttonClose] = display.buttons.doneMode()
     let action = await waitForAny(["click", buttonReset, reset],
-                                   ["click", buttonClose, end],
-                                   ["click", closeButton, end])
+                                  ["click", buttonClose, end],
+                                  ["click", closeButton, end])
     return action()
 }
 
@@ -203,10 +203,14 @@ async function back() {
 }
 
 async function next() {
+    // Prevent simultaneous actions: next & countdown start set
+    if (display.watches.mode == "countdown" &&
+        watches.getCurrentWatchTime() == 1) return "run"
+
     let precedeTime = 0, newPhase
     await waitForTick()
 
-    // Set countdown
+    // Display set countdown
     if (display.watches.mode == "pause" && settings.getSetCountdown()) {
         await setCoutdown()
     }
