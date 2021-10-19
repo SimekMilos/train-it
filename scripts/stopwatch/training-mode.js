@@ -184,8 +184,8 @@ async function back() {
         return "run"
     }
 
-    // Resets curent phase if above 3s or first phase
-    if (watches.getCurrentWatchTime() > 3 || training.isFirst()) {
+    // Resets curent phase if above 3s
+    if (watches.getCurrentWatchTime() > 3) {
         watches.resetCurrentWatchTime()
         training.resetPhase()
         return mode
@@ -194,8 +194,9 @@ async function back() {
     // Go phase back if 3s or less
     const newPhase = training.back()
 
-    if (newPhase == "set") display.watches.setMode()
-    else                   display.watches.pauseMode()
+    if (newPhase == "set")   display.watches.setMode()
+    if (newPhase == "pause") display.watches.pauseMode()
+    //  newPhase == null ->  ignore
 
     watches.setCurrentWatchTime(training.getCurrentTime())
     return "run"

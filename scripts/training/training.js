@@ -74,12 +74,6 @@ export function back() {
     return prevPhase
 }
 
-export function isFirst() {
-    /* return - true if current phase is the first one in the training */
-
-    return false
-}
-
 export function isLast() {
     /* return - true if current phase is the last one in the training */
 
