@@ -34,7 +34,7 @@
     /* Content */
     display: flex;
     flex-direction: row;
-    overflow: auto;
+    overflow: auto hidden;
 
     /*scroll-snap-type: x mandatory;*/
 }
@@ -313,6 +313,14 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    /* Hiding scrollbar */
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* Edge */
+}
+    /* Hiding scrollbar */
+.tce-container::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
 }
 
 .tce-container.odd > :nth-child(odd) {
