@@ -297,6 +297,11 @@ function continueAction() {
 
 function finish() {
     timer.stop()
+
+    display.watches.initialMode()
+    watches.resetCurrentWatchTime()
+    training.next()     // Removes active (running) pause styles
+
     return "done"
 }
 
