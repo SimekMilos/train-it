@@ -31,7 +31,7 @@ export async function smoothVerticalScroll(distance, duration, scrollContainer) 
         await wait(8)       // 120 fps
     }
 
-    scrollContainer.scrollLeft = stop
+    scrollContainer.scrollTop = stop
 }
 
 export async function smoothHorizontalScroll(distance, duration, scrollContainer) {
