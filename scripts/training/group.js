@@ -61,6 +61,10 @@ export default class Group {
         this._group.remove()
     }
 
+    get currentSet() {
+        return this._exercises[this._activeExerciseIndex].currentSet
+    }
+
     set currentTime(value) {
         if (this._watch) {
             this._watchTime = --value
@@ -68,14 +72,15 @@ export default class Group {
         }
     }
 
-    get currentSet() {
-        return this._exercises[this._activeExerciseIndex].currentSet
+    set isNext(value) {
+        this._exercises[0].isNext = value
     }
 
     activate(timer) {
         this._timer = timer
         if (this._watch) timer.registerCallback(this._timerTick)
 
+        this.isNext = false
         return this._exercises[this._activeExerciseIndex].activate(timer)
     }
 
@@ -92,10 +97,13 @@ export default class Group {
         [nextPhase, this._activeExerciseIndex] = setNextPhase(this._exercises,
                                                   this._activeExerciseIndex,
                                                   this._timer)
+        this._prepareNextExercise(true)
         return nextPhase
     }
 
     back() {
+        this._prepareNextExercise(false)
+
         let prevPhase
         [prevPhase, this._activeExerciseIndex] = setPreviousPhase(this._exercises,
                                                   this._activeExerciseIndex,
@@ -147,5 +155,13 @@ export default class Group {
         end += float(getComputedStyle(last).marginRight)
 
         this._groupContainer.style.width = px(end - start)
+    }
+
+    _prepareNextExercise(isNext) {
+        if (this._exercises[this._activeExerciseIndex].isLastPhase() &&
+            this._activeExerciseIndex < this._exercises.length - 1){
+
+            this._exercises[this._activeExerciseIndex+1].isNext = isNext
+        }
     }
 }

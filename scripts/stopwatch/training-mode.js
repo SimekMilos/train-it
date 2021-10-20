@@ -142,8 +142,9 @@ async function doneMode() {
 function start() {
     // Start countdown mode if set
     if (display.watches.mode == "countdown") {
-        countdownTimer.start()
         buttonBack.textContent = "+ 15 s"
+        countdownTimer.start()
+        training.countdown()
 
     // Start first set
     } else {

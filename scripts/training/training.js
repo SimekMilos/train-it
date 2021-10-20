@@ -49,6 +49,10 @@ export function setTimer(timerObj) {
 
 // Actions
 
+export function countdown() {
+    groups[0].isNext = true
+}
+
 export function start() {
     activeGroupIndex = 0
     groups[0].activate(timer)
@@ -63,6 +67,7 @@ export function next() {
     let nextPhase
     [nextPhase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex,
                                                  timer)
+    prepareNextExercise(true)
     return nextPhase
 }
 
@@ -72,6 +77,7 @@ export function back() {
 
        return: new phase - "set" / "pause" / null (no previous phase)
     */
+    prepareNextExercise(false)
 
     let prevPhase
     [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,
@@ -116,4 +122,15 @@ export function reset() {
     /* Resets whole training */
 
     for (const group of groups) group.reset()
+}
+
+
+// --- Private ---
+
+function prepareNextExercise(isNext) {
+    if (groups[activeGroupIndex].isLastPhase() &&
+        activeGroupIndex < groups.length - 1) {
+
+        groups[activeGroupIndex+1].isNext = isNext
+    }
 }

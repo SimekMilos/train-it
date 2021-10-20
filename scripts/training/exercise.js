@@ -42,13 +42,13 @@ export default class Exercise {
         container.append(exerciseFrag)
     }
 
+    get currentSet() {
+        return this._sets[this._activeSetIndex]
+    }
+
     set currentTime(value) {
         this._watchTime = --value
         this._timerTick()
-    }
-
-    get currentSet() {
-        return this._sets[this._activeSetIndex]
     }
 
     set isNext(value) {
@@ -60,6 +60,7 @@ export default class Exercise {
         this._timer = timer
         timer.registerCallback(this._timerTick)
 
+        this.isNext = false
         setStyle(this, this.currentSet.currentPhase)
         return this._sets[this._activeSetIndex].activate(timer)
     }
@@ -87,6 +88,7 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer, this)
         setStyle(this, prevPhase)
+        if (!prevPhase) this.isNext = true
         return prevPhase
     }
 
