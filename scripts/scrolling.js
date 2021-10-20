@@ -68,6 +68,56 @@ export async function smoothHorizontalScroll(distance, duration, scrollContainer
     scrollContainer.scrollLeft = stop
 }
 
+export async function smoothScroll(distance, duration, scrollContainer,
+                                   horizontal = false) {
+    /* Scrolls container vertically or horizontally.
+        distance - Number in px
+            - positive - to the bottom/right
+            - negative - up/left
+        duration - in ms
+        horizontal - false = vertical scrolling, true = horizontal scrolling
+    */
+
+    let contentLenght, scrolled, clientLength
+
+    // Get dimensions
+    if (horizontal) {
+        contentLenght = scrollContainer.scrollWidth
+        scrolled = scrollContainer.scrollLeft
+        clientLength = scrollContainer.clientWidth
+    } else {
+        contentLenght = scrollContainer.scrollHeight
+        scrolled = scrollContainer.scrollTop
+        clientLength = scrollContainer.clientHeight
+    }
+
+    // Cap by maximum possible scrolling distance
+    if (distance > 0) {
+        const maxScrollEnd = contentLenght - scrolled - clientLength
+        distance = Math.min(distance, maxScrollEnd)
+    } else {
+        distance = Math.max(distance, -scrolled)
+    }
+
+    // Setup values for scrolling
+    const stop = scrolled + distance
+    const step = 8 * distance/duration
+
+    // Scroll
+    scrolled += step
+    while (distance > 0 ? scrolled < stop : scrolled > stop) {
+
+        if (horizontal) scrollContainer.scrollLeft = scrolled
+        else            scrollContainer.scrollTop = scrolled
+
+        await wait(8)       // 120 fps
+        scrolled += step
+    }
+
+    if (horizontal) scrollContainer.scrollLeft = scrolled
+    else            scrollContainer.scrollTop = scrolled
+}
+
 export function getExtraContainerHeight(scrollContainer) {
     /* Returns height of scroll container unused by its content. */
 
