@@ -1,6 +1,7 @@
 
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
-import {dynamicScrollDown, addDynamicPadding} from "../scrolling.js"
+import {smoothVerticalScroll, addDynamicPadding} from "../scrolling.js"
+import {getExtraContainerHeight} from "../scrolling.js"
 
 const component = document.querySelector(".training-setup-component")
 const trainingName = document.querySelector(".ts-training-name")
@@ -114,14 +115,18 @@ export async function addTrainingItem(type, container) {
     }
 
     // Compute scroll distance
-    const scroll = computeScrollDist(topScrollPos, bottomScrollPos)
+    let scroll = computeScrollDist(topScrollPos, bottomScrollPos)
 
     // Remove item before scrolling (cannot be visible during scroll)
     trainingItem.remove()
 
     // Scroll down
     let removePadd = null
-    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
+    if (scroll) {
+        scroll += getExtraContainerHeight(scrollContainer)
+        removePadd = addDynamicPadding(scroll, scrollContainer)
+        await smoothVerticalScroll(scroll, 250, scrollContainer)
+    }
     await wait(100)
 
     // Hide no-training displays

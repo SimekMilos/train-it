@@ -1,11 +1,14 @@
 
 import {float, range, wait, waitFor, dialog, generateTrainingID} from "../tools.js"
-import {dynamicScrollDown, addDynamicPadding} from "../scrolling.js"
 import {storageVersion} from "../main.js"
+
+import {smoothVerticalScroll, addDynamicPadding} from "../scrolling.js"
+import {getExtraContainerHeight} from "../scrolling.js"
 
 import * as screens from "../screens.js"
 import * as overviewSettings from "../overview-settings/overview-settings.js"
 import * as setup from "../setup/setup.js"
+
 import * as display from "./display.js"
 
 const initialScreen = document.querySelector(".initial-screen")
@@ -132,8 +135,12 @@ async function createTraining() {
     trItem.remove()
 
     // Scroll container
-    let remPadd = null
-    if (distance > 0) remPadd = await dynamicScrollDown(distance, 100, trList)
+    let removePadd = null
+    if (distance > 0) {
+        distance += getExtraContainerHeight(trList)
+        removePadd = addDynamicPadding(distance, trList)
+        await smoothVerticalScroll(distance, 100, trList)
+    }
     await wait(200)
 
     // Setup training item
@@ -144,7 +151,7 @@ async function createTraining() {
     // Transition training item
     trItem.classList.remove("hidden")
     await waitFor("transitionend", trItem)
-    if (remPadd) remPadd()
+    if (removePadd) removePadd()
 }
 
 async function editTraining() {

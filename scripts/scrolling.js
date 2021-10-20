@@ -2,35 +2,6 @@
 import {px, float, wait} from "./tools.js"
 
 
-export async function dynamicScrollDown(distance, duration, scrollContainer) {
-    // Detect where content ends
-    const last = scrollContainer.lastElementChild
-    let {bottom: contentEnd} = last.getBoundingClientRect()
-    contentEnd += float(getComputedStyle(last).marginBottom)
-
-    // Add filler distance in case content is smaller than scrollContainer
-    const {bottom: containerEnd} = scrollContainer.getBoundingClientRect()
-    const filler = containerEnd - contentEnd
-    if (filler > 0) distance += filler
-
-    // Add padding
-    const removePadding = addDynamicPadding(distance, scrollContainer)
-
-    // Setup values for scrolling
-    const start = scrollContainer.scrollTop
-    const stop = start + distance
-    const step = 8 * distance/duration
-
-    // Scroll
-    for (let scrolled = start + step; scrolled < stop; scrolled += step) {
-        scrollContainer.scrollTop = scrolled
-        await wait(8)   // 120 fps
-    }
-    scrollContainer.scrollTop = stop
-
-    return removePadding
-}
-
 export async function smoothVerticalScroll(distance, duration, scrollContainer) {
     /*  distance - Number in px, positive - down, negative - up
         duration - in ms
