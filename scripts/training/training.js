@@ -82,6 +82,10 @@ export function back() {
     let prevPhase
     [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,
                                                      timer)
+    if (!prevPhase) {   // Resets display if first
+        groups[0].deactivate()
+        groups[0].activate(timer)
+    }
     return prevPhase
 }
 
