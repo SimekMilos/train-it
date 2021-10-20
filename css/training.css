@@ -10,9 +10,7 @@
     margin-top: 15px;
 
     --column-width: 15em;
-
-    --notes-tb-padding: .4em;    /* Top Bottom */
-    --notes-lr-padding: .6em;    /* Left Right */
+    --gap: 1em;
 
     --border-width: .1em;
     --border-color: hsl(209, 100%, 70%);
@@ -23,6 +21,9 @@
 
     --background-color1: hsl(209, 100%, 95%);
     --background-color2: hsl(209, 100%, 98%);
+
+    --notes-tb-padding: .4em;    /* Top Bottom */
+    --notes-lr-padding: .6em;    /* Left Right */
 }
 
 .tc-container {
@@ -104,6 +105,7 @@
 /* --- Training Info --- */
 
 .tc-training {
+    margin-right: var(--gap);
     width: var(--column-width);
 
     /* Content */
@@ -147,7 +149,7 @@
 /* --- Group Container --- */
 
 .tc-group {
-    margin: 0 .5em .75em;
+    margin: 0 var(--gap) .75em 0;
     padding: .5em 0 0 .5em;
 
     border: var(--border-width) solid var(--main-color);
@@ -233,6 +235,7 @@
 
 .tc-no-group {
     height: 100%;
+    margin: .5em calc(var(--gap) - .5em) 0 0;
     padding-bottom: .25em;
 
     /* Multiple column layout */
