@@ -36,7 +36,7 @@
     flex-direction: row;
     overflow: auto;
 
-    scroll-snap-type: x mandatory;
+    /*scroll-snap-type: x mandatory;*/
 }
 
 .tc-container::after{   /* Fix for right padding not working in Safari */
