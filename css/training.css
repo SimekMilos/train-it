@@ -265,28 +265,9 @@
     scroll-snap-align: center;
 }
 
-/* Active exercise */
-.tc-exercise.active-set {
-    border-color: var(--active-set-color);
-}
-
-.tc-exercise.active-pause {
-    border-color: var(--active-pause-color);
-}
-
-.tc-exercise.next {
-    animation: next-exercise 2s ease-in-out infinite;
-}
-
-    @keyframes next-exercise {
-        50% {
-            border-color: hsl(0, 80%, 45%);
-            box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
-        }
-    }
-
 
 /* Header */
+
 .tce-header {
     padding: .5em;
     border-bottom: 1px solid var(--border-color);
@@ -319,7 +300,9 @@
     font: 1.8em/.8 "OpenSans Regular", sans-serif;
 }
 
+
 /* Content */
+
 .tce-container {
     flex-shrink: 1;
     overflow: auto;
@@ -355,6 +338,42 @@
 .tce-notes:focus {
     border: none;
 }
+
+
+/* Active exercise */
+
+.tc-exercise.active-set {
+    border-color: var(--active-set-color);
+}
+
+.tc-exercise.active-set .tce-name {
+    color: var(--active-set-color);
+}
+
+
+.tc-exercise.active-pause {
+    border-color: var(--active-pause-color);
+}
+
+.tc-exercise.active-pause .tce-name {
+    color: var(--active-pause-color);
+}
+
+
+.tc-exercise.next {
+    animation: next-exercise 2.5s ease-in-out infinite;
+}
+
+    @keyframes next-exercise {
+        20% {
+            border-color: hsl(0, 80%, 45%);
+            box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
+        }
+        80% {
+            border-color: hsl(0, 80%, 45%);
+            box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
+        }
+    }
 
 
 /* --- Set --- */
