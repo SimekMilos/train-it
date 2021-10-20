@@ -49,14 +49,32 @@ export function setTimer(timerObj) {
 
 // Actions
 
-export function countdown() {
-    groups[0].isNext = true
+export function countdown(active) {
+    groups[0].isNext = active
 }
 
 export function start() {
     activeGroupIndex = 0
     groups[0].activate(timer)
 }
+
+export function pause(paused) {
+    prepareNextExercise(!paused)
+    groups[activeGroupIndex].prepareNextExercise(!paused)
+}
+
+export function resetPhase() {
+    /* Resets current phase clock, not group or exercise clock */
+
+    groups[activeGroupIndex].currentSet.currentTime = 0
+}
+
+export function reset() {
+    /* Resets whole training */
+
+    for (const group of groups) group.reset()
+}
+
 
 export function next() {
     /* Moves 1 phase forward
@@ -114,18 +132,6 @@ export function substractTime(time) {
 
     const currentSet = groups[activeGroupIndex].currentSet
     currentSet.currentTime = currentSet.currentTime - time
-}
-
-export function resetPhase() {
-    /* Resets current phase clock, not group or exercise clock */
-
-    groups[activeGroupIndex].currentSet.currentTime = 0
-}
-
-export function reset() {
-    /* Resets whole training */
-
-    for (const group of groups) group.reset()
 }
 
 

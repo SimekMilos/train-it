@@ -97,12 +97,12 @@ export default class Group {
         [nextPhase, this._activeExerciseIndex] = setNextPhase(this._exercises,
                                                   this._activeExerciseIndex,
                                                   this._timer)
-        this._prepareNextExercise(true)
+        this.prepareNextExercise(true)
         return nextPhase
     }
 
     back() {
-        this._prepareNextExercise(false)
+        this.prepareNextExercise(false)
 
         let prevPhase
         [prevPhase, this._activeExerciseIndex] = setPreviousPhase(this._exercises,
@@ -114,6 +114,14 @@ export default class Group {
     isLastPhase() {
         if (this._activeExerciseIndex < this._exercises.length - 1) return false
         return this._exercises[this._activeExerciseIndex].isLastPhase()
+    }
+
+    prepareNextExercise(isNext) {
+        if (this._exercises[this._activeExerciseIndex].isLastPhase() &&
+            this._activeExerciseIndex < this._exercises.length - 1){
+
+            this._exercises[this._activeExerciseIndex+1].isNext = isNext
+        }
     }
 
     reset() {
@@ -155,13 +163,5 @@ export default class Group {
         end += float(getComputedStyle(last).marginRight)
 
         this._groupContainer.style.width = px(end - start)
-    }
-
-    _prepareNextExercise(isNext) {
-        if (this._exercises[this._activeExerciseIndex].isLastPhase() &&
-            this._activeExerciseIndex < this._exercises.length - 1){
-
-            this._exercises[this._activeExerciseIndex+1].isNext = isNext
-        }
     }
 }
