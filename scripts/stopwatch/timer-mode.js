@@ -3,7 +3,7 @@ import {waitForAny, dialog} from "../tools.js"
 
 import * as watches from "./watches.js"
 import * as display from "./display.js"
-// import * as nosleep from "./nosleep.js"
+import * as wakeLock from "./wake-lock.js"
 import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
@@ -34,11 +34,11 @@ export async function eventCycle() {
 
         // Activate app close warning and prevent sleep in run mode
         if (mode == "run") {
-            // nosleep.activate()
+            wakeLock.activate()
             window.addEventListener("beforeunload", closeWarning)
         }
         else {
-            // nosleep.deactivate()
+            wakeLock.deactivate()
             window.removeEventListener("beforeunload", closeWarning)
         }
 
