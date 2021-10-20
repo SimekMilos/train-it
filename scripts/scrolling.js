@@ -95,6 +95,20 @@ export async function smoothHorizontalScroll(distance, duration, scrollContainer
     scrollContainer.scrollLeft = stop
 }
 
+export function getExtraContainerHeight(scrollContainer) {
+    /* Returns height of scroll container unused by its content. */
+
+    // Detect where content ends
+    const last = scrollContainer.lastElementChild
+    let {bottom: contentEnd} = last.getBoundingClientRect()
+    contentEnd += float(getComputedStyle(last).marginBottom)
+
+    // Compute difference to the container
+    const {bottom: containerEnd} = scrollContainer.getBoundingClientRect()
+    const unusedHeight = containerEnd - contentEnd
+    return unusedHeight > 0 ? unusedHeight : 0
+}
+
 export function addDynamicPadding(maxHeight, scrollContainer) {
     /* Adds bottom padding to scrolling container as a filler before i.e.
     removing element.
