@@ -1,6 +1,6 @@
 
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
-import {smoothVerticalScroll, addDynamicPadding} from "../scrolling.js"
+import {smoothScroll, addDynamicPadding} from "../scrolling.js"
 import {getExtraContainerHeight} from "../scrolling.js"
 
 const component = document.querySelector(".training-setup-component")
@@ -125,7 +125,7 @@ export async function addTrainingItem(type, container) {
     if (scroll) {
         scroll += getExtraContainerHeight(scrollContainer)
         removePadd = addDynamicPadding(scroll, scrollContainer)
-        await smoothVerticalScroll(scroll, 250, scrollContainer)
+        await smoothScroll(scroll, 250, scrollContainer)
     }
     await wait(100)
 

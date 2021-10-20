@@ -2,7 +2,7 @@
 import {float, range, wait, waitFor, dialog, generateTrainingID} from "../tools.js"
 import {storageVersion} from "../main.js"
 
-import {smoothVerticalScroll, addDynamicPadding} from "../scrolling.js"
+import {smoothScroll, addDynamicPadding} from "../scrolling.js"
 import {getExtraContainerHeight} from "../scrolling.js"
 
 import * as screens from "../screens.js"
@@ -139,7 +139,7 @@ async function createTraining() {
     if (distance > 0) {
         distance += getExtraContainerHeight(trList)
         removePadd = addDynamicPadding(distance, trList)
-        await smoothVerticalScroll(distance, 100, trList)
+        await smoothScroll(distance, 100, trList)
     }
     await wait(200)
 
