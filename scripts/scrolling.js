@@ -25,10 +25,11 @@ export async function smoothVerticalScroll(distance, duration, scrollContainer) 
     const step = 8 * distance/duration
 
     // Scroll
+    scrolled += step
     while (distance > 0 ? scrolled < stop : scrolled > stop) {
-        scrolled += step
         scrollContainer.scrollTop = scrolled
         await wait(8)       // 120 fps
+        scrolled += step
     }
 
     scrollContainer.scrollTop = stop
@@ -57,10 +58,11 @@ export async function smoothHorizontalScroll(distance, duration, scrollContainer
     const step = 8 * distance/duration
 
     // Scroll
+    scrolled += step
     while (distance > 0 ? scrolled < stop : scrolled > stop) {
-        scrolled += step
         scrollContainer.scrollLeft = scrolled
         await wait(8)       // 120 fps
+        scrolled += step
     }
 
     scrollContainer.scrollLeft = stop
