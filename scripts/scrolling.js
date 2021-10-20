@@ -31,6 +31,38 @@ export async function dynamicScrollDown(distance, duration, scrollContainer) {
     return removePadding
 }
 
+export async function smoothVerticalScroll(distance, duration, scrollContainer) {
+    /*  distance - Number in px, positive - down, negative - up
+        duration - in ms
+    */
+
+    // Cap by maximum possible scrolling distance
+    if (distance > 0) {
+        const maxDown = scrollContainer.scrollHeight
+                          - scrollContainer.scrollTop
+                          - scrollContainer.clientHeight
+
+        distance = Math.min(distance, maxDown)
+    } else {
+        const maxUp = scrollContainer.scrollTop
+        distance = Math.max(distance, -maxUp)
+    }
+
+    // Setup values for scrolling
+    let scrolled = scrollContainer.scrollTop
+    const stop = scrolled + distance
+    const step = 8 * distance/duration
+
+    // Scroll
+    while (distance > 0 ? scrolled < stop : scrolled > stop) {
+        scrolled += step
+        scrollContainer.scrollTop = scrolled
+        await wait(8)       // 120 fps
+    }
+
+    scrollContainer.scrollLeft = stop
+}
+
 export async function smoothHorizontalScroll(distance, duration, scrollContainer) {
     /*  distance - Number in px, positive - to the right, negative - to the left
         duration - in ms
