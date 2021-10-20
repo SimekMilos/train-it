@@ -31,6 +31,38 @@ export async function dynamicScrollDown(distance, duration, scrollContainer) {
     return removePadding
 }
 
+export async function smoothHorizontalScroll(distance, duration, scrollContainer) {
+    /*  distance - Number in px, positive - to the right, negative - to the left
+        duration - in ms
+    */
+
+    // Cap by maximum possible scrolling distance
+    if (distance > 0) {
+        const maxRight = scrollContainer.scrollWidth
+                          - scrollContainer.scrollLeft
+                          - scrollContainer.clientWidth
+
+        distance = Math.min(distance, maxRight)
+    } else {
+        const maxLeft = scrollContainer.scrollLeft
+        distance = Math.max(distance, -maxLeft)
+    }
+
+    // Setup values for scrolling
+    let scrolled = scrollContainer.scrollLeft
+    const stop = scrolled + distance
+    const step = 8 * distance/duration
+
+    // Scroll
+    while (distance > 0 ? scrolled < stop : scrolled > stop) {
+        scrolled += step
+        scrollContainer.scrollLeft = scrolled
+        await wait(8)       // 120 fps
+    }
+
+    scrollContainer.scrollLeft = stop
+}
+
 export function addDynamicPadding(maxHeight, scrollContainer) {
     /* Adds bottom padding to scrolling container as a filler before i.e.
     removing element.
