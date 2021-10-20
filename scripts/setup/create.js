@@ -1,6 +1,6 @@
 
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
-import {addDynamicPadding, dynamicScrollDown} from "../tools.js"
+import {dynamicScrollDown, addDynamicPadding} from "../scrolling.js"
 
 const component = document.querySelector(".training-setup-component")
 const trainingName = document.querySelector(".ts-training-name")

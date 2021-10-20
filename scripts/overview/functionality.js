@@ -1,6 +1,6 @@
 
-import {float, range, wait, waitFor, generateTrainingID} from "../tools.js"
-import {dialog, addDynamicPadding, dynamicScrollDown} from "../tools.js"
+import {float, range, wait, waitFor, dialog, generateTrainingID} from "../tools.js"
+import {dynamicScrollDown, addDynamicPadding} from "../scrolling.js"
 import {storageVersion} from "../main.js"
 
 import * as screens from "../screens.js"
