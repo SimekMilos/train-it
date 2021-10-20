@@ -32,10 +32,16 @@ export function init(trainingData) {
 }
 
 export function destroy() {
-    trainingInfo.destruct()
-
     for (const group of groups) group.destruct()
     groups.length = 0
+
+    if (trainingInfo) {
+        trainingInfo.destruct()
+        trainingInfo = null
+    }
+
+    timer = null
+    activeGroupIndex = 0
 }
 
 export function display() {
