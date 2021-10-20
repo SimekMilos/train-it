@@ -112,7 +112,12 @@ export default class Exercise {
         const scrollDist = exerciseCenter - containerCenter
 
         // Scroll
-        await smoothScroll(scrollDist, 300, scrollContainer, true)
+        await smoothScroll(scrollDist, 250, scrollContainer, true)
+    }
+
+    async scrollUp() {
+        await smoothScroll(-this._exerciseContainer.scrollTop, 250,
+                            this._exerciseContainer)
     }
 
     reset() {
