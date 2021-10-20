@@ -251,7 +251,7 @@
 
     border: var(--border);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+    box-shadow: 0 0 .3em .05em transparent, var(--shadow);
 
     background-color: var(--background-color1);
 
@@ -261,6 +261,27 @@
 
     scroll-snap-align: center;
 }
+
+/* Active exercise */
+.tc-exercise.active-set {
+    border-color: var(--active-set-color);
+}
+
+.tc-exercise.active-pause {
+    border-color: var(--active-pause-color);
+}
+
+.tc-exercise.next {
+    animation: next-exercise 2s ease-in-out infinite;
+}
+
+    @keyframes next-exercise {
+        50% {
+            border-color: hsl(0, 80%, 45%);
+            box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
+        }
+    }
+
 
 /* Header */
 .tce-header {
@@ -331,25 +352,6 @@
 .tce-notes:focus {
     border: none;
 }
-
-/* Active exercise */
-.tc-exercise.active-set {
-    border-color: var(--active-set-color);
-}
-
-.tc-exercise.active-pause {
-    border-color: var(--active-pause-color);
-}
-
-.tc-exercise.next {
-    animation: next-exercise 2s ease-in-out infinite;
-}
-
-    @keyframes next-exercise {
-        50% {
-            border-color: var(--active-set-color);
-        }
-    }
 
 
 /* --- Set --- */
