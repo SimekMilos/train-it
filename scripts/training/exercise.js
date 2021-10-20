@@ -120,6 +120,20 @@ export default class Exercise {
                             this._exerciseContainer)
     }
 
+    async scrollToActiveSet() {
+        // Get container center
+        let {top, bottom} = this._exerciseContainer.getBoundingClientRect()
+        const containerCenter = (top + bottom)/2
+
+        // Get set center
+        ;({top, bottom} = this._sets[this._activeSetIndex].getBoundingClientRect())
+        const setCenter = (top + bottom)/2
+        const scrollDist = setCenter - containerCenter
+
+        // Scroll
+        await smoothScroll(scrollDist, 150, this._exerciseContainer)
+    }
+
     reset() {
         this._watch.textContent = "00:00"
         this._watchTime = 0

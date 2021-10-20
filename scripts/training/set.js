@@ -10,17 +10,17 @@ const defaultName = "Set"
 export default class Set {
     constructor(nameStr, container) {
         const setFrag = template.content.cloneNode(true)
-        const set = setFrag.firstElementChild
-        this._classList = set.classList
+        this._set = setFrag.firstElementChild
+        this._classList = this._set.classList
 
         // Name
-        const name = set.querySelector(":scope .tcex-name")
+        const name = this._set.querySelector(":scope .tcex-name")
         if (!nameStr) name.textContent = defaultName
         else          name.textContent = nameStr
 
         // Watches
-        this._setWatch = set.querySelector(":scope .tcex-set-watch")
-        this._pauseWatch = set.querySelector(":scope .tcex-pause-watch")
+        this._setWatch = this._set.querySelector(":scope .tcex-set-watch")
+        this._pauseWatch = this._set.querySelector(":scope .tcex-pause-watch")
         this._initWatches()
 
         this._timerTick = this._timerTick.bind(this)
@@ -89,6 +89,10 @@ export default class Set {
     isLastPhase() {
         if (this._activeWatch == this._pauseWatch) return true
         return false
+    }
+
+    getBoundingClientRect() {
+        return this._set.getBoundingClientRect()
     }
 
     reset() {
