@@ -1,17 +1,21 @@
 
 import {getWatchString} from "../tools.js"
 import {setNextPhase, setPreviousPhase, setStyle} from "./training-tools.js"
+import {smoothScroll} from "../scrolling.js"
 
 import Set from "./set.js"
 import {notesFunctionality} from "./notes.js"
 
 const exerciseTemplate = document.querySelector(".tc-exercise-template")
+const scrollContainer = document.querySelector(".tc-container")
 
 
 export default class Exercise {
     constructor(exerciseData, container, resizeCallback) {
         const exerciseFrag = exerciseTemplate.content.cloneNode(true)
         const exercise = exerciseFrag.firstElementChild
+
+        this._exercise = exercise
         this._classList = exercise.classList
         this._exerciseContainer = exercise.querySelector(":scope .tce-container")
 
@@ -95,6 +99,20 @@ export default class Exercise {
     isLastPhase() {
         if (this._activeSetIndex < this._sets.length - 1) return false
         return this._sets[this._activeSetIndex].isLastPhase()
+    }
+
+    async scrollTo() {
+        // Get container center
+        let {left, right} = scrollContainer.getBoundingClientRect()
+        const containerCenter = (left + right)/2
+
+        // Get exercise center
+        ;({left, right} = this._exercise.getBoundingClientRect())
+        const exerciseCenter = (left + right)/2
+        const scrollDist = exerciseCenter - containerCenter
+
+        // Scroll
+        await smoothScroll(scrollDist, 300, scrollContainer, true)
     }
 
     reset() {
