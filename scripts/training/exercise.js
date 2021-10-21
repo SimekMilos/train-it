@@ -56,13 +56,16 @@ export default class Exercise {
     }
 
     set isNext(value) {
+        this._isNext = value
+
         if (value) {
             this.scrollTo().then(() => {
-                this._classList.add("next")
+                if (this._isNext) this._classList.add("next")
                 this.scrollUp()
             })
+        } else {
+            this._classList.remove("next")
         }
-        else this._classList.remove("next")
     }
 
     activate(timer) {
