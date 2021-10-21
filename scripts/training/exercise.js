@@ -120,15 +120,28 @@ export default class Exercise {
                             this._exerciseContainer)
     }
 
-    async scrollToActiveSet() {
-        // Get container center
-        let {top, bottom} = this._exerciseContainer.getBoundingClientRect()
-        const containerCenter = (top + bottom)/2
+    async scrollActiveSetIntoView() {
+        // Get dimensions
+        const {top: contTop,
+               bottom: contBottom
+         } = this._exerciseContainer.getBoundingClientRect()
+        const {top: setTop,
+               bottom: setBottom
+        } = this._sets[this._activeSetIndex].getBoundingClientRect()
 
-        // Get set center
-        ;({top, bottom} = this._sets[this._activeSetIndex].getBoundingClientRect())
-        const setCenter = (top + bottom)/2
-        const scrollDist = setCenter - containerCenter
+        // Get scrolling thresholds
+        const setHeight = setBottom - setTop
+        const topThreshold = contTop + setHeight
+        const bottomThreshold = contBottom - setHeight
+
+        // Compute both scrolling posibitities
+        const bottomScrollDist = setBottom - bottomThreshold
+        const topScrollDist = setTop - topThreshold
+
+        // Get scroll distance
+        let scrollDist = 0
+        if (topScrollDist < 0) scrollDist = topScrollDist
+        if (bottomScrollDist > 0) scrollDist = bottomScrollDist
 
         // Scroll
         await smoothScroll(scrollDist, 150, this._exerciseContainer)
