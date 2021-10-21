@@ -48,8 +48,8 @@ export async function smoothScroll(distance, duration, scrollContainer,
         scrolled += step
     }
 
-    if (horizontal) scrollContainer.scrollLeft = scrolled
-    else            scrollContainer.scrollTop = scrolled
+    if (horizontal) scrollContainer.scrollLeft = stop
+    else            scrollContainer.scrollTop = stop
 }
 
 
