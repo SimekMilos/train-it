@@ -101,6 +101,12 @@
     transform: translate(-50%, -50%);
 
     opacity: .1;
+
+    background:
+        linear-gradient(hsl(209, 100%, 56%), hsl(209, 100%, 56%)),
+        center/contain no-repeat url(../res/icons/app-icon.png),
+        white;
+    background-blend-mode: lighten, normal;
 }
 
 .tc-no-training:not(:only-child) {
@@ -159,7 +165,8 @@
 
     background:
         linear-gradient(hsl(209, 100%, 56%), hsl(209, 100%, 56%)),
-        top 30% center/contain no-repeat url(../res/icons/app-icon.png), white;
+        top 30% center/contain no-repeat url(../res/icons/app-icon.png),
+        white;
     background-blend-mode: lighten, normal;
 }
 
