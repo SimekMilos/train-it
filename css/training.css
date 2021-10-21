@@ -29,7 +29,6 @@
 .tc-container {
     width: 100%;
     height: 100%;
-    padding-left: max(.5em, env(safe-area-inset-left, 0));
 
     /* Content */
     display: flex;
@@ -113,6 +112,7 @@
 /* --- Training Info --- */
 
 .tc-training {
+    margin-left: max(var(--gap), env(safe-area-inset-left, 0));
     margin-right: var(--gap);
     width: var(--column-width);
 
