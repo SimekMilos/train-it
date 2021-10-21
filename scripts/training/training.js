@@ -1,5 +1,6 @@
 
 import {setNextPhase, setPreviousPhase} from "./training-tools.js"
+import {prepareNextExercise} from "./training-tools.js"
 
 import {} from "./display.js"
 import TrainingInfo from "./training-info.js"
@@ -65,7 +66,7 @@ export function start() {
 }
 
 export function pause(paused) {
-    prepareNextExercise(!paused)
+    prepareNextExercise(!paused, groups, activeGroupIndex)
     groups[activeGroupIndex].prepareNextExercise(!paused)
 
     if (!paused) {
@@ -98,7 +99,7 @@ export function next() {
     let nextPhase
     [nextPhase, activeGroupIndex] = setNextPhase(groups, activeGroupIndex,
                                                  timer)
-    prepareNextExercise(true)
+    prepareNextExercise(true, groups, activeGroupIndex)
     return nextPhase
 }
 
@@ -108,7 +109,7 @@ export function back() {
 
        return: new phase - "set" / "pause" / null (no previous phase)
     */
-    prepareNextExercise(false)
+    prepareNextExercise(false, groups, activeGroupIndex)
 
     let prevPhase
     [prevPhase, activeGroupIndex] = setPreviousPhase(groups, activeGroupIndex,
@@ -145,15 +146,4 @@ export function substractTime(time) {
 
     const currentSet = groups[activeGroupIndex].currentExercise.currentSet
     currentSet.currentTime = currentSet.currentTime - time
-}
-
-
-// --- Private ---
-
-function prepareNextExercise(isNext) {
-    if (groups[activeGroupIndex].isLastPhase() &&
-        activeGroupIndex < groups.length - 1) {
-
-        groups[activeGroupIndex+1].isNext = isNext
-    }
 }

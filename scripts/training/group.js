@@ -1,6 +1,7 @@
 
 import {float, px, getWatchString} from "../tools.js"
 import {setNextPhase, setPreviousPhase} from "./training-tools.js"
+import {prepareNextExercise} from "./training-tools.js"
 
 import Exercise from "./exercise.js"
 import {notesFunctionality} from "./notes.js"
@@ -97,12 +98,12 @@ export default class Group {
         [nextPhase, this._activeExerciseIndex] = setNextPhase(this._exercises,
                                                   this._activeExerciseIndex,
                                                   this._timer)
-        this.prepareNextExercise(true)
+        prepareNextExercise(true, this._exercises, this._activeExerciseIndex)
         return nextPhase
     }
 
     back() {
-        this.prepareNextExercise(false)
+        prepareNextExercise(false, this._exercises, this._activeExerciseIndex)
 
         let prevPhase
         [prevPhase, this._activeExerciseIndex] = setPreviousPhase(this._exercises,
@@ -117,11 +118,7 @@ export default class Group {
     }
 
     prepareNextExercise(isNext) {
-        if (this._exercises[this._activeExerciseIndex].isLastPhase() &&
-            this._activeExerciseIndex < this._exercises.length - 1){
-
-            this._exercises[this._activeExerciseIndex+1].isNext = isNext
-        }
+        prepareNextExercise(isNext, this._exercises, this._activeExerciseIndex)
     }
 
     reset() {

@@ -33,6 +33,14 @@ export function setPreviousPhase(objArray, activeIndex, timer, obj = null) {
     return [previousPhase, activeIndex]
 }
 
+export function prepareNextExercise(isNext, objArray, activeIndex) {
+    if (objArray[activeIndex].isLastPhase() &&
+        activeIndex < objArray.length - 1) {
+
+        objArray[activeIndex+1].isNext = isNext
+    }
+}
+
 export function setStyle(obj, phase) {
     if (phase == "set") {
         obj._classList.remove("active-pause")
