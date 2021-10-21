@@ -45,10 +45,6 @@ export function destroy() {
     activeGroupIndex = 0
 }
 
-export function display() {
-
-}
-
 export function setTimer(timerObj) {
     timer = timerObj
 }
