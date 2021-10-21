@@ -152,6 +152,17 @@
     background-color: var(--background-color2);
 }
 
+.tct-icon {
+    flex-grow: 1;
+    width: 60%;
+    opacity: .1;
+
+    background:
+        linear-gradient(hsl(209, 100%, 56%), hsl(209, 100%, 56%)),
+        top 30% center/contain no-repeat url(../res/icons/app-icon.png), white;
+    background-blend-mode: lighten, normal;
+}
+
 
 /* --- Group Container --- */
 

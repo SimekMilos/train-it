@@ -18,10 +18,26 @@ export default class TrainingInfo {
         const notesButton = this._trInfo.querySelector(":scope .tct-notes-button")
         notesFunctionality(notes, notesButton, trainingData)
 
+        // Icon
+        this._icon = this._trInfo.querySelector(":scope .tct-icon")
+        new ResizeObserver(this._iconDisplay.bind(this)).observe(this._icon)
+
         container.append(trInfoFrag)
     }
 
     destruct() {
         this._trInfo.remove()
+    }
+
+
+    // --- Private ---
+
+    _iconDisplay() {
+        const containerHeight = this._trInfo.clientHeight
+        const iconHeight = this._icon.clientHeight
+        const ratio = iconHeight / containerHeight
+
+        if (ratio < .15) this._icon.style.opacity = 0
+        else this._icon.style.removeProperty("opacity")
     }
 }
