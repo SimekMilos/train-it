@@ -56,7 +56,12 @@ export default class Exercise {
     }
 
     set isNext(value) {
-        if (value) this._classList.add("next")
+        if (value) {
+            this.scrollTo().then(() => {
+                this._classList.add("next")
+                this.scrollUp()
+            })
+        }
         else this._classList.remove("next")
     }
 
@@ -66,6 +71,8 @@ export default class Exercise {
 
         this.isNext = false
         setStyle(this, this.currentSet.currentPhase)
+        this.scrollActiveSetIntoView()
+
         return this._sets[this._activeSetIndex].activate(timer)
     }
 
@@ -83,6 +90,7 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer)
         setStyle(this, nextPhase)
+        if (!this.isLastPhase()) this.scrollActiveSetIntoView()
         return nextPhase
     }
 
@@ -92,13 +100,30 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer, this)
         setStyle(this, prevPhase)
-        if (!prevPhase) this.isNext = true
+        if (prevPhase) this.scrollActiveSetIntoView()
+        else this.isNext = true
+
         return prevPhase
     }
 
     isLastPhase() {
         if (this._activeSetIndex < this._sets.length - 1) return false
         return this._sets[this._activeSetIndex].isLastPhase()
+    }
+
+    reset() {
+        this._watch.textContent = "00:00"
+        this._watchTime = 0
+
+        if (this._timer) {
+            this._timer.removeCallback(this._timerTick)
+            this._timer = null
+        }
+
+        setStyle(this, null)
+        this.isNext = false
+        this._activeSetIndex = 0
+        for (const set of this._sets) set.reset()
     }
 
     async scrollTo() {
@@ -121,6 +146,8 @@ export default class Exercise {
     }
 
     async scrollActiveSetIntoView() {
+        await this.scrollTo()
+
         // Get dimensions
         const {top: contTop,
                bottom: contBottom
@@ -145,21 +172,6 @@ export default class Exercise {
 
         // Scroll
         await smoothScroll(scrollDist, 150, this._exerciseContainer)
-    }
-
-    reset() {
-        this._watch.textContent = "00:00"
-        this._watchTime = 0
-
-        if (this._timer) {
-            this._timer.removeCallback(this._timerTick)
-            this._timer = null
-        }
-
-        setStyle(this, null)
-        this.isNext = false
-        this._activeSetIndex = 0
-        for (const set of this._sets) set.reset()
     }
 
 

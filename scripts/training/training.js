@@ -67,12 +67,19 @@ export function start() {
 export function pause(paused) {
     prepareNextExercise(!paused)
     groups[activeGroupIndex].prepareNextExercise(!paused)
+
+    if (!paused) {
+        groups[activeGroupIndex].currentExercise.scrollActiveSetIntoView()
+    }
 }
 
 export function resetPhase() {
     /* Resets current phase clock, not group or exercise clock */
 
-    groups[activeGroupIndex].currentExercise.currentSet.currentTime = 0
+    const currentExercise = groups[activeGroupIndex].currentExercise
+
+    currentExercise.currentSet.currentTime = 0
+    currentExercise.scrollActiveSetIntoView()
 }
 
 export function reset() {
