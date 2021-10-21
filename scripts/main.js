@@ -4,7 +4,6 @@ import {initInitScreen} from "./screens.js"
 export const storageVersion = 1
 
 window.addEventListener("load", onAppLoad)
-window.addEventListener("DOMContentLoaded", centerButtonText)
 
 
 function onAppLoad() {
@@ -17,21 +16,4 @@ function onAppLoad() {
 
     // Initialize application
     initInitScreen()
-}
-
-function centerButtonText() {
-    const buttons = document.querySelectorAll("button")
-
-    for (const button of buttons) {
-        if (!button.textContent.trim()) continue
-
-        const buttonText = button.textContent.trim()
-        button.textContent = ""
-
-        const centerElem = document.createElement("div")
-        centerElem.classList.add("center-font")
-        centerElem.textContent = buttonText
-
-        button.append(centerElem)
-    }
 }
