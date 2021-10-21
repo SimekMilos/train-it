@@ -118,7 +118,7 @@ export default class Group {
     }
 
     prepareNextExercise(isNext) {
-        prepareNextExercise(isNext, this._exercises, this._activeExerciseIndex)
+        return prepareNextExercise(isNext, this._exercises, this._activeExerciseIndex)
     }
 
     reset() {

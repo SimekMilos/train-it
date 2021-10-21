@@ -34,11 +34,16 @@ export function setPreviousPhase(objArray, activeIndex, timer, obj = null) {
 }
 
 export function prepareNextExercise(isNext, objArray, activeIndex) {
+    let preparing = false
+
     if (objArray[activeIndex].isLastPhase() &&
         activeIndex < objArray.length - 1) {
 
+        preparing = true
         objArray[activeIndex+1].isNext = isNext
     }
+
+    return preparing
 }
 
 export function setStyle(obj, phase) {

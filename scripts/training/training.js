@@ -66,10 +66,10 @@ export function start() {
 }
 
 export function pause(paused) {
-    prepareNextExercise(!paused, groups, activeGroupIndex)
-    groups[activeGroupIndex].prepareNextExercise(!paused)
+    const prep1 = prepareNextExercise(!paused, groups, activeGroupIndex)
+    const prep2 = groups[activeGroupIndex].prepareNextExercise(!paused)
 
-    if (!paused) {
+    if (!paused && !(prep1 || prep2)) {
         groups[activeGroupIndex].currentExercise.scrollActiveSetIntoView()
     }
 }
