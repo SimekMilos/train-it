@@ -46,11 +46,10 @@
     display: none;              /* Chrome, Safari, Opera */
 }
 
-.tc-container::after{   /* Fix for right padding not working in Safari */
+.tc-container::after {    /* Fix for final right margin not working in Safari */
     flex-shrink: 0;
     content: "";
-
-    width: env(safe-area-inset-right, 0);
+    width: max(var(--gap),env(safe-area-inset-right, 0));
 }
 
 
@@ -169,6 +168,11 @@
     box-shadow: var(--shadow);
 }
 
+.tc-group:last-child {
+    margin-right: 0;          /* Right margin created by .tc-container::after */
+}
+
+
 .tcg-header {
     position: sticky;
     left: 0;
@@ -250,6 +254,10 @@
     display: flex;
     flex-flow: column wrap;
     align-content: flex-start;
+}
+
+.tc-no-group:last-child {
+    margin-right: 0;          /* Right margin created by .tc-container::after */
 }
 
 
