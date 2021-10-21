@@ -61,8 +61,8 @@ export default class Group {
         this._group.remove()
     }
 
-    get currentSet() {
-        return this._exercises[this._activeExerciseIndex].currentSet
+    get currentExercise() {
+        return this._exercises[this._activeExerciseIndex]
     }
 
     set currentTime(value) {

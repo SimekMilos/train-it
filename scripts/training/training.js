@@ -72,7 +72,7 @@ export function pause(paused) {
 export function resetPhase() {
     /* Resets current phase clock, not group or exercise clock */
 
-    groups[activeGroupIndex].currentSet.currentTime = 0
+    groups[activeGroupIndex].currentExercise.currentSet.currentTime = 0
 }
 
 export function reset() {
@@ -123,20 +123,20 @@ export function isLastPhase() {
 export function getCurrentTime() {
     /* Gets time of current phase */
 
-    return groups[activeGroupIndex].currentSet.currentTime
+    return groups[activeGroupIndex].currentExercise.currentSet.currentTime
 }
 
 export function addTime(time) {
     /* Adds time to current phase */
 
-    const currentSet = groups[activeGroupIndex].currentSet
+    const currentSet = groups[activeGroupIndex].currentExercise.currentSet
     currentSet.currentTime = currentSet.currentTime + time
 }
 
 export function substractTime(time) {
     /* Subtracts time from current phase */
 
-    const currentSet = groups[activeGroupIndex].currentSet
+    const currentSet = groups[activeGroupIndex].currentExercise.currentSet
     currentSet.currentTime = currentSet.currentTime - time
 }
 
