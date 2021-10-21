@@ -113,6 +113,7 @@
 .tc-training {
     margin-left: max(var(--gap), env(safe-area-inset-left, 0));
     margin-right: var(--gap);
+    margin-bottom: .75em;
     width: var(--column-width);
 
     /* Content */
@@ -137,7 +138,6 @@
     height: calc(2*1.5em + 2*var(--notes-tb-padding) + 2px);
     flex-shrink: 1;
 
-    margin-bottom: 0.938em;
     padding: var(--notes-tb-padding) var(--notes-lr-padding);
     font-size: .8em;
 
@@ -248,7 +248,7 @@
 .tc-no-group {
     height: 100%;
     margin: .5em calc(var(--gap) - .5em) 0 0;
-    padding-bottom: .25em;
+    padding-bottom: .75em;
 
     /* Multiple column layout */
     display: flex;
