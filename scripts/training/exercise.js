@@ -71,7 +71,7 @@ export default class Exercise {
 
         this.isNext = false
         setStyle(this, this.currentSet.currentPhase)
-        this.scrollActiveSetIntoView()
+        if (!this.isLastPhase()) this.scrollActiveSetIntoView()
 
         return this._sets[this._activeSetIndex].activate(timer)
     }
