@@ -417,15 +417,11 @@
 
 
 .tc-exercise.next {
-    animation: next-exercise 2s ease-in-out infinite;
+    animation: next-exercise 1.8s ease-in-out infinite;
 }
 
     @keyframes next-exercise {
-        35% {
-            border-color: hsl(0, 80%, 45%);
-            box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
-        }
-        65% {
+        50% {
             border-color: hsl(0, 80%, 45%);
             box-shadow: 0 0 .3em .05em hsla(0, 80%, 45%, .3), var(--shadow);
         }
