@@ -421,10 +421,14 @@
 /* --- Set --- */
 
 .tc-exercise-set {
+    height: 1.73em;
     padding: .15em .5em .2em 1.5em;
 
-    display: flex;
     font-size: 1.2em;
+
+    /* Content */
+    display: flex;
+    align-items: center;
 }
 
 .tc-exercise-set::before {
