@@ -171,7 +171,7 @@
 }
 
 
-/* --- Group Container --- */
+/* --- Group --- */
 
 .tc-group {
     margin: 0 var(--gap) .75em 0;
@@ -196,6 +196,7 @@
     left: 0;
 
     width: var(--column-width);
+    height: 1.45em;
     margin-right: .5em;
 
     display: flex;
@@ -261,7 +262,7 @@
 }
 
 
-/* --- No Group Container --- */
+/* --- No Group --- */
 
 .tc-no-group {
     height: 100%;
