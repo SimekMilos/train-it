@@ -215,7 +215,7 @@ async function next() {
 
     // Display set countdown
     if (display.watches.mode == "pause" && settings.getSetCountdown()) {
-        await setCoutdown()
+        await setCoutdown(training.getNextInfo())
     }
 
     // Preceding pause
@@ -346,7 +346,7 @@ function closeWarning(ev) {
     return ""
 }
 
-async function setCoutdown() {
+async function setCoutdown(info) {
     let finish = false
 
     // Create subcomponent
@@ -356,6 +356,16 @@ async function setCoutdown() {
     const mainDisplay = document.createElement("div")
     mainDisplay.classList.add("main")
     component.append(mainDisplay)
+
+    const exerciseHeader = document.createElement("p")
+    exerciseHeader.classList.add("exercise-name", "ellipsis")
+    exerciseHeader.textContent = info.exerciseName
+    mainDisplay.append(exerciseHeader)
+
+    const setHeader = document.createElement("p")
+    setHeader.classList.add("set-name", "ellipsis")
+    setHeader.textContent = info.setName
+    mainDisplay.append(setHeader)
 
     const counter = document.createElement("p")
     counter.classList.add("counter")

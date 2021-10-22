@@ -149,8 +149,8 @@ export function getNextInfo() {
     }
 
     return {
-        exercise: exercise.name,
-        set: set.name
+        exerciseName: exercise.name,
+        setName: set.name
     }
 }
 
