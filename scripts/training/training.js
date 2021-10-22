@@ -124,6 +124,36 @@ export function isLastPhase() {
     return groups[activeGroupIndex].isLastPhase()
 }
 
+export function getNextInfo() {
+    let exercise, set
+    exercise = groups[activeGroupIndex].currentExercise
+    set = exercise.currentSet
+
+    // When group is finished
+    if (groups[activeGroupIndex].isLastPhase()) {
+        if (activeGroupIndex == groups.length - 1) return null
+
+        exercise = groups[activeGroupIndex + 1].currentExercise
+        set = exercise.currentSet
+    }
+
+    // When exercise is finished
+    if (exercise.isLastPhase()) {
+        exercise = groups[activeGroupIndex].nextExercise
+        set = exercise.currentSet
+    }
+
+    // When set is finished
+    if (set.isLastPhase()) {
+        set = exercise.nextSet
+    }
+
+    return {
+        exercise: exercise.name,
+        set: set.name
+    }
+}
+
 export function getCurrentTime() {
     /* Gets time of current phase */
 
