@@ -2,7 +2,7 @@
 import {sizeNotes} from "../tools.js"
 import * as stopwatch from "../stopwatch/stopwatch.js"
 
-const compContainer = document.querySelector(".tc-container")
+const mainScreen = document.querySelector(".main-screen")
 
 let dataStructure
 
@@ -29,7 +29,7 @@ export function notesFunctionality(notes, notesButton, objData,
     }
 
     const observer = new ResizeObserver(sizing)
-    observer.observe(compContainer)
+    observer.observe(mainScreen)
     notes.addEventListener("input", sizing)
 
     // Display

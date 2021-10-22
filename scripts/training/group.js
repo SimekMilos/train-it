@@ -8,6 +8,7 @@ import {notesFunctionality} from "./notes.js"
 
 const groupTemplate = document.querySelector(".tc-group-template")
 const nogroupTemplate = document.querySelector(".tc-no-group-template")
+const mainScreen = document.querySelector(".main-screen")
 
 
 export default class Group {
@@ -45,7 +46,7 @@ export default class Group {
 
         // Sizing
         const widthObserver = new ResizeObserver(() => this._fitWidth())
-        widthObserver.observe(container)
+        widthObserver.observe(mainScreen)
 
         // Add exercises
         this._exercises = []
