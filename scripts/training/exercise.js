@@ -55,8 +55,17 @@ export default class Exercise {
         container.append(exerciseFrag)
     }
 
+    get name() {
+        return this._name.textContent
+    }
+
     get currentSet() {
         return this._sets[this._activeSetIndex]
+    }
+
+    get nextSet() {
+        if (this._activeSetIndex == this._sets.length - 1) return null
+        return this._sets[this._activeSetIndex + 1]
     }
 
     set currentTime(value) {
