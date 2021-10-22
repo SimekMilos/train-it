@@ -303,13 +303,16 @@
 /* Header */
 
 .tce-header {
-    padding: .5em;
+    padding: 0 .5em;
     border-bottom: 1px solid var(--border-color);
 
     /* Content */
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
+    align-content: center;
+
+    /* 1 row display */
+    height: 2.7em;
 }
 
 .tce-right {
@@ -332,6 +335,16 @@
 .tce-watch {
     margin: -.05em -.02em 0 0;
     font: 1.8em/.8 "OpenSans Regular", sans-serif;
+}
+
+    /* 2 rows display */
+.tce-header.two-rows {
+    flex-wrap: wrap;
+    height: 4.05em;
+}
+
+.tce-header.two-rows .tce-name {
+    width: 100%;
 }
 
 

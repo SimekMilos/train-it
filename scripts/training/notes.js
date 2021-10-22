@@ -13,7 +13,8 @@ export function setDataStructure(dataStruct) {
 
 
 export function notesFunctionality(notes, notesButton, objData,
-                                   resizeCallback = null) {
+                                   resizeCallback = null,
+                                   notesDisplayCallback = null) {
     // Initial display
     if (objData.notes) {
         notes.value = objData.notes
@@ -38,6 +39,7 @@ export function notesFunctionality(notes, notesButton, objData,
         notesButton.style.display = "none"
 
         if (resizeCallback) resizeCallback()
+        if (notesDisplayCallback) notesDisplayCallback()
         notes.focus()
     })
 
@@ -49,6 +51,7 @@ export function notesFunctionality(notes, notesButton, objData,
         notesButton.style.display = "block"
 
         if (resizeCallback) resizeCallback()
+        if (notesDisplayCallback) notesDisplayCallback()
     })
 
     // Save

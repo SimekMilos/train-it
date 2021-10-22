@@ -19,9 +19,18 @@ export default class Exercise {
         this._classList = exercise.classList
         this._exerciseContainer = exercise.querySelector(":scope .tce-container")
 
+        // Header
+        this._header = exercise.querySelector(":scope .tce-header")
+        this._right = exercise.querySelector(":scope .tce-right")
+
+        const firstDisplay = new ResizeObserver(() => {
+            this._sizeHeader(); firstDisplay.disconnect()
+        })
+        firstDisplay.observe(this._header)
+
         // Name
-        const name = exercise.querySelector(":scope .tce-name")
-        name.textContent = exerciseData.name
+        this._name = exercise.querySelector(":scope .tce-name")
+        this._name.textContent = exerciseData.name
 
         // Watch
         this._watch = exercise.querySelector(":scope .tce-watch")
@@ -35,7 +44,7 @@ export default class Exercise {
 
         this._setupRows()
         notesFunctionality(this._notes, notesButton, exerciseData,
-                           resizeCallback)
+                           resizeCallback, this._sizeHeader.bind(this))
         // Sets
         this._sets = []
         this._activeSetIndex = 0
@@ -200,5 +209,16 @@ export default class Exercise {
 
         const config = {attributes: true, attributeFilter: ["style"]}
         rowObserver.observe(this._notes, config)
+    }
+
+    _sizeHeader() {
+        this._header.classList.remove("two-rows")
+
+        const elemsWidth = this._name.clientWidth + this._right.clientWidth
+        const headerWidth = this._header.clientWidth
+
+        if (elemsWidth > headerWidth / 1.05) {         // 5% margin to allow
+            this._header.classList.add("two-rows")     // for font resizing
+        }
     }
 }
