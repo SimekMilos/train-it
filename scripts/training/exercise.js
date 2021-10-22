@@ -217,7 +217,7 @@ export default class Exercise {
         const elemsWidth = this._name.clientWidth + this._right.clientWidth
         const headerWidth = this._header.clientWidth
 
-        if (elemsWidth > headerWidth / 1.05) {         // 5% margin to allow
+        if (elemsWidth > headerWidth / 1.06) {         // 6% margin to allow
             this._header.classList.add("two-rows")     // for font resizing
         }
     }
