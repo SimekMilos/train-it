@@ -36,7 +36,7 @@ export function setPreviousPhase(objArray, activeIndex, timer, obj = null) {
 export function prepareNextExercise(isNext, objArray, activeIndex) {
     let preparing = false
 
-    if (objArray[activeIndex].isLastPhase() &&
+    if (objArray[activeIndex].isLastPhase &&
         activeIndex < objArray.length - 1) {
 
         preparing = true

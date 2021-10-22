@@ -68,6 +68,11 @@ export default class Exercise {
         return this._sets[this._activeSetIndex + 1]
     }
 
+    get isLastPhase() {
+        if (this._activeSetIndex < this._sets.length - 1) return false
+        return this._sets[this._activeSetIndex].isLastPhase
+    }
+
     set currentTime(value) {
         this._watchTime = --value
         this._timerTick()
@@ -92,7 +97,7 @@ export default class Exercise {
 
         this.isNext = false
         setStyle(this, this.currentSet.currentPhase)
-        if (!this.isLastPhase()) this.scrollActiveSetIntoView()
+        if (!this.isLastPhase) this.scrollActiveSetIntoView()
 
         return this._sets[this._activeSetIndex].activate(timer)
     }
@@ -111,7 +116,7 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer)
         setStyle(this, nextPhase)
-        if (!this.isLastPhase()) this.scrollActiveSetIntoView()
+        if (!this.isLastPhase) this.scrollActiveSetIntoView()
         return nextPhase
     }
 
@@ -125,11 +130,6 @@ export default class Exercise {
         else this.isNext = true
 
         return prevPhase
-    }
-
-    isLastPhase() {
-        if (this._activeSetIndex < this._sets.length - 1) return false
-        return this._sets[this._activeSetIndex].isLastPhase()
     }
 
     reset() {

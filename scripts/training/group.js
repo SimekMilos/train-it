@@ -71,6 +71,11 @@ export default class Group {
         return this._exercises[this._activeExerciseIndex + 1]
     }
 
+    get isLastPhase() {
+        if (this._activeExerciseIndex < this._exercises.length - 1) return false
+        return this._exercises[this._activeExerciseIndex].isLastPhase
+    }
+
     set currentTime(value) {
         if (this._watch) {
             this._watchTime = --value
@@ -115,11 +120,6 @@ export default class Group {
                                                   this._activeExerciseIndex,
                                                   this._timer, this)
         return prevPhase
-    }
-
-    isLastPhase() {
-        if (this._activeExerciseIndex < this._exercises.length - 1) return false
-        return this._exercises[this._activeExerciseIndex].isLastPhase()
     }
 
     prepareNextExercise(isNext) {

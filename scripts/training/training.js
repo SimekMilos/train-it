@@ -121,7 +121,7 @@ export function isLastPhase() {
     /* Returns true if current phase is the last one in the training */
 
     if (activeGroupIndex < groups.length - 1) return false
-    return groups[activeGroupIndex].isLastPhase()
+    return groups[activeGroupIndex].isLastPhase
 }
 
 export function getNextInfo() {
@@ -130,7 +130,7 @@ export function getNextInfo() {
     set = exercise.currentSet
 
     // When group is finished
-    if (groups[activeGroupIndex].isLastPhase()) {
+    if (groups[activeGroupIndex].isLastPhase) {
         if (activeGroupIndex == groups.length - 1) return null
 
         exercise = groups[activeGroupIndex + 1].currentExercise
@@ -138,13 +138,13 @@ export function getNextInfo() {
     }
 
     // When exercise is finished
-    if (exercise.isLastPhase()) {
+    if (exercise.isLastPhase) {
         exercise = groups[activeGroupIndex].nextExercise
         set = exercise.currentSet
     }
 
     // When set is finished
-    if (set.isLastPhase()) {
+    if (set.isLastPhase) {
         set = exercise.nextSet
     }
 

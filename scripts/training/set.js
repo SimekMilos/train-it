@@ -57,6 +57,11 @@ export default class Set {
         return "pause"
     }
 
+    get isLastPhase() {
+        if (this._activeWatch == this._pauseWatch) return true
+        return false
+    }
+
     activate(timer) {
         this._timer = timer
         timer.registerCallback(this._timerTick)
@@ -96,11 +101,6 @@ export default class Set {
 
         setStyle(this, null)
         return null
-    }
-
-    isLastPhase() {
-        if (this._activeWatch == this._pauseWatch) return true
-        return false
     }
 
     getBoundingClientRect() {
