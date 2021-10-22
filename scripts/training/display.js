@@ -11,8 +11,8 @@ const portraitSizeFactor = .8
 
 
 // Component sizing
-new ResizeObserver(sizeComponent).observe(mainScreen)
-new ResizeObserver(sizeNoTrainDisp).observe(mainScreen)
+new ResizeObserver(sizeComponent).observe(trainingComponent)
+new ResizeObserver(sizeNoTrainDisp).observe(trainingComponent)
 
 
 function sizeComponent() {
