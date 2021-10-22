@@ -1,5 +1,5 @@
 
-import {getWatchString} from "../tools.js"
+import {range, getWatchString} from "../tools.js"
 import {setStyle} from "./training-tools.js"
 
 const template = document.querySelector(".tc-exercise-set-template")
@@ -14,9 +14,9 @@ export default class Set {
         this._classList = this._set.classList
 
         // Name
-        const name = this._set.querySelector(":scope .tcex-name")
-        if (!nameStr) name.textContent = defaultName
-        else          name.textContent = nameStr
+        this._name = this._set.querySelector(":scope .tcex-name")
+        if (!nameStr) this._name.textContent = defaultName
+        else          this._name.textContent = nameStr
 
         // Watches
         this._setWatch = this._set.querySelector(":scope .tcex-set-watch")
@@ -26,6 +26,18 @@ export default class Set {
         this._timerTick = this._timerTick.bind(this)
 
         container.append(setFrag)
+    }
+
+    get name() {
+        const parent = this._set.parentElement
+        let index
+
+        // Get current set number
+        for (index of range(parent.children.length)) {
+            if (parent.children[index] == this._set) break
+        }
+
+        return `${index}. ${this._name.textContent}`
     }
 
     get currentTime() {
