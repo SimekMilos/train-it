@@ -66,6 +66,11 @@ export default class Group {
         return this._exercises[this._activeExerciseIndex]
     }
 
+    get nextExercise() {
+        if (this._activeExerciseIndex == this._exercises.length - 1) return null
+        return this._exercises[this._activeExerciseIndex + 1]
+    }
+
     set currentTime(value) {
         if (this._watch) {
             this._watchTime = --value
