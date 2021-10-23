@@ -94,6 +94,20 @@
     overflow: auto;
 }
 
+    /* Fade out effect at the bottom of the scroll container */
+.sett-scroll-container::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+
+    height: 15px;
+    content: "";
+
+    background-image: linear-gradient(to bottom, #FFF0, #FFFF);
+}
+
 
 /* Close Button */
 
@@ -206,7 +220,7 @@
 
 .settings-component small {
     display: block;
-    margin-top: 2rem;
+    margin: 2rem 0 1rem;
 
     text-align: center;
 }

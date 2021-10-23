@@ -159,7 +159,7 @@
     overflow: auto;
 }
 
-/* Fade at the bottom of the scroll container */
+    /* Fade out effect at the bottom of the scroll container */
 .training-setup-component::after {
     display: block;
     position: absolute;
