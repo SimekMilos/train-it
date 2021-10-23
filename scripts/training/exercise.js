@@ -1,5 +1,5 @@
 
-import {getWatchString} from "../tools.js"
+import {float, getWatchString} from "../tools.js"
 import {setNextPhase, setPreviousPhase, setStyle} from "./training-tools.js"
 import {smoothScroll} from "../scrolling.js"
 
@@ -222,13 +222,16 @@ export default class Exercise {
     }
 
     _sizeHeader() {
+        const headerStyle = getComputedStyle(this._header)
         this._header.classList.remove("two-rows")
 
         const elemsWidth = this._name.clientWidth + this._right.clientWidth
         const headerWidth = this._header.clientWidth
+                             - float(headerStyle.paddingLeft)
+                             - float(headerStyle.paddingRight)
 
-        if (elemsWidth > headerWidth / 1.06) {         // 6% margin to allow
-            this._header.classList.add("two-rows")     // for font resizing
+        if (elemsWidth > headerWidth / 1.02) {         // 2% margin between
+            this._header.classList.add("two-rows")     // elements
         }
     }
 }
