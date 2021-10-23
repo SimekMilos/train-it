@@ -154,6 +154,24 @@ export function getNextInfo() {
     }
 }
 
+export function setCoutdown() {
+    /* Deactivate next exercise focus */
+
+    // When group is finished
+    if (groups[activeGroupIndex].isLastPhase) {
+        if (activeGroupIndex + 1 == groups.length) {
+            throw new RangeError("Called on last group")
+        }
+        groups[activeGroupIndex + 1].currentExercise.isNext = false
+        return
+    }
+
+    // When exercise is finished
+    if (groups[activeGroupIndex].currentExercise.isLastPhase) {
+        groups[activeGroupIndex].nextExercise.isNext = false
+    }
+}
+
 export function getCurrentTime() {
     /* Gets time of current phase */
 

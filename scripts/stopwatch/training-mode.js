@@ -215,6 +215,7 @@ async function next() {
 
     // Display set countdown
     if (display.watches.mode == "pause" && settings.getSetCountdown()) {
+        training.setCoutdown()
         await setCoutdown(training.getNextInfo())
     }
 
