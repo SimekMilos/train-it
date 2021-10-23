@@ -123,8 +123,9 @@
     scroll-snap-align: center;
 }
 
-.tc-training h2 {
+.tct-heading {
     margin: .5em 0 .75em;
+    width: 100%;
 
     font: normal 1.2em "OpenSans Regular", sans-serif;
     color: var(--main-color);
