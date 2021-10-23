@@ -62,14 +62,6 @@
     /* Content */
     display: flex;
     flex-direction: column;
-
-    /* Hiding scrollbar */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* Edge */
-}
-    /* Hiding scrollbar */
-.ov-training-list::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
 }
 
 

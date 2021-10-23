@@ -36,14 +36,6 @@
     overflow: auto hidden;
 
     /*scroll-snap-type: x mandatory;*/
-
-    /* Hiding scrollbar */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* Edge */
-}
-    /* Hiding scrollbar */
-.tc-container::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
 }
 
 .tc-container::after {    /* Fix for final right margin not working in Safari */
@@ -358,14 +350,6 @@
     /* Content */
     display: flex;
     flex-direction: column;
-
-    /* Hiding scrollbar */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* Edge */
-}
-    /* Hiding scrollbar */
-.tce-container::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
 }
 
 .tce-container.odd > :nth-child(odd) {
