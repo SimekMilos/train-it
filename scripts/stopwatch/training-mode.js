@@ -144,7 +144,7 @@ function start() {
     if (display.watches.mode == "countdown") {
         buttonBack.textContent = "+ 15 s"
         countdownTimer.start()
-        training.startCountdown(true)
+        training.initialCountdown(true)
 
     // Start first set
     } else {
@@ -251,7 +251,7 @@ async function next() {
 
 function pause() {
     if (display.watches.mode == "countdown") {
-        training.startCountdown(false)
+        training.initialCountdown(false)
         countdownTimer.stop()
     } else {
         training.pause(true)
@@ -290,7 +290,7 @@ async function reset() {
 
 function continueAction() {
     if (display.watches.mode == "countdown") {
-        training.startCountdown(true)
+        training.initialCountdown(true)
         countdownTimer.start()
     } else {
         training.pause(false)
