@@ -52,7 +52,7 @@ export function setTimer(timerObj) {
 
 // Actions
 
-export function countdown(active) {
+export function startCountdown(active) {
     groups[0].isNext = active
 }
 
