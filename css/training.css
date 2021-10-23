@@ -187,7 +187,7 @@
 
 .tcg-header {
     position: sticky;
-    left: 0;
+    left: .4em;
 
     width: var(--column-width);
     height: 1.45em;
@@ -199,20 +199,23 @@
 
 .tcg-right {
     margin-left: auto;
-    padding-left: .5em;
+    padding-left: .4em;
 
     display: flex;
     align-items: center;
 }
 
 .tcg-heading {
-    margin-top: -.1em;
+    margin: -.1em 0 0 .1em;
+    flex-shrink: 1;
+
     color: var(--main-color);
     font: normal 1.1em "OpenSans Regular", sans-serif;
 }
 
 .tcg-notes-button {
     margin-right: .5em;
+    margin-left: -.2em;
 }
 
 .tcg-watch {
