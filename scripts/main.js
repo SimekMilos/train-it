@@ -3,6 +3,9 @@ import {initInitScreen} from "./screens.js"
 
 export const storageVersion = 1
 
+window.addEventListener("load", onAppLoad)
+
+
 function onAppLoad() {
     // Deactivate loading screen
     const lScreen = document.querySelector(".loading-screen")
@@ -14,5 +17,3 @@ function onAppLoad() {
     // Initialize application
     initInitScreen()
 }
-
-window.addEventListener("load", onAppLoad)

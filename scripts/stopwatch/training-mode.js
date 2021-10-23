@@ -5,7 +5,7 @@ import * as settings from "../settings/settings.js"
 
 import * as display from "./display.js"
 import * as watches from "./watches.js"
-import * as nosleep from "./nosleep.js"
+import * as wakeLock from "./wake-lock.js"
 import {Timer} from "./timer.js"
 import {deactSpacebarContext} from "./spacebar.js"
 
@@ -62,8 +62,8 @@ export async function eventCycle() {
         }
 
         // Prevent device sleep during running training
-        if ((new Set(["run", "finish"])).has(mode)) nosleep.activate()
-        else nosleep.deactivate()
+        if ((new Set(["run", "finish"])).has(mode)) wakeLock.activate()
+        else wakeLock.deactivate()
 
     } while (mode != "end")
 
@@ -129,8 +129,8 @@ async function finishMode() {
 async function doneMode() {
     const [buttonReset, buttonClose] = display.buttons.doneMode()
     let action = await waitForAny(["click", buttonReset, reset],
-                                   ["click", buttonClose, end],
-                                   ["click", closeButton, end])
+                                  ["click", buttonClose, end],
+                                  ["click", closeButton, end])
     return action()
 }
 
@@ -142,12 +142,14 @@ async function doneMode() {
 function start() {
     // Start countdown mode if set
     if (display.watches.mode == "countdown") {
-        countdownTimer.start()
         buttonBack.textContent = "+ 15 s"
+        countdownTimer.start()
+        training.initialCountdown(true)
 
     // Start first set
     } else {
         display.watches.setMode()
+        training.start()
         timer.start()
     }
 
@@ -162,6 +164,7 @@ async function countdownTick() {
     if (!watches.getCurrentWatchTime()) {
         display.watches.setMode()
         countdownTimer.stop()
+        training.start()
         timer.start()
 
         buttonBack.textContent = "Back"
@@ -184,30 +187,36 @@ async function back() {
         return "run"
     }
 
-    // Resets curent phase if above 3s or first phase
-    if (watches.getCurrentWatchTime() > 3 || training.isFirst()) {
+    // Resets curent phase if above 3s
+    if (watches.getCurrentWatchTime() > 3) {
         watches.resetCurrentWatchTime()
         training.resetPhase()
         return mode
     }
 
-    // Go phase back if 3s or under
-    const {phase: newPhase, time: newTime} = training.back()
+    // Go phase back if 3s or less
+    const newPhase = training.back()
 
-    if (newPhase == "set") display.watches.setMode()
-    else                   display.watches.pauseMode()
+    if (newPhase == "set")   display.watches.setMode()
+    if (newPhase == "pause") display.watches.pauseMode()
+    //  newPhase == null ->  ignore
 
-    watches.setCurrentWatchTime(newTime)
+    watches.setCurrentWatchTime(training.getCurrentTime())
     return "run"
 }
 
 async function next() {
+    // Prevent simultaneous actions: next & countdown start set
+    if (display.watches.mode == "countdown" &&
+        watches.getCurrentWatchTime() == 1) return "run"
+
     let precedeTime = 0, newPhase
     await waitForTick()
 
-    // Set countdown
+    // Display set countdown
     if (display.watches.mode == "pause" && settings.getSetCountdown()) {
-        await setCoutdown()
+        training.setCoutdown()
+        await setCoutdown(training.getNextInfo())
     }
 
     // Preceding pause
@@ -220,6 +229,7 @@ async function next() {
     // Countdown mode
     if (display.watches.mode == "countdown") {
         countdownTimer.stop()
+        training.start()
         timer.start()
 
         newPhase = "set"
@@ -234,14 +244,17 @@ async function next() {
     if (newPhase == "set") display.watches.setMode()
     else                   display.watches.pauseMode()
 
+    training.addTime(precedeTime)
     watches.setCurrentWatchTime(precedeTime)
-    return !training.isLast() ? "run" : "finish"
+    return !training.isLastPhase() ? "run" : "finish"
 }
 
 function pause() {
     if (display.watches.mode == "countdown") {
+        training.initialCountdown(false)
         countdownTimer.stop()
     } else {
+        training.pause(true)
         timer.stop()
     }
 
@@ -276,10 +289,15 @@ async function reset() {
 }
 
 function continueAction() {
-    if (display.watches.mode == "countdown") countdownTimer.start()
-    else                                     timer.start()
+    if (display.watches.mode == "countdown") {
+        training.initialCountdown(true)
+        countdownTimer.start()
+    } else {
+        training.pause(false)
+        timer.start()
+    }
 
-    return !training.isLast() ? "run" : "finish"
+    return !training.isLastPhase() ? "run" : "finish"
 }
 
 
@@ -287,6 +305,11 @@ function continueAction() {
 
 function finish() {
     timer.stop()
+
+    display.watches.initialMode()
+    watches.resetCurrentWatchTime()
+    training.next()     // Removes active (running) pause styles
+
     return "done"
 }
 
@@ -324,7 +347,7 @@ function closeWarning(ev) {
     return ""
 }
 
-async function setCoutdown() {
+async function setCoutdown(info) {
     let finish = false
 
     // Create subcomponent
@@ -334,6 +357,16 @@ async function setCoutdown() {
     const mainDisplay = document.createElement("div")
     mainDisplay.classList.add("main")
     component.append(mainDisplay)
+
+    const exerciseHeader = document.createElement("p")
+    exerciseHeader.classList.add("exercise-name", "ellipsis")
+    exerciseHeader.textContent = info.exerciseName
+    mainDisplay.append(exerciseHeader)
+
+    const setHeader = document.createElement("p")
+    setHeader.classList.add("set-name", "ellipsis")
+    setHeader.textContent = info.setName
+    mainDisplay.append(setHeader)
 
     const counter = document.createElement("p")
     counter.classList.add("counter")
@@ -371,7 +404,7 @@ async function setCoutdown() {
 
     // Display
     let countdownTime = settings.getSetCountdown()
-    counter.textContent = countdownTime - 1
+    counter.textContent = countdownTime
     document.body.append(component)
 
     // Countdown
@@ -380,7 +413,7 @@ async function setCoutdown() {
 
     function count() {
         countdownTime--
-        counter.textContent = countdownTime - 1
+        counter.textContent = countdownTime
         if (!countdownTime || finish) resolve()
     }
     timer.registerCallback(count)

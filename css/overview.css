@@ -62,14 +62,6 @@
     /* Content */
     display: flex;
     flex-direction: column;
-
-    /* Hiding scrollbar */
-    scrollbar-width: none;      /* Firefox */
-    -ms-overflow-style: none;   /* Edge */
-}
-    /* Hiding scrollbar */
-.ov-training-list::-webkit-scrollbar {
-    display: none;              /* Chrome, Safari, Opera */
 }
 
 
@@ -127,6 +119,7 @@
 
 .ovt-name {
     margin: 0 10px;
+    flex-shrink: 1;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -135,7 +128,7 @@
 }
 
 .ov-training .handle {
-    margin: 0 10px;
+    margin-right: 10px;
 }
 
 /* Selected state */

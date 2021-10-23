@@ -44,6 +44,9 @@ export async function main() {
     transitionToInitScreen()
 }
 
+export const activateSpacebar = spacebar.activate
+export const deactivateSpacebar = spacebar.deactivate
+
 
 // --- Private ---
 

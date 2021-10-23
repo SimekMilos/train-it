@@ -61,8 +61,8 @@ body {
 
     --secondary-watch-color: #0009;
 
-    --running-color: hsl(0, 80%, 45%);
-    --running-pause-color: hsl(120, 100%, 35%);
+    --active-set-color: hsl(0, 80%, 45%);
+    --active-pause-color: hsl(120, 100%, 35%);
 
     --comp-shadow:
         0 0 5px 3px rgba(0,0,0,.1),
@@ -181,8 +181,17 @@ body {
 }
 
 
+/* --- Buttons --- */
+
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 /* --- Control Button --- */
-/* General styles for buttons */
 
 .control-button {
     height: var(--button-height);
@@ -190,14 +199,10 @@ body {
     border: 1px solid var(--button-color);
     border-radius: var(--comp-border-radius);
     background-color: transparent;
+    outline: none;                  /* Chrome tends to add outline */
 
     font: var(--button-font);
     color: var(--button-color);
-
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 @media (any-hover: hover) {
@@ -351,6 +356,28 @@ body {
 .notes::placeholder {
     line-height: 1.5;
 }
+
+
+/* --- Ellipsis text --- */
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* --- Hide Scrollbar --- */
+
+.hide-scrollbar {
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari, Opera */
+}
+
 
 
 /* --- Overlay Disabling --- */

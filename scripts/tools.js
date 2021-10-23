@@ -133,85 +133,30 @@ export async function dialog(message, ...buttons) {
     return action
 }
 
-export function sizeNotes(event) {
-    const notes = event.target
-    const styles = getComputedStyle(notes)
-    const border = float(styles.borderTopWidth) + float(styles.borderBottomWidth)
+export function getWatchString(time) {
+    let seconds = time % 60
+    let minutes = ((time - seconds) / 60) % 60
+    seconds = String(seconds).padStart(2, "0")
+    minutes = String(minutes).padStart(2, "0")
+
+    return `${minutes}:${seconds}`
+}
+
+export function sizeNotes(elemOrEvent) {
+    let notes = elemOrEvent
+    if (elemOrEvent instanceof Event) notes = elemOrEvent.target
+
+    // Test for display
+    const style = getComputedStyle(notes)
+    if (style.display == "none") return
+
+    const border = float(style.borderTopWidth) + float(style.borderBottomWidth)
 
     // Set new height
-    notes.style.removeProperty("height")            // for shrinking
+    notes.style.removeProperty("height")            // enables shrinking
     const height = notes.scrollHeight + border
 
-    if (Math.ceil(float(styles.height)) < height) { // necessary size must be
+    if (Math.ceil(float(style.height)) < height) { // necessary size must be
         notes.style.height = px(height)             // larger than minimum size
     }
-}
-
-
-// Scrolling
-
-export function addDynamicPadding(maxHeight, scrollContainer) {
-    /* Adds bottom padding to scrolling container as a filler before i.e.
-    removing element.
-        - Accounts for current scroll and adds only as much as needed.
-
-    maxHeight - maximum padding height to be added
-        - i.e. height of the element being removed)
-
-    return - function that smoothly removes said padding in specified
-        duration (in ms).
-    */
-
-    const cont = scrollContainer
-
-    const remaining = cont.scrollHeight - cont.scrollTop - cont.clientHeight
-    const origPadd = float(getComputedStyle(scrollContainer).paddingBottom)
-    let addSize = maxHeight - remaining
-    if (addSize < 0) addSize = 0
-
-    scrollContainer.style.paddingBottom = px(origPadd + addSize)
-
-    return async (duration = 0) => {
-        if (duration) {
-            let amount = origPadd + addSize
-            const step = 8 * amount/duration
-
-            while (amount > origPadd) {
-                amount -= step
-                scrollContainer.style.paddingBottom = px(amount)
-                await wait(8)       // 120 fps
-            }
-        }
-
-        scrollContainer.style.removeProperty("padding-bottom")
-    }
-}
-
-export async function dynamicScrollDown(distance, duration, scrollContainer) {
-    // Detect where content ends
-    const last = scrollContainer.lastElementChild
-    let {bottom: contentEnd} = last.getBoundingClientRect()
-    contentEnd += float(getComputedStyle(last).marginBottom)
-
-    // Add filler distance in case content is smaller than scrollContainer
-    const {bottom: containerEnd} = scrollContainer.getBoundingClientRect()
-    const filler = containerEnd - contentEnd
-    if (filler > 0) distance += filler
-
-    // Add padding
-    const removePadding = addDynamicPadding(distance, scrollContainer)
-
-    // Setup values for scrolling
-    const start = scrollContainer.scrollTop
-    const stop = start + distance
-    const step = 8 * distance/duration
-
-    // Scroll
-    for (let scrolled = start + step; scrolled < stop; scrolled += step) {
-        scrollContainer.scrollTop = scrolled
-        await wait(8)   // 120 fps
-    }
-    scrollContainer.scrollTop = stop
-
-    return removePadding
 }

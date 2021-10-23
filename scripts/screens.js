@@ -31,7 +31,6 @@ export async function transitionToMainScreen(trainingData) {
     await hideScreen(initScreen, 1000)
 
     stopwatch.main()
-    training.display()
 }
 
 export async function transitionToInitScreen() {

@@ -28,9 +28,6 @@
     <!-- Scripts -->
     <script type="module" src="scripts/main.js"></script>
 
-    <!-- To be removed -->
-    <script type="module" src="scripts/comp-training.js"></script>
-
     <title>Train It</title>
 
     <style>
@@ -118,7 +115,7 @@
             <form class="overview-component overlay-disabling">
                 <h1>Train It</h1>
                 <h2>Trainings:</h2>
-                <div class="ov-training-list">
+                <div class="ov-training-list hide-scrollbar">
                     <div class="ov-no-trainings no-content-display">
                         <p>You don't have any trainings yet.</p>
 
@@ -154,7 +151,7 @@
                     <div class="ov-training">
                         <input type="radio" name="training" value="" id="" hidden>
                         <label for="">
-                            <p class="ovt-name"></p>
+                            <p class="ovt-name ellipsis"></p>
                             <div class="handle"><div></div></div>
                         </label>
                     </div>
@@ -192,7 +189,7 @@
                     size="1" placeholder="Name this training"
                     spellcheck="false">
 
-                <div class="ts-scroll-container">
+                <div class="ts-scroll-container hide-scrollbar">
                     <textarea class="ts-training-notes text-input notes"
                         placeholder="- notes for the training"
                         spellcheck="false"></textarea>
@@ -351,12 +348,10 @@
 <!-- Training Component -->
 
         <div class="training-component">
-            <div class="tc-container">
-                <img class="tc-no-training"
-                     src="res/images/training-background.svg" alt="">
+            <div class="tc-container hide-scrollbar">
+                <div class="tc-no-training"></div>
 
                 <!-- Training info, groups and exercises goes here -->
-
             </div>
 
             <!-- Training info template -->
@@ -368,9 +363,10 @@
                         <img src="res/icons/notes.png" alt="Add Notes">
                     </button>
 
-                    <textarea class="tct-notes text-input notes"
+                    <textarea class="tct-notes text-input notes hide-scrollbar"
                             placeholder="- training notes"
                             spellcheck="false"></textarea>
+                    <div class="tct-icon"></div>
                 </div>
             </template>
 
@@ -383,11 +379,11 @@
                             <button class="tcg-notes-button notes-button">
                                 <img src="res/icons/notes.png" alt="Add Notes">
                             </button>
-                            <p class="tcg-watch">00:00</p>
+                            <p class="tcg-watch"></p>
                         </div>
                     </div>
                     <div class="tcg-container">
-                        <textarea class="tcg-notes text-input notes"
+                        <textarea class="tcg-notes text-input notes hide-scrollbar"
                             placeholder="- group notes"
                             spellcheck="false"></textarea>
 
@@ -412,11 +408,15 @@
                             <button class="tce-notes-button notes-button">
                                 <img src="res/icons/notes.png" alt="Add Notes">
                             </button>
-                            <p class="tce-watch">00:00</p>
+                            <p class="tce-watch"></p>
                         </div>
                     </div>
-                    <div class="tce-container">
-                        <!-- Notes and sets goes here -->
+                    <div class="tce-container hide-scrollbar even">
+                        <textarea class="tce-notes text-input notes"
+                            placeholder="- exercise notes"
+                            spellcheck="false"></textarea>
+
+                        <!-- Sets goes here -->
                     </div>
                 </div>
             </template>
@@ -425,22 +425,12 @@
             <template class="tc-exercise-set-template">
                 <div class="tc-exercise-set">
                     <!-- Set counter pseudoelement -->
-                    <div class="tcex-container">
-                        <p class="tcex-name ellipsis">Set</p>
-
-                        <div class="tcex-watches">
-                            <span class="tcex-set-watch">00:00</span>
-                            <span class="tcex-pause-watch">00:00</span>
-                        </div>
+                    <p class="tcex-name ellipsis"></p>
+                    <div class="tcex-watches">
+                        <span class="tcex-set-watch"></span>
+                        <span class="tcex-pause-watch"></span>
                     </div>
                 </div>
-            </template>
-
-            <!-- Exercise notes template -->
-            <template class="tc-notes-template">
-                <textarea class="tc-notes text-input notes"
-                          placeholder="- exercise notes"
-                          spellcheck="false"></textarea>
             </template>
         </div>
 

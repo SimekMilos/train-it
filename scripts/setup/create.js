@@ -1,6 +1,7 @@
 
 import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
-import {addDynamicPadding, dynamicScrollDown} from "../tools.js"
+import {smoothScroll, addDynamicPadding} from "../scrolling.js"
+import {getExtraContainerHeight} from "../scrolling.js"
 
 const component = document.querySelector(".training-setup-component")
 const trainingName = document.querySelector(".ts-training-name")
@@ -33,7 +34,7 @@ export function createTraining(data) {
 
 export function createGroup(data = null) {
     /* For both groups and no-groups
-       Input - group object/null (empty group)
+        Input - group object/null (empty group)
     */
 
     if (!data) data = {type: "group"}
@@ -56,6 +57,8 @@ export function createGroup(data = null) {
 
         // Events
         notes.addEventListener("input", sizeNotes)
+        sizeNotesOnResize(notes)
+
         buttonAddExercise.addEventListener("click", () => {
             addTrainingItem("exercise", exerContainer)
         })
@@ -89,8 +92,8 @@ export function createGroup(data = null) {
 export async function addTrainingItem(type, container) {
     /* Adds training item with intro animation and necessary scrolling
 
-    type - "group" or "exercise"
-    container - container to add to
+        type - "group" or "exercise"
+        container - container to add to
     */
 
     component.classList.remove("enable-access")
@@ -112,14 +115,18 @@ export async function addTrainingItem(type, container) {
     }
 
     // Compute scroll distance
-    const scroll = computeScrollDist(topScrollPos, bottomScrollPos)
+    let scroll = computeScrollDist(topScrollPos, bottomScrollPos)
 
     // Remove item before scrolling (cannot be visible during scroll)
     trainingItem.remove()
 
     // Scroll down
     let removePadd = null
-    if (scroll) removePadd = await dynamicScrollDown(scroll, 250, scrollContainer)
+    if (scroll) {
+        scroll += getExtraContainerHeight(scrollContainer)
+        removePadd = addDynamicPadding(scroll, scrollContainer)
+        await smoothScroll(scroll, 250, scrollContainer)
+    }
     await wait(100)
 
     // Hide no-training displays
@@ -138,6 +145,7 @@ export async function addTrainingItem(type, container) {
 // ===== Private =====
 
 trainingNotes.addEventListener("input", sizeNotes)
+sizeNotesOnResize(trainingNotes)
 
 
 // --- Group ---
@@ -214,6 +222,8 @@ function createExercise(data = null) {
 
     // Events
     notes.addEventListener("input", sizeNotes)
+    sizeNotesOnResize(notes)
+
     buttonAddSet.addEventListener("click", () => {
         setContainer.append(createSet())
     })
@@ -291,6 +301,11 @@ function createSet(setName = "") {
 
 
 // --- Other ---
+
+function sizeNotesOnResize(notes) {
+    const observer = new ResizeObserver(() => sizeNotes(notes))
+    observer.observe(component)
+}
 
 function appendToContainer(container, type) {
     // Save current scroll position - adding element can scroll, container
