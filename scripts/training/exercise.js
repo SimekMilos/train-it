@@ -19,15 +19,6 @@ export default class Exercise {
         this._classList = exercise.classList
         this._exerciseContainer = exercise.querySelector(":scope .tce-container")
 
-        // Header
-        this._header = exercise.querySelector(":scope .tce-header")
-        this._right = exercise.querySelector(":scope .tce-right")
-
-        const firstDisplay = new ResizeObserver(() => {
-            this._sizeHeader(); firstDisplay.disconnect()
-        })
-        firstDisplay.observe(this._header)
-
         // Name
         this._name = exercise.querySelector(":scope .tce-name")
         this._name.textContent = exerciseData.name
@@ -45,6 +36,16 @@ export default class Exercise {
         this._setupRows()
         notesFunctionality(this._notes, notesButton, exerciseData,
                            resizeCallback, this._sizeHeader.bind(this))
+        // Header
+        this._header = exercise.querySelector(":scope .tce-header")
+        this._right = exercise.querySelector(":scope .tce-right")
+
+        const firstDisplay = new ResizeObserver(() => {
+            firstDisplay.disconnect()
+            this._sizeHeader()
+        })
+        firstDisplay.observe(this._header)
+
         // Sets
         this._sets = []
         this._activeSetIndex = 0

@@ -330,11 +330,12 @@
     /* 2 rows display */
 .tce-header.two-rows {
     flex-wrap: wrap;
-    height: 4.05em;
+    height: 4.25em;
 }
 
 .tce-header.two-rows .tce-name {
     width: 100%;
+    margin-bottom: .2em;
 }
 
 
