@@ -127,6 +127,7 @@
 
 .ovt-name {
     margin: 0 10px;
+    flex-shrink: 1;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -135,7 +136,7 @@
 }
 
 .ov-training .handle {
-    margin: 0 10px;
+    margin-right: 10px;
 }
 
 /* Selected state */
