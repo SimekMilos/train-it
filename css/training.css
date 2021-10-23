@@ -207,7 +207,7 @@
 
 .tcg-notes-button {
     margin-right: .5em;
-    margin-left: -.2em;
+    margin-left: -.25em;
 }
 
 .tcg-watch {
@@ -289,7 +289,6 @@
     scroll-snap-align: center;
 }
 
-
 /* Header */
 
 .tce-header {
@@ -336,7 +335,6 @@
     width: 100%;
     margin-bottom: .2em;
 }
-
 
 /* Content */
 
