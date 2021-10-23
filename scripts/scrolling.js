@@ -14,6 +14,13 @@ export async function smoothScroll(distance, duration, scrollContainer,
 
     let contentLenght, scrolled, clientLength
 
+    // Temporarily deactivate user scrolling
+    let overflow = null
+    const contStyle = scrollContainer.style
+
+    if (contStyle.overflow) overflow = contStyle.overflow
+    scrollContainer.style.overflow = "hidden"
+
     // Get dimensions
     if (horizontal) {
         contentLenght = scrollContainer.scrollWidth
@@ -47,9 +54,13 @@ export async function smoothScroll(distance, duration, scrollContainer,
         await wait(8)       // 120 fps
         scrolled += step
     }
-
+        // Scroll remainder
     if (horizontal) scrollContainer.scrollLeft = stop
     else            scrollContainer.scrollTop = stop
+
+    // Reactivate user scrolling
+    if (overflow) contStyle.overflow = overflow
+    else contStyle.removeProperty("overflow")
 }
 
 
