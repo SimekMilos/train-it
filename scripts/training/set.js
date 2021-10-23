@@ -1,5 +1,5 @@
 
-import {range, getWatchString} from "../tools.js"
+import {float, range, getWatchString} from "../tools.js"
 import {setStyle} from "./training-tools.js"
 
 const template = document.querySelector(".tc-exercise-set-template")
@@ -23,8 +23,15 @@ export default class Set {
         this._pauseWatch = this._set.querySelector(":scope .tcex-pause-watch")
         this._initWatches()
 
-        this._timerTick = this._timerTick.bind(this)
+        // Sizing
+        this._watches = this._set.querySelector(":scope .tcex-watches")
+        const firstDisplay = new ResizeObserver(() => {
+            firstDisplay.disconnect()
+            this._size()
+        })
+        firstDisplay.observe(this._set)
 
+        this._timerTick = this._timerTick.bind(this)
         container.append(setFrag)
     }
 
@@ -127,6 +134,19 @@ export default class Set {
         this._pauseWatchTime = 0
 
         this._activeWatch = this._setWatch
+    }
+
+    _size() {
+        const setStyle = getComputedStyle(this._set)
+        this._set.classList.remove("two-rows")
+
+        const elemsWidth = this._name.clientWidth + this._watches.clientWidth
+        const setWidth = this._set.clientWidth - float(setStyle.paddingLeft)
+                          - float(setStyle.paddingRight)
+
+        if (elemsWidth > setWidth / 1.02) {         // 2% margin between
+            this._set.classList.add("two-rows")     // elements
+        }
     }
 
     _timerTick() {

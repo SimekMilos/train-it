@@ -413,34 +413,33 @@
 /* --- Set --- */
 
 .tc-exercise-set {
-    height: 1.73em;
-    padding: .15em .5em .2em 1.5em;
+    padding: 0 .5em 0 1.5em;
 
     font-size: 1.2em;
 
     /* Content */
     display: flex;
     align-items: center;
+    align-content: center;
+
+    /* 1 row display */
+    height: 1.8em;
 }
 
-.tc-exercise-set::before {
-    margin-right: .25em;
+.tcex-name {
+    margin: -.34em 0 -.25em 0;
+}
 
+    /* Set counter */
+.tcex-name::before {
     content: counter(sets) ".";
     counter-increment: sets;
-}
 
-.tcex-container {
-    flex-grow: 1;
-    width: 0;
-
-    display: inline-flex;
-    flex-wrap: wrap;
+    margin-right: .25em;
 }
 
 .tcex-watches {
-    margin-left: auto;
-    padding-left: .45em;
+    margin: -.02em 0 0 auto;
 
     font-size: 1.05em;
     line-height: .8;
@@ -456,6 +455,19 @@
 .tcex-pause-watch {
     color: var(--secondary-watch-color);
 }
+
+
+/* 2 rows display */
+.tc-exercise-set.two-rows {
+    flex-wrap: wrap;
+    height: 3.16em;
+}
+
+.tc-exercise-set.two-rows .tcex-name {
+    width: 100%;
+    margin-bottom: .26em;
+}
+
 
 /* Active set */
 .tc-exercise-set.active-set::before {
