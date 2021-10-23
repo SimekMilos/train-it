@@ -190,6 +190,18 @@
 }
 
 
+/* About Creator */
+
+.settings-component .about {
+    margin-bottom: 2em;
+}
+
+.buy-me-a-coffee {
+    display: flex;
+    justify-content: center;
+}
+
+
 /* Attribution */
 
 .settings-component small {

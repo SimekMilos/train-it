@@ -10,6 +10,8 @@ const trCountdownSelect = document.querySelector(".sett-tr-countdown")
 const setCountdownSelect = document.querySelector(".sett-set-countdown")
 const precedingPauseSelect = document.querySelector(".sett-preceding-pause")
 
+const creatorEmail = document.querySelector(".creator-email")
+
 let trainingData = null
 
 
@@ -32,6 +34,8 @@ export function init(trData) {
     trCountdownSelect.value = settings.trainingCountdown
     setCountdownSelect.value = settings.setCountdown
     precedingPauseSelect.value = settings.precedingPause
+
+    generateEmail()
 }
 
 export function destroy() {
@@ -157,4 +161,18 @@ function generateSelectOptions() {
         fragment.append(option)
     }
     precedingPauseSelect.append(fragment)
+}
+
+function generateEmail() {
+    if (creatorEmail.textContent.trim()) return
+
+    const e = "tjsn"
+    const m = "ake"
+    const a = "@"
+    const i = "me."
+    const l = "com"
+    const together = e + m + a + i + l
+
+    creatorEmail.href = "mailto:" + together
+    creatorEmail.textContent = together
 }
