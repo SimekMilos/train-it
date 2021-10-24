@@ -1,7 +1,7 @@
 # Train-It
 
 Train It is a web app for timing and organizing training.
-It's available at: <www.trainit.app>
+It's available at: www.trainit.app
 
 ## License
 
