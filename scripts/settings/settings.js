@@ -18,16 +18,17 @@ let trainingData = null
 // --- Public ---
 
 export function init(trData) {
+    trainingData = trData
+    generateSelectOptions()
+
     if (!trData) {
         trCountdownSelect.disabled = true
         setCountdownSelect.disabled = true
         precedingPauseSelect.disabled = true
         return
     }
-    trainingData = trData
 
     // Load values
-    generateSelectOptions()
     const settings = trData.settings
     if(!settings) return
 
