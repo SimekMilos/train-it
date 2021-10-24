@@ -128,6 +128,7 @@
 }
 
 .ov-training .handle {
+    display: none;                                         /* Handle disabled */
     margin-right: 10px;
 }
 

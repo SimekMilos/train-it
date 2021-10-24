@@ -337,6 +337,7 @@
 }
 
 .ts-group-handle {
+    display: none;                                         /* Handle disabled */
     position: absolute;
     top: 10px;
     left: 10px;
@@ -430,6 +431,7 @@
 /* Controls */
 
 .ts-exercise-handle {
+    display: none;                                         /* Handle disabled */
     position: absolute;
     top: 10px;
     left: 10px;
@@ -474,6 +476,7 @@
 /* Content */
 
 .ts-set-handle {
+    visibility: hidden;                                    /* Handle disabled */
     margin-right: 12px;
     order: -1;
 }
