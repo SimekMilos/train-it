@@ -1,7 +1,7 @@
 # Train-It
 
 Train It is a web app for timing and organizing training.
-It is available at: <https://simekmilos.github.io/train-it/>
+It's available at: <www.trainit.app>
 
 ## License
 
