@@ -62,6 +62,8 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    --item-height: 43px;
 }
 
 
@@ -75,11 +77,9 @@
 .ov-training {
     position: relative;
 
-    height: var(--height);
+    height: var(--item-height);
     overflow: hidden;
     transition: height .4s;
-
-    --height: 43px;
 }
 
 .ov-training:nth-child(2) {
@@ -106,7 +106,7 @@
     bottom: 0;
 
     width: 100%;
-    height: var(--height);
+    height: var(--item-height);
     border-bottom: 1px solid var(--main-color);
 
     /* Content */
