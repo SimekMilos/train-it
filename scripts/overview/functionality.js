@@ -227,6 +227,10 @@ async function deleteTraining() {
 let draggedElem = null
 let dropZone = null
 
+trainingList.addEventListener("dragenter", listDragEnter)
+trainingList.addEventListener("dragover", dragOver)
+trainingList.addEventListener("drop", drop)
+
 async function dragStart(ev) {
     ev.dataTransfer.setData('text/plain', null)
     ev.dataTransfer.effectAllowed = "move"
@@ -278,29 +282,40 @@ function createDropZone() {
     dropZone.classList.add("ov-drop-zone")
 
     // Dropping
-    dropZone.addEventListener("dragover", ev => {
-        ev.preventDefault()
-        ev.dataTransfer.dropEffect = "move"
-    })
-
-    dropZone.addEventListener("drop", ev => {
-        ev.preventDefault()
-
-        ev.target.after(draggedElem)
-        ev.target.remove()
-        storeDropChange()
-    })
+    dropZone.addEventListener("dragover", dragOver)
+    dropZone.addEventListener("drop", drop)
 
     return dropZone
 }
 
-function storeDropChange() {
+function drop(ev) {
+    ev.preventDefault()
+    dropZone.after(draggedElem)
+    dropZone.remove()
+
+    // Store changes
     const trainings = [...trainingList.children]
     trainings.shift()               // Ignoring no-training display
 
     const newOrder = []
     for(const training of trainings) newOrder.push(training.firstElementChild.id)
     storage["training-order"] = JSON.stringify(newOrder)
+}
+
+function dragOver(ev) {
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = "move"
+}
+
+function listDragEnter(ev) {
+    if (ev.target != ev.currentTarget) return
+
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = "move"
+
+    dropZone.remove()
+    dropZone = createDropZone()
+    trainingList.lastElementChild.after(dropZone)
 }
 
 
