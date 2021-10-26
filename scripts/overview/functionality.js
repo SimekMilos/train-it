@@ -266,26 +266,15 @@ async function dragEnter(ev) {
     else                           elem.after(dropZone)
 }
 
-function dragEnd(ev) {
-    ev.target.style.removeProperty("opacity")
-    ev.target.classList.remove("drag")
+function listDragEnter(ev) {
+    if (ev.target != ev.currentTarget) return
 
-    // Drop canceled
-    if (ev.dataTransfer.dropEffect == "none") {
-        dropZone.remove()
-        loadTrainings()
-    }
-}
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = "move"
 
-function createDropZone() {
-    const dropZone = document.createElement("div")
-    dropZone.classList.add("ov-drop-zone")
-
-    // Dropping
-    dropZone.addEventListener("dragover", dragOver)
-    dropZone.addEventListener("drop", drop)
-
-    return dropZone
+    dropZone.remove()
+    dropZone = createDropZone()
+    trainingList.lastElementChild.after(dropZone)
 }
 
 function drop(ev) {
@@ -302,20 +291,31 @@ function drop(ev) {
     storage["training-order"] = JSON.stringify(newOrder)
 }
 
+function dragEnd(ev) {
+    ev.target.style.removeProperty("opacity")
+    ev.target.classList.remove("drag")
+
+    // Drop canceled
+    if (ev.dataTransfer.dropEffect == "none") {
+        dropZone.remove()
+        loadTrainings()
+    }
+}
+
 function dragOver(ev) {
     ev.preventDefault()
     ev.dataTransfer.dropEffect = "move"
 }
 
-function listDragEnter(ev) {
-    if (ev.target != ev.currentTarget) return
+function createDropZone() {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add("ov-drop-zone")
 
-    ev.preventDefault()
-    ev.dataTransfer.dropEffect = "move"
+    // Dropping
+    dropZone.addEventListener("dragover", dragOver)
+    dropZone.addEventListener("drop", drop)
 
-    dropZone.remove()
-    dropZone = createDropZone()
-    trainingList.lastElementChild.after(dropZone)
+    return dropZone
 }
 
 
