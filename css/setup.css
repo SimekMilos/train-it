@@ -518,6 +518,7 @@
 
     border: 4px solid white;
     border-radius: 10px;
-
     background-color: hsl(0, 0%, 95%);
+
+    counter-increment: set-counter;
 }
