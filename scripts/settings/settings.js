@@ -20,6 +20,7 @@ let trainingData = null
 export function init(trData) {
     trainingData = trData
     generateSelectOptions()
+    generateEmail()
 
     if (!trData) {
         trCountdownSelect.disabled = true
@@ -35,8 +36,6 @@ export function init(trData) {
     trCountdownSelect.value = settings.trainingCountdown
     setCountdownSelect.value = settings.setCountdown
     precedingPauseSelect.value = settings.precedingPause
-
-    generateEmail()
 }
 
 export function destroy() {
