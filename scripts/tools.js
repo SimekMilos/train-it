@@ -165,3 +165,17 @@ export function sizeNotes(elemOrEvent) {
         notes.style.height = px(height)             // larger than minimum size
     }
 }
+
+export function createDropZone(classString, dropCallback) {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add(classString)
+
+    // Dropping
+    dropZone.addEventListener("dragover", (ev) => {
+        ev.preventDefault()
+        ev.dataTransfer.dropEffect = "move"
+    })
+    dropZone.addEventListener("drop", dropCallback)
+
+    return dropZone
+}

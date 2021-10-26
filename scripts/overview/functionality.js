@@ -1,5 +1,6 @@
 
-import {float, range, wait, waitFor, dialog, generateTrainingID} from "../tools.js"
+import {float, range, wait, waitFor, dialog,
+        generateTrainingID, createDropZone} from "../tools.js"
 import {storageVersion} from "../main.js"
 
 import {smoothScroll, addDynamicPadding} from "../scrolling.js"
@@ -242,7 +243,7 @@ async function dragStart(ev) {
     await wait(0)
 
     // Prepare dropzone
-    dropZone = createDropZone()
+    dropZone = createDropZone("ov-dropzone", drop)
     draggedElem.after(dropZone)
 
     draggedElem.remove()
@@ -257,7 +258,7 @@ async function dragEnter(ev) {
 
     // Add new dropzone
     dropZone.remove()
-    dropZone = createDropZone()
+    dropZone = createDropZone("ov-dropzone", drop)
     if (dropZoneTop > elemTop) elem.before(dropZone)
     else                       elem.after(dropZone)
 }
@@ -276,7 +277,7 @@ function listDragOver(ev) {
     // Set bottom dropzone
     if (!trainingList.lastElementChild.classList.contains("ov-dropzone")) {
         dropZone.remove()
-        dropZone = createDropZone()
+        dropZone = createDropZone("ov-dropzone", drop)
         trainingList.lastElementChild.after(dropZone)
     }
 }
@@ -304,20 +305,6 @@ function dragEnd(ev) {
         dropZone.remove()
         loadTrainings()
     }
-}
-
-function createDropZone() {
-    const dropZone = document.createElement("div")
-    dropZone.classList.add("ov-dropzone")
-
-    // Dropping
-    dropZone.addEventListener("dragover", (ev) => {
-        ev.preventDefault()
-        ev.dataTransfer.dropEffect = "move"
-    })
-    dropZone.addEventListener("drop", drop)
-
-    return dropZone
 }
 
 

@@ -1,5 +1,6 @@
 
-import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
+import {px, float, range, wait, waitFor,
+        sizeNotes, createDropZone} from "../tools.js"
 import {smoothScroll, addDynamicPadding} from "../scrolling.js"
 import {getExtraContainerHeight} from "../scrolling.js"
 
@@ -323,7 +324,7 @@ async function setDragStart(ev) {
     await wait(0)
 
     // Prepare dropzone
-    dropZone = createSetDropZone()
+    dropZone = createDropZone("ts-set-dropzone", setDrop)
     draggedElem.after(dropZone)
 
     draggedElem.style.display = "none"
@@ -338,7 +339,7 @@ function setDragEnter(ev) {
 
     // Add new dropzone
     dropZone.remove()
-    dropZone = createSetDropZone()
+    dropZone = createDropZone("ts-set-dropzone", setDrop)
     if (dropZoneTop > elemTop) elem.before(dropZone)
     else                       elem.after(dropZone)
 }
@@ -353,20 +354,6 @@ function setDragEnd(ev) {
     draggedElem.style.removeProperty("opacity")
     draggedElem.style.removeProperty("display")
     dropZone.remove()
-}
-
-function createSetDropZone() {
-    const dropZone = document.createElement("div")
-    dropZone.classList.add("ts-set-dropzone")
-
-    // Dropping
-    dropZone.addEventListener("dragover", (ev) => {
-        ev.preventDefault()
-        ev.dataTransfer.dropEffect = "move"
-    })
-    dropZone.addEventListener("drop", setDrop)
-
-    return dropZone
 }
 
 
