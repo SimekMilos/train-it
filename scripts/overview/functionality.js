@@ -232,7 +232,7 @@ trainingList.addEventListener("dragover", listDragOver)
 trainingList.addEventListener("drop", drop)
 
 async function dragStart(ev) {
-    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.setData('application/training', "")
     ev.dataTransfer.effectAllowed = "move"
 
     // Prepare dragged elem

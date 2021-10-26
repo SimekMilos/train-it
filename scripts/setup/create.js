@@ -312,7 +312,7 @@ let draggedElem = null
 let dropZone = null
 
 async function setDragStart(ev) {
-    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.setData("application/set", "")
     ev.dataTransfer.effectAllowed = "move"
 
     // Prepare dragged elem
@@ -349,7 +349,7 @@ function setDrop(ev) {
     dropZone.after(draggedElem)
 }
 
-function setDragEnd(ev) {
+function setDragEnd() {
     draggedElem.classList.remove("dragged")
     draggedElem.style.removeProperty("opacity")
     draggedElem.style.removeProperty("display")
