@@ -474,7 +474,7 @@
     content: counter(set-counter) ".";
 }
 
-.ts-set:nth-child(even) {
+.ts-set:nth-of-type(even) {
     background-color: #f4f5f4;
 }
 
