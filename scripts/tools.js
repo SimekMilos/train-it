@@ -45,6 +45,8 @@ export async function waitForAny(...events) {
        Each event is described as an array:
         [eventString, eventElement, optionalReturnValue, optionalUseCapture]
 
+        optionalReturnValue - if undefined event object is returned
+
        Output - Promise with optional return value of first event
     */
 
@@ -56,7 +58,10 @@ export async function waitForAny(...events) {
         const [eventStr, element, retVal, useCapture = false] = event
 
         promises.push(new Promise(resolve => {
-            const handler = () => resolve(retVal)
+            const handler = (ev) => {
+                if (retVal === undefined) resolve(ev)
+                else resolve(retVal)
+            }
 
             element.addEventListener(eventStr, handler, useCapture)
             registered.push([element, eventStr, handler, useCapture])

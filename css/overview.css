@@ -5,7 +5,7 @@
     position: relative;
 
     /* Dimensions */
-    max-height: 450px;
+    max-height: 455px;
     min-height: 284px;
     flex: 1 0 0;
 
@@ -62,6 +62,8 @@
     /* Content */
     display: flex;
     flex-direction: column;
+
+    --item-height: 43px;
 }
 
 
@@ -75,19 +77,17 @@
 .ov-training {
     position: relative;
 
-    height: var(--height);
+    height: var(--item-height);
     overflow: hidden;
     transition: height .4s;
-
-    --height: 43px;
 }
 
-.ov-training:nth-child(2) {
+.ov-training:nth-child(2), .ov-drop-zone:nth-child(2) {
     margin-top: 10px;
     border-top: 1px solid var(--main-color);
 }
 
-.ov-training:last-child {
+.ov-training:last-child, .ov-drop-zone:last-child {
     margin-bottom: 5px;
 }
 
@@ -106,8 +106,9 @@
     bottom: 0;
 
     width: 100%;
-    height: var(--height);
+    height: var(--item-height);
     border-bottom: 1px solid var(--main-color);
+    background-color: white;
 
     /* Content */
     display: flex;
@@ -118,7 +119,7 @@
 }
 
 .ovt-name {
-    margin: 0 10px;
+    margin-left: 10px;
     flex-shrink: 1;
 
     -webkit-user-select: none;
@@ -127,9 +128,16 @@
     user-select: none;
 }
 
-.ov-training .handle {
-    display: none;                                         /* Handle disabled */
-    margin-right: 10px;
+.ovt-move {
+    height: calc(100% + 1px);   /* Must go over items border line */
+    padding: 0 10px;
+
+    cursor: move;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Selected state */
@@ -144,8 +152,23 @@
     --handle-color: white;
 }
 
+/* Dragging */
+
+.ov-training.drag label {
+    border: 1px solid var(--main-color);
+}
+
+.ov-drop-zone {
+    height: var(--item-height);
+    border-bottom: 1px solid var(--main-color);
+
+    background: center/calc(100% - 10px) calc(100% - 10px) no-repeat
+        linear-gradient(hsl(0, 0%, 95%), hsl(0, 0%, 95%));
+}
+
 
 /* --- Controls --- */
+
 .ov-controls {
     margin-top: 5px;
 

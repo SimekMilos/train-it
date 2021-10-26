@@ -181,7 +181,7 @@ async function deleteTraining() {
 
     // Confirm deletion
     const trName = trNameElem.textContent
-    const action = await dialog(`Do you want to delete training ${trName}?`,
+    const action = await dialog(`Do you want to delete training: ${trName}?`,
                                 "Yes", "No")
     if (action == "No") return
     display.disableAccess()
@@ -219,6 +219,107 @@ async function deleteTraining() {
     // Delete training data
     storage.removeItem(trID)
     overviewSettings.onStorageRemove()  // notify component about removal
+}
+
+
+// --- Drag & Drop ---
+
+let draggedElem = null
+let dropZone = null
+
+trainingList.addEventListener("dragover", listDragOver)
+trainingList.addEventListener("drop", drop)
+
+async function dragStart(ev) {
+    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.effectAllowed = "move"
+
+    draggedElem = ev.target
+    draggedElem.classList.add("drag")
+    draggedElem.style.opacity = ".5"
+
+    dropZone = createDropZone()
+    draggedElem.after(dropZone)
+
+    await wait(0)
+    draggedElem.remove()
+}
+
+async function dragEnter(ev) {
+    const elem = ev.currentTarget
+    let listItems = trainingList.children
+    let elemIndex, dropZoneIndex
+
+    // Get positions of elem and dropzone
+    for(const index of range(1, listItems.length)) {
+        if (listItems[index] == elem) elemIndex = index
+        if (listItems[index].classList.contains("ov-drop-zone")) {
+            dropZoneIndex = index
+        }
+    }
+
+    // Add new dropzone
+    dropZone.remove()
+    dropZone = createDropZone()
+    if (dropZoneIndex > elemIndex) elem.before(dropZone)
+    else                           elem.after(dropZone)
+}
+
+function listDragOver(ev) {
+    if (ev.target != ev.currentTarget) return
+
+    // Disables above/side gaps
+    const lastBottom = trainingList.lastElementChild.getBoundingClientRect().bottom
+    if (ev.clientY <= lastBottom) return
+
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = "move"
+
+    // Set bottom dropzone
+    if (!trainingList.lastElementChild.classList.contains("ov-drop-zone")) {
+        dropZone.remove()
+        dropZone = createDropZone()
+        trainingList.lastElementChild.after(dropZone)
+    }
+}
+
+function drop(ev) {
+    ev.preventDefault()
+    dropZone.after(draggedElem)
+    dropZone.remove()
+
+    // Store changes
+    const trainings = [...trainingList.children]
+    trainings.shift()               // Ignoring no-training display
+
+    const newOrder = []
+    for(const training of trainings) newOrder.push(training.firstElementChild.id)
+    storage["training-order"] = JSON.stringify(newOrder)
+}
+
+function dragEnd(ev) {
+    ev.target.style.removeProperty("opacity")
+    ev.target.classList.remove("drag")
+
+    // Drop canceled
+    if (ev.dataTransfer.dropEffect == "none") {
+        dropZone.remove()
+        loadTrainings()
+    }
+}
+
+function createDropZone() {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add("ov-drop-zone")
+
+    // Dropping
+    dropZone.addEventListener("dragover", ev => {
+        ev.preventDefault()
+        ev.dataTransfer.dropEffect = "move"
+    })
+    dropZone.addEventListener("drop", drop)
+
+    return dropZone
 }
 
 
@@ -276,19 +377,23 @@ async function onSettingsClick() {
 // --- Other ---
 
 function createTrainingItem(trainingID, trainingName) {
-    const training = trainingTemplate.content.cloneNode(true)
+    const trainingFrag = trainingTemplate.content.cloneNode(true)
 
-    const input = training.querySelector("input")
-    const label = training.querySelector("label")
-    const name = training.querySelector(".ovt-name")
+    const training = trainingFrag.querySelector(".ov-training")
+    const input = trainingFrag.querySelector("input")
+    const label = trainingFrag.querySelector("label")
+    const name = trainingFrag.querySelector(".ovt-name")
 
     input.id = trainingID
     label.htmlFor = trainingID
     name.textContent = trainingName
 
     label.addEventListener("click", selectedMode)
+    training.addEventListener("dragstart", dragStart)
+    training.addEventListener("dragenter", dragEnter)
+    training.addEventListener("dragend", dragEnd)
 
-    return training
+    return trainingFrag
 }
 
 function getSelectedTraining() {
