@@ -316,16 +316,16 @@ async function setDragStart(ev) {
 
     // Prepare dragged elem
     draggedElem = ev.target
-    draggedElem.style.opacity = .6
+    draggedElem.style.opacity = .5
     draggedElem.classList.add("dragged")
     draggedElem.querySelector(":scope .ts-set-name").blur()
+
+    await wait(0)
 
     // Prepare dropzone
     dropZone = createSetDropZone()
     draggedElem.after(dropZone)
 
-    // Hide elem
-    await wait(0)
     draggedElem.style.display = "none"
 }
 
@@ -346,18 +346,13 @@ function setDragEnter(ev) {
 function setDrop(ev) {
     ev.preventDefault()
     dropZone.after(draggedElem)
-    dropZone.remove()
 }
 
 function setDragEnd(ev) {
     draggedElem.classList.remove("dragged")
     draggedElem.style.removeProperty("opacity")
     draggedElem.style.removeProperty("display")
-
-    // Drop canceled
-    if (ev.dataTransfer.dropEffect == "none") {
-        dropZone.remove()
-    }
+    dropZone.remove()
 }
 
 function createSetDropZone() {

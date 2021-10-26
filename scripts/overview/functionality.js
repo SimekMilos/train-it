@@ -237,14 +237,14 @@ async function dragStart(ev) {
     // Prepare dragged elem
     draggedElem = ev.target
     draggedElem.classList.add("dragged")
-    draggedElem.style.opacity = ".5"
+    draggedElem.style.opacity = .5
+
+    await wait(0)
 
     // Prepare dropzone
     dropZone = createDropZone()
     draggedElem.after(dropZone)
 
-    // Remove elem from flow
-    await wait(0)
     draggedElem.remove()
 }
 
