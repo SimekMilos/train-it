@@ -355,8 +355,23 @@ async function dragEnter(ev) {
     else                           elem.after(dropZone)
 }
 
+function dragEnd(ev) {
+    dropZone.remove()
+    ev.target.style.removeProperty("opacity")
+    ev.target.classList.remove("drag")
+}
+
 function createDropZone() {
     const dropZone = document.createElement("div")
     dropZone.classList.add("ov-drop-zone")
+
+    // Dropping
+    dropZone.addEventListener("dragover", (ev) => ev.preventDefault())
+    dropZone.addEventListener("drop", (ev) => {
+        ev.preventDefault()
+        ev.target.after(draggedElem)
+    })
+
+
     return dropZone
 }
