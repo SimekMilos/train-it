@@ -82,12 +82,12 @@
     transition: height .4s;
 }
 
-.ov-training:nth-child(2), .ov-drop-zone:nth-child(2) {
+.ov-training:nth-child(2), .ov-dropzone:nth-child(2) {
     margin-top: 10px;
     border-top: 1px solid var(--main-color);
 }
 
-.ov-training:last-child, .ov-drop-zone:last-child {
+.ov-training:last-child, .ov-dropzone:last-child {
     margin-bottom: 5px;
 }
 
@@ -154,11 +154,11 @@
 
 /* Dragging */
 
-.ov-training.drag label {
+.ov-training.dragged label {
     border: 1px solid var(--main-color);
 }
 
-.ov-drop-zone {
+.ov-dropzone {
     height: var(--item-height);
     border-bottom: 1px solid var(--main-color);
 

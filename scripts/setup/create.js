@@ -1,5 +1,6 @@
 
-import {px, float, range, wait, waitFor, sizeNotes} from "../tools.js"
+import {px, float, range, wait, waitFor,
+        sizeNotes, createDropZone} from "../tools.js"
 import {smoothScroll, addDynamicPadding} from "../scrolling.js"
 import {getExtraContainerHeight} from "../scrolling.js"
 
@@ -282,6 +283,9 @@ async function removeExercise(exercise) {
     component.classList.add("enable-access")
 }
 
+
+// --- Set ---
+
 function createSet(setName = "") {
     /* empty string = default set name value */
 
@@ -296,7 +300,60 @@ function createSet(setName = "") {
     const closeButton = setFrag.querySelector(".ts-set-close")
     closeButton.addEventListener("click", () => set.remove())
 
+    // Drag & Drop
+    set.addEventListener("dragstart", setDragStart)
+    set.addEventListener("dragenter", setDragEnter)
+    set.addEventListener("dragend", setDragEnd)
+
     return setFrag
+}
+
+let draggedElem = null
+let dropZone = null
+
+async function setDragStart(ev) {
+    ev.dataTransfer.setData("application/set", "")
+    ev.dataTransfer.effectAllowed = "move"
+
+    // Prepare dragged elem
+    draggedElem = ev.target
+    draggedElem.style.opacity = .5
+    draggedElem.classList.add("dragged")
+    draggedElem.querySelector(":scope .ts-set-name").blur()
+
+    await wait(0)
+
+    // Prepare dropzone
+    dropZone = createDropZone("ts-set-dropzone", setDrop)
+    draggedElem.after(dropZone)
+
+    draggedElem.style.display = "none"
+}
+
+function setDragEnter(ev) {
+    const elem = ev.currentTarget
+
+    // Get positions of elem and dropzone
+    const dropZoneTop = dropZone.getBoundingClientRect().top
+    const elemTop = elem.getBoundingClientRect().top
+
+    // Add new dropzone
+    dropZone.remove()
+    dropZone = createDropZone("ts-set-dropzone", setDrop)
+    if (dropZoneTop > elemTop) elem.before(dropZone)
+    else                       elem.after(dropZone)
+}
+
+function setDrop(ev) {
+    ev.preventDefault()
+    dropZone.after(draggedElem)
+}
+
+function setDragEnd() {
+    draggedElem.classList.remove("dragged")
+    draggedElem.style.removeProperty("opacity")
+    draggedElem.style.removeProperty("display")
+    dropZone.remove()
 }
 
 

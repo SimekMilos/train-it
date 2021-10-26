@@ -1,5 +1,6 @@
 
-import {float, range, wait, waitFor, dialog, generateTrainingID} from "../tools.js"
+import {float, range, wait, waitFor, dialog,
+        generateTrainingID, createDropZone} from "../tools.js"
 import {storageVersion} from "../main.js"
 
 import {smoothScroll, addDynamicPadding} from "../scrolling.js"
@@ -231,54 +232,52 @@ trainingList.addEventListener("dragover", listDragOver)
 trainingList.addEventListener("drop", drop)
 
 async function dragStart(ev) {
-    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.setData('application/training', "")
     ev.dataTransfer.effectAllowed = "move"
 
+    // Prepare dragged elem
     draggedElem = ev.target
-    draggedElem.classList.add("drag")
-    draggedElem.style.opacity = ".5"
-
-    dropZone = createDropZone()
-    draggedElem.after(dropZone)
+    draggedElem.classList.add("dragged")
+    draggedElem.style.opacity = .5
 
     await wait(0)
+
+    // Prepare dropzone
+    dropZone = createDropZone("ov-dropzone", drop)
+    draggedElem.after(dropZone)
+
     draggedElem.remove()
 }
 
 async function dragEnter(ev) {
     const elem = ev.currentTarget
-    let listItems = trainingList.children
-    let elemIndex, dropZoneIndex
 
     // Get positions of elem and dropzone
-    for(const index of range(1, listItems.length)) {
-        if (listItems[index] == elem) elemIndex = index
-        if (listItems[index].classList.contains("ov-drop-zone")) {
-            dropZoneIndex = index
-        }
-    }
+    const dropZoneTop = dropZone.getBoundingClientRect().top
+    const elemTop = elem.getBoundingClientRect().top
 
     // Add new dropzone
     dropZone.remove()
-    dropZone = createDropZone()
-    if (dropZoneIndex > elemIndex) elem.before(dropZone)
-    else                           elem.after(dropZone)
+    dropZone = createDropZone("ov-dropzone", drop)
+    if (dropZoneTop > elemTop) elem.before(dropZone)
+    else                       elem.after(dropZone)
 }
 
 function listDragOver(ev) {
     if (ev.target != ev.currentTarget) return
 
     // Disables above/side gaps
-    const lastBottom = trainingList.lastElementChild.getBoundingClientRect().bottom
+    const lastElem = trainingList.lastElementChild
+    const lastBottom = lastElem.getBoundingClientRect().bottom
     if (ev.clientY <= lastBottom) return
 
     ev.preventDefault()
     ev.dataTransfer.dropEffect = "move"
 
     // Set bottom dropzone
-    if (!trainingList.lastElementChild.classList.contains("ov-drop-zone")) {
+    if (!trainingList.lastElementChild.classList.contains("ov-dropzone")) {
         dropZone.remove()
-        dropZone = createDropZone()
+        dropZone = createDropZone("ov-dropzone", drop)
         trainingList.lastElementChild.after(dropZone)
     }
 }
@@ -299,27 +298,13 @@ function drop(ev) {
 
 function dragEnd(ev) {
     ev.target.style.removeProperty("opacity")
-    ev.target.classList.remove("drag")
+    ev.target.classList.remove("dragged")
 
     // Drop canceled
     if (ev.dataTransfer.dropEffect == "none") {
         dropZone.remove()
         loadTrainings()
     }
-}
-
-function createDropZone() {
-    const dropZone = document.createElement("div")
-    dropZone.classList.add("ov-drop-zone")
-
-    // Dropping
-    dropZone.addEventListener("dragover", ev => {
-        ev.preventDefault()
-        ev.dataTransfer.dropEffect = "move"
-    })
-    dropZone.addEventListener("drop", drop)
-
-    return dropZone
 }
 
 
@@ -389,6 +374,8 @@ function createTrainingItem(trainingID, trainingName) {
     name.textContent = trainingName
 
     label.addEventListener("click", selectedMode)
+
+    // Drag & Drop
     training.addEventListener("dragstart", dragStart)
     training.addEventListener("dragenter", dragEnter)
     training.addEventListener("dragend", dragEnd)
