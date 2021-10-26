@@ -222,6 +222,82 @@ async function deleteTraining() {
 }
 
 
+// --- Drag & Drop ---
+
+let draggedElem = null
+let dropZone = null
+
+async function dragStart(ev) {
+    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.effectAllowed = "move"
+
+    draggedElem = ev.target
+    draggedElem.classList.add("drag")
+    draggedElem.style.opacity = ".5"
+
+    dropZone = createDropZone()
+    draggedElem.after(dropZone)
+
+    await wait(0)
+    draggedElem.remove()
+}
+
+async function dragEnter(ev) {
+    const elem = ev.currentTarget
+    let listItems = trainingList.children
+    let elemIndex, dropZoneIndex
+
+    // Get positions of elem and dropzone
+    for(const index of range(1, listItems.length)) {
+        if (listItems[index] == elem) elemIndex = index
+        if (listItems[index].classList.contains("ov-drop-zone")) {
+            dropZoneIndex = index
+        }
+    }
+
+    // Add new dropzone
+    dropZone.remove()
+    dropZone = createDropZone()
+    if (dropZoneIndex > elemIndex) elem.before(dropZone)
+    else                           elem.after(dropZone)
+}
+
+function dragEnd(ev) {
+    ev.target.style.removeProperty("opacity")
+    ev.target.classList.remove("drag")
+}
+
+function createDropZone() {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add("ov-drop-zone")
+
+    // Dropping
+    dropZone.addEventListener("dragover", ev => {
+        ev.preventDefault()
+        ev.dataTransfer.dropEffect = "move"
+    })
+
+    dropZone.addEventListener("drop", ev => {
+        ev.preventDefault()
+
+        ev.target.after(draggedElem)
+        ev.target.remove()
+        storeDropChange()
+    })
+
+    return dropZone
+}
+
+function storeDropChange() {
+    const trainings = [...trainingList.children]
+    trainings.shift()               // Ignoring no-training display
+
+    const newOrder = []
+    for(const training of trainings) newOrder.push(training.firstElementChild.id)
+    storage["training-order"] = JSON.stringify(newOrder)
+}
+
+
 // --- Open Training/Timer ---
 
 buttonOpenTraining.addEventListener("click", openTraining)
@@ -313,65 +389,4 @@ function getSelectedTraining() {
         trID: trID,
         trData: trData
     }
-}
-
-
-// --- Drag & Drop ---
-
-let draggedElem = null
-let dropZone = null
-
-async function dragStart(ev) {
-    ev.dataTransfer.setData('text/plain', null)
-
-    draggedElem = ev.target
-    draggedElem.classList.add("drag")
-    draggedElem.style.opacity = ".5"
-
-    dropZone = createDropZone()
-    draggedElem.after(dropZone)
-
-    await wait(0)
-    draggedElem.remove()
-}
-
-async function dragEnter(ev) {
-    const elem = ev.currentTarget
-    let listItems = trainingList.children
-    let elemIndex, dropZoneIndex
-
-    // Get positions of elem and dropzone
-    for(const index of range(1, listItems.length)) {
-        if (listItems[index] == elem) elemIndex = index
-        if (listItems[index].classList.contains("ov-drop-zone")) {
-            dropZoneIndex = index
-        }
-    }
-
-    // Add new dropzone
-    dropZone.remove()
-    dropZone = createDropZone()
-    if (dropZoneIndex > elemIndex) elem.before(dropZone)
-    else                           elem.after(dropZone)
-}
-
-function dragEnd(ev) {
-    dropZone.remove()
-    ev.target.style.removeProperty("opacity")
-    ev.target.classList.remove("drag")
-}
-
-function createDropZone() {
-    const dropZone = document.createElement("div")
-    dropZone.classList.add("ov-drop-zone")
-
-    // Dropping
-    dropZone.addEventListener("dragover", (ev) => ev.preventDefault())
-    dropZone.addEventListener("drop", (ev) => {
-        ev.preventDefault()
-        ev.target.after(draggedElem)
-    })
-
-
-    return dropZone
 }
