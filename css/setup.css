@@ -457,6 +457,8 @@
     padding-right: 5px;
     height: 36px;
 
+    background-color: white;
+
     list-style: none;
     counter-increment: set-counter;
 
@@ -499,3 +501,7 @@
 .ts-set-name::placeholder {
     color: #0009;
 }
+
+
+/* Drag & Drop */
+
