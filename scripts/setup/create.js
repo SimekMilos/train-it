@@ -282,6 +282,9 @@ async function removeExercise(exercise) {
     component.classList.add("enable-access")
 }
 
+
+// --- Set ---
+
 function createSet(setName = "") {
     /* empty string = default set name value */
 
@@ -296,7 +299,79 @@ function createSet(setName = "") {
     const closeButton = setFrag.querySelector(".ts-set-close")
     closeButton.addEventListener("click", () => set.remove())
 
+    // Drag & Drop
+    set.addEventListener("dragstart", setDragStart)
+    set.addEventListener("dragenter", setDragEnter)
+    set.addEventListener("dragend", setDragEnd)
+
     return setFrag
+}
+
+let draggedElem = null
+let dropZone = null
+
+async function setDragStart(ev) {
+    ev.dataTransfer.setData('text/plain', null)
+    ev.dataTransfer.effectAllowed = "move"
+
+    // Prepare dragged elem
+    draggedElem = ev.target
+    draggedElem.style.opacity = .6
+    draggedElem.classList.add("dragged")
+    draggedElem.querySelector(":scope .ts-set-name").blur()
+
+    // Prepare dropzone
+    dropZone = createSetDropZone()
+    draggedElem.after(dropZone)
+
+    // Hide elem
+    await wait(0)
+    draggedElem.style.display = "none"
+}
+
+function setDragEnter(ev) {
+    const elem = ev.currentTarget
+
+    // Get positions of elem and dropzone
+    const dropZoneTop = dropZone.getBoundingClientRect().top
+    const elemTop = elem.getBoundingClientRect().top
+
+    // Add new dropzone
+    dropZone.remove()
+    dropZone = createSetDropZone()
+    if (dropZoneTop > elemTop) elem.before(dropZone)
+    else                       elem.after(dropZone)
+}
+
+function setDrop(ev) {
+    ev.preventDefault()
+    dropZone.after(draggedElem)
+    dropZone.remove()
+}
+
+function setDragEnd(ev) {
+    draggedElem.classList.remove("dragged")
+    draggedElem.style.removeProperty("opacity")
+    draggedElem.style.removeProperty("display")
+
+    // Drop canceled
+    if (ev.dataTransfer.dropEffect == "none") {
+        dropZone.remove()
+    }
+}
+
+function createSetDropZone() {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add("ts-set-dropzone")
+
+    // Dropping
+    dropZone.addEventListener("dragover", (ev) => {
+        ev.preventDefault()
+        ev.dataTransfer.dropEffect = "move"
+    })
+    dropZone.addEventListener("drop", setDrop)
+
+    return dropZone
 }
 
 
