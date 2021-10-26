@@ -265,6 +265,12 @@ async function dragEnter(ev) {
 function dragEnd(ev) {
     ev.target.style.removeProperty("opacity")
     ev.target.classList.remove("drag")
+
+    // Drop canceled
+    if (ev.dataTransfer.dropEffect == "none") {
+        dropZone.remove()
+        loadTrainings()
+    }
 }
 
 function createDropZone() {
