@@ -227,8 +227,7 @@ async function deleteTraining() {
 let draggedElem = null
 let dropZone = null
 
-trainingList.addEventListener("dragenter", listDragEnter)
-trainingList.addEventListener("dragover", dragOver)
+trainingList.addEventListener("dragover", listDragOver)
 trainingList.addEventListener("drop", drop)
 
 async function dragStart(ev) {
@@ -266,15 +265,22 @@ async function dragEnter(ev) {
     else                           elem.after(dropZone)
 }
 
-function listDragEnter(ev) {
+function listDragOver(ev) {
     if (ev.target != ev.currentTarget) return
+
+    // Disables above/side gaps
+    const lastBottom = trainingList.lastElementChild.getBoundingClientRect().bottom
+    if (ev.clientY <= lastBottom) return
 
     ev.preventDefault()
     ev.dataTransfer.dropEffect = "move"
 
-    dropZone.remove()
-    dropZone = createDropZone()
-    trainingList.lastElementChild.after(dropZone)
+    // Set bottom dropzone
+    if (!trainingList.lastElementChild.classList.contains("ov-drop-zone")) {
+        dropZone.remove()
+        dropZone = createDropZone()
+        trainingList.lastElementChild.after(dropZone)
+    }
 }
 
 function drop(ev) {
@@ -302,17 +308,15 @@ function dragEnd(ev) {
     }
 }
 
-function dragOver(ev) {
-    ev.preventDefault()
-    ev.dataTransfer.dropEffect = "move"
-}
-
 function createDropZone() {
     const dropZone = document.createElement("div")
     dropZone.classList.add("ov-drop-zone")
 
     // Dropping
-    dropZone.addEventListener("dragover", dragOver)
+    dropZone.addEventListener("dragover", ev => {
+        ev.preventDefault()
+        ev.dataTransfer.dropEffect = "move"
+    })
     dropZone.addEventListener("drop", drop)
 
     return dropZone
