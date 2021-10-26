@@ -234,42 +234,40 @@ async function dragStart(ev) {
     ev.dataTransfer.setData('text/plain', null)
     ev.dataTransfer.effectAllowed = "move"
 
+    // Prepare dragged elem
     draggedElem = ev.target
-    draggedElem.classList.add("drag")
+    draggedElem.classList.add("dragged")
     draggedElem.style.opacity = ".5"
 
+    // Prepare dropzone
     dropZone = createDropZone()
     draggedElem.after(dropZone)
 
+    // Remove elem from flow
     await wait(0)
     draggedElem.remove()
 }
 
 async function dragEnter(ev) {
     const elem = ev.currentTarget
-    let listItems = trainingList.children
-    let elemIndex, dropZoneIndex
 
     // Get positions of elem and dropzone
-    for(const index of range(1, listItems.length)) {
-        if (listItems[index] == elem) elemIndex = index
-        if (listItems[index].classList.contains("ov-dropzone")) {
-            dropZoneIndex = index
-        }
-    }
+    const dropZoneTop = dropZone.getBoundingClientRect().top
+    const elemTop = elem.getBoundingClientRect().top
 
     // Add new dropzone
     dropZone.remove()
     dropZone = createDropZone()
-    if (dropZoneIndex > elemIndex) elem.before(dropZone)
-    else                           elem.after(dropZone)
+    if (dropZoneTop > elemTop) elem.before(dropZone)
+    else                       elem.after(dropZone)
 }
 
 function listDragOver(ev) {
     if (ev.target != ev.currentTarget) return
 
     // Disables above/side gaps
-    const lastBottom = trainingList.lastElementChild.getBoundingClientRect().bottom
+    const lastElem = trainingList.lastElementChild
+    const lastBottom = lastElem.getBoundingClientRect().bottom
     if (ev.clientY <= lastBottom) return
 
     ev.preventDefault()
@@ -299,7 +297,7 @@ function drop(ev) {
 
 function dragEnd(ev) {
     ev.target.style.removeProperty("opacity")
-    ev.target.classList.remove("drag")
+    ev.target.classList.remove("dragged")
 
     // Drop canceled
     if (ev.dataTransfer.dropEffect == "none") {
@@ -313,7 +311,7 @@ function createDropZone() {
     dropZone.classList.add("ov-dropzone")
 
     // Dropping
-    dropZone.addEventListener("dragover", ev => {
+    dropZone.addEventListener("dragover", (ev) => {
         ev.preventDefault()
         ev.dataTransfer.dropEffect = "move"
     })

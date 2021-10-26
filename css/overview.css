@@ -154,7 +154,7 @@
 
 /* Dragging */
 
-.ov-training.drag label {
+.ov-training.dragged label {
     border: 1px solid var(--main-color);
 }
 
