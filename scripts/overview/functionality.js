@@ -181,7 +181,7 @@ async function deleteTraining() {
 
     // Confirm deletion
     const trName = trNameElem.textContent
-    const action = await dialog(`Do you want to delete training ${trName}?`,
+    const action = await dialog(`Do you want to delete training: ${trName}?`,
                                 "Yes", "No")
     if (action == "No") return
     display.disableAccess()
