@@ -119,7 +119,7 @@
 }
 
 .ovt-name {
-    margin: 0 10px;
+    margin-left: 10px;
     flex-shrink: 1;
 
     -webkit-user-select: none;
@@ -128,8 +128,16 @@
     user-select: none;
 }
 
-.ov-training .handle {
-    margin-right: 10px;
+.ovt-move {
+    height: calc(100% + 1px);   /* Must go over items border line */
+    padding: 0 10px;
+
+    cursor: move;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Selected state */
