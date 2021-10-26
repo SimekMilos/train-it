@@ -276,19 +276,23 @@ async function onSettingsClick() {
 // --- Other ---
 
 function createTrainingItem(trainingID, trainingName) {
-    const training = trainingTemplate.content.cloneNode(true)
+    const trainingFrag = trainingTemplate.content.cloneNode(true)
 
-    const input = training.querySelector("input")
-    const label = training.querySelector("label")
-    const name = training.querySelector(".ovt-name")
+    const training = trainingFrag.querySelector(".ov-training")
+    const input = trainingFrag.querySelector("input")
+    const label = trainingFrag.querySelector("label")
+    const name = trainingFrag.querySelector(".ovt-name")
 
     input.id = trainingID
     label.htmlFor = trainingID
     name.textContent = trainingName
 
     label.addEventListener("click", selectedMode)
+    training.addEventListener("dragstart", dragStart)
+    training.addEventListener("dragenter", dragEnter)
+    training.addEventListener("dragend", dragEnd)
 
-    return training
+    return trainingFrag
 }
 
 function getSelectedTraining() {
@@ -309,4 +313,50 @@ function getSelectedTraining() {
         trID: trID,
         trData: trData
     }
+}
+
+
+// --- Drag & Drop ---
+
+let draggedElem = null
+let dropZone = null
+
+async function dragStart(ev) {
+    ev.dataTransfer.setData('text/plain', null)
+
+    draggedElem = ev.target
+    draggedElem.classList.add("drag")
+    draggedElem.style.opacity = ".5"
+
+    dropZone = createDropZone()
+    draggedElem.after(dropZone)
+
+    await wait(0)
+    draggedElem.remove()
+}
+
+async function dragEnter(ev) {
+    const elem = ev.currentTarget
+    let listItems = trainingList.children
+    let elemIndex, dropZoneIndex
+
+    // Get positions of elem and dropzone
+    for(const index of range(1, listItems.length)) {
+        if (listItems[index] == elem) elemIndex = index
+        if (listItems[index].classList.contains("ov-drop-zone")) {
+            dropZoneIndex = index
+        }
+    }
+
+    // Add new dropzone
+    dropZone.remove()
+    dropZone = createDropZone()
+    if (dropZoneIndex > elemIndex) elem.before(dropZone)
+    else                           elem.after(dropZone)
+}
+
+function createDropZone() {
+    const dropZone = document.createElement("div")
+    dropZone.classList.add("ov-drop-zone")
+    return dropZone
 }
