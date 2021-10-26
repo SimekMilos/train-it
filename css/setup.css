@@ -454,7 +454,8 @@
 /* ===== Set ===== */
 
 .ts-set {
-    padding: 3px 5px 3px 10px;
+    padding-right: 5px;
+    height: 36px;
 
     list-style: none;
     counter-increment: set-counter;
@@ -475,10 +476,17 @@
 
 /* Content */
 
-.ts-set-handle {
-    visibility: hidden;                                    /* Handle disabled */
-    margin-right: 12px;
+.ts-set-move {
+    height: 100%;
+    padding: 0 12px 0 10px;
+
     order: -1;
+    cursor: move;
+
+    /* Content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .ts-set-name {
