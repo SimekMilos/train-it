@@ -253,7 +253,7 @@ async function dragEnter(ev) {
     // Get positions of elem and dropzone
     for(const index of range(1, listItems.length)) {
         if (listItems[index] == elem) elemIndex = index
-        if (listItems[index].classList.contains("ov-drop-zone")) {
+        if (listItems[index].classList.contains("ov-dropzone")) {
             dropZoneIndex = index
         }
     }
@@ -276,7 +276,7 @@ function listDragOver(ev) {
     ev.dataTransfer.dropEffect = "move"
 
     // Set bottom dropzone
-    if (!trainingList.lastElementChild.classList.contains("ov-drop-zone")) {
+    if (!trainingList.lastElementChild.classList.contains("ov-dropzone")) {
         dropZone.remove()
         dropZone = createDropZone()
         trainingList.lastElementChild.after(dropZone)
@@ -310,7 +310,7 @@ function dragEnd(ev) {
 
 function createDropZone() {
     const dropZone = document.createElement("div")
-    dropZone.classList.add("ov-drop-zone")
+    dropZone.classList.add("ov-dropzone")
 
     // Dropping
     dropZone.addEventListener("dragover", ev => {
@@ -389,6 +389,8 @@ function createTrainingItem(trainingID, trainingName) {
     name.textContent = trainingName
 
     label.addEventListener("click", selectedMode)
+
+    // Drag & Drop
     training.addEventListener("dragstart", dragStart)
     training.addEventListener("dragenter", dragEnter)
     training.addEventListener("dragend", dragEnd)
