@@ -82,12 +82,12 @@
     transition: height .4s;
 }
 
-.ov-training:nth-child(2) {
+.ov-training:nth-child(2), .ov-drop-zone:nth-child(2) {
     margin-top: 10px;
     border-top: 1px solid var(--main-color);
 }
 
-.ov-training:last-child {
+.ov-training:last-child, .ov-drop-zone:last-child {
     margin-bottom: 5px;
 }
 
@@ -108,6 +108,7 @@
     width: 100%;
     height: var(--item-height);
     border-bottom: 1px solid var(--main-color);
+    background-color: white;
 
     /* Content */
     display: flex;
@@ -143,8 +144,23 @@
     --handle-color: white;
 }
 
+/* Dragging */
+
+.ov-training.drag label {
+    border: 1px solid var(--main-color);
+}
+
+.ov-drop-zone {
+    height: var(--item-height);
+    border-bottom: 1px solid var(--main-color);
+
+    background: center/calc(100% - 10px) calc(100% - 10px) no-repeat
+        linear-gradient(hsl(0, 0%, 95%), hsl(0, 0%, 95%));
+}
+
 
 /* --- Controls --- */
+
 .ov-controls {
     margin-top: 5px;
 
