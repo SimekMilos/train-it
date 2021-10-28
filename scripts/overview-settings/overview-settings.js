@@ -11,7 +11,7 @@ import {parseFile, ParserError} from "./file-parser.js"
 const exportButton = document.querySelector(".ovs-export")
 const importButton = document.querySelector(".ovs-import")
 
-const fileExtension = ".train-it"
+const fileExtension = ".trainit"
 const exportFileName = "trainings" + fileExtension
 
 
