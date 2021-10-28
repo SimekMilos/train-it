@@ -35,7 +35,7 @@
     flex-direction: row;
     overflow: auto hidden;
 
-    /*scroll-snap-type: x mandatory;*/
+    scroll-snap-type: x mandatory;
 }
 
 .tc-container::after {    /* Fix for final right margin not working in Safari */

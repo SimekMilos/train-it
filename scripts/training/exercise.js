@@ -159,7 +159,9 @@ export default class Exercise {
         const scrollDist = exerciseCenter - containerCenter
 
         // Scroll
+        scrollContainer.style.scrollSnapType = "none"
         await smoothScroll(scrollDist, 250, scrollContainer, true)
+        scrollContainer.style.removeProperty("scroll-snap-type")
     }
 
     async scrollUp() {
