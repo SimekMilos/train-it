@@ -1,5 +1,5 @@
 
-import {float, getWatchString} from "../tools.js"
+import {int, float, getWatchString} from "../tools.js"
 import {setNextPhase, setPreviousPhase, setStyle} from "./training-tools.js"
 import {smoothScroll} from "../scrolling.js"
 
@@ -156,7 +156,7 @@ export default class Exercise {
         // Get exercise center
         ;({left, right} = this._exercise.getBoundingClientRect())
         const exerciseCenter = (left + right)/2
-        const scrollDist = exerciseCenter - containerCenter
+        const scrollDist = int(exerciseCenter - containerCenter)
 
         // Scroll
         scrollContainer.style.scrollSnapType = "none"
