@@ -54,19 +54,19 @@ function onExport() {
     URL.revokeObjectURL(a.href)
 }
 
-function onImport() {
+async function onImport() {
+    // Create file input
+    const input = document.createElement("input")
+    input.type = "file"
+    input.accept = fileExtension
+    input.click()
+
+    // Wait for user interaction
+    const canceled = await waitForAny(["change", input, false],
+                                      ["click", window, true, true])
+    if (canceled) return
+
     overlayContext(async () => {
-        // Create file input
-        const input = document.createElement("input")
-        input.type = "file"
-        input.accept = fileExtension
-        input.click()
-
-        // Wait for user interaction
-        const canceled = await waitForAny(["change", input, false],
-                                          ["click", window, true, true])
-        if (canceled) return
-
         // Load file
         const reader = new FileReader()
         reader.readAsText(input.files[0])
