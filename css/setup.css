@@ -141,7 +141,7 @@
 }
 
 .ts-training-name::placeholder {
-    font: 24px "Roboto Light", sans-serif;
+    font: 26px "Roboto Light", sans-serif;
 }
 
 
@@ -311,7 +311,7 @@
     margin: 30px -6px 5px;
 
     color: var(--name-color);
-    font: normal 21px "Roboto Light", sans-serif;
+    font: normal 24px "Roboto Light", sans-serif;
 }
 
 .ts-group-no-exercises {
@@ -412,7 +412,7 @@
     margin: 30px -6px 5px;
 
     color: var(--name-color);
-    font: normal 18px "Roboto Light", sans-serif;
+    font: normal 20px "Roboto Light", sans-serif;
 }
 
 .ts-exercise-notes {
