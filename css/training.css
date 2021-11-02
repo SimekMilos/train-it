@@ -65,6 +65,7 @@
 
 .notes-button:hover {
     background-color: var(--secondary-color-hover);
+    cursor: pointer;
 }
 
 .notes-button:active {
