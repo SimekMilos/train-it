@@ -18,7 +18,7 @@ export function readTraining() {
 
     // Read and check training name
     const nameStr = trainingName.value.trim()
-    if (!nameStr) throw new ReadError("Training must have name.")
+    if (!nameStr) throw new ReadError("Training must have a name.")
     trData.name = nameStr
 
     // Read notes
@@ -64,7 +64,7 @@ function readGroup(groupElem) {
     // Read and check group name
     if (nameElem) {
         const nameStr = nameElem.value.trim()
-        if (!nameStr) throw new ReadError("Group must have name.")
+        if (!nameStr) throw new ReadError("Group must have a name.")
         groupData.name = nameStr
     }
 
@@ -97,7 +97,7 @@ function readExercise(exerciseElem) {
 
     // Read and check exercise name
     const nameStr = nameElem.value.trim()
-    if (!nameStr) throw new ReadError("Exercise must have name.")
+    if (!nameStr) throw new ReadError("Exercise must have a name.")
     exerciseData.name = nameStr
 
     // Read notes
