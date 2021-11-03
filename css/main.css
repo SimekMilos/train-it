@@ -184,6 +184,8 @@ body {
 /* --- Buttons --- */
 
 button {
+    cursor: pointer;
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -209,7 +211,6 @@ button {
     .control-button:hover {
         color: var(--main-color);
         border-color: var(--main-color);
-        cursor: pointer;
     }
 }
 
