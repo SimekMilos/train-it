@@ -1,0 +1,68 @@
+
+    Top level items
+-----------------------
+
+    storage-version: 1
+
+    training-order: [training-1, trainin-3, ...]
+
+    training-ID: {                  // ID - integers
+        name: "...",                // trimmed
+        notes: "...",               // end trimmed
+        settings: settings-obj,
+        groups: [group-obj1, group-obj2, ...]
+    }
+
+        - Addition
+            - storage-version and training-order is added when adding first training
+
+        - Removing
+            - Everything is removed from local storage after removing last training
+
+        - Constrains
+            - Training must have non-empty name
+            - Training must have at least 1 exercise
+
+
+    Training Settings
+-------------------------
+
+    settings: {            // training doesn't have to have settings object
+        trainingCountdown: integer,     // values - [0, 300] with step 5
+        setCountdown:      integer,     // values - [0,  60]
+        precedingPause:    integer,     // values - [0,  60]
+    }
+
+
+   Groups
+------------
+
+    group: {
+        type: "group",
+        name: "...",                // trimmed
+        notes: "...",               // end trimmed
+        exercises: [exer-obj1, exer-obj2, ...]
+    }
+
+    no-group: {
+        type: "no-group",
+        exercises: [exer-obj1, exer-obj2, ...]
+    }
+
+        - Constrains
+            - Group must have non-empty name
+            - Group and No-group must have at least 1 exercise
+
+
+   Exercise
+--------------
+
+    exercise: {
+        name: "...",                // trimmed
+        notes: "...",               // end trimmed
+        sets: ["...", "", ...]      // empty string == default set name
+    }                                      - trimmed
+
+        - Constrains
+            - Exercise must have non-empty name
+            - Exercise must have at least 1 set
