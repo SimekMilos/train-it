@@ -55,7 +55,7 @@
     max-width: var(--comp-default-width);
     max-height: 100%;
 
-    padding: 1em 30px 30px 30px;
+    padding: 1em 25px 30px 25px;
     border-radius: var(--comp-border-radius);
 
     background-color: white;
@@ -82,7 +82,7 @@
 
 @media (max-width: 400px) {
     .sett-main-window {
-        padding: 1em 25px 30px 25px;
+        padding: 1em 20px 30px 20px;
     }
 }
 
@@ -92,6 +92,9 @@
 .sett-scroll-container {
     flex-shrink: 1;
     overflow: auto;
+    padding: 0 5px;
+
+    border-top: 1px solid var(--main-color);
 }
 
     /* Fade out effect at the bottom of the scroll container */
@@ -127,7 +130,7 @@
     text-align: center;
     color: var(--main-color);
     font: normal 28px "OpenSans Light", sans-serif;
-    margin-bottom: .5rem;
+    margin-bottom: .4rem;
 }
 
 .settings-component h3 {
@@ -140,7 +143,7 @@
 /* Lists */
 
 .sett-info {
-    margin: .5em 0 1em var(--list-offset);
+    margin: 1em 0 1em var(--list-offset);
 }
 
 .sett-explanation {
