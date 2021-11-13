@@ -10,7 +10,7 @@ const initScreen = document.querySelector(".initial-screen")
 const mainScreen = document.querySelector(".main-screen")
 
 
-// --- Interface ---
+// --- Public ---
 
 export async function initInitScreen() {
     await displayScreen(initScreen)

@@ -4,7 +4,6 @@ import {waitForAny, dialog,
 import {storageVersion} from "../main.js"
 
 import * as overview from "../overview/overview.js"
-import * as displayFunc from "./display.js"
 import {parseFile, ParserError} from "./file-parser.js"
 
 
@@ -17,11 +16,12 @@ const exportFileName = "trainings" + fileExtension
 
 // --- Public ---
 
-export const isDisplayed = displayFunc.isDisplayed
-export const display     = displayFunc.display
-export const hide        = displayFunc.hide
-
-export const onStorageRemove = displayFunc.setExportState
+export {
+    display,
+    hide,
+    isDisplayed,
+    setExportState as onStorageRemove
+} from "./display.js"
 
 
 // --- Private ---

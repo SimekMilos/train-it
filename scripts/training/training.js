@@ -2,7 +2,7 @@
 import {setNextPhase, setPreviousPhase} from "./training-tools.js"
 import {prepareNextExercise} from "./training-tools.js"
 
-import {} from "./display.js"
+import "./display.js"
 import TrainingInfo from "./training-info.js"
 import Group from "./group.js"
 import * as notes from "./notes.js"
