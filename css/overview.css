@@ -193,10 +193,42 @@
     display: none;
 }
 
+
+/* Delete button */
+
 .ov-delete {
     flex: 1 1 0;
     margin-right: 5px;
+
+    --delete-color: hsl(0, 80%, 40%);
+    --delete-hover-color: hsl(0, 90%, 50%);
+
+    color: var(--delete-color);
+    border-color: var(--delete-color);
 }
+
+@media (any-hover: hover) {
+    .ov-delete:hover {
+        color: var(--delete-hover-color);
+        border-color: var(--delete-hover-color);
+    }
+}
+
+.ov-delete:active {
+    color: white;
+    border-color: var(--delete-hover-color);
+    background-color: var(--delete-hover-color);
+}
+
+.ov-delete:disabled {
+    color: var(--disabled-control-color);
+    border-color: var(--disabled-control-color);
+    background-color: transparent;
+    cursor: auto;
+}
+
+
+/* Settings button */
 
 .ov-settings {
     --background:
