@@ -31,6 +31,7 @@ export async function setupTraining(trainingData = null) {
     // Load data and display component
     if (trainingData) create.createTraining(trainingData)
     await display.display()
+    if (!trainingData) trainingName.focus()
 
     // Edit cycle
     do {
