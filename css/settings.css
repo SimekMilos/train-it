@@ -164,6 +164,11 @@
     text-decoration: underline;
 }
 
+.wake-lock-not-supported {
+    display: none;          /* Activated in JS */
+    color: firebrick;
+}
+
 
 /* Inputs */
 

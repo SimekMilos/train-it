@@ -1,5 +1,6 @@
 
 import {int, range, waitFor} from "../tools.js"
+import * as wakeLock from "../wake-lock.js"
 
 const component = document.querySelector(".settings-component")
 const mainWindow = component.firstElementChild
@@ -10,6 +11,7 @@ const trCountdownSelect = document.querySelector(".sett-tr-countdown")
 const setCountdownSelect = document.querySelector(".sett-set-countdown")
 const precedingPauseSelect = document.querySelector(".sett-preceding-pause")
 
+const wakeLockNotSupported = document.querySelector(".wake-lock-not-supported")
 const creatorEmail = document.querySelector(".creator-email")
 
 let trainingData = null
@@ -19,6 +21,8 @@ let trainingData = null
 
 export function init(trData) {
     trainingData = trData
+
+    informAboutWakeLockSupport()
     generateSelectOptions()
     generateEmail()
 
@@ -121,6 +125,10 @@ function hasChanged(oldVal, newVal) {
     }
 
     return false
+}
+
+function informAboutWakeLockSupport() {
+    if (!wakeLock.isSupported()) wakeLockNotSupported.style.display = "list-item"
 }
 
 function generateSelectOptions() {

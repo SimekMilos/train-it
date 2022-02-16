@@ -3,6 +3,9 @@ let wakeLock = null
 
 // --- Public ---
 
+export function isSupported() {
+    return "wakeLock" in navigator
+}
 
 export async function activate() {
     if(!("wakeLock" in navigator) || wakeLock) return

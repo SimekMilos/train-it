@@ -3,7 +3,7 @@ import {waitForAny, dialog} from "../tools.js"
 
 import * as watches from "./watches.js"
 import * as display from "./display.js"
-import * as wakeLock from "./wake-lock.js"
+import * as wakeLock from "../wake-lock.js"
 import {Timer} from "./timer.js"
 
 const closeButton = document.querySelector(".ts-close")
