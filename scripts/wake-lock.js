@@ -8,7 +8,7 @@ export function isSupported() {
 }
 
 export async function activate() {
-    if(!("wakeLock" in navigator) || wakeLock) return
+    if(!isSupported() || wakeLock) return
 
     try {
         wakeLock = await navigator.wakeLock.request("screen")
@@ -16,7 +16,7 @@ export async function activate() {
 }
 
 export async function deactivate() {
-    if(!("wakeLock" in navigator) || !wakeLock) return
+    if(!isSupported() || !wakeLock) return
 
     await wakeLock.release()
     wakeLock = null
@@ -26,7 +26,7 @@ export async function deactivate() {
 // --- Private ---
 
 document.addEventListener("visibilitychange", async () => {
-    if (!("wakeLock" in navigator)) return
+    if (!isSupported()) return
 
     if (wakeLock && document.visibilityState == "visible") {
         try {
