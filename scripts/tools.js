@@ -31,7 +31,7 @@ export function* range(startStop, stop, step) {
 }
 
 export function wait(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
+    return new Promise(resolve => void setTimeout(resolve, milliseconds))
 }
 
 export function waitFor(event, element) {
