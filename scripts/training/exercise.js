@@ -118,7 +118,6 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer)
         setStyle(this, nextPhase)
-        if (!this.isLastPhase) this.scrollPhaseIntoView("current")
         return nextPhase
     }
 
@@ -172,7 +171,7 @@ export default class Exercise {
 
     /**
      * Scrolls to current/next set/pause watch
-     * @param  {String} phase: "current", "next"
+     * @param  {String} phase - "current", "next"
      * @return {Boolean} false, if next phase doesn't exist
      */
     async scrollPhaseIntoView(phase) {

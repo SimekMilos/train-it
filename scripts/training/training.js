@@ -117,6 +117,21 @@ export function back() {
     return prevPhase
 }
 
+/**
+ * Scrolls to next set/pause watch
+ * @return {Boolean} false, if next phase doesn't exist
+ */
+export async function scrollNextPhaseIntoView() {
+    let scrolled = await groups[activeGroupIndex].scrollNextPhaseIntoView()
+
+    if(!scrolled) {
+        if (activeGroupIndex + 1 == groups.length) return false
+        await groups[activeGroupIndex + 1].scrollNextPhaseIntoView()
+    }
+
+    return true
+}
+
 export function isLastPhase() {
     /* Returns true if current phase is the last one in the training */
 

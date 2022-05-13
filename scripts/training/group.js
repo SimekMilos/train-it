@@ -143,6 +143,21 @@ export default class Group {
         for (const exercise of this._exercises) exercise.reset()
     }
 
+    /**
+     * Scrolls to next set/pause watch
+     * @return {Boolean} false, if next phase doesn't exist
+     */
+    async scrollNextPhaseIntoView() {
+        let scrolled = await this.currentExercise.scrollPhaseIntoView("next")
+
+        if (!scrolled) {
+            if (!this.nextExercise) return false
+            await this.nextExercise.scrollPhaseIntoView("current")
+        }
+
+        return true
+    }
+
 
     // --- Private ---
 
