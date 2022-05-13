@@ -99,7 +99,7 @@ export default class Exercise {
 
         this.isNext = false
         setStyle(this, this.currentSet.currentPhase)
-        if (!this.isLastPhase) this.scrollActiveSetIntoView()
+        if (!this.isLastPhase) this.scrollPhaseIntoView("current")
 
         return this._sets[this._activeSetIndex].activate(timer)
     }
@@ -118,7 +118,7 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer)
         setStyle(this, nextPhase)
-        if (!this.isLastPhase) this.scrollActiveSetIntoView()
+        if (!this.isLastPhase) this.scrollPhaseIntoView("current")
         return nextPhase
     }
 
@@ -128,7 +128,7 @@ export default class Exercise {
                                                          this._activeSetIndex,
                                                          this._timer, this)
         setStyle(this, prevPhase)
-        if (prevPhase) this.scrollActiveSetIntoView()
+        if (prevPhase) this.scrollPhaseIntoView("current")
         else this.isNext = true
 
         return prevPhase
@@ -170,16 +170,30 @@ export default class Exercise {
                             this._exerciseContainer)
     }
 
-    async scrollActiveSetIntoView() {
+    /**
+     * Scrolls to current/next set/pause watch
+     * @param  {String} phase: "current", "next"
+     * @return {Boolean} false, if next phase doesn't exist
+     */
+    async scrollPhaseIntoView(phase) {
+        // choose set to scroll to
+        let set = this.currentSet
+
+        if (phase == "next") {
+            if (this.isLastPhase) return false
+            if (this.currentSet.currentPhase == "pause") set = this.nextSet
+        }
+
+        // Scroll to exercise
         await this.scrollTo()
 
         // Get dimensions
         const {top: contTop,
                bottom: contBottom
-         } = this._exerciseContainer.getBoundingClientRect()
+        } = this._exerciseContainer.getBoundingClientRect()
         const {top: setTop,
                bottom: setBottom
-        } = this._sets[this._activeSetIndex].getBoundingClientRect()
+        } = set.getBoundingClientRect()
 
         // Get scrolling thresholds
         const setHeight = setBottom - setTop
@@ -197,6 +211,7 @@ export default class Exercise {
 
         // Scroll
         await smoothScroll(scrollDist, 150, this._exerciseContainer)
+        return true
     }
 
 

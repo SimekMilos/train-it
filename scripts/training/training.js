@@ -66,7 +66,7 @@ export function pause(paused) {
     const prep2 = groups[activeGroupIndex].prepareNextExercise(!paused)
 
     if (!paused && !(prep1 || prep2)) {
-        groups[activeGroupIndex].currentExercise.scrollActiveSetIntoView()
+        groups[activeGroupIndex].currentExercise.scrollPhaseIntoView("current")
     }
 }
 
@@ -76,7 +76,7 @@ export function resetPhase() {
     const currentExercise = groups[activeGroupIndex].currentExercise
 
     currentExercise.currentSet.currentTime = 0
-    currentExercise.scrollActiveSetIntoView()
+    currentExercise.scrollPhaseIntoView("current")
 }
 
 export function reset() {
