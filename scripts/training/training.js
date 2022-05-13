@@ -66,7 +66,7 @@ export function pause(paused) {
     const prep2 = groups[activeGroupIndex].prepareNextExercise(!paused)
 
     if (!paused && !(prep1 || prep2)) {
-        groups[activeGroupIndex].currentExercise.scrollActiveSetIntoView()
+        groups[activeGroupIndex].currentExercise.scrollPhaseIntoView("current")
     }
 }
 
@@ -76,7 +76,7 @@ export function resetPhase() {
     const currentExercise = groups[activeGroupIndex].currentExercise
 
     currentExercise.currentSet.currentTime = 0
-    currentExercise.scrollActiveSetIntoView()
+    currentExercise.scrollPhaseIntoView("current")
 }
 
 export function reset() {
@@ -115,6 +115,21 @@ export function back() {
         groups[0].activate(timer)
     }
     return prevPhase
+}
+
+/**
+ * Scrolls to next set/pause watch
+ * @return {Boolean} false, if next phase doesn't exist
+ */
+export async function scrollNextPhaseIntoView() {
+    let scrolled = await groups[activeGroupIndex].scrollNextPhaseIntoView()
+
+    if(!scrolled) {
+        if (activeGroupIndex + 1 == groups.length) return false
+        await groups[activeGroupIndex + 1].scrollNextPhaseIntoView()
+    }
+
+    return true
 }
 
 export function isLastPhase() {

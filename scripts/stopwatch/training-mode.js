@@ -212,6 +212,7 @@ async function next() {
 
     let precedeTime = 0, newPhase
     await waitForTick()
+    training.scrollNextPhaseIntoView()
 
     // Display set countdown
     if (display.watches.mode == "pause" && settings.getSetCountdown()) {
