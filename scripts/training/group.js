@@ -84,7 +84,7 @@ export default class Group {
         }
     }
 
-    /** Sets group to be next in line. */
+    /** Sets group whether to be next in line. */
     set isNext(value) {
         this._exercises[0].isNext = value
     }

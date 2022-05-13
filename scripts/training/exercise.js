@@ -79,7 +79,7 @@ export default class Exercise {
         this._timerTick()
     }
 
-    /** Sets exercise to be next in line. */
+    /** Sets exercise whenter to be next in line. */
     set isNext(value) {
         this._isNext = value
 
