@@ -10,6 +10,7 @@ const groupTemplate = document.querySelector(".tc-group-template")
 const nogroupTemplate = document.querySelector(".tc-no-group-template")
 
 
+/** Visible and non-visible group */
 export default class Group {
     constructor(groupData, container) {
         let groupFrag
@@ -83,6 +84,7 @@ export default class Group {
         }
     }
 
+    /** Sets group to be next in line. */
     set isNext(value) {
         this._exercises[0].isNext = value
     }
