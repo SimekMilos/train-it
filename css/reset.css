@@ -5,9 +5,13 @@ article, aside, figcaption, figure, footer, main, header, menu, nav, section {
     display: block;
 }
 
-* {
+:root {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     flex-shrink: 0;
 }
