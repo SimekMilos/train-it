@@ -72,7 +72,7 @@ async function runMode() {
     // Close action
     if (newMode == "end") {
         const action = await dialog("Timer is running, are you sure you \
-                                    want to close it?", "Close", "Cancel")
+                                    want to close it?", ["Close", "Cancel"])
         if (action == "Cancel") newMode = "run"
     }
 

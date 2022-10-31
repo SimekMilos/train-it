@@ -98,7 +98,15 @@ export function generateTrainingID() {
     }
 }
 
-export async function dialog(message, ...buttons) {
+/**
+ * Confirmation dialog
+ * @param  {string}          message        Message to be displayed in dialog
+ * @param  {string|string[]} buttons        Button labels
+ * @param  {string}          [dialogClass]  Class to be applied to dialogs main element
+ * @return {string}                         Clicked button label
+ */
+export async function dialog(message, buttons, dialogClass) {
+    if (!Array.isArray(buttons)) buttons = [buttons]
     if (!buttons.length) throw new Error("Dialog must have at least 1 button.")
 
     // Create overlay elem
@@ -108,6 +116,7 @@ export async function dialog(message, ...buttons) {
     // Create main dialog window
     const dialog = document.createElement("div")
     dialog.classList.add("main")
+    if (dialogClass) dialog.classList.add(dialogClass)
     dialogOverlay.append(dialog)
 
     // Add message
