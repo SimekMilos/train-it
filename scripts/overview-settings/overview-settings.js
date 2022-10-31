@@ -92,7 +92,7 @@ async function onImport() {
         if (localStorage["training-order"]) {
             const action = await dialog("You have trainings in the app. \
                 Do you want to add imported trainings to existing ones or \
-                replace them?", ["Add", "Replace", "Cancel"])
+                replace them?", ["Add", "Replace", "Cancel"], "dialog-second-button-red")
 
             if (action == "Cancel") return
             if (action == "Replace") localStorage.clear()

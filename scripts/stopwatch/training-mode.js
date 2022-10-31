@@ -268,8 +268,8 @@ function pause() {
 async function reset() {
     // Confirm in pause mode
     if (mode == "pause") {
-        const action = await dialog("Are you sure you want to reset this \
-                                     training?", ["Reset", "Cancel"])
+        const action = await dialog("Are you sure you want to reset this training?",
+                                     ["Reset", "Cancel"], "dialog-first-button-red")
         if (action == "Cancel") return "pause"
     }
 
@@ -321,7 +321,7 @@ function end() { return "end" }
 
 async function confirmEnd() {
     const action = await dialog("Are you sure you want to close this training?",
-                                ["Close", "Cancel"])
+                                ["Close", "Cancel"], "dialog-first-button-red")
     if (action == "Cancel") return mode
     return "end"
 }

@@ -60,7 +60,8 @@ export async function setupTraining(trainingData = null) {
         } else {
             if (hasChanged(trainingData)) {
                 const action = await dialog(
-                    "Do you want to delete unsaved changes?", ["Yes", "No"])
+                    "Do you want to delete unsaved changes?",
+                    ["Yes", "No"], "dialog-first-button-red")
                 if (action == "Yes") finished = true
             } else {
                 finished = true

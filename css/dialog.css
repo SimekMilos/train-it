@@ -53,3 +53,16 @@
 
     cursor: pointer;
 }
+
+
+/* Predefined appliacable classes */
+
+.dialog-first-button-red button,
+.dialog-second-button-red button {
+    color: unset;
+}
+
+.dialog-first-button-red button:first-child,
+.dialog-second-button-red button:nth-child(2) {
+    color: hsl(0, 90%, 50%);
+}
