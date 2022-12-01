@@ -120,7 +120,7 @@
     width: 100%;
 
     font: bold 1.2em "OpenSans Regular", sans-serif;
-    color: darkred;
+    color: var(--main-color);
     text-align: center;
 }
 
